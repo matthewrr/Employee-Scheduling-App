@@ -1,0 +1,33 @@
+list event information.
+    +title
+    +date
+    +doors
+    +total employees
+----------------------
+
+action:
+    + clear all
+    + pull from previous event
+
+employees = employees.active()
+
+for location in locations:
+    event.Location.add(
+        active=True --> toggle
+        name=location.name
+        man_position=1,
+        prep_positions=1,
+        reg_positions=4,
+        value=employees.not_scheduled
+        )
+
+if employee selected:
+    employee = scheduled
+if plus:
+    event.Location.positions += 1
+if minus:
+    event.Location.positions -= 1
+
+save()
+print()
+    
