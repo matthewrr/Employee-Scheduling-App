@@ -25,7 +25,7 @@ SECRET_KEY = '%0f%y(y=tx!gx0q)tz!w43z_9&f!e^_9605^vt*1!kv@$b4gr7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.amazonaws.com']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'events',
     'employees',
+    'locations',
 ]
 
 MIDDLEWARE = [
