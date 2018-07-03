@@ -11,6 +11,15 @@ def index(request):
     #     'coding':Projects.objects.filter(category='coding'),
     #     'design':Projects.objects.filter(category='design'),
     # }
+    # total_items*(min_height + each_position(position_height))
+    
+    # total_items*(113 + each_position(46))
+
+    # total = 0
+    # for location in locations:
+    #     total += 
+    
+    
     context = {
         'employees':Employee.objects.all(),
         'events':Event.objects.all(),

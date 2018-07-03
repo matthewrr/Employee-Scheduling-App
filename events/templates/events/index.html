@@ -1,48 +1,78 @@
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Condensed:300,400i" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
 </head>
 
-<body>
+<body style='background:#DDD'>
 {% include './navbar.html' %}
 
 <div class="container">
-{% for event in events %}
+    {% for event in events %}
     {% if forloop.first %}
     {% include './header.html' %}
-
+    
+    <div class='card' style='border-radius:16px;'>
+    <div class='card-body px-5'>
+    <div class='row'>
+        <div class='col col-12'>
+            <h2>
+            <span>Schedule</span>
+                <button type="button" class="btn btn-dark float-right">Print</button>
+                <button type="button" class="mx-2 btn btn-dark float-right">Export</button>
+                <button type="button" class="btn btn-dark float-right">Email</button>
+            </h2>
+        </div>
+    </div>
     <hr />
-    <h2>Schedule</h2><button type="button" class="btn btn-dark">Print</button>
-<button type="button" class="btn btn-dark">Export</button>
-    {% for location in locations %}
-        <div class="card" style="width: 18rem;">
-        <div class="card-header">Location: {{location.title}} [+] [-]</div>
-        <div class="card-body">
-        {% with ''|center:location.positions as range %}
-            {% for _ in range %}
+    
+        
 
-                    <div class="btn-group dropright">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Employee
-                      </button>
-                      
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        {% for employee in employees %}
-                            <a class="dropdown-item" href="#">{{employee.first_name}} {{employee.last_name}}</a>
-                        {% endfor %}
-                      </div>
-                      
-                    </div>
-                    <br />
 
+    
+    <div class='row'>
+        <div class='col-4'>
+            {% for location in locations %}
+                <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    {{location.title}} 
+                    <a class='float-right' href='#'>Add/Remove</a>
+                </div>
+                <div class="card-body">
+                {% with ''|center:location.positions as range %}
+             
+                    {% for _ in range %}
+                        <!--<div class='col col-12'>-->
+                        <div class="btn-group dropright" style="width:100%;">
+                           
+                              <button class="my-1 btn btn-secondary dropdown-toggle" style="width:100%;text-align:left;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Employee
+                              </button>
+                              
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% for employee in employees %}
+                                    <a class="dropdown-item" href="#">{{employee.first_name}} {{employee.last_name}}</a>
+                                {% endfor %}
+                              </div>
+                      
+                            
+                            
+                          
+                        <!--</div>-->
+                        </div>
+                        <br />
+                    {% endfor %}
+         
+                {% endwith %}
+                </div>
+                </div>
+                <br />
             {% endfor %}
-        {% endwith %}
-        </div>
-        </div>
-        <br />
-    {% endfor %}
-    
-    
+    </div>
+    </div>
     <hr />
+    </div>
+    </div>
     {%endif%}
 {% endfor %}
 </div>
