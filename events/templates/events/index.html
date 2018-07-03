@@ -1,6 +1,7 @@
 <head>
-
+{% load staticfiles %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'events/js/script.js' %}"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto+Condensed:300,400i" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -39,38 +40,38 @@
         <div class='card-columns'>
             {% for location in locations %}
                 <div class="card bg-light mx-auto" style="width: 18rem;">
-                <div class="card-header">
-                    <input class='mr-1' style='height:18px; width:18px;' type="checkbox" aria-label="Active Stand Checkbox" checked>
-                    <span>{{location.title}}</span>
-                    <div class='float-right ml-1' style='height:22px; width:22px;'>{% include '../img/002-add.svg' %}</div>
-                    <div class='float-right' style='height:22px; width:22px;'>{% include '../img/001-remove.svg' %}</div>
+                    <div class="card-header">
+                        <input class='mr-1' style='height:18px; width:18px;' type="checkbox" aria-label="Active Stand Checkbox" checked>
+                        <span>{{location.title}}</span>
+                        <div class='float-right ml-1' style='height:22px; width:22px;'>{% include '../img/002-add.svg' %}</div>
+                        <div class='float-right' style='height:22px; width:22px;'>{% include '../img/001-remove.svg' %}</div>
+                        
+                        
+                        
+                    </div>
                     
                     
-                    
-                </div>
+
+    
+    
+    
                 <div class="card-body">
                 {% with ''|center:location.total_positions as range %}
              
                     {% for _ in range %}
-                        <!--<div class='col col-12'>-->
-                        <div class="btn-group dropdown" style="width:100%;">
-                           
-                              <button class="my-1 btn btn-secondary dropdown-toggle" style="width:100%;text-align:left;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Employee
-                              </button>
-                              
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {% for employee in employees %}
-                                    <a class="dropdown-item" href="#">{{employee.first_name}} {{employee.last_name}}</a>
-                                {% endfor %}
-                              </div>
-                      
-                            
-                            
-                          
-                        <!--</div>-->
-                        </div>
+                    <div class='mb-2'>
+
+                        <select class="js-example-basic-single js-states form-control mb-3" style="width:100%;" name="Employee Name">
+                            <option></option>
+                            {% for employee in employees %}
+                                {% if forloop.first %}
+                                <option></option>
+                                {% endif %}
+                                <option value='{{employee.employee_id}}'>{{employee.first_name}} {{employee.last_name}}</option>
+                            {% endfor %}
+                        </select>
                         <br />
+                    </div>
                     {% endfor %}
          
                 {% endwith %}
@@ -90,6 +91,6 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'events/js/script.js' %}"></script>
+
 </body>
 
