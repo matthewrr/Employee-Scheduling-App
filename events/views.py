@@ -23,7 +23,7 @@ def index(request):
     context = {
         'employees':Employee.objects.all(),
         'events':Event.objects.all(),
-        'locations':Location.objects.all()
+        'locations':Location.objects.all().order_by('location_id')
         # 'locations':Event.objects.location(),
         # 'employees':Event.objects.employees()
     }
