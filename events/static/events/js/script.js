@@ -2,6 +2,6 @@
 $(document).ready(function() {
     $(".js-example-basic-single").select2({
         placeholder: "Select Employee",
-        allowClear: true
+        allowClear: true,
     });
 });

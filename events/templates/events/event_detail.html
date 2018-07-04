@@ -52,29 +52,36 @@
                     
                     
 
-    
+ 
     
     
                 <div class="card-body">
-                {% with ''|center:location.total_positions as range %}
              
-                    {% for _ in range %}
-                    <div class='mb-2'>
+                    {% for position in location.position_set.all %}
+                    {% if forloop.last %}
+                    <div class='row mb-0'>
+                    {% else %}
+                    <div class='row mb-2'>
+                    {% endif %}
+                        <div class='col col-2 px-0'>
+                            <div class='text-right'>{{position}}:</div>
+                        </div>
+                        <div class='col col-10'>
+                                  <select class="js-example-basic-single js-states form-control mb-3 float-right" style="width:100%;" name="Employee Name">
+                                    <option></option>
+                                    {% for employee in employees %}
+                                        {% if forloop.first %}
+                                        <option></option>
+                                        {% endif %}
+                                        <option value='{{employee.employee_id}}'>{{employee.first_name}} {{employee.last_name}}</option>
+                                    {% endfor %}
+                                </select>
+                        </div>
 
-                        <select class="js-example-basic-single js-states form-control mb-3" style="width:100%;" name="Employee Name">
-                            <option></option>
-                            {% for employee in employees %}
-                                {% if forloop.first %}
-                                <option></option>
-                                {% endif %}
-                                <option value='{{employee.employee_id}}'>{{employee.first_name}} {{employee.last_name}}</option>
-                            {% endfor %}
-                        </select>
                         <br />
                     </div>
                     {% endfor %}
          
-                {% endwith %}
                 </div>
                 </div>
                 <br />
