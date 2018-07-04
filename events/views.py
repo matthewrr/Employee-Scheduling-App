@@ -9,3 +9,11 @@ def index(request):
         'locations':Location.objects.all().order_by('location_id'),
     }
     return render(request, './events/event_detail.html', context)
+
+def event_detail_view(request,year,month,day):
+    context = {
+        'employees':Employee.objects.all(),
+        'events':Event.objects.all(),
+        'locations':Location.objects.all().order_by('location_id'),
+    }
+    return render(request, './events/event_detail.html', context)

@@ -23,7 +23,7 @@ from events import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # url(r'^$', redirect_root),
-    url(r'', include('events.urls')),
+    url(r'events/', include('events.urls')),
     
 ]
 
