@@ -1,5 +1,10 @@
+{% extends "base.html" %}
 {% load staticfiles %}
+{% block content %}  
 
-{% for event in events %}
-    <p>Hello!</p>
-{% endfor %}
+<div class="container">
+    {% for event in events %}
+        <a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br />
+    {% endfor %}
+</div>
+{% endblock %}

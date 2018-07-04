@@ -4,8 +4,6 @@
 
 <div class="container">
 
-  {% for event in events %}
-  {% if forloop.first %}
   {% include 'events/event_header.html' %}
   
   <div class='card shadow' style='border-radius:8px;'>
@@ -67,7 +65,5 @@
       
     </div>
   </div>
-  {% endif %}
-  {% endfor %}
 </div>
 {% endblock %}
