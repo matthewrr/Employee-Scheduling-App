@@ -3,8 +3,70 @@
 {% block content %}  
 
 <div class="container">
-    {% for employee in employees %}
-        <p>{{employee.first_name}} {{employee.last_name}}</p><br />
-    {% endfor %}
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-auto align-center'>
+      
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Employees</span>
+            <button type="button" class="mx-2 btn btn-dark float-right">Add New Employee</button>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      
+  </div>
+</div>
+
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-auto align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Employees</span>
+            <button type="button" class="btn btn-dark float-right">Print</button>
+            <button type="button" class="mx-2 btn btn-dark float-right">Export</button>
+            <button type="button" class="btn btn-dark float-right">Email</button>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      
+      <div class='row'>
+        <div class='col col-12'>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Employee ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Food Permit</th>
+                <th scope="col">Alcohol Permit</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Active</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for employee in employees %}
+              <tr>
+                <th scope="row"><button type="button" class="mx-2 btn btn-dark float-right">Edit</button></th>
+                <td>{{employee.employee_id}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.phone}}</td>
+                <td>{{employee.food_permit}}</td>
+                <td>{{employee.alcohol_permit}}</td>
+                <td>{{employee.admin}}</td>
+                <td>{{employee.active}}</td>
+              </tr>
+            {% endfor %}
+            </table>
+        </div>
+      </div>
+      <hr />
+      
+    </div>
+  </div>
 </div>
 {% endblock %}

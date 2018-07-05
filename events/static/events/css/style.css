@@ -1,0 +1,22 @@
+.select2-container--default .select2-selection--single {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid #ced4da;
+}
+
+
+.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.select2-container .select2-selection--single {
+    height:2.5rem;
+}    
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height:37px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-top:5px;
+}
