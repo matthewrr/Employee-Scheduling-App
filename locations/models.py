@@ -9,7 +9,8 @@ class Location(models.Model):
 
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-   position = models.CharField(max_length=3)
+   position = models.CharField(max_length=256)
+   code = models.CharField(max_length=3)
    
    def __str__(self):
        return self.position

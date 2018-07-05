@@ -1,6 +1,5 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
-{% load static %}
 {% block content %}  
 
 <div class="container">
@@ -47,7 +46,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">{{position}}:</div>
                 </div>
-                    <select class="js-example-basic-single js-states form-control mb-3 float-right" name="Employee Name">
+                    <select class="js-example-basic-single js-states form-control mb-3 float-right" name="Hello">
                     {% for employee in employees %}
                       {% if forloop.first %}<option></option>{% endif %}
                       <option value='{{employee.employee_id}}'>{{employee.name}}</option>
