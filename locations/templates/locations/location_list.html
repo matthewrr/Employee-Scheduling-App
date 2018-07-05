@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}  
+
+<div class="container">
+    {% for location in locations %}
+        <p>{{location.title}}</p><br />
+    {% endfor %}
+</div>
+{% endblock %}

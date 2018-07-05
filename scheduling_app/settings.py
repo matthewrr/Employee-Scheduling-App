@@ -53,8 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'scheduling_app.urls'
 
-TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
-print(TEMPLATE_PATH)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}  
+
+<div class="container">
+    {% for employee in employees %}
+        <p>{{employee.first_name}} {{employee.last_name}}</p><br />
+    {% endfor %}
+</div>
+{% endblock %}
