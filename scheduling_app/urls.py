@@ -4,10 +4,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from events import views
+from .views import redirect_root
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(r'^$', redirect_root),
+    url(r'^$', redirect_root),
     url(r'events/', include('events.urls')),
     url(r'employees/', include('employees.urls')),
     url(r'locations/', include('locations.urls')),

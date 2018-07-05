@@ -18,12 +18,3 @@ def event_detail_view(request,year,month,day,slug):
         'locations':Location.objects.all().order_by('location_id'),
     }
     return render(request, './events/event_detail.html', context)
-    
-
-employee_positions = {
-    'MGR': 'manager',
-    'C1': 'Cashier #1',
-    'C2': 'Cashier #2',
-    'C3': 'Cashier #3',
-    'C4': 'Cashier #4',
-}
