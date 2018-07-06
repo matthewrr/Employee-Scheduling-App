@@ -6,7 +6,7 @@ from locations.models import Location
 
 def employee_list_view(request):
     context = {
-        'employees':Employee.objects.all(),
+        'employees':Employee.objects.all().order_by('first_name'),
         'events':Event.objects.all(),
         'locations':Location.objects.all().order_by('location_id'),
     }

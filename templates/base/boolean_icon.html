@@ -1,0 +1,7 @@
+{% load staticfiles %}
+
+{% if myvar==True %}
+  <img style='height:20px; width:20px;' src='{% static "events/img/true.svg" %}' alt="Checkmark"/></a>
+{% else %}
+  <img style='height:20px; width:20px;' src='{% static "events/img/false.svg" %}' alt="X-Mark"/></a>
+{% endif %}

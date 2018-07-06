@@ -28,15 +28,13 @@
             <div class="card bg-light mx-auto" style="width: 18rem;">
               
               <div class="card-header">
-                <input class='mr-1' style='height:18px; width:18px;' type="checkbox" aria-label="Active Stand Checkbox" checked>
-                <span>{{location.title}}</span>
-                <div class='float-right ml-1' style='height:22px; width:22px;'>{% include '../img/002-add.svg' %}</div>
-                <div class='float-right' style='height:22px; width:22px;'>{% include '../img/001-remove.svg' %}</div>
+                  <input class='mr-1' style='height:18px; width:18px;' type="checkbox" data-target='#collapse-{{location.location_id}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
+                  <span>{{location.title}}</span>
+                  <a href='#'><img class='float-right ml-1' style='height:20px; width:20px;' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>
+                  <a href='#'><img class='float-right ml-1' style='height:20px; width:20px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>
               </div>
-            
-        
-
-              <div class="card-body">
+              
+              <div class="card-body" id="collapse-{{location.location_id}}">
               {% for position in location.position_set.all %}
                 {% if forloop.last %}
                 <div class='row mb-0'>{% else %}<div class='row mb-2'>
@@ -46,7 +44,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text">{{position.code}}:</div>
                 </div>
-                    <select class="js-example-basic-single js-states form-control mb-3 float-right" name="Hello">
+                    <select class="js-example-basic-single js-states form-control mb-3 float-right" name="{{position.position}}">
                     {% for employee in employees %}
                       {% if forloop.first %}<option></option>{% endif %}
                       <option value='{{employee.employee_id}}'>{{employee.name}}</option>
