@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<div class="card bg-light mx-auto" class='testing' style="width: 18rem;">
+              
+  <div class="card-header">
+      <input class='mr-1' style='height:18px; width:18px;' type="checkbox" data-target='#{{location.location_id}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
+      <span>{{location.title}}</span>
+      <a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' style='height:20px; width:20px;' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>
+      <a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' style='height:20px; width:20px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>
+  </div>
+      
+  <div class="card-body" id="{{location.location_id}}">
+  {% for position in location.position_set.all %}
+    <div class='row'>
+      <div class='col col-12'>
+        <div class='input-group'>
+          <img class='remove-{{loc}}' style='height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
+          <div class="input-group-prepend">
+            <div class="input-group-text">{{position.code}}:</div>
+          </div>
+          <select class="js-example-basic-single js-states form-control float-right">
+            <option></option>
+            {% autoescape off %}
+              {{all_employees}}
+            {% endautoescape %}
+          </select>
+          {% include 'events/add_row.html' with loc=location.location_id %}
+          <br />
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+<br/>

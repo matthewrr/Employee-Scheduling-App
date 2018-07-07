@@ -3,8 +3,113 @@
 {% block content %}  
 
 <div class="container">
-    {% for location in locations %}
-        <p>{{location.title}}</p><br />
-    {% endfor %}
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-auto align-center'>
+      
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Locations</span>
+            <button type="button" class="mx-2 btn btn-dark float-right">Add New Location</button>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      
+  </div>
+</div>
+
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-4 align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Locations</span>
+            <button type="button" class="mx-2 btn btn-dark float-right">Export</button>
+            <input type="text" class="form-control float-right" id="myInput" onkeyup="myFunction()" placeholder="Search Locations" style="width:25%;">
+          </h2>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col col-12'>
+
+          
+          
+          <table class="table table-striped table-hover" id='myTable'>
+            <thead>
+              <tr class='header'>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Default Positions</th>
+              </tr>
+
+            </thead>
+            <tbody>
+
+            {% for location in locations %}
+            
+              <tr>
+                <th scope="row"><button type="button" class="mx-2 btn btn-dark btn-sm float-right">Edit</button></th>
+                <td>{{location.location_id}}</td>
+                <td>{{location.title}}</td>
+                <td>
+                  
+                  
+                {% for position in location.position_set.all %}
+                  {% with position=position|stringformat:"s" %}
+                    {% if 'Manager' in position or 'Prep Lead' in position %}
+                      <a href="#" class="badge badge-success">{{position}}</a>
+                    {% endif %}
+                  {% endwith %}
+                {% endfor %}
+                <br/>
+                  
+                {% regroup location.position_set.all by code.0 as position_list %}
+                
+                {% for group, roles in position_list %}
+                  {% if group in 'MPCB' %}
+                    {% if group == 'P' %}
+                      {% for role in roles %}
+                        {% if role|stringformat:"s" != 'Prep Lead' %}
+                          <a href="#" class="badge badge-danger">{{role}}</a>
+                        {% endif %}
+                      {% endfor %}
+                      <br/>
+                    {% endif %}
+                    {% if group == 'C' %}
+                      {% for role in roles %}
+                        <a href="#" class="badge badge-primary">{{role}}</a>
+                      {% endfor %}
+                      <br/>
+                    {% endif %}
+                    {% if group == 'B' %}
+                      {% for role in roles %}
+                        <a href="#" class="badge badge-secondary">{{role}}</a>
+                      {% endfor %}
+                    {% endif %}
+                  {% else %}
+                    {% for role in roles %}
+                      <a href="#" class="badge badge-dark">{{role}}</a>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+                    
+
+    
+                    
+            
+            
+                </td>
+              </tr>
+            {% endfor %}
+
+            </table>
+        </div>
+      </div>
+      <hr />
+      
+    </div>
+  </div>
 </div>
 {% endblock %}

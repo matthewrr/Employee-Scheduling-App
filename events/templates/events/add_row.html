@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<div style='display:none'>
+    <div class='row' id='new-employee'>
+      <div class='col col-12'>
+        <div class='input-group'>
+          <img class='remove-{{loc}}' style='height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
+          <input type='text' class='form-control input-group-text' id='inlineFormInputGroup' placeholder='*E:' style='display:flex;margin-right:-1px;max-width:20%'>
+          <select class='js-example-basic-single js-states form-control'>
+              <option></option>
+              {% autoescape off %}
+                {{all_employees}}
+              {% endautoescape %}
+          </select>
+          <br />
+          </div>
+        </div>
+    </div>
+</div>
