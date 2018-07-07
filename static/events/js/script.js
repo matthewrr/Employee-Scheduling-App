@@ -4,25 +4,43 @@ $(document).ready(function() {
         placeholder: "Select Employee",
         allowClear: true,
     });
-
-    function myFunction() {
-      // Declare variables 
-      var input, filter, table, tr, td, i;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
-    
-      // Loop through all table rows, and hide those who don't match the search query
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[3];
-        if (td) {
-          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        } 
-      }
-    }
 });
+
+function myFunction() {
+    
+  var input, filter, table, tr, td, td2, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    td2 = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+
+$(function() {
+  $('.add-employee').click(function(){
+    var myparent = $(this).parent().prop('className');
+    
+    var newRow = document.getElementById("new-employee");
+    $('#' + myparent).append(newRow)
+    // $('#' + myparent).append("<div class='row'><div class='col col-12'><input type='text' class='form-control float-left' placeholder='POS:' style='width:20%;'><input type='text' class='form-control float-right' placeholder='Employee Name' style='width:80%;'></div></div>");
+  });
+});
+
+$(function() {
+  $('.remove-employee').click(function(){
+    var myparent = $(this).parent().prop('className');
+    $('#' + myparent).append("<div class='row mb-0'><div class='col col-12'><div class='input-group'><div class='input-group-prepend'><div class='input-group-text'>CST:</div></div><select class='js-example-basic-single js-states form-control mb-3 float-right'><option>Hello</option></select></div></div>");
+  });
+});
+

@@ -30,13 +30,28 @@ function myFunction() {
 $(function() {
   $('.add-employee').click(function(){
     var myparent = $(this).parent().prop('className');
-    $('#' + myparent).append("<div class='row mb-0'><div class='col col-12'><input type='text' class='form-control float-right' placeholder='Stuff here'></div></div>");
+    
+    var newRow = document.getElementById("new-employee");
+    $('#' + myparent).append(newRow)
+    // $('#' + myparent).append("<div class='row'><div class='col col-12'><input type='text' class='form-control float-left' placeholder='POS:' style='width:20%;'><input type='text' class='form-control float-right' placeholder='Employee Name' style='width:80%;'></div></div>");
   });
 });
 
+// $(function() {
+//   $('.remove-employee').click(function(){
+//     var myparent = $(this).parent().prop('className');
+//     $('#' + myparent).append("<div class='row mb-0'><div class='col col-12'><div class='input-group'><div class='input-group-prepend'><div class='input-group-text'>CST:</div></div><select class='js-example-basic-single js-states form-control mb-3 float-right'><option>Hello</option></select></div></div>");
+//   });
+// });
+
 $(function() {
   $('.remove-employee').click(function(){
-    var myparent = $(this).parent().prop('className');
-    $('#' + myparent).append("<div class='row mb-0'><div class='col col-12'>Hello!!!</div></div>");
+    var target = $(this).attr('id')
+    var els = document.getElementsByClassName(target);
+    for(var i=0; i<els.length; ++i){
+      var s = els[i].style;
+      s.display = s.display==='none' ? 'inline-block' : 'none';
+    }
+    // $('#' + myparent).append("<div class='row'><div class='col col-12'><input type='text' class='form-control float-left' placeholder='POS:' style='width:20%;'><input type='text' class='form-control float-right' placeholder='Employee Name' style='width:80%;'></div></div>");
   });
 });

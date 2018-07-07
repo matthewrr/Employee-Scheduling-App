@@ -21,7 +21,7 @@
         </div>
       </div>
       <hr />
-  
+
       <div class='row mx-auto'>
         <div class='col col-12'>
           <div class='card-columns'>
@@ -32,29 +32,48 @@
                   <input class='mr-1' style='height:18px; width:18px;' type="checkbox" data-target='#{{location.location_id}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
                   <span>{{location.title}}</span>
                   <a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' style='height:20px; width:20px;' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>
-                  <a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' style='height:20px; width:20px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>
+                  <a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' style='height:20px; width:20px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>
               </div>
-              
-
-                
-              
-              
+      
               <div class="card-body" id="{{location.location_id}}">
               {% for position in location.position_set.all %}
-                {% if forloop.last %}
-                <div class='row mb-0'>{% else %}<div class='row mb-2'>
-                {% endif %}
+                <div class='row'>
                   <div class='col col-12'>
                     <div class='input-group'>
+                      <img class='remove-{{location.location_id}}' style='height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
                       <div class="input-group-prepend">
                         <div class="input-group-text">{{position.code}}:</div>
                       </div>
-                      <select class="js-example-basic-single js-states form-control mb-3 float-right">
-                      {% for employee in employees %}
-                        {% if forloop.first %}<option></option>{% endif %}
-                        <option value='{{employee.employee_id}}'>{{employee.name}}</option>
-                      {% endfor %}
+                      <select class="js-example-basic-single js-states form-control float-right">
+                        <option></option>
+                        {% autoescape off %}
+                          {{all_employees}}
+                        {% endautoescape %}
                       </select>
+                      
+                      
+                      
+                      
+                      
+                      
+                      <div style='display:none'>
+                        <div class='row' id='new-employee'>
+                          <div class='col col-12'>
+                            <div class='input-group'>
+                              <img class='remove-{{location.location_id}}' style='height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
+                              <input type='text' class='form-control input-group-text' id='inlineFormInputGroup' placeholder='*E:' style='display:flex;margin-right:-1px;max-width:20%'>
+                              <select class='js-example-basic-single js-states form-control'>
+                                  <option></option>
+                                  {% autoescape off %}
+                                    {{all_employees}}
+                                  {% endautoescape %}
+                              </select>
+                              <br />
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+
                       <br />
                       </div>
                     </div>

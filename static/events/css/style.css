@@ -1,14 +1,17 @@
+.row {
+    margin-bottom: .5rem;
+}
+
+.row:last-child {
+    margin-bottom:0px;
+}
+
 .select2-container--default .select2-selection--single {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border: 1px solid #ced4da;
 }
 
-
-.input-group-text {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
 .select2-container .select2-selection--single {
     height:2.5rem;
 }    
@@ -21,6 +24,6 @@
     padding-top:5px;
 }
 
-body {
-    font-family:'open sans'!important;
+#new-employee span.select2.select2-container.select2-container--default {
+    width:80%;
 }
