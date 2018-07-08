@@ -3,8 +3,72 @@
 {% block content %}  
 
 <div class="container">
-    {% for event in events %}
-        <a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br />
-    {% endfor %}
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-auto align-center'>
+      
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Events</span>
+            <button type="button" class="mx-2 btn btn-dark float-right">Add New Event</button>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      
+  </div>
+</div>
+
+  <div class='card shadow' style='border-radius:8px;'>
+    <div class='card-body mx-4 align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span>Employees</span>
+            <button type="button" class="mx-2 btn btn-dark float-right">Export All</button>
+            <input type="text" class="form-control float-right" id="myInput" onkeyup="myFunction()" placeholder="Search for Event..." style="width:25%;">
+          </h2>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col col-12'>
+
+          
+          
+          <table class="table table-striped table-hover" id='eventTable'>
+            <thead>
+              <tr class='header'>
+                <th scope="col"></th>
+                <th scope="col">Event ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Date</th>
+                <th scope="col">Doors Open</th>
+                <th scope="col">Scheduled</th>
+                <th scope="col">Alcohol</th>
+              </tr>
+
+            </thead>
+            <tbody>
+
+            {% for event in events %}
+            
+              <tr>
+                <th scope="row"><button type="button" class="mx-2 btn btn-dark btn-sm float-right">Edit</button></th>
+                <td>{{event.event_id}}</td>
+                <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
+                <td>{{event.date}}</td>
+                <td>{{event.doors_open}}</td>
+                <td>0</td>
+                <td>TRUE</td>
+              </tr>
+            {% endfor %}
+
+            </table>
+        </div>
+      </div>
+      <hr />
+      
+    </div>
+  </div>
 </div>
 {% endblock %}

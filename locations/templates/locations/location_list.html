@@ -57,17 +57,18 @@
                 <td>{{location.bar}}</td>
                 <td>
                   
-                  
+                {% regroup location.position_set.all by code.0 as position_list %}
+                
                 {% for position in location.position_set.all %}
                   {% with position=position|stringformat:"s" %}
                     {% if 'Manager' in position or 'Prep Lead' in position %}
-                      <a href="#" class="badge badge-success">{{position}}</a>
+                      <a href="#" class="badge badge-success">{{position}}</a><br/>
                     {% endif %}
                   {% endwith %}
                 {% endfor %}
-                <br/>
+                
                   
-                {% regroup location.position_set.all by code.0 as position_list %}
+                
                 
                 {% for group, roles in position_list %}
                   {% if group in 'MPCB' %}
@@ -89,11 +90,13 @@
                       {% for role in roles %}
                         <a href="#" class="badge badge-secondary">{{role}}</a>
                       {% endfor %}
+                      <br/>
                     {% endif %}
                   {% else %}
                     {% for role in roles %}
                       <a href="#" class="badge badge-dark">{{role}}</a>
                     {% endfor %}
+                    <br/>
                   {% endif %}
                 {% endfor %}
                     

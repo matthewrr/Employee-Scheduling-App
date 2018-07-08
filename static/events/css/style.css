@@ -1,3 +1,7 @@
+body {
+    background-image: url("/events/static/events/img/background.jpg");
+}
+
 .row {
     margin-bottom: .5rem;
 }
