@@ -1,23 +1,17 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 {% block content %}  
-
-
-
-
-<!-- Modal -->
-
+{% include 'create_object.html' with object_name='Event' %}
 
 <div class="container">
-
 
   <div class='card shadow' style='border-radius:8px;'>
     <div class='card-body mx-4 align-center'>
       <div class='row'>
         <div class='col col-12'>
           <h2>
-            <span>Events</span>
-            {% include 'create_object.html' with object_name='Event' %}
+            <span class='title'>Events</span>
+            <button type="button" class="btn add-object" data-toggle="modal" data-target="#exampleModal"><a>+</a></button>
             <button type="button" class="mx-2 btn btn-dark float-right">Export All</button>
             <input type="text" class="form-control float-right" id="myInput" onkeyup="myFunction()" placeholder="Search for Event..." style="width:25%;">
           </h2>
@@ -38,6 +32,7 @@
                 <th scope="col">Doors Open</th>
                 <th scope="col">Scheduled</th>
                 <th scope="col">Alcohol</th>
+                <th scope="col">Expired</th>
               </tr>
 
             </thead>
@@ -53,6 +48,7 @@
                 <td>{{event.doors_open}}</td>
                 <td>0</td>
                 <td>TRUE</td>
+                <td>{{event.expired}}</td>
               </tr>
             {% endfor %}
 

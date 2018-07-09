@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from employees.models import Employee
 from locations.models import Location
+import datetime
 
 class Event(models.Model):
     event_id = models.IntegerField(blank=True)
@@ -12,6 +13,9 @@ class Event(models.Model):
     locations = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True, null=True)
     employees = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=True)
     slug = models.SlugField()
+    
+    def expired(self):
+        return True if self.date < datetime.date.today() else False
     
     def get_absolute_url(self):
         return ('blog_post_detail', None, {'slug' :self.slug,})

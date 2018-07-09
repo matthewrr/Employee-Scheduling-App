@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 {% block content %}  
+{% include 'create_object.html' with object_name='Location' %}
 
 <div class="container">
   
@@ -9,10 +10,10 @@
       <div class='row'>
         <div class='col col-12'>
           <h2>
-            <span>Locations</span>
-            {% include 'create_object.html' with object_name='Location' %}
+            <span class='title'>Locations</span>
+            <button type="button" class="btn add-object" data-toggle="modal" data-target="#exampleModal"><a>+</a></button>
             <button type="button" class="mx-2 btn btn-dark float-right">Export</button>
-            <input type="text" class="form-control float-right" id="locationSearch" onkeyup="myFunction()" placeholder="Search Locations" style="width:25%;">
+            <input type="text" class="form-control float-right" id="locationSearch" onkeyup="myFunction()" placeholder="Search for Location..." style="width:25%;">
           </h2>
         </div>
       </div>

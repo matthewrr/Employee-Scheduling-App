@@ -79,7 +79,7 @@ span.select2-selection.select2-selection--single {
     -webkit-text-stroke: 2px white;
 }
 
-.schedule {
+.title {
     font-weight: 300;
     color: white!important;
     text-transform:uppercase;
@@ -148,4 +148,26 @@ hr {
 
 #new-employee span.select2.select2-container.select2-container--default {
     width:80%!important;
+}
+
+.border-with-grad {
+  position: relative;
+  height: 100px;
+  width: 250px;
+  color: white;
+  line-height: 100px;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+.border-with-grad svg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+.border-with-grad path {
+  fill: transparent;
+  stroke: url(#border-gradient);
+  stroke-width: 4;
 }

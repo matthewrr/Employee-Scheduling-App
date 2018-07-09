@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
-{% block content %}  
+{% block content %} 
+{% include 'create_object.html' with object_name='Employee' %}
 
 <div class="container">
 
@@ -9,9 +10,9 @@
       <div class='row'>
         <div class='col col-12'>
           <h2>
-            <span>Employees</span>
-            {% include 'create_object.html' with object_name='Employee' %}
-            <button type="button" class="mx-2 btn btn-dark float-right">Export All</button>
+            <span class='title'>Employees</span>
+            <button type="button" class="btn add-object" data-toggle="modal" data-target="#exampleModal"><a>+</a></button>
+            <button type="button" class="mx-2 btn btn-outline-dark float-right">Export All</button>
             <input type="text" class="form-control float-right" id="myInput" onkeyup="myFunction()" placeholder="Search for Employee..." style="width:25%;">
           </h2>
         </div>
@@ -41,7 +42,7 @@
             {% for employee in employees %}
             
               <tr>
-                <th scope="row"><button type="button" class="mx-2 btn btn-dark btn-sm float-right">Edit</button></th>
+                <th scope="row"><button type="button" class="mx-2 btn btn-outline-dark btn-sm float-right" style='background-color:rgba(0,0,0,.1);color:black;'><strong>Edit</strong></button></th>
                 <td>{{employee.employee_id}}</td>
                 <td class='.first_name'>{{employee.first_name}}</td>
                 <td>{{employee.last_name}}</td>

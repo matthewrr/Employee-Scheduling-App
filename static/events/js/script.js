@@ -10,6 +10,10 @@ $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 })
 
+$(function() {
+  $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+});
+
 function myFunction() {
     
   var input, filter, table, tr, td, td2, i;
