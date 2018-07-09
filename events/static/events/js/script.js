@@ -6,6 +6,10 @@ $(document).ready(function() {
     });
 });
 
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
 function myFunction() {
     
   var input, filter, table, tr, td, td2, i;

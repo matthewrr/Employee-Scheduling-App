@@ -1,6 +1,124 @@
 body {
-    background-image: url("/events/static/events/img/background.jpg");
+    background: url("/static/events/img/background.jpg") no-repeat bottom fixed;
 }
+
+.navbar {
+    margin-bottom:30px!important;
+}
+
+.card.custom-shadow {
+    margin:auto;
+    width:90%;
+}
+
+.schedule-btn {
+	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
+	border-radius: 40px;
+    box-sizing: border-box;
+	color: #00a84f;
+	display: block;
+	/*height: 80px;*/
+	letter-spacing: 1px;
+	margin: 0 auto;
+	padding: 2px;
+	position: relative;
+    text-decoration: none;
+	/*text-transform: uppercase;*/
+	/*width: 264px;*/
+	z-index: 2;
+}
+
+.schedule-btn:hover {
+	color: #fff;
+}
+
+.schedule-btn span {
+	align-items: center;
+	background: #e7e8e9;
+	border-radius: 40px;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	transition: background .5s ease;
+	width: 100%;
+	padding-left: 8px;
+    padding-right: 8px;
+}
+
+.schedule-btn:hover span {
+	background: transparent;
+}
+
+
+
+.trial {
+    background-color: rgba(256,256,256,.1);
+}
+
+span.select2-selection.select2-selection--single {
+    background-color: rgba(256,256,256,.3);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color:black;
+}
+
+.card-header {
+    /*background-color: #36093e;*/
+    /*color:white;*/
+    /*background-color: rgba(256,256,256,.4)*/
+}
+.input-group-text {
+    background-color: rgba(256,256,256,.4);
+}
+.event-title {
+    font-size: 4em;
+    font-family: "Open Sans";
+    font-weight: 700;
+    color: rgba(256,256,256,.2);
+    -webkit-text-stroke: 2px white;
+}
+
+.schedule {
+    font-weight: 300;
+    color: white!important;
+    text-transform:uppercase;
+    font-size:1.2em;
+}
+
+hr {
+    background-color:white;
+    margin: 0px;
+    margin-bottom:24px!important;
+}
+
+.schedule-header {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.custom-shadow {
+    box-shadow: 0rem 0rem 6rem rgba(0,0,0,.4);
+} 
+
+.card-columns .card {
+    /*border-radius:20px;*/
+}
+.navbar {
+    background-color: rgba(0,0,0,.7);
+}
+
+.card {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.location-header {
+    /*background-image: linear-gradient(to right bottom, #220537, #2c0e3d, #351842, #3e2148, #472a4e);*/
+}
+
+.location-body {
+    background-color: rgba(256,256,256,.2);
+}
+
 
 .row {
     margin-bottom: .5rem;

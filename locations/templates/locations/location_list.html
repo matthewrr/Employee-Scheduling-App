@@ -3,28 +3,14 @@
 {% block content %}  
 
 <div class="container">
-  <div class='card shadow' style='border-radius:8px;'>
-    <div class='card-body mx-auto align-center'>
-      
-      <div class='row'>
-        <div class='col col-12'>
-          <h2>
-            <span>Locations</span>
-            <button type="button" class="mx-2 btn btn-dark float-right">Add New Location</button>
-          </h2>
-        </div>
-      </div>
-      <hr />
-      
-  </div>
-</div>
-
+  
   <div class='card shadow' style='border-radius:8px;'>
     <div class='card-body mx-4 align-center'>
       <div class='row'>
         <div class='col col-12'>
           <h2>
             <span>Locations</span>
+            {% include 'create_object.html' with object_name='Location' %}
             <button type="button" class="mx-2 btn btn-dark float-right">Export</button>
             <input type="text" class="form-control float-right" id="locationSearch" onkeyup="myFunction()" placeholder="Search Locations" style="width:25%;">
           </h2>
