@@ -9,14 +9,12 @@ def event_list_view(request):
         form = EventForm(request.POST)
         if form.is_valid():
             event = form.save(commit=False)
-            #post.author = request.user
-            #post.published_date = timezone.now()
             event.save()
     
     form = EventForm()
     context = {
-        'employees':Employee.objects.all(),
-        'events':Event.objects.all(),
+        'employees':Employee.objects.all().order_by('first_name'),
+        'events':Event.objects.all().order_by('-date'),
         'locations':Location.objects.all().order_by('location_id'),
         'form':form,
     }

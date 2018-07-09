@@ -196,3 +196,15 @@ button.add-object {
 button.add-object a {
     margin-left:-1px;
 }
+
+.table-header {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white!important;
+    letter-spacing: 1px;
+}
+
+.event-row {
+    background-color: rgba(256,256,256,.1);
+    border-radius: 8px;
+}

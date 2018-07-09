@@ -2,8 +2,12 @@
 {% load staticfiles %}
 {% block content %}  
 {% include 'create_object.html' with object_name='Event' %}
+{% regroup events by expired as event_list %}
 
 <div class="container">
+  
+  
+    
 
   <div class='card shadow' style='border-radius:8px;'>
     <div class='card-body mx-4 align-center'>
@@ -19,40 +23,22 @@
       </div>
       <div class='row'>
         <div class='col col-12'>
-
+        
+        
+        {% for expired in event_list %}
+            {% if expired.grouper|stringformat:'s' == 'False' %}
+            <div class='event-row pt-3 px-3 pb-1 mb-4'><a class='table-header'>Upcoming Events</a>
+              {% include 'events/table.html' with events=expired.list %}
+            </div>
+            {% else %}
+            <div class='event-row pt-3 px-3 pb-1 mb-3'><a class='table-header'>Previous Events</a>
+              {% include 'events/table.html' with events=expired.list %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    
           
           
-          <table class="table table-striped table-hover" id='eventTable'>
-            <thead>
-              <tr class='header'>
-                <th scope="col"></th>
-                <th scope="col">Event ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Date</th>
-                <th scope="col">Doors Open</th>
-                <th scope="col">Scheduled</th>
-                <th scope="col">Alcohol</th>
-                <th scope="col">Expired</th>
-              </tr>
-
-            </thead>
-            <tbody>
-
-            {% for event in events %}
-            
-              <tr>
-                <th scope="row"><button type="button" class="mx-2 btn btn-dark btn-sm float-right">Edit</button></th>
-                <td>{{event.event_id}}</td>
-                <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
-                <td>{{event.date}}</td>
-                <td>{{event.doors_open}}</td>
-                <td>0</td>
-                <td>TRUE</td>
-                <td>{{event.expired}}</td>
-              </tr>
-            {% endfor %}
-
-            </table>
         </div>
       </div>
       <hr />

@@ -38,10 +38,10 @@
             {% for location in locations %}
             
               <tr>
-                <th scope="row"><button type="button" class="mx-2 btn btn-dark btn-sm float-right">Edit</button></th>
+                <th scope="row"><img style='height:20px; width:20px;' src='{% static "events/img/edit.svg" %}' alt="Edit Symbol"/></th>
                 <td>{{location.location_id}}</td>
                 <td>{{location.title}}</td>
-                <td>{{location.bar}}</td>
+                <td>{% if location.bar %}<img style='height:20px; width:20px;' src='{% static "events/img/check.svg" %}' alt="Checkmark Symbol"/></a>{% else %}<img style='height:20px; width:20px;' src='{% static "events/img/cancel.svg" %}' alt="Cancel Symbol"/></a>{% endif %}</td>
                 <td>
                   
                 {% regroup location.position_set.all by code.0 as position_list %}
