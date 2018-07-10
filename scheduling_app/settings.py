@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'employees',
     'import_export',
     'locations',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

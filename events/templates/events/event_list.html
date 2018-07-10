@@ -2,9 +2,10 @@
 {% load staticfiles %}
 {% block content %}  
 {% include 'create_object.html' with object_name='Event' %}
+{% include 'edit_object.html' with object_name='Event' %}
 {% regroup events by expired as event_list %}
 
-<div class="container">
+<div class="container background-container">
   
   
     
@@ -15,7 +16,7 @@
         <div class='col col-12'>
           <h2>
             <span class='title'>Events</span>
-            <button type="button" class="btn add-object" data-toggle="modal" data-target="#exampleModal"><a>+</a></button>
+            <button type="button" class="btn add-object" data-toggle="modal" data-target="#newObject"><a>+</a></button>
             <button type="button" class="mx-2 btn btn-dark float-right">Export All</button>
             <input type="text" class="form-control float-right" id="myInput" onkeyup="myFunction()" placeholder="Search for Event..." style="width:25%;">
           </h2>

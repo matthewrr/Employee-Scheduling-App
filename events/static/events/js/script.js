@@ -10,6 +10,13 @@ $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 })
 
+$('#editEvent').on('shown.bs.modal', function () {
+  $('#editEventInput').trigger('focus')
+})
+// $(window).on('load',function(){
+//         $('#editEventInput').modal('show');
+//     });
+
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
