@@ -231,3 +231,22 @@ body.modal-open .background-container {
     filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='4');
 }
 
+#searchInput {
+    color: black;
+    font-weight: 700;
+    margin-bottom: -6px;
+    background: rgba(0,0,0,0);
+}
+
+#searchInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+#searchInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+#searchInput::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
