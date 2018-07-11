@@ -17,8 +17,9 @@ def event_list_view(request):
         'events':Event.objects.all().order_by('-date'),
         'locations':Location.objects.all().order_by('location_id'),
         'form':form,
+        'obj':'event',
     }
-    return render(request, './events/event_list.html', context)
+    return render(request, './objects/object_list.html', context)
 
 def event_detail_view(request,year,month,day,slug):
     event = Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug)
@@ -40,4 +41,4 @@ def event_detail_view(request,year,month,day,slug):
     
 
     
-    return render(request, './events/event_detail.html', context)
+    return render(request, './events/detail/event_detail.html', context)

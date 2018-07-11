@@ -9,10 +9,14 @@ from .views import redirect_root
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', redirect_root),
-    url(r'events/', include('events.urls')),
     url(r'employees/', include('employees.urls')),
+    url(r'events/', include('events.urls')),
     url(r'locations/', include('locations.urls')),
+    # url(r'profile/', include('profile.urls')),
+    # url(r'sms/', include('sms.urls')),
 ]
+
+# profile: company v individual. admin = true in URL?pythonpython
 
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

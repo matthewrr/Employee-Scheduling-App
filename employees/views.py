@@ -21,5 +21,6 @@ def employee_list_view(request):
         'events':Event.objects.all(),
         'locations':Location.objects.all().order_by('location_id'),
         'form':form,
+        'obj':'employee',
     }
-    return render(request, './employees/employee_list.html', context)
+    return render(request, './objects/object_list.html', context)

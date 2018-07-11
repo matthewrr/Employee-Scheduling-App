@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+class SMS(models.Model):
+    command = models.CharField(max_length=256)
+    response = models.CharField(max_length=256)
+    # if employee schedule, how many events?
+    # profiles/numbers with access
+    # who receives response: employees, mgmt, all

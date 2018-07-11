@@ -1,58 +1,19 @@
-{% extends "base/base.html" %}
 {% load staticfiles %}
-{% block content %}  
-{% include 'create_object.html' with object_name='Event' %}
-{% include 'edit_object.html' with object_name='Event' %}
 {% regroup events by expired as event_list %}
-
-<div class="container background-container">
-  
-  
-    
-
-  <div class='card custom-shadow' style='border-radius:8px;'>
-    <div class='card-body mx-4 align-center'>
-      <div class='row'>
-        <div class='col col-12'>
-          <h2>
-            <span class='title'>Events</span>
-            <button type="button" class="btn add-object" data-toggle="modal" data-target="#newObject"><a>+</a></button>
-            <div class='export-button float-right'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>
-          </h2>
-        </div>
-      </div>
-      <hr />
-      <div class='row'>
-        <div class='col col-12'>
         
-        
-        {% for expired in event_list %}
-            {% if expired.grouper|stringformat:'s' == 'False' %}
-            <div class='event-row py-3 px-3 mb-4'><a class='table-header'>Upcoming Events</a>
-              {% include 'events/table.html' with events=expired.list %}
-            </div>
-            {% else %}
-            <div class='event-row py-3 px-3 mb-3'>
-              <a class='table-header' style="display:inline-block;">
-                Previous Events
-                <img style='height:20px; width:20px; display:inline-block; margin-left:2px; margin-right:2px;' src='{% static "events/img/down-chevron.svg" %}' alt="Down Chevron Icon"/>
-              
-              </a>
-              
-            
-            
-              {% include 'events/table.html' with events=expired.list %}
-            </div>
-            {% endif %}
-        {% endfor %}
-    
-          
-          
-        </div>
-      </div>
-      <hr />
-      
+{% for expired in event_list %}
+  {% if expired.grouper|stringformat:'s' == 'False' %}
+    <div class='event-row py-3 px-3 mb-4'>
+      <a class='table-header'>Upcoming Events</a>
+      {% include 'events/table.html' with events=expired.list %}
     </div>
-  </div>
-</div>
-{% endblock %}
+  {% else %}
+    <div class='event-row py-3 px-3 mb-3'>
+      <a class='table-header'>
+        Previous Events
+        <img class='chevron-down' src='{% static "events/img/down-chevron.svg" %}' alt="Down Chevron Icon"/>
+      </a>
+      {% include 'events/table.html' with events=expired.list %}
+    </div>
+  {% endif %}
+{% endfor %}
