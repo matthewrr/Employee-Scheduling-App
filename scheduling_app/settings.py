@@ -36,10 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'company_profile',
     'events',
     'employees',
     'import_export',
     'locations',
+    'sms',
     'widget_tweaks',
 ]
 

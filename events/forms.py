@@ -8,8 +8,6 @@ class EventForm(ModelForm):
         model = Event
         
         fields = ['event_id', 'title', 'date', 'doors_open','alcohol','slug',]
-        slug = forms.TextInput(attrs={'size': 10, 'title': 'Your name'})
-        slug.render('name', 'A name')
 
 form = EventForm()
 

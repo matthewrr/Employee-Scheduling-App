@@ -1,5 +1,12 @@
 body {
-    background: url("/static/events/img/background.jpg") no-repeat bottom fixed;
+    background: url("/static/events/img/background.jpg") no-repeat fixed;
+    /* background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; */
+    color:#1b142d;
+    background-position: bottom left;
+}
+
+th {
+    color:#1b142d;
 }
 
 .navbar {
@@ -84,7 +91,7 @@ span.select2-selection.select2-selection--single {
     font-weight: 300;
     color: white!important;
     text-transform:uppercase;
-    font-size:1.2em;
+    font-size:1.6em;
 }
 
 hr {
@@ -154,6 +161,7 @@ hr {
 .form-control {
     background-color:rgba(0,0,0,.3);
     border:none;
+    color:white;
 }
 
 
@@ -182,26 +190,28 @@ hr {
 
 button.add-object {
     border-radius: 500px;
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     color: white;
     background-color: #c37f7f;
     border: none;
-    font-size: .8em;
+    font-size: .9em;
     line-height: 4px;
-    margin-top: -10px;
     margin-left: 2px;
+    margin-top: -18px;
+
 }
 
-button.add-object a {
-    margin-left:-1px;
-}
 
 .table-header {
     text-transform: uppercase;
     font-weight: 700;
     color: white!important;
     letter-spacing: 1px;
+    font-size: 24px;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
 }
 
 .event-row {
@@ -234,7 +244,6 @@ body.modal-open .background-container {
 #searchInput {
     color: black;
     font-weight: 700;
-    margin-bottom: -6px;
     background: rgba(0,0,0,0);
 }
 
@@ -243,10 +252,50 @@ body.modal-open .background-container {
     opacity: 1; /* Firefox */
 }
 
+.edit-object {
+    background: none;
+    text-align: center;
+}
 #searchInput:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: black;
 }
 
 #searchInput::-ms-input-placeholder { /* Microsoft Edge */
     color: black;
+}
+.export-button {
+
+    display: inline-block;
+}
+.export-button img {
+    height: 32px;
+    width: 32px;
+    margin-top: 14px;
+    margin-right: 10px
+}
+
+.btn:focus, .input:focus, textarea:focus, text:focus, a:focus {
+    box-shadow: none!important;
+    outline: none!important;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+
+#eventTable {
+    margin-top: 12px;
+}
+
+.table th {
+    vertical-align:middle!important;
+    text-align:center;
+}
+
+td {
+    vertical-align:middle!important;
 }
