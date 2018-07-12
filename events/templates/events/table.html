@@ -20,13 +20,18 @@
   {% for event in events %}
     <tr>
       <th scope="row">
-        <button type="button" class="btn edit-object" data-toggle="modal" data-target="#editObject" id={{event.slug}}>
-          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
-        </button>
+        <!--<button type="button" class="btn edit-object" data-toggle="modal" data-target="#editObject" id={{event.pk}}>-->
+        <!--  <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>-->
+        <!--</button>-->
+        <button type="button"
+              class="btn btn-warning btn-sm js-update-book"
+              data-url="{% url 'book_update' book.id %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
       </th>
       <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}' style='color:white;font-weight:600;'>{{event}}</a><br /></td>
       <td>{{event.date}}</td>
-      <td style="text-align:center;">{{event.doors_open}}</td>
+      <td style="text-align:center;">{{event.doors_open}} - {{event.pk}}</td>
       <td style="text-align:center;">0</td>
       <td style="text-align:center;">{% include 'base/boolean.html' with bool=event.alcohol %}</td>
     </tr>

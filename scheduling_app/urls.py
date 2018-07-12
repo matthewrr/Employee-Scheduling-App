@@ -12,8 +12,8 @@ urlpatterns = [
     url(r'employees/', include('employees.urls')),
     url(r'events/', include('events.urls')),
     url(r'locations/', include('locations.urls')),
-    # url(r'profile/', include('profile.urls')),
-    # url(r'sms/', include('sms.urls')),
+    url(r'company/', include('company_profile.urls')),
+    url(r'features/', include('sms.urls')),
 ]
 
 # profile: company v individual. admin = true in URL?pythonpython

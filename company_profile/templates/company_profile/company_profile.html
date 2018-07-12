@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block content %}  
+
+<div class="container background-container">  
+  <div class='card shadow-custom'>
+    <div class='card-body mx-4 align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span class='title'>{{obj}}</span>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      <div class='row'>
+        <div class='col col-12'>
+            Company Name<br/>
+            Logo<br/>
+            Admin Users<br/>
+            How to User/Site Navigation<br/>
+            Contact for Help/Feedback<br/>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+{% endblock %}

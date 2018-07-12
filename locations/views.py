@@ -16,13 +16,7 @@ def location_list_view(request):
             if formset.is_valid():
                 formset.save()
                 created_location.save()
-    
-    d = {}
-    all_locations = Location.objects.all()
-    for location in all_locations:
-        positions = list(location.position_set.values_list('position'))
-        d[location] = positions
-        
+
     form = LocationForm()
     context = {
         'employees':Employee.objects.all(),
@@ -30,6 +24,5 @@ def location_list_view(request):
         'locations':Location.objects.all().order_by('location_id'),
         'form':form,
         'obj':'location',
-        'myd':d
     }
     return render(request, './objects/object_list.html', context)

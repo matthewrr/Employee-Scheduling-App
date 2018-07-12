@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+{% block content %}  
+
+<div class="container background-container">  
+  <div class='card shadow-custom'>
+    <div class='card-body mx-4 align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          <h2>
+            <span class='title'>{{obj}}</span>
+            <button type="button" class="btn add-object" data-toggle="modal" data-target="#newObject"><a>+</a></button>
+          </h2>
+        </div>
+      </div>
+      <hr />
+      <div class='row'>
+        <div class='col col-12'>
+            <p>Table #1</p>
+            <br/> list admins with add (remove) feature from reg employee list, (maybe 2 levels of admin)
+            <p>Table #2</p>
+        <br /><strong>texts:</strong> dropdown for employee, admin, all
+        <br /><strong>table:</strong> cmd, response, description, application to,
+            
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+{% endblock %}

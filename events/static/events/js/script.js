@@ -1,4 +1,3 @@
-// In your Javascript (external .js resource or <script> tag)
 $(document).ready(function() {
     $(".js-example-basic-single").select2({
         placeholder: "Select Employee",
@@ -13,9 +12,6 @@ $('#myModal').on('shown.bs.modal', function () {
 $('#editEvent').on('shown.bs.modal', function () {
   $('#editEventInput').trigger('focus')
 })
-// $(window).on('load',function(){
-//         $('#editEventInput').modal('show');
-//     });
 
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
@@ -66,10 +62,8 @@ function myFunction() {
 $(function() {
   $('.add-employee').click(function(){
     var myparent = $(this).parent().prop('className');
-    
     var newRow = document.getElementById("new-employee");
     $('#' + myparent).append(newRow)
-    // $('#' + myparent).append("<div class='row'><div class='col col-12'><input type='text' class='form-control float-left' placeholder='POS:' style='width:20%;'><input type='text' class='form-control float-right' placeholder='Employee Name' style='width:80%;'></div></div>");
   });
 });
 
@@ -82,4 +76,140 @@ $(function() {
       s.display = s.display==='none' ? 'inline-block' : 'none';
     }
   });
+});
+
+
+$(document).ready(function(){
+  
+  var pk = '';
+  
+  $('.edit-object').click(function(){
+    pk = $(this).attr('id');
+    var test = $('body');
+    $(test).attr('id','hello');
+    
+    console.log('this is the edit-object function');
+    console.log('pk is...');
+    console.log(pk);
+    console.log('-----------');
+    
+    $.ajax({
+      url: '/events/edit/' + pk + '/',
+      type: "GET",
+      data: pk,
+      success: function(data) {
+        $('.modal-body-edit').append(data)
+      }});
+    
+    var thing = $('.edit-submit').attr('id',pk)
+      
+      
+  });
+
+
+  $('.edit-submit').click(function(){
+
+    console.log('this is the edit-submit function');
+    console.log('pk is...');
+    console.log(pk);
+    console.log('-----------');
+    
+    $.ajax({
+      url: '/events/edit/' + pk + '/',
+      type: "POST",
+      data: pk,
+    });
+  });
+    
+});
+  
+
+  
+  // $('.edit-submit').click(function(){
+  //   var slug = $(this).attr('id');
+  //   console.log(slug)
+    
+  //   $.ajax({
+  //   url: '/events/edit/success/',
+  //   type: "GET",
+  //   data: slug,
+  //   success: function(data) {
+  //     // $('.modal-body-edit').append(data)
+  //     alert('Success!');
+  //   }});
+
+    
+  // });
+  
+
+$(".object-edit").on("hidden.bs.modal", function () {
+    $('.modal-body-edit').empty()
+});
+
+
+$(".js-create-book").click(function () {
+  var btn = $(this);  // <-- HERE
+  $.ajax({
+    url: btn.attr("data-url"),  // <-- AND HERE
+    type: 'get',
+    dataType: 'json',
+    beforeSend: function () {
+      $("#modal-book").modal("show");
+    },
+    success: function (data) {
+      $("#modal-book .modal-content").html(data.html_form);
+    }
+  });
+});
+
+$(function () {
+
+  /* Functions */
+
+  var loadForm = function () {
+    var btn = $(this);
+    $.ajax({
+      url: btn.attr("data-url"),
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-book").modal("show");
+      },
+      success: function (data) {
+        $("#modal-book .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  var saveForm = function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#book-table tbody").html(data.html_book_list);
+          $("#modal-book").modal("hide");
+        }
+        else {
+          $("#modal-book .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
+
+
+  /* Binding */
+
+  // Create book
+  $(".js-create-book").click(loadForm);
+  $("#modal-book").on("submit", ".js-book-create-form", saveForm);
+
+  // Update book
+  $("#book-table").on("click", ".js-update-book", loadForm);
+  $("#modal-book").on("submit", ".js-book-update-form", saveForm);
+
 });

@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 
 <form method="POST" class="post-form">{% csrf_token %}
-  <div class="modal fade" id="newObject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade object-create" id="newObject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-body">
@@ -17,13 +17,13 @@
           <form>
             <div class='form-fields ml-4'>
           {% for field in form.visible_fields %}
-          {% if field.name != 'event_id' and field.name != 'slug' %}
+        
           <div class='form-inline mb-3'>  
             <div class="form-group">
               <a class='font-weight-bold text-capitalize'>{{ field.label_tag }}</a> {% render_field field class="form-control ml-2" %}
             </div>
           </div>
-          {% endif %}
+          
           {% endfor %}
           </div>
           </form>
@@ -31,6 +31,8 @@
           
           <button type="submit" class="save btn btn-dark float-right ml-2">Add {{object_name}}</button>
           <button type="button" class="btn btn-dark float-right" data-dismiss="modal">Cancel</button>
+          
+          
 
         </div>
       </div>

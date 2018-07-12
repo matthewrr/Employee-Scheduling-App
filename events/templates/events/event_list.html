@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% regroup events by expired as event_list %}
-        
+
 {% for expired in event_list %}
   {% if expired.grouper|stringformat:'s' == 'False' %}
     <div class='event-row py-3 px-3 mb-4'>
