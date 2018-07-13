@@ -12,9 +12,14 @@
         <div class='col col-12'>
           <h2>
             <span class='title'>{{obj}}s</span>
-            <button type="button" class="btn add-object" data-toggle="modal" data-target="#newObject"><a>+</a></button>
+            <button type="button" class="btn add-object js-create-event" data-url="{% url 'event_create' %}"><a>+</a></button>
             <div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>
           </h2>
+          
+
+          
+          
+          
         </div>
       </div>
       <hr />

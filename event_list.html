@@ -1,0 +1,50 @@
+<!--{% load staticfiles %}-->
+
+<!--<div class="container background-container">  -->
+<!--  <div class='card shadow-custom'>-->
+<!--    <div class='card-body mx-4 align-center'>-->
+<!--      <div class='row'>-->
+<!--        <div class='col col-12'>-->
+          
+<!--          <h2>-->
+<!--            <span class='title'>{{obj}}s</span>-->
+<!--            <button type="button" class="btn add-object js-create-event" data-url="{% url obj|add:'_create' %}"><a>+</a></button>-->
+<!--            <div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>-->
+<!--          </h2>-->
+          
+          <!--{% regroup events by event_category as event_list %}-->
+          <!--{% for event_category in event_list %}-->
+          <!--<div class='event-row py-3 px-3 mb-4'>-->
+          <!--  <a class='table-header'>{% cycle 'Upcoming Events' 'Previous Events' %}</a>-->
+          <!--  <table class="table" id="event-table">-->
+          <!--    <thead>-->
+          <!--      <tr class='header' style='text-align:center;'>-->
+          <!--        <th scope="col">-->
+          <!--        </th>-->
+          <!--        <th style="text-align:left;" scope="col">Date</th>-->
+          <!--        <th scope="col">Doors Open</th>-->
+          <!--        <th scope="col">Scheduled</th>-->
+          <!--        <th scope="col">Alcohol</th>-->
+          <!--      </tr>-->
+          <!--    </thead>-->
+          
+          
+              <!--<tbody>-->
+            <!--    {% include 'objects/list.html' with events=event_category.list %}-->
+            <!--  </tbody>-->
+            <!--</table>-->
+          <!--</div>-->
+
+          <!-- MODAL -->
+          <!--<div class="modal fade" id="modal-event" role="dialog">-->
+          <!--  <div class="modal-dialog">-->
+          <!--    <div class="modal-content"></div>-->
+          <!--  </div>-->
+          <!--</div>-->
+          <!--{% endfor %}-->
+          
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

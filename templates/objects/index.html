@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+{% load staticfiles %}
+
+<div class="container background-container">  
+  <div class='card shadow-custom'>
+    <div class='card-body mx-4 align-center'>
+      <div class='row'>
+        <div class='col col-12'>
+          
+          <h2>
+            <span class='title'>{{objs}}</span>
+            <button type="button" class="btn add-object js-create-object" data-url="{% url obj|add:'_create' %}"><a>+</a></button>
+            <div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>
+          </h2>
+          
+            {% include objs|add:'/table_head.html' %}
+            {% include objs|add:'/table_body.html' %}
+          </table>
+          
+          <div class="modal fade" id="modal-object" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content"></div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

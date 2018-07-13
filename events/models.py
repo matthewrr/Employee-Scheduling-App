@@ -14,7 +14,7 @@ class Event(models.Model):
     employees = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=True)
     slug = models.SlugField()
     
-    def expired(self):
+    def event_category(self):
         return True if self.date < datetime.date.today() else False
     
     def get_absolute_url(self):

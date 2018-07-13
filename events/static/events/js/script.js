@@ -13,6 +13,8 @@ $('#editEvent').on('shown.bs.modal', function () {
   $('#editEventInput').trigger('focus')
 })
 
+
+
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
@@ -23,27 +25,6 @@ function myFunction() {
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    td2 = tr[i].getElementsByTagName("td")[2];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1 || td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    } 
-  }
-}
-
-function myFunction() {
-    
-  var input, filter, table, tr, td, td2, i;
-  input = document.getElementById("locationSearch");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("locationTable");
   tr = table.getElementsByTagName("tr");
 
   for (i = 0; i < tr.length; i++) {
@@ -122,45 +103,48 @@ $(document).ready(function(){
   });
     
 });
-  
-
-  
-  // $('.edit-submit').click(function(){
-  //   var slug = $(this).attr('id');
-  //   console.log(slug)
-    
-  //   $.ajax({
-  //   url: '/events/edit/success/',
-  //   type: "GET",
-  //   data: slug,
-  //   success: function(data) {
-  //     // $('.modal-body-edit').append(data)
-  //     alert('Success!');
-  //   }});
-
-    
-  // });
-  
 
 $(".object-edit").on("hidden.bs.modal", function () {
     $('.modal-body-edit').empty()
 });
 
 
-$(".js-create-book").click(function () {
+
+$(".js-create-object").click(function () {
   var btn = $(this);  // <-- HERE
   $.ajax({
     url: btn.attr("data-url"),  // <-- AND HERE
     type: 'get',
     dataType: 'json',
     beforeSend: function () {
-      $("#modal-book").modal("show");
+      $("#modal-object").modal("show");
     },
     success: function (data) {
-      $("#modal-book .modal-content").html(data.html_form);
+      $("#modal-object .modal-content").html(data.html_form);
     }
   });
 });
+
+
+$("#modal-object").on("submit", ".js-object-create-form", function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#object-table tbody").html(data.html_event_list);  // <-- Replace the table body
+          $("#modal-object").modal("hide");  // <-- Close the modal
+        }
+        else {
+          $("#modal-object .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  });
 
 $(function () {
 
@@ -173,10 +157,10 @@ $(function () {
       type: 'get',
       dataType: 'json',
       beforeSend: function () {
-        $("#modal-book").modal("show");
+        $("#modal-object").modal("show");
       },
       success: function (data) {
-        $("#modal-book .modal-content").html(data.html_form);
+        $("#modal-object .modal-content").html(data.html_form);
       }
     });
   };
@@ -190,11 +174,11 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#book-table tbody").html(data.html_book_list);
-          $("#modal-book").modal("hide");
+          $("#object-table tbody").html(data.html_event_list);
+          $("#modal-object").modal("hide");
         }
         else {
-          $("#modal-book .modal-content").html(data.html_form);
+          $("#modal-object .modal-content").html(data.html_form);
         }
       }
     });
@@ -204,12 +188,19 @@ $(function () {
 
   /* Binding */
 
-  // Create book
-  $(".js-create-book").click(loadForm);
-  $("#modal-book").on("submit", ".js-book-create-form", saveForm);
+  // Create event
+  $(".js-create-object").click(loadForm);
+  $("#modal-object").on("submit", ".js-object-create-form", saveForm);
 
-  // Update book
-  $("#book-table").on("click", ".js-update-book", loadForm);
-  $("#modal-book").on("submit", ".js-book-update-form", saveForm);
+  // Update event
+  $("#object-table").on("click", ".js-update-object", loadForm);
+  $("#modal-object").on("submit", ".js-object-update-form", saveForm);
 
 });
+
+// .js-create-event --> .js-create-object
+// #event-table --> #object-table
+// .js-event-update-form --> .js-object-update-form
+// #modal-event --> #modal-object
+// .js-update-event --> .js-update-object
+// .js-event-create-form --> .js-object-create-form
