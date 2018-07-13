@@ -3,6 +3,7 @@ body {
     /* background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; */
     background-position: bottom left;
     color:#1b142d;
+    font-family:"Open Sans";
 }
 
 hr { background-color:white; margin: 0px; margin-bottom:24px!important;}

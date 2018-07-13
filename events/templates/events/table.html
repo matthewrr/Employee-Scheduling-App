@@ -1,4 +1,10 @@
 {% load staticfiles %}
+
+<div class='redbull'>
+  <div class='noredbull'>
+
+  
+
 {% regroup events by event_category as event_list %}
 {% for event_category in event_list %}
 
@@ -16,6 +22,7 @@
       </tr>
     </thead>
     <tbody>
+    {% with events=event_category.list %} 
     {% for event in events %}
       <tr>
         <th scope="row">
@@ -34,7 +41,13 @@
         <td colspan="8" class="text-center">No Events</td>
       </tr>
     {% endfor %}
+    {% endwith %}
     </tbody>
   </table>
 </div>
+
 {% endfor %}
+</div>
+<div>
+  
+  

@@ -5,16 +5,6 @@ $(document).ready(function() {
     });
 });
 
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
-
-$('#editEvent').on('shown.bs.modal', function () {
-  $('#editEventInput').trigger('focus')
-})
-
-
-
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
@@ -59,56 +49,9 @@ $(function() {
   });
 });
 
-
-$(document).ready(function(){
-  
-  var pk = '';
-  
-  $('.edit-object').click(function(){
-    pk = $(this).attr('id');
-    var test = $('body');
-    $(test).attr('id','hello');
-    
-    console.log('this is the edit-object function');
-    console.log('pk is...');
-    console.log(pk);
-    console.log('-----------');
-    
-    $.ajax({
-      url: '/events/edit/' + pk + '/',
-      type: "GET",
-      data: pk,
-      success: function(data) {
-        $('.modal-body-edit').append(data)
-      }});
-    
-    var thing = $('.edit-submit').attr('id',pk)
-      
-      
-  });
-
-
-  $('.edit-submit').click(function(){
-
-    console.log('this is the edit-submit function');
-    console.log('pk is...');
-    console.log(pk);
-    console.log('-----------');
-    
-    $.ajax({
-      url: '/events/edit/' + pk + '/',
-      type: "POST",
-      data: pk,
-    });
-  });
-    
-});
-
 $(".object-edit").on("hidden.bs.modal", function () {
     $('.modal-body-edit').empty()
 });
-
-
 
 $(".js-create-object").click(function () {
   var btn = $(this);  // <-- HERE
@@ -135,7 +78,7 @@ $("#modal-object").on("submit", ".js-object-create-form", function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#object-table tbody").html(data.html_event_list);  // <-- Replace the table body
+          $(".redbull").html(data.html_event_list);  // <-- Replace the table body
           $("#modal-object").modal("hide");  // <-- Close the modal
         }
         else {
@@ -147,8 +90,6 @@ $("#modal-object").on("submit", ".js-object-create-form", function () {
   });
 
 $(function () {
-
-  /* Functions */
 
   var loadForm = function () {
     var btn = $(this);
@@ -174,10 +115,11 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#object-table tbody").html(data.html_event_list);
+          $(".redbull").html(data.html_event_list);
           $("#modal-object").modal("hide");
         }
         else {
+          console.log('form not valid');
           $("#modal-object .modal-content").html(data.html_form);
         }
       }

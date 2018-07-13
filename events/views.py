@@ -27,7 +27,7 @@ def event_detail_view(request,year,month,day,slug):
 
 def event_list(request):
     events = Event.objects.all().order_by('-date')
-    return render(request, 'objects/index.html', {'events': events, 'obj':'event', 'objs':'events'})
+    return render(request, 'objects/list.html', {'events': events, 'obj':'event', 'objs':'events'})
 
 def event_create(request):
     if request.method == 'POST':
@@ -49,11 +49,12 @@ def save_event_form(request, form, template_name):
     data = dict()
     if request.method == 'POST':
         if form.is_valid():
+            print('valid!')
             form.save()
             data['form_is_valid'] = True
-            events = Event.objects.all()
-            data['html_event_list'] = render_to_string('objects/index.html', {
-                'events': events
+            events = Event.objects.all().order_by('-date')
+            data['html_event_list'] = render_to_string('events/table.html', {
+                'events': events,
             })
         else:
             data['form_is_valid'] = False
