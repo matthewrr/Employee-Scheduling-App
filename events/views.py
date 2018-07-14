@@ -48,21 +48,43 @@ def event_update(request, pk):
 
 def save_event_form(request, form, template_name):
     data = dict()
-    date = str(form['date'].value())
-    format_str = '%Y-%m-%d'
-    date_obj = datetime.datetime.strptime(date, format_str)
-    expired = date_obj < datetime.datetime.today()
+    try:
+        date = str(form['date'].value())
+        format_str = '%Y-%m-%d'
+        date_obj = datetime.datetime.strptime(date, format_str)
+        expired = date_obj < datetime.datetime.today()
+    except:
+        expired = False
     
     if request.method == 'POST':
         if form.is_valid():
-            print('valid!')
             form.save()
             data['form_is_valid'] = True
             events = Event.objects.all().order_by('-date')
-            print(events)
-            data['html_event_list'] = render_to_string('events/event_list_ajax.html', {'events': events,'expired':expired})
+            data['html_event_list'] = render_to_string('events/event_list_ajax.html', {
+                'events': events,'expired': expired
+            })
         else:
             data['form_is_valid'] = False
     context = {'form': form, 'obj':'event'}
     data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+def event_delete(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    data = dict()
+    expired = event.event_category
+    if request.method == 'POST':
+        event.delete()
+        data['form_is_valid'] = True
+        events = Event.objects.all().order_by('-date')
+        data['html_event_list'] = render_to_string('events/event_list_ajax.html', {
+            'events': events, 'expired': expired,
+        })
+    else:
+        context = {'event': event, 'obj': 'event', 'expired': expired,}
+        data['html_form'] = render_to_string('objects/delete.html',
+            context,
+            request=request,
+        )
     return JsonResponse(data)

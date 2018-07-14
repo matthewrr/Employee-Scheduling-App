@@ -23,6 +23,10 @@
     {% for event in event_category.list %}
       <tr>
         <td scope="row">
+          <button type="button"
+              class="btn btn-danger btn-sm js-delete-object"
+              data-url="{% url 'event_delete' event.id %}">
+        <span class="glyphicon glyphicon-trash"></span> Delete
           <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
             <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
           </button>

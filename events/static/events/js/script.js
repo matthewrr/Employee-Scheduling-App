@@ -125,6 +125,7 @@ $(function() {
 
   var saveForm = function () {
     var form = $(this);
+    console.log('first table is ' + table);
     $.ajax({
       url: form.attr("action"),
       data: form.serialize(),
@@ -132,7 +133,16 @@ $(function() {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $(table + " tbody").replaceWith(data.html_event_list);
+          
+          if (table != '#undefined') {
+            console.log('table is probably undefined: ' + table)
+            $(table + " tbody").replaceWith(data.html_event_list);
+          } else {
+            console.log('table is ' + table)
+            console.log(data.html_event_list);
+            $("#upcoming-events tbody").replaceWith(data.html_event_list);
+            
+          }
           $("#modal-object").modal("hide");
         }
         else {
@@ -144,17 +154,20 @@ $(function() {
     return false;
   };
   
-
-
   /* Binding */
 
-  // Create event
+  // Create
   $(".js-create-object").click(loadForm);
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
 
-  // Update event
+  // Update
   $("#upcoming-events").on("click", ".js-update-object", loadForm);
   $("#previous-events").on("click", ".js-update-object", loadForm);
   $("#modal-object").on("submit", ".js-object-update-form", saveForm);
+  
+  // Delete
+  $("#upcoming-events").on("click", ".js-delete-object", loadForm);
+  $("#previous-events").on("click", ".js-delete-object", loadForm);
+  $("#modal-object").on("submit", ".js-object-delete-form", saveForm);
 
 });

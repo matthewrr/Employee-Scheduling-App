@@ -2,8 +2,6 @@
 {% load staticfiles %}
 {% block content %}
 
-
-
 <div class="container background-container">  
   <div class='card shadow-custom'>
     <div class='card-body mx-4 align-center'>
@@ -15,7 +13,13 @@
             <button type="button" class="btn add-object js-create-object" data-url="{% url 'event_create' %}"><a>+</a></button>
             <div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>
           </h2>
-          {% include 'objects/modal.html' %}
+          
+          <div class="modal fade hide" id="modal-object" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content"></div>
+            </div>
+          </div>
+          
           {% include 'events/event_list.html' %}
 
         </div>
