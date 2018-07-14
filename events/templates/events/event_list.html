@@ -1,16 +1,12 @@
 {% load staticfiles %}
-
-<div class='redbull'>
-  <div class='noredbull'>
-
-  
-
-{% regroup events by event_category as event_list %}
-{% for event_category in event_list %}
+{% regroup events by event_category as active_list %}
+{% for event_category in active_list %}
 
 <div class='event-row py-3 px-3 mb-4'>
-  <a class='table-header'>{% cycle 'Upcoming Events' 'Previous Events' %}</a>
-  <table class="table" id="object-table">
+  <a class='table-header'>
+    {% cycle 'Upcoming Events' 'Previous Events' %}
+  </a>
+  <table class="table" id="{% cycle 'upcoming-events' 'previous-events' %}">
     <thead>
       <tr class='header text-center'>
         <th scope="col">
@@ -19,17 +15,18 @@
         <th scope="col">Doors Open</th>
         <th scope="col">Scheduled</th>
         <th scope="col">Alcohol</th>
+        <th scope="col">Food</th>
       </tr>
     </thead>
+
     <tbody>
-    {% with events=event_category.list %} 
-    {% for event in events %}
+    {% for event in event_category.list %}
       <tr>
-        <th scope="row">
-        <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
-          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
-        </button>
-        </th>
+        <td scope="row">
+          <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
+            <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+          </button>
+        </td>
         <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
         <td>{{event.date}}</td>
         <td class='text-center'>{{event.doors_open}}</td>
@@ -41,13 +38,9 @@
         <td colspan="8" class="text-center">No Events</td>
       </tr>
     {% endfor %}
-    {% endwith %}
     </tbody>
+    
   </table>
 </div>
 
 {% endfor %}
-</div>
-<div>
-  
-  

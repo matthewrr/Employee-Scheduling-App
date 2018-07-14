@@ -5,6 +5,11 @@ $(document).ready(function() {
     });
 });
 
+
+// $(".modal").on("hidden.bs.modal", function(){
+//     $(".modal-content").html("");
+// });
+
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
@@ -49,55 +54,67 @@ $(function() {
   });
 });
 
-$(".object-edit").on("hidden.bs.modal", function () {
-    $('.modal-body-edit').empty()
-});
+// $(".object-edit").on("hidden.bs.modal", function () {
+//     $('.modal-body-edit').empty()
+// });
 
-$(".js-create-object").click(function () {
-  var btn = $(this);  // <-- HERE
-  $.ajax({
-    url: btn.attr("data-url"),  // <-- AND HERE
-    type: 'get',
-    dataType: 'json',
-    beforeSend: function () {
-      $("#modal-object").modal("show");
-    },
-    success: function (data) {
-      $("#modal-object .modal-content").html(data.html_form);
-    }
-  });
-});
+// $(".js-create-object").click(function () {
+//   var btn = $(this);  // <-- HERE
+//   $.ajax({
+//     url: btn.attr("data-url"),  // <-- AND HERE
+//     type: 'get',
+//     dataType: 'json',
+//     beforeSend: function () {
+//       $("#modal-object").modal("show");
+//     },
+//     success: function (data) {
+//       $("#modal-object .modal-content").html(data.html_form);
+//     }
+//   });
+// });
 
 
-$("#modal-object").on("submit", ".js-object-create-form", function () {
-    var form = $(this);
-    $.ajax({
-      url: form.attr("action"),
-      data: form.serialize(),
-      type: form.attr("method"),
-      dataType: 'json',
-      success: function (data) {
-        if (data.form_is_valid) {
-          $(".redbull").html(data.html_event_list);  // <-- Replace the table body
-          $("#modal-object").modal("hide");  // <-- Close the modal
-        }
-        else {
-          $("#modal-object .modal-content").html(data.html_form);
-        }
-      }
-    });
-    return false;
-  });
+// $("#modal-object").on("submit", ".js-object-create-form", function () {
+//     var form = $(this);
+//     $.ajax({
+//       url: form.attr("action"),
+//       data: form.serialize(),
+//       type: form.attr("method"),
+//       dataType: 'json',
+//       success: function (data) {
+//         if (data.form_is_valid) {
+//           console.log(data);
+//           $(".redbull").parent().html(data.html_event_list);  // <-- Replace the table body
+//           $("#modal-object").modal("hide");  // <-- Close the modal
+//           $('body').removeClass('modal-open');
+//           $('.modal-backdrop').remove();
+//           $('.modal').removeData('bs.modal');
+//           $('.modal').empty();
+//           $('.modal').removeAttr('style');
+          
+         
+//         }
+//         else {
+//           $("#modal-object .modal-content").html(data.html_form);
+//         }
+//       }
+//     });
+//     return false;
+//   });
 
-$(function () {
-
+$(function() {
+  
+  var table = '';
   var loadForm = function () {
     var btn = $(this);
+    table = '#' + $(this).closest('table').attr('id');
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
       dataType: 'json',
+      
       beforeSend: function () {
+        $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
       },
       success: function (data) {
@@ -115,7 +132,7 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $(".redbull").html(data.html_event_list);
+          $(table + " tbody").replaceWith(data.html_event_list);
           $("#modal-object").modal("hide");
         }
         else {
@@ -126,6 +143,7 @@ $(function () {
     });
     return false;
   };
+  
 
 
   /* Binding */
@@ -135,14 +153,8 @@ $(function () {
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
 
   // Update event
-  $("#object-table").on("click", ".js-update-object", loadForm);
+  $("#upcoming-events").on("click", ".js-update-object", loadForm);
+  $("#previous-events").on("click", ".js-update-object", loadForm);
   $("#modal-object").on("submit", ".js-object-update-form", saveForm);
 
 });
-
-// .js-create-event --> .js-create-object
-// #event-table --> #object-table
-// .js-event-update-form --> .js-object-update-form
-// #modal-event --> #modal-object
-// .js-update-event --> .js-update-object
-// .js-event-create-form --> .js-object-create-form

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
+import datetime
 
 from .forms import EventForm
 from .models import *
@@ -47,15 +48,19 @@ def event_update(request, pk):
 
 def save_event_form(request, form, template_name):
     data = dict()
+    date = str(form['date'].value())
+    format_str = '%Y-%m-%d'
+    date_obj = datetime.datetime.strptime(date, format_str)
+    expired = date_obj < datetime.datetime.today()
+    
     if request.method == 'POST':
         if form.is_valid():
             print('valid!')
             form.save()
             data['form_is_valid'] = True
             events = Event.objects.all().order_by('-date')
-            data['html_event_list'] = render_to_string('events/table.html', {
-                'events': events,
-            })
+            print(events)
+            data['html_event_list'] = render_to_string('events/event_list_ajax.html', {'events': events,'expired':expired})
         else:
             data['form_is_valid'] = False
     context = {'form': form, 'obj':'event'}

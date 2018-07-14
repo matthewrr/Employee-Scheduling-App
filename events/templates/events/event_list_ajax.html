@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+{% regroup events by event_category as active_list %}
+{% for event_category in active_list %}
+  {% if expired == event_category.grouper %}
+    
+    <tbody>
+    {% for event in event_category.list %}
+      <tr>
+        <td scope="row">
+          <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
+            <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+          </button>
+        </td>
+        <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
+        <td>{{event.date}}</td>
+        <td class='text-center'>{{event.doors_open}}</td>
+        <td class='text-center'>0 {{expired}}</td>
+        <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8" class="text-center">No Events</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    
+  {% endif %}
+{% endfor %}
+
