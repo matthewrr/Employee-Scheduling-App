@@ -4,7 +4,6 @@
   
   <thead>
     <tr class='header'>
-      <th scope="col"></th>
       <th scope="col">ID</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
@@ -13,16 +12,13 @@
       <th scope="col">Alcohol</th>
       <th scope="col">Admin</th>
       <th scope="col">Active</th>
+      <th scope="col">Edit</th>
     </tr>
   </thead>
   
   <tbody>
   {% for employee in employees %}
     <tr>
-      <td scope="row">
-        <button type="button" class="btn btn-danger btn-sm js-delete-object" data-url="{% url 'employee_delete' employee.id %}">Delete</button>
-        <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}"><img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/></button>
-      </td>
       <td>{{employee.employee_id}}</td>
       <td>{{employee.first_name}}</td>
       <td>{{employee.last_name}}</td>
@@ -31,6 +27,14 @@
       <td>{% include 'base/boolean.html' with bool=employee.alcohol_permit %}</td>
       <td>{% include 'base/boolean.html' with bool=employee.admin %}</td>
       <td>{% include 'base/boolean.html' with bool=employee.active %}</td>
+      <td>
+        <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}">
+          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+        </button>
+        <button type="button" class="btn js-delete-object" data-url="{% url 'employee_delete' employee.id %}">
+          <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
+        </button>
+      </td>
     </tr>
   {% endfor %}
   </tbody>

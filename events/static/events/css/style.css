@@ -13,7 +13,7 @@ td > a { color:white; font-weight:600;}
 
 .navbar { margin-bottom:30px!important; }
 
-.shadow-custom { margin:auto; width:90%; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
+.shadow-custom { margin:auto; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
 
 .schedule-btn {
 	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
@@ -51,9 +51,11 @@ td > a { color:white; font-weight:600;}
 
 .title {
     font-weight: 300;
-    color: white!important;
     text-transform:uppercase;
     font-size:1.6em;
+    background: -webkit-linear-gradient(#844162, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .schedule-header {
@@ -69,7 +71,7 @@ td > a { color:white; font-weight:600;}
     background-color: rgba(256,256,256,.2);
 }
 
-.card {background-color: rgba(255, 255, 255, .3);}
+.card {background-color: rgba(255, 255, 255, .15); border-radius:15px;}
 .row {margin-bottom: .5rem;}
 .row:last-child {margin-bottom:0px;}
 
@@ -96,7 +98,7 @@ button.add-object {
     width: 42px;
     height: 42px;
     color: white;
-    background-color: #c37f7f;
+    background: -webkit-linear-gradient(#844162, #68305f);;
     border: none;
     font-size: .9em;
     line-height: 4px;
@@ -105,6 +107,8 @@ button.add-object {
 
 }
 
+.js-update-object, .js-delete-object {background: none; text-align: center;}
+.js-object-create a {margin-left: -1px;}
 
 .table-header {
     text-transform: uppercase;
@@ -157,12 +161,7 @@ button.add-object {
 #searchInput:-ms-input-placeholder { color: black; } /* Internet Explorer 10-11 */
 #searchInput::-ms-input-placeholder { color: black; } /* Microsoft Edge */
 
-.js-update-object {
-    background: none;
-    text-align: center;
-}
-
-.icon-edit, .icon-false, .icon-search, .icon-true { height:20px; width:20px; }
+.icon-edit, .icon-false, .icon-search, .icon-true, .icon-delete { height:20px; width:20px; }
 .icon-export {float:right;}
 .icon-export img {height: 32px; width: 32px; margin-top: 14px; margin-right: 10px}
 .icon-search {vertical-align:text-top}

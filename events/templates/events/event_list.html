@@ -3,35 +3,37 @@
 {% for event_category in active_list %}
 
 <div class='event-row py-3 px-3 mb-4'>
-  <a class='table-header'>
+  <a class='table-header mb-3'>
     {% cycle 'Upcoming Events' 'Previous Events' %}
   </a>
-  <table class="table" id="{% cycle 'upcoming-events' 'previous-events' %}">
+  <table class="table table-striped table-hover" id="{% cycle 'upcoming-events' 'previous-events' %}">
     <thead>
       <tr class='header text-center'>
-        <th scope="col">
-        </th>
+        <th scope="col" class='text-left'>Event</th>
         <th scope="col" class='text-left'>Date</th>
-        <th scope="col">Doors Open</th>
+        <th scope="col" class='text-left'>Doors Open</th>
         <th scope="col">Scheduled</th>
         <th scope="col">Alcohol</th>
-        <th scope="col">Food</th>
+        <th scope="col">Edit</th>
       </tr>
     </thead>
 
     <tbody>
     {% for event in event_category.list %}
       <tr>
-        <td scope="row">
-          
-          <button type="button" class="btn btn-danger btn-sm js-delete-object" data-url="{% url 'event_delete' event.id %}">Delete</button>
-          <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}"><img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/></button>
-        </td>
         <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
         <td>{{event.date}}</td>
         <td class='text-center'>{{event.doors_open}}</td>
         <td class='text-center'>0</td>
         <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
+        <td>
+          <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
+            <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+          </button>
+          <button type="button" class="btn js-delete-object" data-url="{% url 'event_delete' event.id %}">
+            <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
+          </button>
+        </td>
       </tr>
       {% empty %}
       <tr>
