@@ -1,8 +1,7 @@
-from django.contrib import messages
-from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.template.loader import render_to_string
 import datetime
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.template.loader import render_to_string
 
 from .forms import EventForm
 from .models import *
@@ -61,7 +60,7 @@ def save_event_form(request, form, template_name):
             form.save()
             data['form_is_valid'] = True
             events = Event.objects.all().order_by('-date')
-            data['html_event_list'] = render_to_string('events/event_list_ajax.html', {
+            data['html_object_list'] = render_to_string('events/event_list_ajax.html', {
                 'events': events,'expired': expired
             })
         else:
@@ -71,18 +70,21 @@ def save_event_form(request, form, template_name):
     return JsonResponse(data)
 
 def event_delete(request, pk):
+    print("hello")
     event = get_object_or_404(Event, pk=pk)
+    
     data = dict()
     expired = event.event_category
     if request.method == 'POST':
         event.delete()
         data['form_is_valid'] = True
         events = Event.objects.all().order_by('-date')
-        data['html_event_list'] = render_to_string('events/event_list_ajax.html', {
+        data['html_object_list'] = render_to_string('events/event_list_ajax.html', {
             'events': events, 'expired': expired,
         })
     else:
-        context = {'event': event, 'obj': 'event', 'expired': expired,}
+        context = {'object': event, 'obj': 'event', 'expired': expired,}
+        print(event)
         data['html_form'] = render_to_string('objects/delete.html',
             context,
             request=request,

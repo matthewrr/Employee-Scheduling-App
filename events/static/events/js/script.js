@@ -104,20 +104,26 @@ $(function() {
 
 $(function() {
   
+  var btn_id = '';
   var table = '';
   var loadForm = function () {
     var btn = $(this);
+    console.log(btn_id);
+    console.log("working");
     table = '#' + $(this).closest('table').attr('id');
+    console.log(table);
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
       dataType: 'json',
       
       beforeSend: function () {
+        console.log("working #1")
         $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
       },
       success: function (data) {
+        console.log("working #2");
         $("#modal-object .modal-content").html(data.html_form);
       }
     });
@@ -136,12 +142,13 @@ $(function() {
           
           if (table != '#undefined') {
             console.log('table is probably undefined: ' + table)
-            $(table + " tbody").replaceWith(data.html_event_list);
-          } else {
+            $(table + " tbody").replaceWith(data.html_object_list);
+          } else if (btn_id === 'events') {
             console.log('table is ' + table)
-            console.log(data.html_event_list);
-            $("#upcoming-events tbody").replaceWith(data.html_event_list);
-            
+            console.log(data.html_object_list);
+            $("#upcoming-events tbody").replaceWith(data.html_object_list);
+          } else {
+            $("#object-table tbody").replaceWith(data.html_object_list);
           }
           $("#modal-object").modal("hide");
         }
@@ -163,11 +170,13 @@ $(function() {
   // Update
   $("#upcoming-events").on("click", ".js-update-object", loadForm);
   $("#previous-events").on("click", ".js-update-object", loadForm);
+  $("#object-table").on("click", ".js-update-object", loadForm);
   $("#modal-object").on("submit", ".js-object-update-form", saveForm);
   
   // Delete
   $("#upcoming-events").on("click", ".js-delete-object", loadForm);
   $("#previous-events").on("click", ".js-delete-object", loadForm);
+  $("#object-table").on("click", ".js-delete-object", loadForm);
   $("#modal-object").on("submit", ".js-object-delete-form", saveForm);
 
 });

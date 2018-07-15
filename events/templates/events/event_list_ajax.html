@@ -19,7 +19,7 @@
         <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
         <td>{{event.date}}</td>
         <td class='text-center'>{{event.doors_open}}</td>
-        <td class='text-center'>0 {{expired}}</td>
+        <td class='text-center'>0</td>
         <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
       </tr>
       {% empty %}

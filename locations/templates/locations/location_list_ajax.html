@@ -1,17 +1,4 @@
 {% load staticfiles %}
-
-<table class="table table-striped table-hover" id='object-table'>
-  
-  <thead>
-    <tr class='header'>
-      <th scope="col"></th>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Bar</th>
-      <th scope="col">Default Positions</th>
-    </tr>
-  </thead>
-  
   <tbody>
   {% for location in locations %}
     <tr>
@@ -26,5 +13,3 @@
     </tr>
   {% endfor %}
   </tbody>
-
-</table>
