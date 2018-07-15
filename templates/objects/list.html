@@ -11,7 +11,7 @@
           <h2 class='mb-3'>
             <span class='title'>{{objs}}</span>
             <button type="button" class="btn add-object js-create-object" data-url="{% url obj|add:'_create' %}" id="{{obj}}"><a>+</a></button>
-            <div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div>
+            <a href="{% url 'export_'|add:objs %}"><div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div></a>
           </h2>
           
           <div class="modal fade hide" id="modal-object" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+import csv
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
@@ -58,3 +59,16 @@ def location_delete(request, pk):
             request=request,
         )
     return JsonResponse(data)
+
+def export_locations(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="all_locations.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['location_id','title','bar'])
+
+    locations = Location.objects.all().values_list('location_id', 'title', 'bar')
+    for location in locations:
+        writer.writerow(location)
+
+    return response

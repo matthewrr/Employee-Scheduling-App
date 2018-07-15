@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+import csv
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 
@@ -58,3 +59,16 @@ def employee_delete(request, pk):
             request=request,
         )
     return JsonResponse(data)
+
+def export_employees(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="all_employees.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['employee_id', 'first_name', 'last_name', 'phone_number', 'active', 'food_permit', 'alcohol_permit', 'admin'])
+
+    employees = Employee.objects.all().values_list('employee_id', 'first_name', 'last_name', 'phone_number', 'active', 'food_permit', 'alcohol_permit', 'admin')
+    for employee in employees:
+        writer.writerow(employee)
+
+    return response

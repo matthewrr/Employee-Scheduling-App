@@ -2,7 +2,6 @@
 {% regroup events by event_category as active_list %}
 {% for event_category in active_list %}
 
-    <a href="{% url 'export_events' %}">Export all events</a>
 <div class='event-row py-3 px-3 mb-4'>
   <a class='table-header mb-3'>
     {% cycle 'Upcoming Events' 'Previous Events' %}

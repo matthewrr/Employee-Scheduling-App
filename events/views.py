@@ -2,7 +2,7 @@ import csv, datetime
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
-from django.http import HttpResponse
+from django.views import View
 
 from .forms import EventForm
 from .models import *
@@ -71,9 +71,7 @@ def save_event_form(request, form, template_name):
     return JsonResponse(data)
 
 def event_delete(request, pk):
-    print("hello")
     event = get_object_or_404(Event, pk=pk)
-    
     data = dict()
     expired = event.event_category
     if request.method == 'POST':
@@ -104,3 +102,9 @@ def export_events(request):
         writer.writerow(event)
 
     return response
+
+# class ClassView(View):
+    
+#     def get(self, request):
+#         # <view logic>
+#         return HttpResponse('result')
