@@ -1,7 +1,8 @@
-import datetime
-from django.http import JsonResponse
+import csv, datetime
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
+from django.http import HttpResponse
 
 from .forms import EventForm
 from .models import *
@@ -90,3 +91,16 @@ def event_delete(request, pk):
             request=request,
         )
     return JsonResponse(data)
+    
+def export_events(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="all_events.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['event_id', 'title', 'date', 'doors_open', 'alcohol', 'slug'])
+
+    events = Event.objects.all().values_list('event_id', 'title', 'date', 'doors_open', 'alcohol', 'slug')
+    for event in events:
+        writer.writerow(event)
+
+    return response
