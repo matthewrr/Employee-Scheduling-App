@@ -8,30 +8,30 @@ from .models import *
 
 from . import views
 from django.views.generic import TemplateView, ListView, CreateView
-from scheduling_app.views import ObjectSave
+from scheduling_app.views import ObjectSave, AjaxableResponseMixin
 
 from scheduling_app.views import *
 
-
-## 1. ListView
-## 2. CreateView
-# 3. DeleteView
-# 4. UpdateView
-# 5. FormView
-# 6. SaveView
-
 class LocationList(ObjectList, ListView):
+    print('list')
     model = Location
     context_object_name = 'locations'
     extra_context = {'obj':'location','objs':'locations'}
 
-class LocationCreate(CreateView):
+class LocationCreate(AjaxableResponseMixin, CreateView):
+    print('create')
     model = Location
     template_name = 'objects/create.html'
     extra_contest = {'obj':'location','objs':'locations'}
     fields = ['location_id', 'title', 'bar',]
 
 
+# def location_create(request):
+#     if request.method == 'POST':
+#         form = LocationForm(request.POST)
+#     else:
+#         form = LocationForm()
+#     return save_location_form(request, form, 'objects/create.html')
 
 def save_location_form(request, form, template_name):
     data = dict()
@@ -91,37 +91,41 @@ def export_locations(request):
 
 
 
-class LocationSave(ObjectSave, TemplateView):
+class SaveLocation(ObjectSave, TemplateView):
     obj = 'location'
     objs = 'locations'
     all_objs = Location.objects.all().order_by('location_id')
     template_name = 'locations/location_list_ajax.html'
-    # pass
+    pass
     
-    # def get_context_data(self, **kwargs):
-    #     context = super(SaveLocation, self).get_context_data(**kwargs)
-    #     context.update({
-    #         'foodata': 'bardata',
-    #     })
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(SaveLocation, self).get_context_data(**kwargs)
+        context.update({
+            'foodata': 'bardata',
+        })
+        return context
 
-# class MyFormView(View):
-#     form_class = MyForm
-#     initial = {'key': 'value'}
-#     template_name = 'form_template.html'
+class MyFormView(View):
+    form_class = MyForm
+    initial = {'key': 'value'}
+    template_name = 'form_template.html'
 
-#     def get(self, request, *args, **kwargs):
-#         form = self.form_class(initial=self.initial)
-#         return render(request, self.template_name, {'form': form})
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
 
-#     def post(self, request, *args, **kwargs):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             # <process form cleaned data>
-#             return HttpResponseRedirect('/success/')
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/success/')
 
-#         return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form})
+
+
+
 
 # def location_list(request):
 #     locations = Location.objects.all().order_by('location_id')
 #     return render(request, 'objects/list.html', {'locations': locations, 'obj':'location', 'objs':'locations'})
+

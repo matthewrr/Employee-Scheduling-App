@@ -6,9 +6,10 @@ body {
     font-family:"Open Sans";
 }
 
-hr { background-color:white; margin: 0px; margin-bottom:24px!important;}
-th { color:#1b142d; vertical-align:middle!important; text-align:center;}
-td { vertical-align:middle!important;}
+.btn-dark {background: rgba(0,0,0,.7); border-color:rgba(0,0,0,0);}
+hr {background-color:white; margin: 0px; margin-bottom:24px!important;}
+th {color:#1b142d;}
+td {vertical-align: baseline!important;}
 td > a { color:white; font-weight:600;}
 
 .navbar { margin-bottom:30px!important; }
@@ -107,7 +108,7 @@ button.add-object {
 
 }
 
-.js-update-object, .js-delete-object {background: none; text-align: center;}
+.js-update-object, .js-delete-object {text-align: center; border: 1px black solid; padding: 4px 9px;;background: rgba(256,256,256,.1);}
 .js-object-create a {margin-left: -1px;}
 
 .table-header {
@@ -161,7 +162,16 @@ button.add-object {
 #searchInput:-ms-input-placeholder { color: black; } /* Internet Explorer 10-11 */
 #searchInput::-ms-input-placeholder { color: black; } /* Microsoft Edge */
 
-.icon-edit, .icon-false, .icon-search, .icon-true, .icon-delete { height:20px; width:20px; }
+.icon-false, .icon-search, .icon-true { height:20px; width:20px; }
+.icon-true {
+    background: rgba(194, 120, 117, 0.71);
+    border-radius: 50px;
+}
+.icon-false {
+    background: rgba(110, 49, 93, 0.47);
+    border-radius: 20px;
+}
+.icon-edit, .icon-delete { height:16px; width:16px; margin-top:-1px; }
 .icon-export {float:right;}
 .icon-export img {height: 32px; width: 32px; margin-top: 14px; margin-right: 10px}
 .icon-search {vertical-align:text-top}

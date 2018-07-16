@@ -10,19 +10,18 @@
           
           <h2 class='mb-3'>
             <span class='title'>{{objs}}</span>
-            {{obj|add:'_create'}}
-            <button type="button" class="btn add-object js-create-object" data-url="{% url obj|add:'_create' %}" id="{{obj}}"><a>+</a></button>
             <div class="btn-group float-right ml-2" style="margin-top:11px;">
               <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Export
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'export_'|add:objs %}">.csv</a>
-                <a class="dropdown-item" href="{% url 'export_'|add:objs %}">.xls</a>
               </div>
               
             </div>
             <div class="btn btn-dark float-right" style="margin-top:11px;" >Import</div>
+            {% for object in object_list %}
+              {{object}}
+            {% endfor %}
             
          
           
@@ -35,7 +34,6 @@
           
 
           
-          {% include objs|add:'/'|add:obj|add:'_list.html' %}
 
         </div>
       </div>

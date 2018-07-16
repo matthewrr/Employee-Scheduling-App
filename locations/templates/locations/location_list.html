@@ -4,21 +4,17 @@
   
   <thead>
     <tr class='header'>
+      <th scope="col"></th>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
       <th scope="col">Bar</th>
-      <th scope="col">Default Positions</th>
-      <th scope="col">Edit</th>
+      <th scope="col">#</th>
     </tr>
   </thead>
   
   <tbody>
   {% for location in locations %}
     <tr>
-      <td>{{location.location_id}}</td>
-      <td>{{location.title}}</td>
-      <td>{% include 'base/boolean.html' with bool=location.bar %}</td>
-      <td>0</td>
       <td>
         <button type="button" class="btn js-update-object" data-url="{% url 'location_update' location.id %}">
           <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
@@ -27,6 +23,11 @@
           <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
         </button>
       </td>
+      <td>{{location.location_id}}</td>
+      <td>{{location.title}}</td>
+      <td>{% include 'base/boolean.html' with bool=location.bar %}</td>
+      <td>0</td>
+
     </tr>
   {% endfor %}
   </tbody>

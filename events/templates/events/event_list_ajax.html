@@ -7,13 +7,7 @@
     <tbody>
     {% for event in event_category.list %}
       <tr>
-        <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
-        <td>{{event.date}}</td>
-        <td class='text-center'>{{event.doors_open}}</td>
-        <td class='text-center'>0</td>
-        <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
-        <td><button type="button" class="btn js-delete-object" data-url="{% url 'event_delete' event.id %}"><img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/></button></td>
-        <td>
+        <td class="text-center">
           <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
             <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
           </button>
@@ -21,6 +15,12 @@
             <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
           </button>
         </td>
+        <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
+        <td>{{event.date}}</td>
+        <td>{{event.doors_open}}</td>
+        <td class='text-center'>0</td>
+        <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
+
       </tr>
       {% empty %}
       <tr>
