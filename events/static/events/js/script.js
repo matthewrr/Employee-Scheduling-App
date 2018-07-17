@@ -102,6 +102,14 @@ $(function() {
 //     return false;
 //   });
 
+
+$('.js-create-object').click(function() {
+  $('#modal-object').modal('show')
+})
+
+
+
+
 $(function() {
   
   var btn_id = '';
@@ -121,10 +129,12 @@ $(function() {
         console.log("working #1")
         $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
+        console.log('AJAX beforeSend...');
       },
       success: function (data) {
         console.log("working #2");
         $("#modal-object .modal-content").html(data.html_form);
+        alert('AJAX afterSend successful!')
       }
     });
   };
@@ -166,6 +176,7 @@ $(function() {
   // Create
   $(".js-create-object").click(loadForm);
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
+  
 
   // Update
   $("#upcoming-events").on("click", ".js-update-object", loadForm);
@@ -180,3 +191,29 @@ $(function() {
   $("#modal-object").on("submit", ".js-object-delete-form", saveForm);
 
 });
+
+// var formAjaxSubmit = function(form, modal) {
+//   $(form).submit(function (e) {
+//       e.preventDefault();
+//       $.ajax({
+//           type: $(this).attr('method'),
+//           url: $(this).attr('action'),
+//           data: $(this).serialize(),
+//           success: function (xhr, ajaxOptions, thrownError) {
+//               if ( $(xhr).find('.has-error').length > 0 ) {
+//                   $(modal).find('.modal-body').html(xhr);
+//                   formAjaxSubmit(form, modal);
+//               } else {
+//                   $(modal).modal('toggle');
+//               }
+//           },
+//           error: function (xhr, ajaxOptions, thrownError) {
+//               // handle response errors here
+//           }
+//       });
+//   });
+// }
+
+
+// $('#myModal').modal('show')
+
