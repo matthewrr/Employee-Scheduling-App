@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.views import View
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from .forms import EventForm
 from .models import *
@@ -27,7 +28,10 @@ def event_detail_view(request,year,month,day,slug):
     return render(request, './events/detail/event_detail.html', context)
 
 def event_list(request):
-    events = Event.objects.all().order_by('-date')
+    events_list = Event.objects.all().order_by('-date')
+    paginator = Paginator(events_list, 20)
+    page = request.GET.get('page')
+    events = paginator.get_page(page)
     return render(request, 'objects/list.html', {'events': events, 'obj':'event', 'objs':'events'})
 
 def event_create(request):

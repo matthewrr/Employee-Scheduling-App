@@ -2,12 +2,16 @@ import csv
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from .forms import EmployeeForm
 from .models import *
 
 def employee_list(request):
-    employees = Employee.objects.all().order_by('first_name')
+    employees_list = Employee.objects.all().order_by('first_name')
+    paginator = Paginator(employees_list, 25)
+    page = request.GET.get('page')
+    employees = paginator.get_page(page)
     return render(request, 'objects/list.html', {'employees': employees, 'obj':'employee', 'objs':'employees'})
 
 def employee_create(request):
