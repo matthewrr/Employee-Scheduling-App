@@ -10,31 +10,15 @@
           
           <h2 class='mb-3'>
             <span class='title'>{{objs}}</span>
-            
-            <a class="js-create-object" data-url="{% url objs|add:':'|add:obj|add:'_new' %}">New</a>
-            
-            <div class="btn-group float-right ml-2" style="margin-top:11px;">
-              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Export
-              </button>
-
-              
-              {# <div class="dropdown-menu"> #}
-              {#  <a class="dropdown-item" href="{% url 'export_'|add:objs %}">.csv</a>#}
-              {#   <a class="dropdown-item" href="{% url 'export_'|add:objs %}">.xls</a>#}
-              {# </div>#}
-              
-            </div>
-            <div class="btn btn-dark float-right" style="margin-top:11px;" >Import</div>
-            
-         
+            <button type="button" class="btn add-object js-create-object" data-url="{% url obj|add:'_create' %}" id="{{obj}}"><a>+</a></button>
+            <a href="{% url 'export_'|add:objs %}"><div class='icon-export'><img src='{% static "events/img/export.svg" %}' alt="Export Icon" /></div></a>
+          </h2>
           
           <div class="modal fade hide" id="modal-object" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">Hello!</div>
+              <div class="modal-content"></div>
             </div>
           </div>
-         </h2>
           
 
           

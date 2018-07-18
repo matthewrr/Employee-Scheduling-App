@@ -102,36 +102,29 @@ $(function() {
 //     return false;
 //   });
 
-
-$('.js-create-object').click(function() {
-  $('#modal-object').modal('show')
-})
-
-
-
-
 $(function() {
   
   var btn_id = '';
   var table = '';
   var loadForm = function () {
     var btn = $(this);
+    console.log(btn_id);
+    console.log("working");
     table = '#' + $(this).closest('table').attr('id');
     console.log(table);
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
-      dataType: 'html',
+      dataType: 'json',
       
       beforeSend: function () {
-        
+        console.log("working #1")
         $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
-        console.log("working #1")
       },
       success: function (data) {
         console.log("working #2");
-        $(".modal-content").html(data);
+        $("#modal-object .modal-content").html(data.html_form);
       }
     });
   };
@@ -173,7 +166,6 @@ $(function() {
   // Create
   $(".js-create-object").click(loadForm);
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
-  
 
   // Update
   $("#upcoming-events").on("click", ".js-update-object", loadForm);
@@ -189,28 +181,42 @@ $(function() {
 
 });
 
-// var formAjaxSubmit = function(form, modal) {
-//   $(form).submit(function (e) {
-//       e.preventDefault();
-//       $.ajax({
-//           type: $(this).attr('method'),
-//           url: $(this).attr('action'),
-//           data: $(this).serialize(),
-//           success: function (xhr, ajaxOptions, thrownError) {
-//               if ( $(xhr).find('.has-error').length > 0 ) {
-//                   $(modal).find('.modal-body').html(xhr);
-//                   formAjaxSubmit(form, modal);
-//               } else {
-//                   $(modal).modal('toggle');
-//               }
-//           },
-//           error: function (xhr, ajaxOptions, thrownError) {
-//               // handle response errors here
-//           }
-//       });
-//   });
-// }
-
-
-// $('#myModal').modal('show')
-
+function sortTable(n,table_id) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  if (!table_id) {
+    table_id = 'object-table';
+  }
+  table = document.getElementById(table_id);
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++; 
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}

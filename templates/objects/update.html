@@ -3,16 +3,17 @@
 <form method="post" action="{% url obj|add:'_update' form.instance.pk %}" class="js-object-update-form">
   {% csrf_token %}
   <div class="modal-header">
-    <h4 class="modal-title">Update {{obj}}</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
+    <h4 class="modal-title">Update {{obj}}</h4>
   </div>
   <div class="modal-body">
     {% include 'objects/form.html' %}
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-dark">Update {{obj}}</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+    <button type="submit" class="btn btn-primary">Update {{obj}}</button>
   </div>
 </form>

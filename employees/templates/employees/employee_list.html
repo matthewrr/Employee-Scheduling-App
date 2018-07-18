@@ -4,15 +4,15 @@
   
   <thead>
     <tr class='header text-left'>
-      <th scope="col"></th>
-      <th scope="col">ID</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Phone</th>
-      <th class="text-center" scope="col">Food</th>
-      <th class="text-center" scope="col">Alcohol</th>
-      <th class="text-center" scope="col">Admin</th>
-      <th class="text-center" scope="col">Active</th>
+      <th onclick="sortTable(0)" scope="col"><a>ID</a></th>
+      <th onclick="sortTable(1)" scope="col"><a>First</a></th>
+      <th onclick="sortTable(2)" scope="col"><a>Last</a></th>
+      <th onclick="sortTable(3)" scope="col"><a>Phone</a></th>
+      <th onclick="sortTable(4)" class="text-center" scope="col"><a>Food</a></th>
+      <th onclick="sortTable(5)" class="text-center" scope="col"><a>Alcohol</a></th>
+      <th onclick="sortTable(6)" class="text-center" scope="col"><a>Admin</a></th>
+      <th onclick="sortTable(7)" class="text-center" scope="col"><a>Active</a></th>
+      <th scope="col">Edit</th>
       
     </tr>
   </thead>
@@ -20,14 +20,7 @@
   <tbody>
   {% for employee in employees %}
     <tr>
-      <td class="text-center">
-        <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}">
-          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
-        </button>
-        <button type="button" class="btn js-delete-object" data-url="{% url 'employee_delete' employee.id %}">
-          <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
-        </button>
-      </td>
+
       <td>{{employee.employee_id}}</td>
       <td>{{employee.first_name}}</td>
       <td>{{employee.last_name}}</td>
@@ -36,6 +29,14 @@
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.alcohol_permit %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.admin %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.active %}</td>
+      <td class="text-center">
+        <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}">
+          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+        </button>
+        <button type="button" class="btn js-delete-object" data-url="{% url 'employee_delete' employee.id %}">
+          <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
+        </button>
+      </td>
 
     </tr>
   {% endfor %}

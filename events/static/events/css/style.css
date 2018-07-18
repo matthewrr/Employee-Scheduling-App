@@ -9,6 +9,7 @@ body {
 .btn-dark {background: rgba(0,0,0,.7); border-color:rgba(0,0,0,0);}
 hr {background-color:white; margin: 0px; margin-bottom:24px!important;}
 th {color:#1b142d;}
+th > a {cursor:pointer;}
 td {vertical-align: baseline!important;}
 td > a { color:white; font-weight:600;}
 
