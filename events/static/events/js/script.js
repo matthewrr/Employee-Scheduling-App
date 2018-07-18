@@ -116,25 +116,22 @@ $(function() {
   var table = '';
   var loadForm = function () {
     var btn = $(this);
-    console.log(btn_id);
-    console.log("working");
     table = '#' + $(this).closest('table').attr('id');
     console.log(table);
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
-      dataType: 'json',
+      dataType: 'html',
       
       beforeSend: function () {
-        console.log("working #1")
+        
         $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
-        console.log('AJAX beforeSend...');
+        console.log("working #1")
       },
       success: function (data) {
         console.log("working #2");
-        $("#modal-object .modal-content").html(data.html_form);
-        alert('AJAX afterSend successful!')
+        $(".modal-content").html(data);
       }
     });
   };

@@ -2,8 +2,8 @@ import csv
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
-
-from .forms import LocationForm
+from django.template import loader
+# from .forms import LocationForm
 from .models import *
 
 from . import views
@@ -11,36 +11,151 @@ from django.views.generic import TemplateView,ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from scheduling_app.views import ObjectSave
+from django import forms
 
 from scheduling_app.views import *
 
-from django.http import JsonResponse
 
 
+class AjaxableResponseMixin:
+    """
+    Mixin to add AJAX support to a form.
+    Must be used with an object-based FormView (e.g. CreateView)
+    """
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status=400)
+        else:
+            return response
 
-class AjaxTemplateMixin(object):
- 
-    def dispatch(self, request, *args, **kwargs):
-        # if not hasattr(self, 'ajax_template_name'):
-        #     split = self.template_name.split('.html')
-        #     split[-1] = '_inner'
-        #     split.append('.html')
-        #     self.ajax_template_name = ''.join(split)
-        # if request.is_ajax():
-        self.template_name = self.ajax_template_name
-        return super(AjaxTemplateMixin, self).dispatch(request, *args, **kwargs)
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super().form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data)
+        else:
+            return response
+
+class LocationForm(forms.Form):
+    title = forms.CharField()
+    subtitle = forms.CharField()
+    option = forms.BooleanField()
+
+
+# def search_book(request):
+#     form = SearchForm(request.POST or None)
+#     if request.method == "POST" and form.is_valid():
+#         stitle = form.cleaned_data['title']
+#         sauthor = form.cleaned_data['author']
+#         scategory = form.cleaned_data['category']
+#         return HttpResponseRedirect('/thanks/')
+#     return render_to_response("books/create.html", {
+#         "form": form,
+#     }, context_instance=RequestContext(request))
+
 
 class LocationList(ObjectList, ListView):
     model = Location
     context_object_name = 'locations'
     extra_context = {'obj':'location','objs':'locations'}
+    form_class = LocationForm
+    
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            # <process form cleaned data>
+            return HttpResponseRedirect('/locations/')
+        return HttpResponseRedirect('/locations/')
+    
 
-class LocationCreate(CreateView):
+# def index(request):
+#     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+#     template = loader.get_template('polls/index.html')
+#     context = {
+#         'latest_question_list': latest_question_list,
+#     }
+#     return HttpResponse(template.render(context, request))
+
+
+class LocationCreate(AjaxableResponseMixin, CreateView):
     model = Location
-    template_name = 'objects/create.html'
-    extra_contest = {'obj':'location','objs':'locations'}
     fields = ['location_id', 'title', 'bar',]
+    template_name = 'objects/create.html'
+    extra_context = {'obj':'location','objs':'locations'}
+    # fields = ['location_id', 'title', 'bar',]
     success_url = reverse_lazy('locations:location_list')
+    # form_class = LocationForm
+    
+    def post(self, request, *args, **kwargs):
+        return form.is_valid()
+    
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST)
+    #     if form.is_valid():
+    #         # <process form cleaned data>
+    #         return HttpResponseRedirect('/locations/')
+    #     return HttpResponseRedirect('/locations/')
+            
+    def get(self, request):
+        
+        form = LocationForm()
+        context = {'form': form, 'obj':'location','objs':'locations'}
+        return render(request, 'objects/create.html', context)
+        # return HttpResponse(template.render(form.as_p(), request))
+        # return form
+        # return JsonResponse(form, safe=False)
+        # response = super().form_valid(form)
+        # if self.request.is_ajax():
+        #     print("is ajax!")
+        #     data = {
+                # 'pk': self.object.pk,
+        #     }
+        #     return JsonResponse(data)
+        # else:
+        #     return response
+        # if form.is_valid():
+        #     print('valid!-------------->')
+        #     response = super().form_valid(form)
+        #     if self.request.is_ajax():
+        #         data = {
+        #             'pk': self.object.pk,
+        #         }
+        #         return JsonResponse(data)
+        #     else:
+        #         return response
+    
+
+    
+    # def form_invalid(self, form):
+        # print('maybe invalid')
+        # response = super().form_invalid(form)
+        # if self.request.is_ajax():
+        #     return JsonResponse(form.errors, status=400)
+        # else:
+        #     return response
+
+    # def form_valid(self, form):
+    #     print('maybe valid')
+    #     # We make sure to call the parent's form_valid() method because
+    #     # it might do some processing (in the case of CreateView, it will
+    #     # call form.save() for example).
+    #     response = super().form_valid(form)
+    #     if self.request.is_ajax():
+    #         data = {
+    #             'pk': self.object.pk,
+    #         }
+    #         return JsonResponse(data)
+    #     else:
+    #         return response
+
+
   
 class LocationUpdate(UpdateView):
     model = Location
