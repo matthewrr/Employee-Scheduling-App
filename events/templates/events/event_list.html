@@ -5,6 +5,7 @@
 
 <div class='event-row py-3 px-3 mb-4'>
   <a class='table-header mb-3'>
+    {% cycle 'Upcoming Events' 'Previous Events' %}
   </a>
   <table class="table table-striped table-hover" id="{% cycle 'upcoming-events' 'previous-events' %}">
     <thead>
@@ -17,11 +18,11 @@
         <th onclick="sortTable(4,'upcoming-events')" scope="col"><a>Alcohol</a></th>
         <th scope="col">Edit</th>
         {% else %}
-        <th onclick="sortTable(0), 'previous-events')" scope="col" class='text-left'><a>Event</a></th>
-        <th onclick="sortTable(1), 'previous-events')" scope="col" class='text-left'><a>Date</a></th>
-        <th onclick="sortTable(2), 'previous-events')" scope="col" class='text-left'><a>Doors</a></th>
-        <th onclick="sortTable(3), 'previous-events')" scope="col"><a>#</a></th>
-        <th onclick="sortTable(4), 'previous-events')" scope="col"><a>Alcohol</a></th>
+        <th onclick="sortTable(0, 'previous-events')" scope="col" class='text-left'><a>Event</a></th>
+        <th onclick="sortTable(1, 'previous-events')" scope="col" class='text-left'><a>Date</a></th>
+        <th onclick="sortTable(2, 'previous-events')" scope="col" class='text-left'><a>Doors</a></th>
+        <th onclick="sortTable(3, 'previous-events')" scope="col"><a>#</a></th>
+        <th onclick="sortTable(4, 'previous-events')" scope="col"><a>Alcohol</a></th>
         <th scope="col">Edit</th>
         {% endif %}
         

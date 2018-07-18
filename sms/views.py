@@ -11,8 +11,13 @@ from events.models import Event
 from employees.models import Employee
 
 def sms_text(request):
+    
+    admins = Employee.objects.filter(admin=True)
+    texts = SMS.objects.all()
 
     context = {
         'obj':'SMS Text',
+        'admins': admins,
+        'texts': texts,
     }
     return render(request, 'sms/sms_text.html', context)

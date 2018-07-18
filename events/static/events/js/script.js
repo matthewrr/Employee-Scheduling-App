@@ -182,6 +182,7 @@ $(function() {
 });
 
 function sortTable(n,table_id) {
+  console.log(table_id);
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   if (!table_id) {
     table_id = 'object-table';
