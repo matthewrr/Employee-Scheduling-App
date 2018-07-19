@@ -5,8 +5,8 @@
     <span class="step-links mx-auto">
         <ul class="pagination">
             {% if employees.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ employees.previous_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1"><<</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ employees.previous_page_number }}"><</a></li>
             {% endif %}
     
             <span class="current">
@@ -14,8 +14,8 @@
             </span>
     
             {% if employees.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ employees.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ employees.paginator.num_pages }}">Last &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ employees.next_page_number }}">></a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ employees.paginator.num_pages }}">>></a></li>
             {% endif %}
         </ul>
     </span>
@@ -72,8 +72,8 @@
     <span class="step-links mx-auto">
         <ul class="pagination">
             {% if employees.has_previous %}
-                <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-                <li class="page-item"><a class="page-link" href="?page={{ employees.previous_page_number }}">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="?page=1"><<</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ employees.previous_page_number }}"><</a></li>
             {% endif %}
     
             <span class="current">
@@ -81,8 +81,8 @@
             </span>
     
             {% if employees.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ employees.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ employees.paginator.num_pages }}">Last &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ employees.next_page_number }}">></a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ employees.paginator.num_pages }}">>></a></li>
             {% endif %}
         </ul>
     </span>

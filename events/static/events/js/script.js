@@ -1,9 +1,9 @@
-$(document).ready(function() {
-    $(".js-example-basic-single").select2({
-        placeholder: "Select Employee",
-        allowClear: true,
-    });
-});
+// $(document).ready(function() {
+//     $(".js-example-basic-single").select2({
+//         placeholder: "Select Employee",
+//         allowClear: true,
+//     });
+// });
 
 
 // $(".modal").on("hidden.bs.modal", function(){

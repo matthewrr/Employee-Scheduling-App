@@ -12,6 +12,9 @@ class Employee(models.Model):
     alcohol_permit = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     
+    class Meta:
+        ordering = ['first_name']
+    
     def name(self):
         return self.first_name + ' ' + self.last_name
         
