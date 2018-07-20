@@ -221,3 +221,19 @@ function sortTable(n,table_id) {
     }
   }
 }
+
+
+// $(function() {
+//   var myvar = $("#201-P-MG").val();
+//   console.log(myvar + 'hello!');
+//   var employee = document.getElementById("201-P-MG");
+//   employee.options[employee.options.selectedIndex].selected = true;
+// });
+var dict = {};
+
+$('select').on('change', function() {
+  var employee = this.value;
+  var position = $(this).closest('select').attr('value');
+  var location = $(this).closest('.location-body').attr('id')
+  dict[location] = [position, employee];
+})

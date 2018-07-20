@@ -20,7 +20,7 @@
             <div class="input-group-prepend">
               <div class="input-group-text">{{position.code}}</div>
             </div>
-            <select class="form-control form-control-sm">
+            <select class="form-control form-control-sm" value="{{position.code}}">
               <option selected>{{position}}</option>
               {% for employee in all_employees%}
                 <option class="{{employee}}">{{employee.name}}</option>
