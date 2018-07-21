@@ -222,18 +222,32 @@ function sortTable(n,table_id) {
   }
 }
 
-
-// $(function() {
-//   var myvar = $("#201-P-MG").val();
-//   console.log(myvar + 'hello!');
-//   var employee = document.getElementById("201-P-MG");
-//   employee.options[employee.options.selectedIndex].selected = true;
-// });
 var dict = {};
 
+
+
+// collect value on change
 $('select').on('change', function() {
   var employee = this.value;
   var position = $(this).closest('select').attr('value');
   var location = $(this).closest('.location-body').attr('id')
   dict[location] = [position, employee];
 })
+
+$(function() {
+  var location_cards = document.getElementsByClassName('location-body');
+  for (l in location_cards) {
+    console.log(l);
+  }
+
+})
+
+
+
+
+// onSave
+//   for location on page:
+//     var location = location
+//     for position in location
+//       var name = name
+//       dict[location] = [position, name]
