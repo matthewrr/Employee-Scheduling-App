@@ -5,12 +5,12 @@
         <div class='input-group'>
           <!--<img class='remove-location remove-{{loc}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>-->
           <input type='text' class='form-control input-group-text' id='inlineFormInputGroup' placeholder='*E:' style='display:flex;margin-right:-1px;max-width:20%'>
-          <select class='js-example-basic-single js-states form-control'>
+          <!--<select class='js-example-basic-single js-states form-control'>-->
               <option></option>
               {% autoescape off %}
                 {{all_employees}}
               {% endautoescape %}
-          </select>
+          <!--</select>-->
           <br />
           </div>
         </div>

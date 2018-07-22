@@ -5,6 +5,7 @@
   <div class="card-header location-header">
       <input class='mr-1' type="checkbox" data-target='#{{location.location_id}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
       <span>{{location.title}}</span>
+      
       <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>-->
       <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>-->
   </div>
@@ -20,8 +21,8 @@
             <div class="input-group-prepend">
               <div class="input-group-text">{{position.code}}</div>
             </div>
-            <select class="form-control form-control-sm" value="{{position.code}}">
-              <option selected>{{position}}</option>
+            <select class="form-control form-control-sm">
+              <option value='{{position.code}}' class='{{position.code}}' selected>{{position}}</option>
               {% for employee in all_employees%}
                 <option class="{{employee}}">{{employee.name}}</option>
               {% endfor %}
@@ -35,7 +36,6 @@
           
 
         
-          </select>
           {% include 'events/detail/add_row.html' with loc=location.location_id %}
           <br />
       </div>

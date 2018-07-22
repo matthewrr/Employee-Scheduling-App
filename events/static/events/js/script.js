@@ -227,27 +227,27 @@ var dict = {};
 
 
 // collect value on change
-$('select').on('change', function() {
-  var employee = this.value;
-  var position = $(this).closest('select').attr('value');
-  var location = $(this).closest('.location-body').attr('id')
-  dict[location] = [position, employee];
+// $('select').on('change', function() {
+//   var employee = this.value;
+//   var position = $(this).closest('select').attr('value');
+//   var location = $(this).closest('.location-body').attr('id')
+//   dict[location] = [position, employee];
+// })
+
+$( ".submit-schedule" ).click(function() {
+  
+  $('.location-body').each(function() {
+    var location = $(this).attr('id');
+    var positions = $(this).find('select');
+    var scheduled = $(positions).children('option:selected');
+    var posDict = {};
+    
+    $(positions).each(function(i,v){
+      var position = $(v).children().first().attr('class');
+      var person = scheduled[i];
+      posDict[position] = $(person).val();
+    })
+    dict[location] = posDict;
+  });
+  console.log(dict);
 })
-
-$(function() {
-  var location_cards = document.getElementsByClassName('location-body');
-  for (l in location_cards) {
-    console.log(l);
-  }
-
-})
-
-
-
-
-// onSave
-//   for location on page:
-//     var location = location
-//     for position in location
-//       var name = name
-//       dict[location] = [position, name]
