@@ -8,12 +8,35 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .forms import EventForm
 from .models import *
 
+
+
 def event_detail_view(request,year,month,day,slug):
+    concerts = Event.objects.all()
     context = {
         'event':Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug),
         'locations':Location.objects.all(),
         'all_employees': Employee.objects.all(),
+        'schedule': Schedule.objects.all()
     }
+    
+    for c in concerts:
+        print(c.__dict__)
+        print(c.schedule_id)
+    #     print(dir(c))
+    # {'_state': <django.db.models.base.ModelState object at 0x7f97526aa240>, 
+    # 'id': 1, 'event_id': 101010, 'title': 'The Eagles', 
+    # 'date': datetime.date(2018, 7, 2), 'doors_open': '8:00PM', 'alcohol': True, 
+    # 'schedule_id': None, 'slug': 'the-eagles'}
+    
+    
+    
+    # for s in Schedule.objects.all():
+    #     print(s) #name of schedule
+    #     # print(s.locations.all()) #active locations
+    #     for t in s.locations.all():
+    #         print(t)
+    #         print(t.position_set.all())
+        
     return render(request, './events/detail/event_detail.html', context)
 
 def event_list(request):

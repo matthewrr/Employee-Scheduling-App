@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import Event
+from .models import Event, Schedule
+
+class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ('schedule_name',)
 
 class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title","doors_open")}
-    list_display = ('event_id','title','doors_open','slug', 'employees', 'locations','alcohol')
+    list_display = ('event_id','title','doors_open','slug', 'alcohol',)
 
-# Register your models here.
 admin.site.register(Event, EventAdmin)
+admin.site.register(Schedule, ScheduleAdmin)
