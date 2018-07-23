@@ -8,8 +8,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .forms import EventForm
 from .models import *
 
-
-
 def event_detail_view(request,year,month,day,slug):
     concerts = Event.objects.all()
     context = {
@@ -19,16 +17,9 @@ def event_detail_view(request,year,month,day,slug):
         'schedule': Schedule.objects.all()
     }
     
-    for c in concerts:
-        print(c.__dict__)
-        print(c.schedule_id)
-    #     print(dir(c))
-    # {'_state': <django.db.models.base.ModelState object at 0x7f97526aa240>, 
-    # 'id': 1, 'event_id': 101010, 'title': 'The Eagles', 
-    # 'date': datetime.date(2018, 7, 2), 'doors_open': '8:00PM', 'alcohol': True, 
-    # 'schedule_id': None, 'slug': 'the-eagles'}
-    
-    
+    # for c in concerts:
+    #     print(c.__dict__)
+    #     print(c.schedule_id)
     
     # for s in Schedule.objects.all():
     #     print(s) #name of schedule
@@ -124,3 +115,20 @@ def export_events(request):
 #     def get(self, request):
 #         # <view logic>
 #         return HttpResponse('result')
+
+
+# def update_schedule(request):
+#     if request.method == 'POST':
+#         schedule = request.POST.get('schedule')
+#         response_data = {}
+
+        # post = Post(text=post_text, author=request.user)
+        # post.save()
+        
+        # make sure to send pk
+        # if event has schedule:
+            #replace
+        # else
+            #create
+        
+    

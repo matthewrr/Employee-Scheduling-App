@@ -250,4 +250,61 @@ $( ".submit-schedule" ).click(function() {
     dict[location] = posDict;
   });
   console.log(dict);
+  
+  
+  
+  
+  function update_schedule() {
+    console.log("update schedule is working!") // sanity check
+    $.ajax({
+        url : "update_schedule/", // the endpoint
+        type : "POST", // http method
+        data : { schedule : dict }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        // error : function(xhr,errmsg,err) {
+        //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+        //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        // }
+    });
+};
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 })
+
+
+
+
+
+
+
+function update_schedule() {
+    console.log("create post is working!") // sanity check
+    // console.log($('#post-text').val())
+};
+
+// $('.submit-schedule').on('submit', function(event){
+//     event.preventDefault();
+//     console.log("form submitted!");  // sanity check
+//     update_schedule();
+// });
