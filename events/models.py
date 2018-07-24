@@ -5,17 +5,10 @@ from locations.models import Location, Position
 import datetime
     
 class Event(models.Model):
-    event_id = models.IntegerField(blank=True)
     title = models.CharField(max_length=256)
     date = models.DateField(blank=False)
     doors_open = models.CharField(max_length=256)
     alcohol = models.BooleanField(default=True)
-    # schedule = models.OneToOneField(
-    #     Schedule,
-    #     on_delete=models.CASCADE,
-    #     blank=True,
-    #     null=True,
-    # )
     slug = models.SlugField()
     
     @property
@@ -33,10 +26,13 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-class Schedule(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True, blank=True)
-    locations = models.ManyToManyField(Location)
-    employees = models.ManyToManyField(Employee)
-    
-    def __str__(self):
-        return 'Schedule object for: ' + self.schedule_name
+# class Schedule(models.Model):
+#     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+class Shift(models.Model):
+    # schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    locations = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
+    position = models.CharField(max_length=256,null=True, blank=True)
+    employees = models.ForeignKey(Employee, on_delete=models.CASCADE,null=True, blank=True)
+    start_time = models.CharField(max_length=256,null=True, blank=True)

@@ -14,10 +14,10 @@ class Migration(migrations.Migration):
             model_name='schedule',
             name='employees',
         ),
-        migrations.RemoveField(
-            model_name='schedule',
-            name='locations',
-        ),
+        # migrations.RemoveField(
+        #     model_name='schedule',
+        #     name='locations',
+        # ),
         migrations.RemoveField(
             model_name='event',
             name='schedule',

@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('employees', '0003_auto_20180722_2105'),
-        ('locations', '0012_auto_20180722_2105'),
+        # ('locations', '0012_auto_20180722_2105'),
         ('events', '0012_auto_20180722_2115'),
     ]
 
@@ -21,13 +21,13 @@ class Migration(migrations.Migration):
             name='employees',
             field=models.ManyToManyField(to='employees.Employee'),
         ),
-        migrations.RemoveField(
-            model_name='schedule',
-            name='locations',
-        ),
-        migrations.AddField(
-            model_name='schedule',
-            name='locations',
-            field=models.ManyToManyField(to='locations.Location'),
-        ),
+        # migrations.RemoveField(
+        #     model_name='schedule',
+        #     name='locations',
+        # ),
+        # migrations.AddField(
+        #     model_name='schedule',
+        #     name='locations',
+        #     field=models.ManyToManyField(to='locations.Location'),
+        # ),
     ]

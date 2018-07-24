@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('employees', '0003_auto_20180722_2105'),
-        ('locations', '0012_auto_20180722_2105'),
+        # ('locations', '0012_auto_20180722_2105'),
         ('events', '0011_auto_20180722_2107'),
     ]
 
@@ -35,9 +35,9 @@ class Migration(migrations.Migration):
             name='employees',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='employees.Employee'),
         ),
-        migrations.AddField(
-            model_name='schedule',
-            name='locations',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='locations.Location'),
-        ),
+        # migrations.AddField(
+        #     model_name='schedule',
+        #     name='locations',
+        #     field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='locations.Location'),
+        # ),
     ]

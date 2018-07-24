@@ -10,12 +10,31 @@ from .models import *
 
 def event_detail_view(request,year,month,day,slug):
     concerts = Event.objects.all()
+    #     @property
+    # def location_positions(self):
+    #     return self.event
+    # schedules = Schedule.objects.all()
+    # for c in concerts:
+    #     print(c.locations_set.all())
+    #     print('bye')
+    # print('hello')
+    # for schedule in schedules:
+    #     print(schedule.event)
+    #     print(schedule.locations)
+    
+    
+    # event = Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug)
+    # schedule = Schedule.objects.get(events=event)
+    # print(schedule)
+    
     context = {
         'event':Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug),
         'locations':Location.objects.all(),
         'all_employees': Employee.objects.all(),
-        'schedule': Schedule.objects.all()
+        # 'schedule': Schedule.objects.all()
     }
+    
+    
     
     # for c in concerts:
     #     print(c.__dict__)

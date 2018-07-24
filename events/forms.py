@@ -1,12 +1,12 @@
 from django.forms import ModelForm
-from .models import Event, Schedule
+from .models import Event
 from django import forms
 
 class EventForm(ModelForm):
     class Meta:
         model = Event
         
-        fields = ['event_id', 'title', 'date', 'doors_open','alcohol','slug',]
+        fields = ['title', 'date', 'doors_open','alcohol','slug',]
 
 # form = EventForm()
 
