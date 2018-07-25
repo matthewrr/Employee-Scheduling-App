@@ -1,41 +1,25 @@
 from django.contrib import admin
-from .models import Event, Shift
+from .models import Event, Shift, EventLocation, EventSchedule
+import nested_admin
 
-# admin.site.unregister(Schedule)
-
-
-class ShiftInline(admin.StackedInline):
+class ShiftInline(nested_admin.NestedTabularInline):
     model = Shift
-    # fields = (('event','location','position','employee','arrival_time'),)
-    fields = (('locations','position','employees','start_time'),)
+    fields = ('employee','event_location','position', 'arrival_time')
 
-# class ScheduleAdmin(admin.ModelAdmin):
-#     def event_name(self, obj):
-#         try:
-#             return obj.event.title
-#         except:
-#             return "Unassigned"
-#     list_display = ('event_name',)
-#     inlines = [ShiftInline]
-
-class EventAdmin(admin.ModelAdmin):
+class EventLocationInline(nested_admin.NestedStackedInline):
+    model = EventLocation
+    fields = ('event_schedule','locations',)
+    inlines = [ShiftInline]
+    
+class EventScheduleInline(nested_admin.NestedTabularInline):
+    model = EventSchedule
+    fields = ('event',)
+    inlines = [EventLocationInline]
+    
+class EventAdmin(nested_admin.NestedModelAdmin):
     prepopulated_fields = {"slug": ("title","doors_open")}
     list_display = ('title','doors_open','slug', 'alcohol',)
-    inlines = [ShiftInline]
+    # inlines = [ShiftInline]
+    inlines = [EventScheduleInline]
 
 admin.site.register(Event, EventAdmin)
-# admin.site.register(Schedule, ScheduleAdmin)
-
-
-
-# class PositionInline(admin.StackedInline):
-#     model = Position
-#     fields = (('position', 'code'),)
-
-# class LocationAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'location_id','bar',)
-#     fields = (('title','location_id','bar'),)
-#     inlines = [PositionInline]
-
-# admin.site.register(Location, LocationAdmin)
-

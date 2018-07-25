@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'employees',
     'import_export',
     'locations',
+    'nested_admin',
     'sms',
     'widget_tweaks',
 ]
