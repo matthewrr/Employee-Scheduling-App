@@ -1,7 +1,7 @@
 from django.db import models
 
 class Location(models.Model):
-    location_id = models.CharField(max_length=256)
+    location_id = models.CharField(max_length=256,null=True, blank=True)
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
     
@@ -12,7 +12,7 @@ class Location(models.Model):
         return self.title
 
 class Position(models.Model):
-   location = models.ForeignKey(Location, on_delete=models.CASCADE)
+   location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
    position = models.CharField(max_length=256)
    code = models.CharField(max_length=3)
    

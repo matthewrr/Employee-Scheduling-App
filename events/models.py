@@ -30,14 +30,18 @@ class EventSchedule(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True, blank=True)
     class Meta:
         verbose_name_plural = 'Schedule'
+    def __str__(self):
+        return "Schedule for: " + self.event.title
   
 class EventLocation(models.Model):
     event_schedule = models.ForeignKey(EventSchedule, on_delete=models.CASCADE,null=True, blank=True)
     locations = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
     class Meta:
         verbose_name_plural = 'Locations'
+    def __str__(self):
+        return self.locations.title
 
 class Shift(Position):
-    event_location = models.ForeignKey(EventLocation, on_delete=models.CASCADE)
+    event_location = models.ForeignKey(EventLocation, on_delete=models.CASCADE, verbose_name="Event Location")
     employee = models.OneToOneField(Employee, on_delete=models.CASCADE,null=True, blank=True)
     arrival_time = models.CharField(max_length=256,null=True, blank=True)

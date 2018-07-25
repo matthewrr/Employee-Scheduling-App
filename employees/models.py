@@ -23,4 +23,4 @@ class Employee(models.Model):
         return '({}) {}-{}'.format(p[:3],p[3:6],p[6:])
         
     def __str__(self):
-        return self.employee_id
+        return self.first_name + ' ' + self.last_name
