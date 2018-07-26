@@ -29,6 +29,7 @@
         <div class='col col-12'>
           <div class='card-columns'>
           {% for location, position in schedule.items %}
+          
             {% include 'events/detail/location_card.html' with location=location position=position %}
           {% endfor %}
           </div>

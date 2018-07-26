@@ -1,15 +1,19 @@
 {% load staticfiles %}
 
 <div class="card mx-auto shadow" class='testing'>
+
+  
               
   <div class="card-header location-header">
-      <input class='mr-1' type="checkbox" data-target='#{{location}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
-      <span>{{location}}</span>
+      <label class='location-title' data-target='#{{location.id}}' data-toggle='collapse'>
+      <input class='active-location mr-2' type="checkbox" checked />
+        {{location}}
+      </label>
       {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>--> #}
       {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>--> #}
   </div>
       
-  <div class="card-body location-body" id="{{location}}">
+  <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location.id}}" aria-expanded="true">
   {% for shift, scheduled in position.items %}
     <div class='row'>
         <div class="btn-group" style="width:100%;">

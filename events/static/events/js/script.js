@@ -36,6 +36,9 @@ function myFunction() {
 }
 
 $(function() {
+  
+  $('.active-location').prop('indeterminate', true)
+  
   $('.add-employee').click(function(){
     var myparent = $(this).parent().prop('className');
     var newRow = document.getElementById("new-employee");
@@ -234,7 +237,7 @@ var dict = {};
 //   dict[location] = [position, employee];
 // })
 
-$( ".submit-schedule" ).click(function() {
+$(".submit-schedule" ).click(function() {
   
   $('.location-body').each(function() {
     var location = $(this).attr('id');
@@ -275,7 +278,7 @@ $( ".submit-schedule" ).click(function() {
     });
 };
   
-  
+
   
   
   
