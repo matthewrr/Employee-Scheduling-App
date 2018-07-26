@@ -17,25 +17,31 @@ def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     schedule = {}
     
-    #create schedule
-    # for location in locations:
-    #     schedule[location] = {}
-    #     for shift in location.shift_set.all():
-    #         schedule[location][shift.position] = {'employee':str(shift.employee),
-    #                                               'arrival_time':shift.arrival_time}
-    # context = {
-    #     'event':event,
-    #     'schedule':schedule,
-    #     'all_employees': all_employees,
-    # }
+    # dict of scheduled shifts
+    for location in locations:
+        schedule[location] = {}
+        for shift in location.shift_set.all():
+            schedule[location][shift.position] = {'employee':str(shift.employee),
+                                                  'arrival_time':shift.arrival_time}
+    pprint(schedule)
+    locations = Location.objects.all()
+    for location in locations:
+        if not schedule.get(location):
+            schedule[location] = {}
+    
+    context = {
+        'event':event,
+        'schedule':schedule,
+        'all_employees': all_employees,
+    }
         
 
     # if not event.eventschedule:
-    context = {
-        'event':event,
-        'locations':Location.objects.all(),
-        'all_employees': Employee.objects.all(),
-    }
+    # context = {
+    #     'event':event,
+    #     'locations':Location.objects.all(),
+    #     'all_employees': Employee.objects.all(),
+    # }
     
     return render(request, './events/detail/event_detail.html', context)
     

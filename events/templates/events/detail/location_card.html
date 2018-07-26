@@ -3,40 +3,38 @@
 <div class="card mx-auto shadow" class='testing' style="width: 18rem;">
               
   <div class="card-header location-header">
-      <input class='mr-1' type="checkbox" data-target='#{{location.location_id}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
-      <span>{{location.title}}</span>
-      
-      <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>-->
-      <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>-->
+      <input class='mr-1' type="checkbox" data-target='#{{location}}' aria-label="Active Stand Checkbox" data-toggle='collapse' checked></input>
+      <span>{{location}}</span>
+      {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>--> #}
+      {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>--> #}
   </div>
       
-  <div class="card-body location-body" id="{{location.location_id}}">
-  {% for position in location.position_set.all %}
+  <div class="card-body location-body" id="{{location}}">
+  {% for shift, scheduled in position.items %}
     <div class='row'>
       <div class='col col-12'>
-          
-          
         <div class="btn-group" style="width:100%;">
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text">{{position.code}}</div>
+              <div class="input-group-text">{{shift}}</div>
             </div>
             <select class="form-control form-control-sm">
-              <option value='{{position.code}}' class='{{position.code}}' selected>{{position}}</option>
+              
+              {% if scheduled %}
+                <option value='{{shift}}' class='{{shift}}' selected>{{scheduled.employee}}</option>
+              {% else %}
+                <option value='{{shift}}' class='{{shift}}' selected>{{shift}}</option>
+              {% endif %}
+              
               {% for employee in all_employees%}
                 <option class="{{employee}}">{{employee.name}}</option>
               {% endfor %}
-              
             </select>
           </div>
  
         </div>
-       
-          
-          
 
-        
-          {% include 'events/detail/add_row.html' with loc=location.location_id %}
+          {# {% include 'events/detail/add_row.html' with loc=location.location_id %} #}
           <br />
       </div>
     </div>
