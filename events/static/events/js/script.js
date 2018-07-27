@@ -311,3 +311,9 @@ function update_schedule() {
 //     console.log("form submitted!");  // sanity check
 //     update_schedule();
 // });
+
+$(document).ready(function(){
+	$('.toggle-shifts').change(function(){
+      	$('.unscheduled').toggle();
+    });
+});

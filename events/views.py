@@ -10,33 +10,97 @@ from .models import *
 from pprint import pprint
 
 #dont fetch if not changed
-
-def event_detail_view(request,year,month,day,slug):
-    event = Event.objects.get(slug=slug)
-    all_employees = Employee.objects.all()
-    all_locations = Location.objects.all()
-    schedule = {}
+def schedule_template(schedule={},locations=None):
+    locations = Location.objects.all()
+    for location in locations:
+        schedule[str(location)] = {}
+        for position in location.position_set.all():
+            schedule[str(location)][position.code] = {'employee':str(position),
+                                                 'arrival_time':None
+                                                 }
+    return schedule
+        
+    
     
 
-    if hasattr(event, 'eventschedule'):
-        locations = event.eventschedule.eventlocation_set.all()
-        for location in locations:
-            schedule[location] = {}
-            for shift in location.shift_set.all():
-                schedule[location][shift.position] = {'employee':str(shift.employee),
-                                                      'arrival_time':shift.arrival_time}
-        for location in all_locations:
-            if not schedule.get(location):
-                schedule[location] = {}
 
-    else:
-        for location in all_locations:
-            schedule[location] = {}
-            for position in location.position_set.all():
-                schedule[location][position.code] = {'employee':position}
+
+def event_detail_view(request,year,month,day,slug):
+    all_employees = Employee.objects.all()
+    event = Event.objects.get(slug=slug)
+    template = schedule_template()
+    locations = event.eventschedule.eventlocation_set.all()
+
+    for location in locations:
+        flag = template.get(str(location))
+        if flag:
+            
+            for position in location.shift_set.all():
+                # second_flag = template[location].get(position)
+                # if second_flag:
+                template[str(location)][str(position)] = {'employee':position.employee,
+                                                'arrival_time':position.arrival_time,
+                }
+    # pprint(template)
+               
+                    
+    
+    
+    # for shift in location.shift_set.all():
+    # print(template)
+    # for location in template:
+        # print(location)
+    
+        # if l.locations.filter(title__icontains=location).exists():
+        #     print('success!')
+    
+    # event = Event.objects.get(slug=slug)
+    # all_employees = Employee.objects.all()
+    # all_locations = Location.objects.all()
+    # locations = event.eventschedule.eventlocation_set.all()
+    # toggle = True
+    # schedule = {}
+    
+    # thing = list(event.eventschedule.eventlocation_set.all())
+    
+    
+    
+    # for location in all_locations:
+    #     schedule[location] = {}
+        
+        
+    #     if location in locations:
+    #         print('Success!')
+        
+        
+        
+        # for position in location.position_set.all():
+        #     schedule[location][position.code] = {'employee':position}
+    
+    
+    
+    
+    
+
+    # if hasattr(event, 'eventschedule'):
+    #     locations = event.eventschedule.eventlocation_set.all()
+    #     for location in locations:
+    #         schedule[location] = {}
+    #         for shift in location.shift_set.all():
+    #             schedule[location][shift.position] = {'employee':str(shift.employee),
+    #                                                   'arrival_time':shift.arrival_time}
+    #     for location in all_locations:
+    #         if not schedule.get(location):
+    #             schedule[location] = {}
+
+    # else:
+    #     for location in all_locations:
+    #         schedule[location] = {}
+    #         for position in location.position_set.all():
+    #             schedule[location][position.code] = {'employee':position}
         
     context = {'event':event,
-               'schedule':schedule,
+               'schedule':template,
                'all_employees':all_employees,
                }
                

@@ -26,6 +26,8 @@ class Event(models.Model):
     def __str__(self):
         return self.title
     
+        
+    
 class EventSchedule(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True, blank=True)
     class Meta:
