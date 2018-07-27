@@ -9,40 +9,37 @@ from .forms import EventForm
 from .models import *
 from pprint import pprint
 
-#dont fetch is not changed
+#dont fetch if not changed
 
 def event_detail_view(request,year,month,day,slug):
     event = Event.objects.get(slug=slug)
-    locations = event.eventschedule.eventlocation_set.all()
     all_employees = Employee.objects.all()
+    all_locations = Location.objects.all()
     schedule = {}
     
-    # dict of scheduled shifts
-    for location in locations:
-        schedule[location] = {}
-        for shift in location.shift_set.all():
-            schedule[location][shift.position] = {'employee':str(shift.employee),
-                                                  'arrival_time':shift.arrival_time}
-    pprint(schedule)
-    locations = Location.objects.all()
-    for location in locations:
-        if not schedule.get(location):
-            schedule[location] = {}
-    
-    context = {
-        'event':event,
-        'schedule':schedule,
-        'all_employees': all_employees,
-    }
-        
 
-    # if not event.eventschedule:
-    # context = {
-    #     'event':event,
-    #     'locations':Location.objects.all(),
-    #     'all_employees': Employee.objects.all(),
-    # }
-    
+    if hasattr(event, 'eventschedule'):
+        locations = event.eventschedule.eventlocation_set.all()
+        for location in locations:
+            schedule[location] = {}
+            for shift in location.shift_set.all():
+                schedule[location][shift.position] = {'employee':str(shift.employee),
+                                                      'arrival_time':shift.arrival_time}
+        for location in all_locations:
+            if not schedule.get(location):
+                schedule[location] = {}
+
+    else:
+        for location in all_locations:
+            schedule[location] = {}
+            for position in location.position_set.all():
+                schedule[location][position.code] = {'employee':position}
+        
+    context = {'event':event,
+               'schedule':schedule,
+               'all_employees':all_employees,
+               }
+               
     return render(request, './events/detail/event_detail.html', context)
     
     
