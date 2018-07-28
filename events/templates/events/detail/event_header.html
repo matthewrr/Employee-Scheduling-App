@@ -1,47 +1,159 @@
-<div class='card custom-shadow' style='border-radius:8px;margin-bottom:30px;'>
-  <div class='card-body px-5'>
-  <div class='row'>
+<div class='row mb-3'>
+  <!--<div class='col-4'>-->
+  <!--  <div class='card custom-shadow'>-->
+  <!--    <div class='card-header'>-->
+  <!--      Reset to Template-->
+  <!--    </div>-->
+  <!--    <div class='card-body'>-->
     
-    <div class='col col-6' >
-        <div class='event-title'>
-          {{event.title|upper}}
-        </div>
-        <div style='font-family: "Open Sans"; font-size:1em;'>
-          <strong>Date: </strong>{{event.date}}<br />
-          <strong>Doors Open: </strong>{{event.doors_open}}<br />
-          <strong>Employees Scheduled: </strong>##<br />
-        </div>
-    </div>
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--  <div class='col-4'>-->
+  <!--  <div class='card custom-shadow'>-->
+  <!--    <div class='card-header'>-->
+  <!--      Show / Hide-->
+  <!--    </div>-->
+  <!--    <div class='card-body'>-->
     
-    <div class='col col-6 align-right'>
-        <form>
-          <div class="form-row justify-content-end">
-            <div class="col-sm-8 my-1">
-              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Managers:</div>
-                </div>
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
-              </div>
-              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
-              <div class="py-1 input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Preps:</div>
-                </div>
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
-              </div>
-              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Cashiers:</div>
-                </div>
-                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
-              </div>
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--<div class='col-4'>-->
+  <!--  <div class='card custom-shadow'>-->
+  <!--  </div>-->
+    
+  <!--</div>-->
+  
+  
+  
+
+<ul class="tg-list">
+  <li class="tg-list-item">
+    <h4>Light</h4>
+    <input class="tgl tgl-light" id="cb1" type="checkbox"/>
+    <label class="tgl-btn" for="cb1"></label>
+  </li>
+</ul>
+  
+  
+  
+  
+  
+  <div class='col-12'>
+    <div class='card custom-shadow'>
+      <div class='card-header'>
+        Control Panel
+      </div>
+      <div class='card-body'>
+        <div class='row'>
+        <div class='col-4'>
+          <div class="input-group">
+            <select class="custom-select" id="inputGroupSelect04">
+              <option selected>Update Entire Schedule...</option>
+              <option value="1">Reset to Blank</option>
+              <option value="2">Reset to Last Save</option>
+              <option value="3">Reset to Previous Event</option>
+            </select>
+            <div class="input-group-append">
+              <button class="btn btn-dark" type="button">Update</button>
             </div>
           </div>
-        </form>
+          <!--<button type="button" class="btn btn-dark"><span>Reset to Template</span></button><br />-->
+          <!--<button type="button" class="btn btn-dark"><span>Revert to Last Save</span></button><br />-->
+          <!--<button type="button" class="btn btn-dark"><span>Previous Event Template</span></button><br />-->
+        </div>
+        
+        
+        <div class='col-4'>
+          <form>
+            <div class="form-row justify-content-end">
+              <div class="col-sm-12 my-1">
+                <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Managers:</div>
+                  </div>
+                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
+                  <div class="input-group-append">
+                    <button class="btn btn-dark" type="button">Update</button>
+                  </div>
+                </div>
+                <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
+                <div class="py-1 input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Preps:</div>
+                  </div>
+                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
+                  <div class="input-group-append">
+                    <button class="btn btn-dark" type="button">Update</button>
+                  </div>
+                </div>
+                <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Cashiers:</div>
+                  </div>
+                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">
+                  <div class="input-group-append">
+                    <button class="btn btn-dark" type="button">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class='col-4'>
+          <div>
+            Scheduled Employees: <button class="btn btn-dark" type="button">Show/Hide</button><br />
+          </div>
+          <div>
+            Unscheduled Employees: <button class="btn btn-dark" type="button">Show/Hide</button><br />
+          </div>
+          <div>
+            Unscheduled Locations: <button class="btn btn-dark" type="button">Show/Hide</button><br />
+          </div>
+          
+        </div>
+        
+        
+        
+      </div>
+        
+    
       </div>
     </div>
-    </div>
+  </div>
 </div>
+
+
+<!--<div class='col col-6 align-right'>-->
+<!--        <form>-->
+<!--          <div class="form-row justify-content-end">-->
+<!--            <div class="col-sm-8 my-1">-->
+<!--              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>-->
+<!--              <div class="input-group">-->
+<!--                <div class="input-group-prepend">-->
+<!--                  <div class="input-group-text">Managers:</div>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">-->
+<!--              </div>-->
+<!--              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>-->
+<!--              <div class="py-1 input-group">-->
+<!--                <div class="input-group-prepend">-->
+<!--                  <div class="input-group-text">Preps:</div>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">-->
+<!--              </div>-->
+<!--              <label class="sr-only" for="inlineFormInputGroupUsername">Managers</label>-->
+<!--              <div class="input-group">-->
+<!--                <div class="input-group-prepend">-->
+<!--                  <div class="input-group-text">Cashiers:</div>-->
+<!--                </div>-->
+<!--                <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrival Time (e.g. 5:30PM)">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
