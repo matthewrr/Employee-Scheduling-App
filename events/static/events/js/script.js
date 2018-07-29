@@ -312,8 +312,23 @@ function update_schedule() {
 //     update_schedule();
 // });
 
+
+  
 $(document).ready(function(){
-	$('.toggle-shifts').change(function(){
+	$('.toggle-unscheduled').on("click", function(){
       	$('.unscheduled').toggle();
     });
-});
+}); 
+
+$(document).ready(function(){
+	$('.toggle-scheduled').on("click", function(){
+      	$('.scheduled').toggle();
+    });
+});  
+
+  
+// $(document).ready(function(){
+// 	$('.toggle-shifts').change(function(){
+//       	$('.unscheduled').toggle();
+//     });
+// });
