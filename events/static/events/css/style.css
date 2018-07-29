@@ -18,6 +18,14 @@ td > a { color:white; font-weight:600;}
 
 .shadow-custom { margin:auto; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
 
+.schedule {
+    font-family: 'Roboto Condensed';
+    font-size: 1.3em;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 500;
+}
+
 .schedule-btn {
 	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
 	border-radius: 40px;
@@ -66,7 +74,15 @@ td > a { color:white; font-weight:600;}
 
 .navbar {background-color: rgba(0,0,0,.7);}
 
-.location-title {font-weight: 300;font-size: 1.2em;vertical-align: middle;letter-spacing: 1px;margin-bottom:0px;}
+.location-title {
+    font-size: 1.2em;
+    vertical-align: middle;
+    letter-spacing: .02em;
+    margin-bottom: 0px;
+    font-family: Lato;
+    font-weight: 500;
+}
+
 .location-body {background-color: rgba(256,256,256,.2);border-bottom-left-radius:.25rem; border-bottom-right-radius:.25rem}
 .card-header.location-header {
     line-height: 12px;
@@ -182,7 +198,7 @@ button:focus {
 
 .chevron-down { height:20px; width:20px; display:inline-block; margin-left:2px; margin-right:2px; }
 
-.location-header input {height:18px; width:18px;}
+.location-header input {height:17px; width:17px;}
 .location-header img {height:20px; width:20px;}
 .remove-location {height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;}
 .employee-dropdown {background:rgba(256,256,256,.3);}
@@ -192,7 +208,7 @@ button:focus {
 
 .input-group-text {padding: 0rem .75rem; font-weight:600;}
 
-.location-header input {vertical-align:middle;}
+.location-header input {vertical-align:text-bottom;}
 
 
 
@@ -618,4 +634,11 @@ button:focus {
     background-color: #e9ecef;
     border: 1px solid #ced4da;
     border-radius: .25rem;
+}
+
+.card-header {
+    font-family: Lato;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
 }

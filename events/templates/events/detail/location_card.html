@@ -3,11 +3,11 @@
 <div class="card mx-auto shadow" class='testing'>
   <div class="card-header location-header">
       <label class='location-title' data-target='#{{location|slugify}}' data-toggle='collapse'>
-      <input class='active-location mr-2' type="checkbox" checked />{{location}}</label>
+      <input class='active-location mr-3' type="checkbox" checked /><a style="vertical-align:middle;">{{location}}</a></label>
       {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>--> #}
       {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>--> #}
   </div>
-      
+
   <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location|slugify}}" aria-expanded="true">
   {% for shift, scheduled in position.items %}
     <div class='row {{scheduled.arrival_time|yesno:"scheduled,unscheduled"}}'>
@@ -23,7 +23,7 @@
             {% endfor %}
           </select>
           <div class="col col-4 pl-0 input-group-append input-group-sm">
-            <input type="text" class="form-control" placeholder="Arrival" aria-label="Username" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+            <input type="text" class="form-control {{shift.0}}" placeholder="Arrive" aria-label="Arrive" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
           </div>
         </div>
       </div>

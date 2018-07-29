@@ -326,9 +326,18 @@ $(document).ready(function(){
     });
 });  
 
+$(document).ready(function(){
+	$('#manager').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.M').val(arrival_time);
+  });
+  $('#prep').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.P').val(arrival_time);
+  });
+  $('#cashier').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.C').val(arrival_time);
+  });
   
-// $(document).ready(function(){
-// 	$('.toggle-shifts').change(function(){
-//       	$('.unscheduled').toggle();
-//     });
-// });
+});
