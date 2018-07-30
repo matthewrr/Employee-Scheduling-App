@@ -339,5 +339,9 @@ $(document).ready(function(){
     var arrival_time = $(this).parent().prev().val();
     $('.C').val(arrival_time);
   });
+  $('#bartender').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.B').val(arrival_time);
+  });
   
 });
