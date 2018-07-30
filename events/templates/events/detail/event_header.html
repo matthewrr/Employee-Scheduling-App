@@ -1,41 +1,43 @@
-<div class='row mb-3'>
-
-
-  <div class='col-5'>
-    <div class='card custom-shadow'>
-      <div class='card-header'>
-        Event Details
-      </div>
-      <div class='card-body'>
+{% load staticfiles %}
+<div class="container" style="background:white;padding-top:50px;padding-bottom:50px;">
+  <div class='event-details col-12'>
+    
+    <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
+    <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
+    <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+    
+    <a class='event-title1' style='font-size:2em; font-family:"Source Sans Pro"'>{{event.title}}</a><br />
+    <a class='event-date1' style='font-size:1.2em; font-family:"Source Sans Pro"'>{{event.date}}</a><br />
+    <a class='event-doors1' style='font-size:1.2em; font-family:"Source Sans Pro"'>Doors Open at {{event.doors_open}}</a>
         
-        Title: {{event.title}}<br />
-        Date: {{event.date}}<br />
-        Doors: {{event.doors_open}}<br />
-        
-        <button type="button" class="btn btn-dark float-left print"><span>Print</span></button>
-            <button type="button" class="mx-2 btn-dark btn float-left"><span>Export</span></button>
-            <button type="button" class="btn btn-dark float-left"><span>Email</span></button>
-      </div>
-    </div>
   </div>
-  
-  
-  <div class='col-7'>
-    <div class='card custom-shadow'>
-      <div class='card-header'>
-        Control Panel
-      </div>
-      <div class='card-body'>
+</div>
+
+<!--<div class='container pl-4 pt-3 pb-2 control-panel-header'>-->
+<!--  CONTROL PANEL-->
+<!--</div>-->
+
+<div class='container pt-4 pb-4' style='background:#e8ebf1;'>
+  <!--<div class='col-12 py-3 control-panel-header'>-->
+  <!--CONTROL PANEL-->
+  <!--</div>-->
+  <div class='col-12 pt-4'>
+    
+
         <div class='row'>
         
         
         
         
-        <div class='col-6 my-1 pr-0'>
-          
+        <div class='col' style='flex: 0 0 38%;max-width: 38%;'>
+            <div class='card'>
+              <div class="card-header py-2" style='color:black;background:#5a626f;color:white;font-family:"Open Sans"'>
+                Update Entire Schedule
+              </div>
+              <div class='card-body' style='background:white;'>
             <div class="input-group">
               <select class="custom-select" id="inputGroupSelect04">
-                <option selected>Mass Update...</option>
+                <option selected>Choose Template...</option>
                 <option value="1">Reset to Blank</option>
                 <option value="2">Reset to Last Save</option>
                 <option value="3">Reset to Previous Event</option>
@@ -44,100 +46,108 @@
                 <button class="btn btn-dark" type="button">Update</button>
               </div>
             </div>
+            </div>
+            </div>
             
           
+          
+        </div>
+        
+          <div class='col'>
+            <div class='card'>
+              <div class="card-header py-2" style='color:black;background:#5a626f;color:white;font-family:"Open Sans"'>
+                Bulk Update by Role
+              </div>
+              
+              <ul class="list-group list-group-flush">
 
-            
-          <div class='employee-toggle row pl-0 py-2 mx-0 mt-2' style="font-weight:600; line-height:1.2em;">
-            <form style='width:100%'>
-            
-            <div class="row ml-0">
-            <div class='col col-7'>
-              <a>Scheduled:</a>
-            </div>
-            <div class='col col-5'>
-                <button type="button" class="btn btn-toggle toggle-scheduled active" data-toggle="button" aria-pressed="true" autocomplete="off">
-                  <div class="handle"></div>
-                </button>
-              </div>
-            </div>
-            
-            <div class="row ml-0">
-            <div class='col col-7'>
-              <a>Unscheduled:</a>
-            </div>
-            <div class='col col-5'>
-                <button type="button" class="btn btn-toggle toggle-unscheduled active" data-toggle="button" aria-pressed="true" autocomplete="off">
-                  <div class="handle"></div>
-                </button>
-              </div>
-            </div>
-            
-            
-            <div class="row ml-0">
-            <div class='col col-7'>
-              <a>All Locations:</a>
-            </div>
-            <div class='col col-5'>
-                <button type="button" class="btn btn-toggle toggle-unscheduled" data-toggle="button" aria-pressed="false" autocomplete="off">
-                  <div class="handle"></div>
-                </button>
-              </div>
-            </div>
-            
-            </form>
+                <li class="list-group-item">
+                  <div class="input-group">
+                    <a class='px-0'>MGR:</a>
+                    <input type="text" class="form-control bulk-arrival" id="inlineFormInputGroupUsername" placeholder="e.g. 6:30PM" />
+                    <!--<button class="btn btn-dark" id='manager' type="button" style='height:1em;'>@</button>-->
+                    <a><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></a>
+                  </div>
+                </li>
+                  
+                <li class="list-group-item">  
+                  <div class="input-group">
+                    <a class='px-0'>PRP:</a>
+                    <input type="text" class="form-control bulk-arrival" id="inlineFormInputGroupUsername" placeholder="e.g. 6:30PM">
+                    <!--<button class="btn btn-dark" id='prep' type="button" style='height:1em;'>-->
+                      <a><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></a>
+                    <!--</button>-->
+                  </div>
+                </li>
+              
+                <li class="list-group-item">
+                  <div class="input-group">
+                    <a class='px-0'>CSH:</a>
+                    <input type="text" class="form-control bulk-arrival" id="inlineFormInputGroupUsername" placeholder="e.g. 6:30PM">
+                    <!--<button class="btn btn-dark" id='cashier' type="button" style='height:1em;'>@</button>-->
+                    <a><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></a>
+                  </div>
+                </li>
+                
+                <li class="list-group-item">
+                  <div class="input-group">
+                    <a class='px-0'>BAR:</a>
+                    <input type="text" class="form-control bulk-arrival" id="inlineFormInputGroupUsername" placeholder="e.g. 6:30PM">
+                    <!--<button class="btn btn-dark" id='bartender' type="button" style='height:1em;'>@</button>-->
+                    <a><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></a>
+                  </div>
+                </li>
+                
+              </ul>
+              
           </div>
-          
+        </div>
+        
+        
+        
+        
+        <div class='col' style='flex: 0 0 36%; max-width: 36%;'>
+          <div class='card' style='background:white;'>
+            <div class="card-header py-2" style='color:black;background:#5a626f;color:white;font-family:"Open Sans"'>
+    Show/Hide Sections
+  </div>
+            <ul class="list-group list-group-flush">
+              
+              
+              <li class="list-group-item">
+                <div class='row'>
+                  <a class='col col-8'>Scheduled Shifts:</a>
+                  <button type="button" class="btn btn-toggle toggle-scheduled float-right active" data-toggle="button" aria-pressed="true" autocomplete="off">
+                    <div class="handle"></div>
+                  </button>
+                </div>
+              </li>
+              
+              <li class="list-group-item">
+                <div class='row'>
+                  <a class='col col-8'>Unscheduled Shifts:</a>
+                  <button type="button" class="btn btn-toggle toggle-unscheduled active" data-toggle="button" aria-pressed="true" autocomplete="off">
+                    <div class="handle"></div>
+                  </button>
+                </div>
+              </li>
+              
+              <li class="list-group-item">
+                <div class='row'>
+                  <a class='col col-8'>Inactive Locations:</a>
+                  <button type="button" class="btn btn-toggle toggle-unscheduled" data-toggle="button" aria-pressed="false" autocomplete="off">
+                    <div class="handle"></div>
+                  </button>
+                </div>
+              </li>
+            
+            </ul>
           </div>
+        </div>
           
  
         
-        <div class='col'>
-          <form>
-            <div class="form-row justify-content-end">
-              <div class="col-sm-12 my-1">
-                
-                <div class="input-group pb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Managers:</div>
-                  </div>
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrive" />
-                  <div class="input-group-append">
-                    <button class="btn btn-dark" id='manager' type="button">Update</button>
-                  </div>
-                </div>
-                
-                <div class="input-group pb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Preps:</div>
-                  </div>
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrive">
-                  <div class="input-group-append">
-                    <button class="btn btn-dark" id='prep' type="button">Update</button>
-                  </div>
-                </div>
-                <div class="input-group pb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Cashiers:</div>
-                  </div>
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrive">
-                  <div class="input-group-append">
-                    <button class="btn btn-dark" id='cashier' type="button">Update</button>
-                  </div>
-                </div>
-                <div class="input-group pb-1">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Bartenders:</div>
-                  </div>
-                  <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Arrive">
-                  <div class="input-group-append">
-                    <button class="btn btn-dark" id='bartender' type="button">Update</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
+
         
     
         
@@ -146,7 +156,5 @@
       </div>
         
     
-      </div>
-    </div>
-  </div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 body {
     /*background: url("/static/events/img/background.jpg") no-repeat fixed;*/
-    background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; 
+    /*background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; */
+    background:#DDD;
     background-position: bottom left;
     color:#1b142d;
     font-family:"Open Sans";
@@ -13,8 +14,6 @@ th {color:#1b142d;}
 th > a {cursor:pointer;}
 td {vertical-align: baseline!important;}
 td > a { color:white; font-weight:600;}
-
-.navbar { margin-bottom:30px!important; }
 
 .shadow-custom { margin:auto; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
 
@@ -638,7 +637,32 @@ button:focus {
 
 .card-header {
     font-family: Lato;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     letter-spacing: 1px;
     color: #fff;
+}
+
+.event-details {
+  font-family: Lato;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.control-panel-header {
+    font-size: 1.5em;
+    color: #5a626f;
+    font-weight: 500;
+    font-family: 'Source Sans Pro';
+    letter-spacing: 1px;
+}
+
+.bulk-arrival {
+    height: 1.45em;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin-left:.5em;
+    margin-right:.5em;
+    text-align: center;
 }

@@ -12,17 +12,17 @@
   {% for shift, scheduled in position.items %}
     <div class='row {{scheduled.arrival_time|yesno:"scheduled,unscheduled"}}'>
       <div class="btn-group" style="width:100%;">
-        <div class="input-group input-group-sm">
+        <div class="input-group input-group">
           <div class="col col-2 pr-0 input-group-prepend">
             <div class="input-group-text" style="width:100%;">{{shift}}</div>
           </div>
-          <select class="col col-6 form-control form-control-sm">
+          <select class="col col-6 form-control form-control">
             <option value='{{shift}}' class='{{shift}}' selected>{{scheduled.employee|default:shift}}</option>
             {% for employee in all_employees %}
               <option class="{{employee}}">{{employee.name}}</option>
             {% endfor %}
           </select>
-          <div class="col col-4 pl-0 input-group-append input-group-sm">
+          <div class="col col-4 pl-0 input-group-append input-group">
             <input type="text" class="form-control {{shift.0}}" placeholder="Arrive" aria-label="Arrive" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
           </div>
         </div>
