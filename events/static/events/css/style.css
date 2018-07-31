@@ -657,12 +657,33 @@ button:focus {
     letter-spacing: 1px;
 }
 
+/*.bulk-arrival {*/
+/*    height: 1.45em;*/
+/*    border-left: none;*/
+/*    border-right: none;*/
+/*    border-top: none;*/
+/*    margin-left:.5em;*/
+/*    margin-right:.5em;*/
+/*    text-align: center;*/
+/*}*/
+
 .bulk-arrival {
-    height: 1.45em;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    margin-left:.5em;
-    margin-right:.5em;
-    text-align: center;
+  background-color: rgba(256,256,256,.4);
+  line-height:1.2em;
+    margin-left: 5px;
+    background-color: rgba(256,256,256,.4);
+    line-height: 1.2em;
+    border: none;
+    border-bottom: 1px solid #BBB;
+    border-radius: 0px;
+    padding-bottom:3px;
+}
+
+.input-group.mb-1 {
+    background: white;
+    border-radius: 5px;
+    padding-left: 15px;
+    font-weight:600;
+    border:1px solid #ced4da;
+    height: 38px;
 }
