@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<div class='col-3'>
+  <div class='control-panel-section'>Bulk Update by Role</div>
+  <div class='pt-2'>
+    <span class='control-panel-description'> Update the arrival time of all employees based on their role.</span>
+    <div class='mt-2 py-2 pl-0'>
+      {% for role in 'MGCB' %}
+    
+      <div class="btn-group mb-2">
+        <div class="input-group">
+        
+          <div class="px-0 input-group-prepend">
+            <div class="input-group-text" style="background: #5a626f;color: white;"><span style='text-align:center;'>{% cycle 'MG' 'CSH' 'PRP' 'BAR' %}</span></div>
+          </div>
+          
+          <input type="text" class="form-control" placeholder="e.g. 6:30PM" aria-label="Arrive" style="text-align: center;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+          <div class="col col-3 px-0 input-group-append input-group">
+            <div class="input-group-text">
+              <span style='text-align:center;'><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></span>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+    
+    {% endfor %}
+    </div>
+  </div>
+</div>

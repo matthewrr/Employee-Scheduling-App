@@ -687,3 +687,22 @@ button:focus {
     border:1px solid #ced4da;
     height: 38px;
 }
+
+.event-details {
+  background:white;
+  padding-top:50px;
+  padding-bottom:50px;
+  font-family:"Source Sans Pro";
+}
+
+.control-panel {
+  background:#e8ebf1;
+}
+
+.control-panel-section {
+  color:#5a626f;font-family:"Open Sans";font-size: 1.2em;font-weight: 600;
+}
+
+.control-panel-description {
+  font-family: "Open Sans";color: #49505a;font-size: .9em;
+}

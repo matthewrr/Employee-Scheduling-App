@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<div class="container event-details">
+  <div class='col-12'>
+    
+    <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
+    <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
+    <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+    
+    <a class='event-title' style='font-size:2em;'>{{event.title}}</a><br />
+    <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
+    <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a>
+        
+  </div>
+</div>
+
+<div class='container control-panel py-4'>
+  <div class='col-12 pt-4'>
+    <div class='row'>
+        
+      {% include './control_panel/update_template.html' %}
+      {% include './control_panel/update_roles.html' %}
+      {% include './control_panel/show_hide.html' %}
+
+    </div>
+  </div>
+</div>
+

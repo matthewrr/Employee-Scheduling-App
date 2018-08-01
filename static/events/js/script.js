@@ -1,23 +1,14 @@
-$(document).ready(function() {
-    $(".js-example-basic-single").select2({
-        placeholder: "Select Employee",
-        allowClear: true,
-    });
-});
-
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
-
-$('#editEvent').on('shown.bs.modal', function () {
-  $('#editEventInput').trigger('focus')
-})
+// $(document).ready(function() {
+//     $(".js-example-basic-single").select2({
+//         placeholder: "Select Employee",
+//         allowClear: true,
+//     });
+// });
 
 
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
-
+// $(".modal").on("hidden.bs.modal", function(){
+//     $(".modal-content").html("");
+// });
 
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
@@ -45,6 +36,9 @@ function myFunction() {
 }
 
 $(function() {
+  
+  $('.active-location').prop('indeterminate', true)
+  
   $('.add-employee').click(function(){
     var myparent = $(this).parent().prop('className');
     var newRow = document.getElementById("new-employee");
@@ -63,93 +57,27 @@ $(function() {
   });
 });
 
-
-$(document).ready(function(){
-  
-  var pk = '';
-  
-  $('.edit-object').click(function(){
-    pk = $(this).attr('id');
-    var test = $('body');
-    $(test).attr('id','hello');
-    
-    console.log('this is the edit-object function');
-    console.log('pk is...');
-    console.log(pk);
-    console.log('-----------');
-    
-    $.ajax({
-      url: '/events/edit/' + pk + '/',
-      type: "GET",
-      data: pk,
-      success: function(data) {
-        $('.modal-body-edit').append(data)
-      }});
-    
-    var thing = $('.edit-submit').attr('id',pk)
-      
-      
-  });
-
-
-  $('.edit-submit').click(function(){
-
-    console.log('this is the edit-submit function');
-    console.log('pk is...');
-    console.log(pk);
-    console.log('-----------');
-    
-    $.ajax({
-      url: '/events/edit/' + pk + '/',
-      type: "POST",
-      data: pk,
-    });
-  });
-    
-});
-
-$(".object-edit").on("hidden.bs.modal", function () {
-    $('.modal-body-edit').empty()
-});
-
-
-
-$(".js-create-event").click(function () {
-  var btn = $(this);  // <-- HERE
-  $.ajax({
-    url: btn.attr("data-url"),  // <-- AND HERE
-    type: 'get',
-    dataType: 'json',
-    beforeSend: function () {
-      $("#modal-event").modal("show");
-    },
-    success: function (data) {
-      $("#modal-event .modal-content").html(data.html_form);
-    }
-  });
-});
-
-// $(function () {
-
-//   $(".js-create-event").click(function () {
-    
-//     $.ajax({
-//       url: '/events/myevents/create/',
-//       type: 'get',
-//       dataType: 'json',
-//       beforeSend: function () {
-//         $("#modal-event").modal("show");
-//       },
-//       success: function (data) {
-//         $("#modal-event .modal-content").html(data.html_form);
-//       }
-//     });
-    
-//   });
-
+// $(".object-edit").on("hidden.bs.modal", function () {
+//     $('.modal-body-edit').empty()
 // });
 
-// $("#modal-event").on("submit", ".js-event-create-form", function () {
+// $(".js-create-object").click(function () {
+//   var btn = $(this);  // <-- HERE
+//   $.ajax({
+//     url: btn.attr("data-url"),  // <-- AND HERE
+//     type: 'get',
+//     dataType: 'json',
+//     beforeSend: function () {
+//       $("#modal-object").modal("show");
+//     },
+//     success: function (data) {
+//       $("#modal-object .modal-content").html(data.html_form);
+//     }
+//   });
+// });
+
+
+// $("#modal-object").on("submit", ".js-object-create-form", function () {
 //     var form = $(this);
 //     $.ajax({
 //       url: form.attr("action"),
@@ -158,57 +86,55 @@ $(".js-create-event").click(function () {
 //       dataType: 'json',
 //       success: function (data) {
 //         if (data.form_is_valid) {
-//           alert("Event created!");  // <-- This is just a placeholder for now for testing
+//           console.log(data);
+//           $(".redbull").parent().html(data.html_event_list);  // <-- Replace the table body
+//           $("#modal-object").modal("hide");  // <-- Close the modal
+//           $('body').removeClass('modal-open');
+//           $('.modal-backdrop').remove();
+//           $('.modal').removeData('bs.modal');
+//           $('.modal').empty();
+//           $('.modal').removeAttr('style');
+          
+         
 //         }
 //         else {
-//           $("#modal-event .modal-content").html(data.html_form);
+//           $("#modal-object .modal-content").html(data.html_form);
 //         }
 //       }
 //     });
 //     return false;
 //   });
 
-$("#modal-event").on("submit", ".js-event-create-form", function () {
-    var form = $(this);
-    $.ajax({
-      url: form.attr("action"),
-      data: form.serialize(),
-      type: form.attr("method"),
-      dataType: 'json',
-      success: function (data) {
-        if (data.form_is_valid) {
-          $("#event-table tbody").html(data.html_event_list);  // <-- Replace the table body
-          $("#modal-event").modal("hide");  // <-- Close the modal
-        }
-        else {
-          $("#modal-event .modal-content").html(data.html_form);
-        }
-      }
-    });
-    return false;
-  });
-
-$(function () {
-
-  /* Functions */
-
+$(function() {
+  
+  var btn_id = '';
+  var table = '';
   var loadForm = function () {
     var btn = $(this);
+    console.log(btn_id);
+    console.log("working");
+    table = '#' + $(this).closest('table').attr('id');
+    console.log(table);
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
       dataType: 'json',
+      
       beforeSend: function () {
-        $("#modal-event").modal("show");
+        console.log("working #1")
+        $("#modal-object .modal-content").html("");
+        $("#modal-object").modal("show");
       },
       success: function (data) {
-        $("#modal-event .modal-content").html(data.html_form);
+        console.log("working #2");
+        $("#modal-object .modal-content").html(data.html_form);
       }
     });
   };
 
   var saveForm = function () {
     var form = $(this);
+    console.log('first table is ' + table);
     $.ajax({
       url: form.attr("action"),
       data: form.serialize(),
@@ -216,26 +142,206 @@ $(function () {
       dataType: 'json',
       success: function (data) {
         if (data.form_is_valid) {
-          $("#event-table tbody").html(data.html_event_list);
-          $("#modal-event").modal("hide");
+          
+          if (table != '#undefined') {
+            console.log('table is probably undefined: ' + table)
+            $(table + " tbody").replaceWith(data.html_object_list);
+          } else if (btn_id === 'events') {
+            console.log('table is ' + table)
+            console.log(data.html_object_list);
+            $("#upcoming-events tbody").replaceWith(data.html_object_list);
+          } else {
+            $("#object-table tbody").replaceWith(data.html_object_list);
+          }
+          $("#modal-object").modal("hide");
         }
         else {
-          $("#modal-event .modal-content").html(data.html_form);
+          console.log('form not valid');
+          $("#modal-object .modal-content").html(data.html_form);
         }
       }
     });
     return false;
   };
-
-
+  
   /* Binding */
 
-  // Create event
-  $(".js-create-event").click(loadForm);
-  $("#modal-event").on("submit", ".js-event-create-form", saveForm);
+  // Create
+  $(".js-create-object").click(loadForm);
+  $("#modal-object").on("submit", ".js-object-create-form", saveForm);
 
-  // Update event
-  $("#event-table").on("click", ".js-update-event", loadForm);
-  $("#modal-event").on("submit", ".js-event-update-form", saveForm);
+  // Update
+  $("#upcoming-events").on("click", ".js-update-object", loadForm);
+  $("#previous-events").on("click", ".js-update-object", loadForm);
+  $("#object-table").on("click", ".js-update-object", loadForm);
+  $("#modal-object").on("submit", ".js-object-update-form", saveForm);
+  
+  // Delete
+  $("#upcoming-events").on("click", ".js-delete-object", loadForm);
+  $("#previous-events").on("click", ".js-delete-object", loadForm);
+  $("#object-table").on("click", ".js-delete-object", loadForm);
+  $("#modal-object").on("submit", ".js-object-delete-form", saveForm);
 
+});
+
+function sortTable(n,table_id) {
+  console.log(table_id);
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  if (!table_id) {
+    table_id = 'object-table';
+  }
+  table = document.getElementById(table_id);
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++; 
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+var dict = {};
+
+
+
+// collect value on change
+// $('select').on('change', function() {
+//   var employee = this.value;
+//   var position = $(this).closest('select').attr('value');
+//   var location = $(this).closest('.location-body').attr('id')
+//   dict[location] = [position, employee];
+// })
+
+$(".submit-schedule" ).click(function() {
+  
+  $('.location-body').each(function() {
+    var location = $(this).attr('id');
+    var positions = $(this).find('select');
+    var scheduled = $(positions).children('option:selected');
+    var posDict = {};
+    
+    $(positions).each(function(i,v){
+      var position = $(v).children().first().attr('class');
+      var person = scheduled[i];
+      posDict[position] = $(person).val();
+    })
+    dict[location] = posDict;
+  });
+  console.log(dict);
+  
+  
+  
+  
+  function update_schedule() {
+    console.log("update schedule is working!") // sanity check
+    $.ajax({
+        url : "update_schedule/", // the endpoint
+        type : "POST", // http method
+        data : { schedule : dict }, // data sent with the post request
+
+        // handle a successful response
+        success : function(json) {
+            console.log("success"); // another sanity check
+        },
+
+        // handle a non-successful response
+        // error : function(xhr,errmsg,err) {
+        //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+        //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        // }
+    });
+};
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+})
+
+
+
+
+
+
+
+function update_schedule() {
+    console.log("create post is working!") // sanity check
+    // console.log($('#post-text').val())
+};
+
+// $('.submit-schedule').on('submit', function(event){
+//     event.preventDefault();
+//     console.log("form submitted!");  // sanity check
+//     update_schedule();
+// });
+
+
+  
+$(document).ready(function(){
+	$('.toggle-unscheduled').on("click", function(){
+      	$('.unscheduled').toggle();
+    });
+}); 
+
+$(document).ready(function(){
+	$('.toggle-scheduled').on("click", function(){
+      	$('.scheduled').toggle();
+    });
+});  
+
+$(document).ready(function(){
+	$('#manager').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.M').val(arrival_time);
+  });
+  $('#prep').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.P').val(arrival_time);
+  });
+  $('#cashier').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.C').val(arrival_time);
+  });
+  $('#bartender').on("click", function(){
+    var arrival_time = $(this).parent().prev().val();
+    $('.B').val(arrival_time);
+  });
+  
 });
