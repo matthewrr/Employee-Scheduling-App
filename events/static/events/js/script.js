@@ -324,23 +324,36 @@ $(document).ready(function(){
 	$('.toggle-scheduled').on("click", function(){
       	$('.scheduled').toggle();
     });
+}); 
+$(document).ready(function(){
+	$('.toggle-inactive-locations').on("click", function(){
+	      $('.location-title.collapsed').each(function(){
+	        $(this).parent().parent().toggle();
+	      });
+    });
+}); 
+
+$(document).ready(function(){
+	$('.toggle-scheduled').on("click", function(){
+      	$('.bars').toggle();
+    });
 });  
 
 $(document).ready(function(){
-	$('#manager').on("click", function(){
-    var arrival_time = $(this).parent().prev().val();
+	$('#managers').on("click", function(){
+    var arrival_time = $(this).parent().prev().children().val();
     $('.M').val(arrival_time);
   });
-  $('#prep').on("click", function(){
-    var arrival_time = $(this).parent().prev().val();
+  $('#preps').on("click", function(){
+    var arrival_time = $(this).parent().prev().children().val();
     $('.P').val(arrival_time);
   });
-  $('#cashier').on("click", function(){
-    var arrival_time = $(this).parent().prev().val();
+  $('#cashiers').on("click", function(){
+    var arrival_time = $(this).parent().prev().children().val();
     $('.C').val(arrival_time);
   });
-  $('#bartender').on("click", function(){
-    var arrival_time = $(this).parent().prev().val();
+  $('#bartenders').on("click", function(){
+    var arrival_time = $(this).parent().prev().children().val();
     $('.B').val(arrival_time);
   });
   

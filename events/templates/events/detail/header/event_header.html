@@ -13,15 +13,25 @@
   </div>
 </div>
 
-<div class='container control-panel py-4'>
-  <div class='col-12 pt-4'>
+<div class='container py-2' style='background:#99a0ab;'>
+  <a class='control-panel-header' data-toggle="collapse" href="#collapseCP" role="button">
+    <div class='text-center' style='font-size:.9em;color:white;letter-spacing:1px;font-family:"Open Sans"'>
+      <span>CONTROL  PANEL</span>
+      <img class='ml-1' src='{% static "events/img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />
+    </div>
+  </a>
+</div>
+
+<div class='container control-panel pt-4 pb-1 collapse show' id='collapseCP'>
+  <div class='col-12'>
     <div class='row'>
-        
+       
       {% include './control_panel/update_template.html' %}
       {% include './control_panel/update_roles.html' %}
       {% include './control_panel/show_hide.html' %}
 
     </div>
   </div>
+  <hr style='border-top: 1px solid rgba(153, 160, 171, 0.5);' />
 </div>
 

@@ -102,6 +102,7 @@ def event_detail_view(request,year,month,day,slug):
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
+               'roles': ['Managers','Cashiers','Preps','Bartenders']
                }
                
     return render(request, './events/detail/event_detail.html', context)

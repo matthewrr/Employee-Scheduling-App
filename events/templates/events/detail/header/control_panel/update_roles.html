@@ -1,30 +1,27 @@
 {% load staticfiles %}
 
-<div class='col-3'>
+<div class='col-4'>
   <div class='control-panel-section'>Bulk Update by Role</div>
   <div class='pt-2'>
-    <span class='control-panel-description'> Update the arrival time of all employees based on their role.</span>
+    <span class='control-panel-description'> Update arrival time of all employees based on role. This will override values previous values.</span>
     <div class='mt-2 py-2 pl-0'>
-      {% for role in 'MGCB' %}
-    
-      <div class="btn-group mb-2">
-        <div class="input-group">
-        
-          <div class="px-0 input-group-prepend">
-            <div class="input-group-text" style="background: #5a626f;color: white;"><span style='text-align:center;'>{% cycle 'MG' 'CSH' 'PRP' 'BAR' %}</span></div>
-          </div>
-          
-          <input type="text" class="form-control" placeholder="e.g. 6:30PM" aria-label="Arrive" style="text-align: center;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
-          <div class="col col-3 px-0 input-group-append input-group">
-            <div class="input-group-text">
-              <span style='text-align:center;'><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height:20px;'/></span>
+      <ul class='pl-0'>
+      {% for role in roles %}
+
+        <li class="list-group-item" style='padding-top: 6px;padding-bottom: 6px;'>
+          <div class='row'>
+            <a class='col col-4' style='color: #5e6673; padding-top: 7px;'>{{role}}:</a>
+            <div class='col col-6 pr-0'>
+              <input type="text" class="form-control" placeholder="e.g. 6:30PM" aria-label="Arrive" style="text-align: center;border:none;background: #EEE;">
+            </div>
+            <div class='col-2' style='padding-left: 18px;'>
+              <a id='{{role|lower}}'><img src='{% static "events/img/refresh-button.svg" %}' alt="Refresh Icon" style='height: 22px;margin-top: 7px;'/></a>
             </div>
           </div>
-          
-      </div>
-    </div>
-    
-    {% endfor %}
+        </li>
+
+      {% endfor %}
+      </ul>
     </div>
   </div>
 </div>

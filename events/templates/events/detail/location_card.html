@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-<div class="card mx-auto shadow" class='testing'>
+<div class="card mx-auto shadow inactive-locations" class='testing'>
   <div class="card-header location-header">
       <label class='location-title' data-target='#{{location|slugify}}' data-toggle='collapse'>
       <input class='active-location mr-3' type="checkbox" checked /><a style="vertical-align:middle;">{{location}}</a></label>
@@ -28,10 +28,8 @@
         </div>
       </div>
       {# {% include 'events/detail/add_row.html' with loc=location.location_id %} #}
-      <br />
     </div>
   {% endfor %}
   </div>
   
 </div>
-<br/>
