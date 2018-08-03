@@ -14,17 +14,15 @@ def schedule_template(schedule={},locations=None):
     locations = Location.objects.all()
     for location in locations:
         schedule[str(location)] = {}
+        schedule[str(location)]['active'] = True
+        schedule[str(location)]['bar'] = location.bar
+        schedule[str(location)]['positions'] = {}
         for position in location.position_set.all():
-            schedule[str(location)][position.code] = {'employee':str(position),
+            schedule[str(location)]['positions'][position.code] = {'employee':str(position),
                                                  'arrival_time':None
                                                  }
     return schedule
         
-    
-    
-
-
-
 def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
@@ -32,73 +30,12 @@ def event_detail_view(request,year,month,day,slug):
     locations = event.eventschedule.eventlocation_set.all()
 
     for location in locations:
-        flag = template.get(str(location))
-        if flag:
-            
+        if template.get(str(location)):
             for position in location.shift_set.all():
-                # second_flag = template[location].get(position)
-                # if second_flag:
-                template[str(location)][str(position)] = {'employee':position.employee,
-                                                'arrival_time':position.arrival_time,
-                }
-    # pprint(template)
-               
-                    
-    
-    
-    # for shift in location.shift_set.all():
-    # print(template)
-    # for location in template:
-        # print(location)
-    
-        # if l.locations.filter(title__icontains=location).exists():
-        #     print('success!')
-    
-    # event = Event.objects.get(slug=slug)
-    # all_employees = Employee.objects.all()
-    # all_locations = Location.objects.all()
-    # locations = event.eventschedule.eventlocation_set.all()
-    # toggle = True
-    # schedule = {}
-    
-    # thing = list(event.eventschedule.eventlocation_set.all())
-    
-    
-    
-    # for location in all_locations:
-    #     schedule[location] = {}
-        
-        
-    #     if location in locations:
-    #         print('Success!')
-        
-        
-        
-        # for position in location.position_set.all():
-        #     schedule[location][position.code] = {'employee':position}
-    
-    
-    
-    
-    
-
-    # if hasattr(event, 'eventschedule'):
-    #     locations = event.eventschedule.eventlocation_set.all()
-    #     for location in locations:
-    #         schedule[location] = {}
-    #         for shift in location.shift_set.all():
-    #             schedule[location][shift.position] = {'employee':str(shift.employee),
-    #                                                   'arrival_time':shift.arrival_time}
-    #     for location in all_locations:
-    #         if not schedule.get(location):
-    #             schedule[location] = {}
-
-    # else:
-    #     for location in all_locations:
-    #         schedule[location] = {}
-    #         for position in location.position_set.all():
-    #             schedule[location][position.code] = {'employee':position}
-        
+                template[str(location)]['positions'][str(position)] = {'employee':position.employee,
+                                                                       'arrival_time':position.arrival_time,
+                                                                       }
+    pprint(template)     
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
@@ -106,43 +43,6 @@ def event_detail_view(request,year,month,day,slug):
                }
                
     return render(request, './events/detail/event_detail.html', context)
-    
-    
-    # concerts = Event.objects.all()
-    #     @property
-    # def location_positions(self):
-    #     return self.event
-    # schedules = Schedule.objects.all()
-    # for c in concerts:
-    #     print(c.locations_set.all())
-    #     print('bye')
-    # print('hello')
-    # for schedule in schedules:
-    #     print(schedule.event)
-    #     print(schedule.locations)
-    
-    
-    # event = Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug)
-    # schedule = Schedule.objects.get(events=event)
-    # print(schedule)
-    
-    # event = Event.objects.get(date__year=year, date__month=month, date__day=day,slug=slug)
-    # print(Shift.objects.get())
-
-    
-    
-    # for c in concerts:
-    #     print(c.__dict__)
-    #     print(c.schedule_id)
-    
-    # for s in Schedule.objects.all():
-    #     print(s) #name of schedule
-    #     # print(s.locations.all()) #active locations
-    #     for t in s.locations.all():
-    #         print(t)
-    #         print(t.position_set.all())
-        
-    
 
 def event_list(request):
     events_list = Event.objects.all().order_by('-date')

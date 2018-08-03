@@ -334,10 +334,19 @@ $(document).ready(function(){
 }); 
 
 $(document).ready(function(){
-	$('.toggle-scheduled').on("click", function(){
-      	$('.bars').toggle();
-    });
-});  
+	$('.toggle-bars').on("click", function(){
+	  $('.bar').each(function(){
+	    $(this).prop('indeterminate', false);
+	    var flag = $(this).is(':checked');
+	    $(this).prop('checked', !flag);
+	    $(this).parent().parent().parent().toggle();
+	      
+	    });
+	  
+	    
+	  });
+	      
+  });
 
 $(document).ready(function(){
 	$('#managers').on("click", function(){

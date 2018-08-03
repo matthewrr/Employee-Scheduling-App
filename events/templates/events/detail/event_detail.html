@@ -4,19 +4,62 @@
 
 <div class='container px-0'>
   {% include 'events/detail/header/event_header.html' %}
+  
+  <div class='container' style='background:white;'>
+  
   <div class='col-12 py-3 control-panel-header'>
-  <span>SCHEDULE</span>
+    <span>SCHEDULE</span>
+    <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'><span>[Control Panel]</span>
+      <img class='ml-1' src='{% static "events/img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />
+    </a>
+    <div class='btn btn-dark float-right'>Save</div>
   </div>
-  <div class='btn btn-dark float-right'>Save</div>
+  
+  <hr/>
+  
+  
+  
+  <div class='container px-0'>
+  
+    <!--<a class='control-panel-header' data-toggle="collapse" href="#collapseCP" role="button">-->
+    <!--  <div class='text-center' style='font-size:.8em;color:white;letter-spacing:1px;font-family:"Open Sans"'>-->
+    <!--    <span>CONTROL  PANEL</span>-->
+    <!--    <img class='ml-1' src='{% static "events/img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />-->
+    <!--  </div>-->
+    <!--</a>-->
+    <div class='card collapse' id='collapseCP'>
+
+  <div class=' mx-3 mb-4'  style='background: #e8ebf1;'>
+    <!--<div class='card-header'>Control Panel</div>-->
+    <div class='card-body'>
+      <div class='row'>
+       
+      {% include './header/control_panel/update_template.html' %}
+      {% include './header/control_panel/update_roles.html' %}
+      {% include './header/control_panel/show_hide.html' %}
+</div>
+    </div>
+  
+  </div>
+  <hr/>
+  </div>
+  
+  
+  
+</div>
+  
   <div class='row mx-auto'>
     <div class='col col-12'>
-      <div class='card-columns'>
-        {% for location, position in schedule.items %}
-          {% include 'events/detail/location_card.html' with location=location position=position %}
+      <div class='card-columns mx-4'>
+        {% for location, attributes in schedule.items %}
+          {% with position=attributes.positions bar=attributes.bar active=attributes.active %}
+            {% include 'events/detail/location_card.html' %}
+          {% endwith %}
         {% endfor %}
       </div>
       <hr />
     </div>
+  </div>
   </div>
 </div>
 

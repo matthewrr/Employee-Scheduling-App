@@ -1,5 +1,6 @@
 body {
     /*background: url("/static/events/img/background.jpg") no-repeat fixed;*/
+    background: url("/static/events/img/blue1.jpg") no-repeat fixed;
     /*background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; */
     background:#DDD;
     background-position: bottom left;
@@ -74,17 +75,14 @@ td > a { color:white; font-weight:600;}
 .navbar {background-color: rgba(0,0,0,.7);}
 
 .location-title {
-    font-size: 1.2em;
-    vertical-align: middle;
-    letter-spacing: .02em;
+    font-size: 1.1em;
     margin-bottom: 0px;
-    font-family: Lato;
-    font-weight: 500;
+    font-family: "Source Sans Pro";
 }
-
-.location-body {background-color: rgba(256,256,256,.2);border-bottom-left-radius:.25rem; border-bottom-right-radius:.25rem}
+.location-body {background-color: #e8ebf1;border-bottom-left-radius:.25rem; border-bottom-right-radius:.25rem}
 .card-header.location-header {
     line-height: 12px;
+    background:#99a0ab;
 }
 
 .card {background-color: rgba(255, 255, 255, .15); border:none;}
@@ -129,13 +127,21 @@ button.add-object {
     background-color: rgba(256,256,256,.1);
     border-radius: 8px;
 }
+/*.event-title {*/
+/*    font-size: 4em;*/
+/*    font-family: "Open Sans";*/
+/*    font-weight: 700;*/
+/*    color: rgba(256,256,256,.2);*/
+/*    letter-spacing: 1px;*/
+/*    -webkit-text-stroke: 2px white;*/
+/*}*/
+
 .event-title {
-    font-size: 4em;
-    font-family: "Open Sans";
-    font-weight: 700;
-    color: rgba(256,256,256,.2);
+    font-size: 1.5em;
+    color: #5a626f;
+    font-weight: 500;
+    font-family: 'Source Sans Pro';
     letter-spacing: 1px;
-    -webkit-text-stroke: 2px white;
 }
 
 .modal-content {
@@ -207,7 +213,7 @@ button:focus {
 
 .input-group-text {padding: 0rem .75rem; font-weight:600;}
 
-.location-header input {vertical-align:text-bottom;}
+.location-header input {vertical-align:text-bottom; height:15px;}
 
 
 
@@ -642,6 +648,13 @@ button:focus {
     color: #fff;
 }
 
+.event-header-details {
+  color: #5a626f;
+  font-weight: 500;
+  font-family: 'Source Sans Pro';
+  letter-spacing: 1px;
+}
+
 .event-details {
   font-family: Lato;
   text-transform: uppercase;
@@ -697,4 +710,16 @@ button:focus {
 
 .control-panel {
   background:#e8ebf1;
+}
+
+.control-panel-section {
+  color:#5a626f;font-family:"Open Sans";font-size: 1.2em;font-weight: 600;
+}
+
+.control-panel-description {
+  font-family: "Open Sans";color: #49505a;font-size: .9em;
+}
+
+.event-details {
+  background-color: #e8ebf1;
 }
