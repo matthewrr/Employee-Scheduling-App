@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<div class="container event-details">
+  <div class='col-12 py-4'>
+    
+    <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
+    <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
+    <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+    
+    <div class='event-header-details'>
+    
+    <a class='event-title'>{{event.title}}</a><br />
+    <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
+    <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a>
+    
+    </div>
+        
+  </div>
+</div>
+
+
+
