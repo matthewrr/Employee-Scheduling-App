@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Event, Shift, EventLocation, EventSchedule
 import nested_admin
 
+
 class ShiftInline(nested_admin.NestedTabularInline):
     model = Shift
     fields = ('employee','event_location','position', 'arrival_time')
@@ -19,7 +20,6 @@ class EventScheduleInline(nested_admin.NestedTabularInline):
 class EventAdmin(nested_admin.NestedModelAdmin):
     prepopulated_fields = {"slug": ("title","doors_open")}
     list_display = ('title','doors_open','slug', 'alcohol',)
-    # inlines = [ShiftInline]
     inlines = [EventScheduleInline]
 
 admin.site.register(Event, EventAdmin)

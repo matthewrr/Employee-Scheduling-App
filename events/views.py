@@ -35,7 +35,6 @@ def event_detail_view(request,year,month,day,slug):
                 template[str(location)]['positions'][str(position)] = {'employee':position.employee,
                                                                        'arrival_time':position.arrival_time,
                                                                        }
-    pprint(template)     
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
