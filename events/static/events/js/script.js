@@ -1,15 +1,3 @@
-// $(document).ready(function() {
-//     $(".js-example-basic-single").select2({
-//         placeholder: "Select Employee",
-//         allowClear: true,
-//     });
-// });
-
-
-// $(".modal").on("hidden.bs.modal", function(){
-//     $(".modal-content").html("");
-// });
-
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
@@ -104,6 +92,10 @@ $(function() {
 //     });
 //     return false;
 //   });
+
+$(function() {
+  
+});
 
 $(function() {
   
@@ -225,7 +217,7 @@ function sortTable(n,table_id) {
   }
 }
 
-var dict = {};
+
 
 
 
@@ -237,7 +229,27 @@ var dict = {};
 //   dict[location] = [position, employee];
 // })
 
+
+$(document).ready(function() {
+       $("#test").submit(function(event){
+            $.ajax({
+                 type:"POST",
+                 url:"/edit_favorites/",
+                 data: {
+                        'video': $('#test').val() // from form
+                        },
+                 success: function(){
+                     $('#message').html("<h2>Contact Form Submitted!</h2>") 
+                 }
+            });
+            return false; //<---- move it here
+       });
+
+});
+
+var dict = {};
 $(".submit-schedule" ).click(function() {
+  var event_id = $('.event-title').attr('id');
   
   $('.location-body').each(function() {
     var location = $(this).attr('id');
@@ -252,65 +264,19 @@ $(".submit-schedule" ).click(function() {
     })
     dict[location] = posDict;
   });
-  console.log(dict);
   
   
-  
-  
-  function update_schedule() {
-    console.log("update schedule is working!") // sanity check
-    $.ajax({
-        url : "update_schedule/", // the endpoint
-        type : "POST", // http method
-        data : { schedule : dict }, // data sent with the post request
-
-        // handle a successful response
-        success : function(json) {
-            console.log("success"); // another sanity check
-        },
-
-        // handle a non-successful response
-        // error : function(xhr,errmsg,err) {
-        //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-        //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-        //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        // }
-    });
-};
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  $.ajax({
+     type:"POST",
+     url:"/events/update_schedule/",
+     data: { schedule: JSON.stringify(dict), event_id: event_id },
+     success: function(){
+         console.log(dict) 
+    }
+  });
 })
 
 
-
-
-
-
-
-function update_schedule() {
-    console.log("create post is working!") // sanity check
-    // console.log($('#post-text').val())
-};
-
-// $('.submit-schedule').on('submit', function(event){
-//     event.preventDefault();
-//     console.log("form submitted!");  // sanity check
-//     update_schedule();
-// });
 
 
   
@@ -367,3 +333,4 @@ $(document).ready(function(){
   });
   
 });
+

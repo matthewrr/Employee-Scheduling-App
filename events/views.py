@@ -9,6 +9,16 @@ from .forms import EventForm
 from .models import *
 from pprint import pprint
 
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def update_schedule(request):
+    if request.method == 'POST':
+        mydata = request.POST.get('schedule', None)
+        event_id = request.POST.get('event_id', None)
+    print(event_id)
+    return HttpResponse("I'm working!")
+
 #dont fetch if not changed
 def schedule_template(schedule={},locations=None):
     locations = Location.objects.all()
@@ -16,18 +26,51 @@ def schedule_template(schedule={},locations=None):
         schedule[str(location)] = {}
         schedule[str(location)]['active'] = True
         schedule[str(location)]['bar'] = location.bar
+        schedule[str(location)]['pk'] = location.id
         schedule[str(location)]['positions'] = {}
         for position in location.position_set.all():
             schedule[str(location)]['positions'][position.code] = {'employee':str(position),
                                                  'arrival_time':None
                                                  }
     return schedule
+
+# def schedule_index(request):
+#     all_employees = Employee.objects.all()
+#     event = Event.objects.get(slug=slug)
+#     template = schedule_template()
+#     locations = event.eventschedule.eventlocation_set.all()
+
+#     for location in locations:
+#         if template.get(str(location)):
+#             for position in location.shift_set.all():
+#                 template[str(location)]['positions'][str(position)] = {'employee':position.employee,
+#                                                                       'arrival_time':position.arrival_time,
+#                                                                       }
+#     context = {'event':event,
+#               'schedule':template,
+#               'all_employees':all_employees,
+#               'roles': ['Managers','Cashiers','Preps','Bartenders']
+#               }
+               
+#     return render(request, './events/schedule/create.html', context)
+
+# def schedule_create_update(request): #post request
+#     #receive dict
+#     #dict includes whether template or event
+#         # if event, 
+#             #check if exists for new or template
+#             #connect with one-to-one of template object
+#         # else 
+#             #check it exists for new or update
+#             #create template object without one-to-one
+#     return HttpResponse('Hello!')
         
 def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
     template = schedule_template()
     locations = event.eventschedule.eventlocation_set.all()
+    new_template = True
 
     for location in locations:
         if template.get(str(location)):
@@ -35,13 +78,12 @@ def event_detail_view(request,year,month,day,slug):
                 template[str(location)]['positions'][str(position)] = {'employee':position.employee,
                                                                        'arrival_time':position.arrival_time,
                                                                        }
-    pprint(template)     
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
-               'roles': ['Managers','Cashiers','Preps','Bartenders']
+               'roles': ['Managers','Cashiers','Preps','Bartenders'],
+               'new_template':new_template
                }
-               
     return render(request, './events/detail/event_detail.html', context)
 
 def event_list(request):

@@ -26,7 +26,11 @@ class Event(models.Model):
     def __str__(self):
         return self.title
     
-        
+class Template(models.Model):
+    event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True, blank=True)
+    alcohol = models.BooleanField(default=True)
+    schedule = {}
+    
     
 class EventSchedule(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True, blank=True)
