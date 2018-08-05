@@ -711,3 +711,31 @@ button:focus {
 .event-details {
   background-color: #e8ebf1;
 }
+
+.remove-button {
+  display:none;
+}
+
+.rotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.remove-employee {
+  transition: transform 0.5s;
+}
+
+.red-border {
+  border: 1px solid red;
+}
+
+.red-border-background {
+  border: 1px solid red;
+  background: #f5f1f1;
+}
+
+.display-flex {
+  display:flex;
+}

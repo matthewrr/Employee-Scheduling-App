@@ -347,3 +347,44 @@ $(document).ready(function(){
   
 });
 
+
+
+  // .remove-employee (click) --> parent --> next --> find .arrival-time --> display:none;
+
+$(document).ready(function(){
+	$('.remove-employee').on("click", function(){
+	  var shift = $(this).parent().next().find('.arrival-time');
+	  $(this).toggleClass('rotate');
+	  $(shift).each(function() {
+	    $(this).toggle();
+	    var delete_button = $(this).next();
+      // $(delete_button).toggle();
+      $(delete_button).toggleClass('display-flex');
+      $(this).prev().toggleClass('red-border');
+      $(this).prev().prev().children().toggleClass('red-border-background');
+      
+
+
+      
+      
+      
+      // $(this).prev().css({
+      //   'border': '1px solid red',
+      //   'border-bottom-right-radius': '5px',
+      //   'border-top-right-radius': '5px'})
+	  });
+	});
+	
+	$('.remove-button').on("click", function(){
+	  $(this).parent().parent().parent().remove();
+	  
+	  
+	});
+
+});
+
+$('#user_button').toggle(function () {
+    $("#user_button").addClass("active");
+}, function () {
+    $("#user_button").removeClass("active");
+});

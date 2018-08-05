@@ -4,9 +4,12 @@
   <div class="card-header location-header py-2">
       <label class='location-title' data-target='#{{location_id}}' data-toggle='collapse'>
       <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked /><a style="vertical-align:middle;">{{location_verbose}}</a></label>
-      {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/></a>--> #}
-      {# <!--<a class='{{location.location_id}}'><img class='float-right ml-1 remove-employee {{location.location_id}}' id='remove-{{location.location_id}}' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/></a>--> #}
+      <img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/>
+      <img class='float-right ml-1 remove-employee' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
+  
   </div>
+  
+
 
   <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true">
   {% for shift, scheduled in position.items %}
@@ -23,8 +26,15 @@
               <option class="{{employee}}">{{employee.name}}</option>
             {% endfor %}
           </select>
-          <div class="col px-0 input-group-append input-group" style='flex: 0 0 27%;max-width: 27%;'>
+          
+          
+          
+          
+          <div class="col pl-0 input-group-append input-group arrival-time" style='flex: 0 0 30%;max-width: 30%; padding-right:15px;'>
             <input type="text" class="form-control {{shift.0}}" placeholder="Arrive" aria-label="Arrive" value='{{scheduled.arrival_time}}' style="text-align:center;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">
+          </div>
+          <div class="col px-0 input-group-append input-group remove-button" style='flex: 0 0 30%;max-width: 30%;'>
+            <div class='btn btn-outline-danger' style='background:#f5f1f1; width:100%; margin-right:15px;'>Delete</div>
           </div>
         </div>
       </div>
