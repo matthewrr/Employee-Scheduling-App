@@ -16,7 +16,6 @@ import json
 def update_schedule(request):
     if request.method == 'POST':
         mydata = request.POST.get('schedule', None)
-        pprint(json.loads(mydata))
         pk = request.POST.get('event_id', None)
         event = get_object_or_404(Event, pk=pk)
         event.schedule = mydata
@@ -31,13 +30,13 @@ def update_schedule(request):
 def schedule_template(schedule={},locations=None):
     locations = Location.objects.all()
     for location in locations:
-        schedule[str(location)] = {}
-        schedule[str(location)]['active'] = True
-        schedule[str(location)]['bar'] = location.bar
-        schedule[str(location)]['pk'] = location.id
-        schedule[str(location)]['positions'] = {}
+        schedule[str(location.id)] = {}
+        schedule[str(location.id)]['active'] = True
+        schedule[str(location.id)]['bar'] = location.bar
+        schedule[str(location.id)]['location'] = location
+        schedule[str(location.id)]['positions'] = {}
         for position in location.position_set.all():
-            schedule[str(location)]['positions'][position.code] = {'employee':str(position),
+            schedule[str(location.id)]['positions'][position.code] = {'employee':str(position),
                                                  'arrival_time':''
                                                  }
     return schedule
@@ -88,11 +87,11 @@ def event_detail_view(request,year,month,day,slug):
     else:
         template = json.loads(event.schedule)
         # template = schedule_template()
-    pprint(template)
-    # locations = event.eventschedule.eventlocation_set.all()
-    
     # pprint(template)
-    
+    # locations = event.eventschedule.eventlocation_set.all()
+    print('-----------------')
+    pprint(template)
+    print('-----------------')
     myjson = json.loads(event.schedule)
 
 

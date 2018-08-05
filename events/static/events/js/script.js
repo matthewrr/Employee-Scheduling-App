@@ -255,16 +255,16 @@ $(".submit-schedule" ).click(function() {
     var location = $(this).attr('id');
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
+    var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
+    
     var posDict = {}
     posDict['positions'] = {};
     posDict['active'] = true;
-    posDict['bar'] = false;
+    posDict['bar'] = bar;
     posDict['location'] = $(this).attr('name');
     
     $(positions).each(function(i,v){
-      // this --> parent --> next  --> children --> input val
       var arrive = $(this).next().children().val();
-      console.log(arrive);
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
       posDict['positions'][position] = {
@@ -287,7 +287,7 @@ $(".submit-schedule" ).click(function() {
     }
   });
 })
-// , event_id: event_id 
+
 
 
 
@@ -317,6 +317,7 @@ $(document).ready(function(){
 	    $(this).prop('indeterminate', false);
 	    var flag = $(this).is(':checked');
 	    $(this).prop('checked', !flag);
+	    
 	    $(this).parent().parent().parent().toggle();
 	      
 	    });

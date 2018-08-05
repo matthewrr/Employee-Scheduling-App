@@ -52,7 +52,7 @@
     <div class='col col-12'>
       <div class='card-columns mx-4'>
         {% for location, attributes in schedule.items %}
-          {% with position=attributes.positions bar=attributes.bar active=attributes.active location_id=attributes.pk %}
+          {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
             {% include 'events/detail/location_card.html' %}
           {% endwith %}
         {% endfor %}
