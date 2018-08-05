@@ -255,27 +255,37 @@ $(".submit-schedule" ).click(function() {
     var location = $(this).attr('id');
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
-    var posDict = {};
+    var posDict = {}
+    posDict['positions'] = {};
+    posDict['active'] = true;
+    posDict['bar'] = false;
+    posDict['location'] = $(this).attr('name');
     
     $(positions).each(function(i,v){
+      
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
-      posDict[position] = $(person).val();
+      posDict['positions'][position] = {
+        'arrival_time': 'blank',
+        'employee': $(person).val()
+      }
+      // posDict['positions'][position] = $(person).val();
     })
     dict[location] = posDict;
   });
   
-  
+// location --- active, bar, pk, positions -- c1 etc ---arrival_time, employee  
   $.ajax({
      type:"POST",
      url:"/events/update_schedule/",
+     dataType: 'json',
      data: { schedule: JSON.stringify(dict), event_id: event_id },
      success: function(){
          console.log(dict) 
     }
   });
 })
-
+// , event_id: event_id 
 
 
 

@@ -4,12 +4,16 @@ from employees.models import Employee
 from locations.models import Location, Position
 import datetime
     
+from django.db import models
+from jsonfield import JSONField
+    
 class Event(models.Model):
     title = models.CharField(max_length=256)
     date = models.DateField(blank=False)
     doors_open = models.CharField(max_length=256,verbose_name="Doors Open")
     alcohol = models.BooleanField(default=True)
     slug = models.SlugField()
+    schedule = JSONField(blank=True,null=True) 
     
     @property
     def event_category(self):

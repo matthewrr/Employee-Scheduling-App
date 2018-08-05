@@ -10,13 +10,21 @@ from .models import *
 from pprint import pprint
 
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 @csrf_exempt
 def update_schedule(request):
     if request.method == 'POST':
         mydata = request.POST.get('schedule', None)
-        event_id = request.POST.get('event_id', None)
-    print(event_id)
+        pprint(json.loads(mydata))
+        pk = request.POST.get('event_id', None)
+        event = get_object_or_404(Event, pk=pk)
+        event.schedule = mydata
+        event.save()
+
+        ## make sure there's a default schedule (i.e. if not schedule...)
+        ## make sure it pull from schedule if available
+    
     return HttpResponse("I'm working!")
 
 #dont fetch if not changed
@@ -64,20 +72,38 @@ def schedule_template(schedule={},locations=None):
 #             #check it exists for new or update
 #             #create template object without one-to-one
 #     return HttpResponse('Hello!')
-        
+
+
+
+
 def event_detail_view(request,year,month,day,slug):
+    #simple dicts for location ids employees etc
+    # pprint(schedule_template())
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
-    template = schedule_template()
-    locations = event.eventschedule.eventlocation_set.all()
+    
+
+    if not event.schedule:
+        template = schedule_template()
+    else:
+        template = json.loads(event.schedule)
+        # template = schedule_template()
+    pprint(template)
+    # locations = event.eventschedule.eventlocation_set.all()
+    
+    # pprint(template)
+    
+    myjson = json.loads(event.schedule)
+
+
     new_template = True
 
-    for location in locations:
-        if template.get(str(location)):
-            for position in location.shift_set.all():
-                template[str(location)]['positions'][str(position)] = {'employee':position.employee,
-                                                                       'arrival_time':position.arrival_time,
-                                                                       }
+    # for location in locations:
+    #     if template.get(str(location)):
+    #         for position in location.shift_set.all():
+    #             template[str(location)]['positions'][str(position)] = {'employee':position.employee,
+    #                                                                   'arrival_time':position.arrival_time,
+    #                                                                   }
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
