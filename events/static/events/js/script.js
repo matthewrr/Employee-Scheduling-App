@@ -262,11 +262,13 @@ $(".submit-schedule" ).click(function() {
     posDict['location'] = $(this).attr('name');
     
     $(positions).each(function(i,v){
-      
+      // this --> parent --> next  --> children --> input val
+      var arrive = $(this).next().children().val();
+      console.log(arrive);
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
       posDict['positions'][position] = {
-        'arrival_time': 'blank',
+        'arrival_time': arrive,
         'employee': $(person).val()
       }
       // posDict['positions'][position] = $(person).val();

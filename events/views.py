@@ -38,7 +38,7 @@ def schedule_template(schedule={},locations=None):
         schedule[str(location)]['positions'] = {}
         for position in location.position_set.all():
             schedule[str(location)]['positions'][position.code] = {'employee':str(position),
-                                                 'arrival_time':None
+                                                 'arrival_time':''
                                                  }
     return schedule
 
