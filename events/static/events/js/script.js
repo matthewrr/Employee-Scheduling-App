@@ -257,9 +257,13 @@ $(".submit-schedule" ).click(function() {
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
     
+    // prev -- children(label) -- children(input) -- checked
+    
+    var active = !$(this).prev().children('label').hasClass('collapsed');
+    
     var posDict = {}
     posDict['positions'] = {};
-    posDict['active'] = true;
+    posDict['active'] = active;
     posDict['bar'] = bar;
     posDict['location'] = $(this).attr('name');
     
@@ -274,7 +278,9 @@ $(".submit-schedule" ).click(function() {
       // posDict['positions'][position] = $(person).val();
     })
     dict[location] = posDict;
+  
   });
+  console.log(dict);
   
 // location --- active, bar, pk, positions -- c1 etc ---arrival_time, employee  
   $.ajax({
@@ -362,7 +368,6 @@ $(function() {
 	  $(shift).each(function() {
 	    $(this).toggle();
 	    var delete_button = $(this).next();
-      // $(delete_button).toggle();
       $(delete_button).toggleClass('display-flex');
       $(this).prev().toggleClass('red-border');
       $(this).prev().prev().children().toggleClass('red-border-background');

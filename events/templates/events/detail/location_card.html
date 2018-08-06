@@ -3,7 +3,9 @@
 <div class="card" class='testing' style='width:100%;'>
   <div class="card-header location-header py-2">
       <label class='location-title' data-target='#{{location_id}}' data-toggle='collapse'>
-      <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked /><a style="vertical-align:middle;">{{location_verbose}}</a></label>
+        <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked='checked' />
+        <a style="vertical-align:middle;">{{location_verbose}}</a>
+      </label>
       <img class='float-right ml-1 add-employee' src='{% static "events/img/plus.svg" %}' alt="Plus Symbol"/>
       <img class='float-right ml-1 remove-employee' src='{% static "events/img/minus.svg" %}' alt="Minus Symbol"/>
   
