@@ -13,7 +13,7 @@
 
   <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true">
   {% for shift, scheduled in position.items %}
-    <div class='row {{scheduled.arrival_time|yesno:"scheduled,unscheduled"}}'>
+    <div class='row shift-row {{scheduled.arrival_time|yesno:"scheduled,unscheduled"}}'>
       <div class="btn-group" style="width:100%;">
         <div class="input-group input-group">
           <div class="col pr-0 input-group-prepend" style='flex: 0 0 20%;max-width: 20%;'>

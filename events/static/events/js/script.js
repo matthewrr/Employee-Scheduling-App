@@ -351,7 +351,11 @@ $(document).ready(function(){
 
   // .remove-employee (click) --> parent --> next --> find .arrival-time --> display:none;
 
-$(document).ready(function(){
+
+
+
+
+$(function() {
 	$('.remove-employee').on("click", function(){
 	  var shift = $(this).parent().next().find('.arrival-time');
 	  $(this).toggleClass('rotate');
@@ -362,23 +366,41 @@ $(document).ready(function(){
       $(delete_button).toggleClass('display-flex');
       $(this).prev().toggleClass('red-border');
       $(this).prev().prev().children().toggleClass('red-border-background');
-      
-
-
-      
-      
-      
-      // $(this).prev().css({
-      //   'border': '1px solid red',
-      //   'border-bottom-right-radius': '5px',
-      //   'border-top-right-radius': '5px'})
 	  });
 	});
 	
-	$('.remove-button').on("click", function(){
+	$('.card-body').on('click', '.remove-button', function(event) { 
+    console.log($(this));
 	  $(this).parent().parent().parent().remove();
+  });
+	
+	
+	
+	$('.add-employee').on("click", function(){
+	  var card_body = $(this).parent().next();
+	  var new_position = $(card_body).children().last().find('span').html();
+	  var prefix = new_position.split('')[0];
+	  var i = Number(new_position.split('')[1]);
+	  
+	  if (prefix !== 'E') {
+	    new_position = 'E1';
+	    i = 1;
+	  } else {
+	    i += 1;
+	    new_position = 'E' + i;
+	  }
 	  
 	  
+	  var new_employee = $(card_body).children().first().clone();
+	  
+	  
+	  new_employee.find('span').html(new_position);
+	  new_employee.find('option').first().html('Extra #' + i);
+	  new_employee.find('input').attr('value','');
+	  
+	  
+	  
+	  $(card_body).append(new_employee);
 	});
 
 });
