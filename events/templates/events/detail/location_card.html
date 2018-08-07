@@ -22,12 +22,17 @@
             <div class="input-group-text text-center" style='width:100%;'><span style='width:100%'>{{shift}}</span>
             </div>
           </div>
-          <select class="col form-control form-control" style='flex: 0 0 50%;max-width: 50%;'>
-            <option value='{{scheduled.employee|default:shift}}' class='{{shift}}' selected>{{scheduled.employee|default:shift}}</option>
-            {% for employee in all_employees %}
-              <option class="{{employee}}">{{employee.name}}</option>
-            {% endfor %}
-          </select>
+          
+          {% if not template %}
+            <select class="col form-control" style='flex: 0 0 50%;max-width: 50%;'>
+              <option value='{{scheduled.employee|default:shift}}' class='{{shift}}' selected>{{scheduled.employee|default:shift}}</option>
+              {% for employee in all_employees %}
+                <option class="{{employee}}">{{employee.name}}</option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input class="form-control" type="text" placeholder="{{scheduled.employee}}" readonly>
+          {% endif %}
           
           
           

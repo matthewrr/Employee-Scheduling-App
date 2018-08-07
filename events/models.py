@@ -33,7 +33,8 @@ class Event(models.Model):
 class Template(models.Model):
     event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True, blank=True)
     alcohol = models.BooleanField(default=True)
-    schedule = {}
+    title = models.CharField(max_length=256,default='')
+    schedule = JSONField(blank=True,null=True)
     
     
 class EventSchedule(models.Model):

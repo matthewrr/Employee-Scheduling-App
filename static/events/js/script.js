@@ -1,15 +1,3 @@
-// $(document).ready(function() {
-//     $(".js-example-basic-single").select2({
-//         placeholder: "Select Employee",
-//         allowClear: true,
-//     });
-// });
-
-
-// $(".modal").on("hidden.bs.modal", function(){
-//     $(".modal-content").html("");
-// });
-
 $(function() {
   $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
 });
@@ -104,6 +92,10 @@ $(function() {
 //     });
 //     return false;
 //   });
+
+$(function() {
+  
+});
 
 $(function() {
   
@@ -225,7 +217,7 @@ function sortTable(n,table_id) {
   }
 }
 
-var dict = {};
+
 
 
 
@@ -237,80 +229,72 @@ var dict = {};
 //   dict[location] = [position, employee];
 // })
 
+
+$(document).ready(function() {
+       $("#test").submit(function(event){
+            $.ajax({
+                 type:"POST",
+                 url:"/edit_favorites/",
+                 data: {
+                        'video': $('#test').val() // from form
+                        },
+                 success: function(){
+                     $('#message').html("<h2>Contact Form Submitted!</h2>") 
+                 }
+            });
+            return false; //<---- move it here
+       });
+
+});
+
+var dict = {};
 $(".submit-schedule" ).click(function() {
+  var event_id = $('.event-title').attr('id');
   
   $('.location-body').each(function() {
     var location = $(this).attr('id');
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
-    var posDict = {};
+    var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
+    
+    // prev -- children(label) -- children(input) -- checked
+    
+    var active = !$(this).prev().children('label').hasClass('collapsed');
+    
+    var posDict = {}
+    posDict['positions'] = {};
+    posDict['active'] = active;
+    posDict['bar'] = bar;
+    posDict['location'] = $(this).attr('name');
     
     $(positions).each(function(i,v){
+      var arrive = $(this).next().children().val();
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
-      posDict[position] = $(person).val();
+      posDict['positions'][position] = {
+        'arrival_time': arrive,
+        'employee': $(person).val()
+      }
+      // posDict['positions'][position] = $(person).val();
     })
     dict[location] = posDict;
+  
   });
   console.log(dict);
   
-  
-  
-  
-  function update_schedule() {
-    console.log("update schedule is working!") // sanity check
-    $.ajax({
-        url : "update_schedule/", // the endpoint
-        type : "POST", // http method
-        data : { schedule : dict }, // data sent with the post request
-
-        // handle a successful response
-        success : function(json) {
-            console.log("success"); // another sanity check
-        },
-
-        // handle a non-successful response
-        // error : function(xhr,errmsg,err) {
-        //     $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-        //         " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-        //     console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        // }
-    });
-};
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+// location --- active, bar, pk, positions -- c1 etc ---arrival_time, employee  
+  $.ajax({
+     type:"POST",
+     url:"/events/update_schedule/",
+     dataType: 'json',
+     data: { schedule: JSON.stringify(dict), event_id: event_id },
+     success: function(){
+         console.log(dict) 
+    }
+  });
 })
 
 
-
-
-
-
-
-function update_schedule() {
-    console.log("create post is working!") // sanity check
-    // console.log($('#post-text').val())
-};
-
-// $('.submit-schedule').on('submit', function(event){
-//     event.preventDefault();
-//     console.log("form submitted!");  // sanity check
-//     update_schedule();
-// });
 
 
   
@@ -334,10 +318,20 @@ $(document).ready(function(){
 }); 
 
 $(document).ready(function(){
-	$('.toggle-scheduled').on("click", function(){
-      	$('.bars').toggle();
-    });
-});  
+	$('.toggle-bars').on("click", function(){
+	  $('.bar').each(function(){
+	    $(this).prop('indeterminate', false);
+	    var flag = $(this).is(':checked');
+	    $(this).prop('checked', !flag);
+	    
+	    $(this).parent().parent().parent().toggle();
+	      
+	    });
+	  
+	    
+	  });
+	      
+  });
 
 $(document).ready(function(){
 	$('#managers').on("click", function(){
@@ -357,4 +351,67 @@ $(document).ready(function(){
     $('.B').val(arrival_time);
   });
   
+});
+
+
+
+  // .remove-employee (click) --> parent --> next --> find .arrival-time --> display:none;
+
+
+
+
+
+$(function() {
+	$('.remove-employee').on("click", function(){
+	  var shift = $(this).parent().next().find('.arrival-time');
+	  $(this).toggleClass('rotate');
+	  $(shift).each(function() {
+	    $(this).toggle();
+	    var delete_button = $(this).next();
+      $(delete_button).toggleClass('display-flex');
+      $(this).prev().toggleClass('red-border');
+      $(this).prev().prev().children().toggleClass('red-border-background');
+	  });
+	});
+	
+	$('.card-body').on('click', '.remove-button', function(event) { 
+    console.log($(this));
+	  $(this).parent().parent().parent().remove();
+  });
+	
+	
+	
+	$('.add-employee').on("click", function(){
+	  var card_body = $(this).parent().next();
+	  var new_position = $(card_body).children().last().find('span').html();
+	  var prefix = new_position.split('')[0];
+	  var i = Number(new_position.split('')[1]);
+	  
+	  if (prefix !== 'E') {
+	    new_position = 'E1';
+	    i = 1;
+	  } else {
+	    i += 1;
+	    new_position = 'E' + i;
+	  }
+	  
+	  
+	  var new_employee = $(card_body).children().first().clone();
+	  
+	  
+	  new_employee.find('span').html(new_position);
+	  new_employee.find('option').first().html('Extra #' + i);
+	  new_employee.find('input').attr('value','');
+	  
+	  
+	  
+	  $(card_body).append(new_employee);
+	});
+
+});
+
+$('#user_button').toggle(function () {
+    $("#user_button").addClass("active");
+}, function () {
+    $("#user_button").removeClass("active");
 });

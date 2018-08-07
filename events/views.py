@@ -20,14 +20,10 @@ def update_schedule(request):
         event = get_object_or_404(Event, pk=pk)
         event.schedule = mydata
         event.save()
-
-        ## make sure there's a default schedule (i.e. if not schedule...)
-        ## make sure it pull from schedule if available
-    
     return HttpResponse("I'm working!")
 
 #dont fetch if not changed
-def schedule_template(schedule={},locations=None):
+def schedule_template(schedule={},locations=None,template=False):
     locations = Location.objects.all()
     for location in locations:
         schedule[str(location.id)] = {}
@@ -37,77 +33,19 @@ def schedule_template(schedule={},locations=None):
         schedule[str(location.id)]['positions'] = {}
         for position in location.position_set.all():
             schedule[str(location.id)]['positions'][position.code] = {'employee':str(position),
-                                                 'arrival_time':''
-                                                 }
+                                                                      'arrival_time':''
+                                                                          }
     return schedule
 
-# def schedule_index(request):
-#     all_employees = Employee.objects.all()
-#     event = Event.objects.get(slug=slug)
-#     template = schedule_template()
-#     locations = event.eventschedule.eventlocation_set.all()
-
-#     for location in locations:
-#         if template.get(str(location)):
-#             for position in location.shift_set.all():
-#                 template[str(location)]['positions'][str(position)] = {'employee':position.employee,
-#                                                                       'arrival_time':position.arrival_time,
-#                                                                       }
-#     context = {'event':event,
-#               'schedule':template,
-#               'all_employees':all_employees,
-#               'roles': ['Managers','Cashiers','Preps','Bartenders']
-#               }
-               
-#     return render(request, './events/schedule/create.html', context)
-
-# def schedule_create_update(request): #post request
-#     #receive dict
-#     #dict includes whether template or event
-#         # if event, 
-#             #check if exists for new or template
-#             #connect with one-to-one of template object
-#         # else 
-#             #check it exists for new or update
-#             #create template object without one-to-one
-#     return HttpResponse('Hello!')
-
-
-
-
 def event_detail_view(request,year,month,day,slug):
-    #simple dicts for location ids employees etc
-    # pprint(schedule_template())
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
-    
-
-    if not event.schedule:
-        template = schedule_template()
-    else:
-        template = json.loads(event.schedule)
-        # template = schedule_template()
-    # pprint(template)
-    # locations = event.eventschedule.eventlocation_set.all()
-    print('-----------------')
-    pprint(template)
-    print('-----------------')
-    myjson = json.loads(event.schedule)
-
-
-    new_template = True
-
-    # for location in locations:
-    #     if template.get(str(location)):
-    #         for position in location.shift_set.all():
-    #             template[str(location)]['positions'][str(position)] = {'employee':position.employee,
-    #                                                                   'arrival_time':position.arrival_time,
-    #                                                                   }
+    template = json.loads(event.schedule) if event.schedule else schedule_template()
     context = {'event':event,
                'schedule':template,
                'all_employees':all_employees,
                'roles': ['Managers','Cashiers','Preps','Bartenders'],
-               'new_template':new_template
+               'template':False,
                }
     return render(request, './events/detail/event_detail.html', context)
 
@@ -124,7 +62,6 @@ def event_create(request):
     else:
         form = EventForm()
     return save_event_form(request, form, 'objects/create.html')
-
 
 def event_update(request, pk):
     event = get_object_or_404(Event, pk=pk)
@@ -191,25 +128,11 @@ def export_events(request):
 
     return response
 
-# class ClassView(View):
-    
-#     def get(self, request):
-#         # <view logic>
-#         return HttpResponse('result')
-
-
-# def update_schedule(request):
-#     if request.method == 'POST':
-#         schedule = request.POST.get('schedule')
-#         response_data = {}
-
-        # post = Post(text=post_text, author=request.user)
-        # post.save()
-        
-        # make sure to send pk
-        # if event has schedule:
-            #replace
-        # else
-            #create
-        
-    
+def create_template(request):
+    schedule = schedule_template()
+    context = {'schedule':schedule,
+               'roles': ['Managers','Cashiers','Preps','Bartenders'],
+               'template':True,
+               'detail':'d-none'
+               }
+    return render(request, './events/templates/create.html', context)

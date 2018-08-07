@@ -275,14 +275,12 @@ $(".submit-schedule" ).click(function() {
         'arrival_time': arrive,
         'employee': $(person).val()
       }
-      // posDict['positions'][position] = $(person).val();
     })
     dict[location] = posDict;
   
   });
   console.log(dict);
   
-// location --- active, bar, pk, positions -- c1 etc ---arrival_time, employee  
   $.ajax({
      type:"POST",
      url:"/events/update_schedule/",
@@ -401,6 +399,9 @@ $(function() {
 	  
 	  new_employee.find('span').html(new_position);
 	  new_employee.find('option').first().html('Extra #' + i);
+	  
+	  
+	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
 	  new_employee.find('input').attr('value','');
 	  
 	  
