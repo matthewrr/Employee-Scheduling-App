@@ -35,6 +35,8 @@ class Template(models.Model):
     alcohol = models.BooleanField(default=True)
     title = models.CharField(max_length=256,default='')
     schedule = JSONField(blank=True,null=True)
+    # def __str__(self):
+    #     return self.title
     
     
 class EventSchedule(models.Model):

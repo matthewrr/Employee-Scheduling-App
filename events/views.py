@@ -12,6 +12,20 @@ from pprint import pprint
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from django.template.loader import render_to_string
+
+
+def render_template(request, context):
+    return render(request, 'events/templates/template.html', context)
+    myhtml = render(request, 'events/templates/template.html', context)
+    thing = HttpResponse(myhtml)
+    print('printing...')
+    print(myhtml)
+    print(thing)
+    print('done printing.')
+    return myhtml
+    # return render(request, './events/detail/event_detail.html', context)
+
 @csrf_exempt
 def update_schedule(request):
     if request.method == 'POST':
@@ -22,14 +36,64 @@ def update_schedule(request):
         event.save()
     return HttpResponse("I'm working!")
 
+@csrf_exempt
+def generate_template(request):
+    # data url in template!
+    
+    if request.method == 'POST':
+    # if request.method == 'GET':
+        mydata = request.POST.get('template', None)
+        # print(mydata)
+        # return mydata
+        mydata = request.POST.get('template', None)
+        title = request.POST.get('template_name', None)
+        # pk = request.POST.get('template_id', None)
+        pk = False
+        template = ''
+        if pk:
+            template = get_object_or_404(Template, pk=pk)
+            template.schedule = mydata
+            template.title = title
+            template.save()
+        else:
+            template = Template()
+            template.title = title
+            template.schedule = mydata
+            template.save()
+            # print([a for a in dir(template) if not a.startswith('__')])
+        
+        template = json.loads(template.schedule)
+        mycontext = schedule_template(template=template)
+        context = {'locations': mycontext}
+        # pprint(newtemplate)
+        
+        # pprint(context)
+        
+        
+        
+        rendered = render_to_string('events/templates/template.html', context)
+        return HttpResponse(rendered)
+        
+        return HttpResponse("<div class='hello'>Hello!!!!</div>")
+        return JsonResponse(newtemplate)
+     
+
+    return HttpResponse("I'm working!")
+
+
 #dont fetch if not changed
-def schedule_template(schedule={},locations=None,template=False):
+def schedule_template(schedule={},locations=None,template={}):
     locations = Location.objects.all()
     for location in locations:
+       
         schedule[str(location.id)] = {}
-        schedule[str(location.id)]['active'] = True
+        
+        if template:
+            schedule[str(location.id)]['active'] = True if template['locations'][str(location)] else False
+        else:
+            schedule[str(location.id)]['active'] = True
         schedule[str(location.id)]['bar'] = location.bar
-        schedule[str(location.id)]['location'] = location
+        schedule[str(location.id)]['location'] = str(location)
         schedule[str(location.id)]['positions'] = {}
         for position in location.position_set.all():
             schedule[str(location.id)]['positions'][position.code] = {'employee':str(position),

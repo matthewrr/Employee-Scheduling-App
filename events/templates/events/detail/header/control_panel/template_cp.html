@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<div class='row'>
+  <div class='control-panel-section'><span>Unselect Inactive Stands</span></div>
+</div>
+
+<div class='row'>
+{% for location, attributes in schedule.items %}
+  <div class='col-3 py-2'>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked />
+      <label class="form-check-label location" for="defaultCheck1" id='{{location}}'>{{attributes.location}}</label>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<div class='row'>
+  <button type="button" class="btn btn-dark float-right generate-template"><span>Generate Template</span></button>
+  <button type="button" class="btn btn-dark float-right d-none"><span>Update Template</span></button>
+</div>
+
+
+
+
+
+
+

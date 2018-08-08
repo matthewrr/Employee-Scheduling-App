@@ -247,6 +247,63 @@ $(document).ready(function() {
 
 });
 
+// if request.method == 'POST':
+//         mydata = request.POST.get('schedule', None)
+//         title = request.POST.get('title', None)
+//         pk = request.POST.get('template_id', None)
+        
+//         if pk:
+//             template = get_object_or_404(Template, pk=pk)
+//             template.schedule = mydata
+//             template.title = title
+//             template.save()
+//         else:
+//             template = Template()
+//             template.title = title
+//             template.schedule = mydata
+//             template.save()
+        
+//     return HttpResponse("I'm working!")
+var template = {'locations': {}};
+$(".generate-template" ).click(function() {
+  var template_id = '';
+  var template_name = $('.template-name').val();
+  $('.location').each(function() {
+    var location = $(this).html();
+    var active = $(this).prev().prop('checked');
+    template['locations'][location] = active;
+  });
+  template['template_name'] = template_name;
+  console.log(template_name);
+  
+  // $.ajax({
+  //   type:"POST",
+  //   url:"/events/templates/create/generate/",
+  //   dataType: 'json',
+  //   data: { template: JSON.stringify(template), template_id: template_id, template_name: template_name },
+  //   success: function(){
+  //       alert(data);
+  //   }
+  // });
+  
+  
+  context = { template: JSON.stringify(template), template_id: template_id, template_name: template_name };
+  
+  var mydata = ''
+  $.post( "/events/templates/create/generate/", context, function( data ) {
+    // mydata = JSON.stringify(data);
+    $('.template-schedule').html(data);
+  });
+  
+  
+  
+    
+    
+  
+});
+
+
+
 var dict = {};
 $(".submit-schedule" ).click(function() {
   var event_id = $('.event-title').attr('id');
@@ -256,8 +313,6 @@ $(".submit-schedule" ).click(function() {
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
-    
-    // prev -- children(label) -- children(input) -- checked
     
     var active = !$(this).prev().children('label').hasClass('collapsed');
     
@@ -350,12 +405,6 @@ $(document).ready(function(){
   });
   
 });
-
-
-
-  // .remove-employee (click) --> parent --> next --> find .arrival-time --> display:none;
-
-
 
 
 
