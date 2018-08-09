@@ -24,29 +24,6 @@ function myFunction() {
 }
 
 $(function() {
-  
-  $('.active-location').prop('indeterminate', true)
-  
-  $('.add-employee').click(function(){
-    var myparent = $(this).parent().prop('className');
-    var newRow = document.getElementById("new-employee");
-    $('#' + myparent).append(newRow)
-  });
-});
-
-$(function() {
-  $('.remove-employee').click(function(){
-    var target = $(this).attr('id')
-    var els = document.getElementsByClassName(target);
-    for(var i=0; i<els.length; ++i){
-      var s = els[i].style;
-      s.display = s.display==='none' ? 'inline-block' : 'none';
-    }
-  });
-});
-
-$(function() {
-  
   var btn_id = '';
   var table = '';
   var loadForm = function () {
@@ -104,8 +81,6 @@ $(function() {
     return false;
   };
   
-  /* Binding */
-
   // Create
   $(".js-create-object").click(loadForm);
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
@@ -124,6 +99,7 @@ $(function() {
 
 });
 
+// Sort Columns
 function sortTable(n,table_id) {
   console.log(table_id);
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -165,23 +141,7 @@ function sortTable(n,table_id) {
   }
 }
 
-$(document).ready(function() {
-       $("#test").submit(function(event){
-            $.ajax({
-                 type:"POST",
-                 url:"/edit_favorites/",
-                 data: {
-                        'video': $('#test').val() // from form
-                        },
-                 success: function(){
-                     $('#message').html("<h2>Contact Form Submitted!</h2>") 
-                 }
-            });
-            return false; //<---- move it here
-       });
-
-});
-
+// Generate Template
 var template = {'locations': {}};
 $(".generate-template" ).click(function() {
   var template_id = '';
@@ -192,28 +152,15 @@ $(".generate-template" ).click(function() {
     template['locations'][location] = active;
   });
   template['template_name'] = template_name;
-  console.log(template_name);
-  
-  // $.ajax({
-  //   type:"POST",
-  //   url:"/events/templates/create/generate/",
-  //   dataType: 'json',
-  //   data: { template: JSON.stringify(template), template_id: template_id, template_name: template_name },
-  //   success: function(){
-  //       alert(data);
-  //   }
-  // });
-  
-  
   context = { template: JSON.stringify(template), template_id: template_id, template_name: template_name };
   
   var mydata = ''
   $.post( "/events/templates/create/generate/", context, function( data ) {
-    // mydata = JSON.stringify(data);
     $('.schedule-cards').html(data);
   });
 });
 
+// Submit/Update Schedule
 var dict = {};
 $(".submit-schedule" ).click(function() {
   var event_id = $('.event-title').attr('id');
@@ -223,7 +170,6 @@ $(".submit-schedule" ).click(function() {
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
-    
     var active = !$(this).prev().children('label').hasClass('collapsed');
     
     var posDict = {}
@@ -242,13 +188,11 @@ $(".submit-schedule" ).click(function() {
       }
     })
     dict[location] = posDict;
-  
   });
   console.log(dict);
-  
   $.ajax({
      type:"POST",
-     url:"/events/update_schedule/",
+     url:"/events/templates/create/save/",
      dataType: 'json',
      data: { schedule: JSON.stringify(dict), event_id: event_id },
      success: function(){
@@ -257,41 +201,30 @@ $(".submit-schedule" ).click(function() {
   });
 })
 
+// Control Panel Toggles
 $(document).ready(function(){
 	$('.toggle-unscheduled').on("click", function(){
-      	$('.unscheduled').toggle();
-    });
-}); 
-
-$(document).ready(function(){
-	$('.toggle-scheduled').on("click", function(){
-      	$('.scheduled').toggle();
-    });
-}); 
-$(document).ready(function(){
-	$('.toggle-inactive-locations').on("click", function(){
-	      $('.location-title.collapsed').each(function(){
-	        $(this).parent().parent().toggle();
-	      });
-    });
-}); 
-
-$(document).ready(function(){
-	$('.toggle-bars').on("click", function(){
-	  $('.bar').each(function(){
-	    $(this).prop('indeterminate', false);
-	    var flag = $(this).is(':checked');
-	    $(this).prop('checked', !flag);
-	    
-	    $(this).parent().parent().parent().toggle();
-	      
-	    });
-	  
-	    
-	  });
-	      
+    $('.unscheduled').toggle();
   });
+  $('.toggle-scheduled').on("click", function(){
+    $('.scheduled').toggle();
+  });
+  $('.toggle-inactive-locations').on("click", function(){
+	  $('.location-title.collapsed').each(function(){
+	    $(this).parent().parent().toggle();
+	  });
+  });
+  $('.toggle-bars').on("click", function(){
+	  $('.bar').each(function(){
+	    var flag = $(this).is(':checked');
+	    $(this).prop('indeterminate', false);
+	    $(this).prop('checked', !flag);
+	    $(this).parent().parent().parent().toggle();
+    });
+  });
+}); 
 
+// Control Panel Arrival Times
 $(document).ready(function(){
 	$('#managers').on("click", function(){
     var arrival_time = $(this).parent().prev().children().val();
@@ -309,34 +242,25 @@ $(document).ready(function(){
     var arrival_time = $(this).parent().prev().children().val();
     $('.B').val(arrival_time);
   });
-  
 });
 
-
-
+// Add/Remove Employees
 $(function() {
   $('.schedule-cards').on('click', '.remove-employee', function(event) { 
-// 	$('.remove-employee').on("click", function(){
 	  var shift = $(this).parent().next().find('.arrival-time');
 	  $(this).toggleClass('rotate');
 	  $(shift).each(function() {
-	    $(this).toggle();
 	    var delete_button = $(this).next();
-      $(delete_button).toggleClass('display-flex');
+	    $(delete_button).toggleClass('display-flex');
+	    $(this).toggle();
       $(this).prev().toggleClass('red-border');
       $(this).prev().prev().children().toggleClass('red-border-background');
 	  });
 	});
-	
 	$('.schedule-cards').on('click', '.remove-button', function(event) { 
 	  $(this).parent().parent().parent().remove();
   });
   
-  
-	
-	
-	
-// 	$('.add-employee').on("click", function(){
   $('.schedule-cards').on('click', '.add-employee', function(event) { 
 	  var card_body = $(this).parent().next();
 	  var new_position = $(card_body).children().last().find('span').html();
@@ -351,27 +275,11 @@ $(function() {
 	    new_position = 'E' + i;
 	  }
 	  
-	  
 	  var new_employee = $(card_body).children().first().clone();
-	  console.log(new_employee);
-	  
-	  
 	  new_employee.find('span').html(new_position);
 	  new_employee.find('option').first().html('Extra #' + i);
-	  
-	  
 	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
 	  new_employee.find('input').attr('value','');
-	  
-	  
-	  
 	  $(card_body).append(new_employee);
 	});
-
-});
-
-$('#user_button').toggle(function () {
-    $("#user_button").addClass("active");
-}, function () {
-    $("#user_button").removeClass("active");
 });
