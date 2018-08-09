@@ -9,12 +9,14 @@ from .views import redirect_root
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', redirect_root),
+    
+    url(r'company/', include('company_profile.urls')),
     url(r'employees/', include('employees.urls')),
     url(r'events/', include('events.urls')),
     url(r'features/', include('sms.urls')),
     url(r'locations/', include('locations.urls')),
     url(r'^nested_admin/', include('nested_admin.urls')),
-    url(r'company/', include('company_profile.urls')),
+    url(r'schedules/', include('schedules.urls')),
 ]
 
 # profile: company v individual. admin = true in URL?pythonpython

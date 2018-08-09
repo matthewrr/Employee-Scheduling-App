@@ -13,7 +13,8 @@ class Event(models.Model):
     doors_open = models.CharField(max_length=256,verbose_name="Doors Open")
     alcohol = models.BooleanField(default=True)
     slug = models.SlugField()
-    schedule = JSONField(blank=True,null=True) 
+    schedule = JSONField(blank=True,null=True)
+    # schedule_obj = models.OneToOneField(Schedule, on_delete=models.CASCADE,null=True, blank=True)
     
     @property
     def event_category(self):

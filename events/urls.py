@@ -9,6 +9,7 @@ urlpatterns = [
     path('update_schedule/', views.update_schedule, name='update_schedule'),
     path('templates/create/', views.create_template, name='create_template'),
     path('templates/create/generate/', views.generate_template, name='generate_template'),
+    # path('templates/create/save/', views.save_template, name='save_template'),
     path('<int:pk>/update/', views.event_update, name='event_update'),
     path('<int:pk>/delete/', views.event_delete, name='event_delete'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>/', views.event_detail_view),
