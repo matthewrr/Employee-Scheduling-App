@@ -155,7 +155,7 @@ $(".generate-template" ).click(function() {
   context = { template: JSON.stringify(template), template_id: template_id, template_name: template_name };
   
   var mydata = ''
-  $.post( "/events/templates/create/generate/", context, function( data ) {
+  $.post( "/schedules/templates/create/generate/", context, function( data ) {
     $('.schedule-cards').html(data);
   });
 });
@@ -192,7 +192,7 @@ $(".submit-schedule" ).click(function() {
   console.log(dict);
   $.ajax({
      type:"POST",
-     url:"/events/templates/create/save/",
+     url:"/schedules/templates/create/save/",
      dataType: 'json',
      data: { schedule: JSON.stringify(dict), event_id: event_id },
      success: function(){

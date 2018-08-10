@@ -6,6 +6,7 @@ from django.views import View
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from .forms import EventForm
+from schedules.views import schedule_template
 from .models import *
 from pprint import pprint
 
@@ -23,54 +24,6 @@ def update_schedule(request):
         event.schedule = mydata
         event.save()
     return HttpResponse("I'm working!")
-
-@csrf_exempt
-def generate_template(request):
-    
-    if request.method == 'POST':
-        mydata = request.POST.get('template', None)
-        title = request.POST.get('template_name', None)
-        pk = False
-        template = ''
-        if pk:
-            template = get_object_or_404(Template, pk=pk)
-            template.schedule = mydata
-            template.title = title
-            # template.save()
-        else:
-            template = Template()
-            template.title = title
-            template.schedule = mydata
-            # template.save()
-            # print([a for a in dir(template) if not a.startswith('__')])
-        
-        template = json.loads(template.schedule)
-        mycontext = schedule_template(template=template)
-        context = {'locations': mycontext}
-        rendered = render_to_string('events/templates/template.html', context)
-        return HttpResponse(rendered)
-
-    return HttpResponse("I'm working!")
-
-#dont fetch if not changed
-def schedule_template(schedule={},locations=None,template={}):
-    locations = Location.objects.all()
-    for location in locations:
-       
-        schedule[str(location.id)] = {}
-        
-        if template:
-            schedule[str(location.id)]['active'] = True if template['locations'][str(location)] else False
-        else:
-            schedule[str(location.id)]['active'] = True
-        schedule[str(location.id)]['bar'] = location.bar
-        schedule[str(location.id)]['location'] = str(location)
-        schedule[str(location.id)]['positions'] = {}
-        for position in location.position_set.all():
-            schedule[str(location.id)]['positions'][position.code] = {'employee':str(position),
-                                                                      'arrival_time':''
-                                                                          }
-    return schedule
 
 def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
@@ -163,11 +116,3 @@ def export_events(request):
 
     return response
 
-def create_template(request):
-    schedule = schedule_template()
-    context = {'schedule':schedule,
-               'roles': ['Managers','Cashiers','Preps','Bartenders'],
-               'template':True,
-               'detail':'d-none'
-               }
-    return render(request, './events/templates/create.html', context)
