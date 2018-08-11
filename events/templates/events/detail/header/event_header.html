@@ -1,40 +1,19 @@
 {% load staticfiles %}
 
-{% if not template %}
-  <div class="container event-details">
-    <div class='col-12 py-4'>
-      
-      <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
-      <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
-      <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
-      
-      <div class='event-header-details'>
-      
-      <a class='event-title' id='{{event.id}}'>{{event.title}}</a><br />
-      <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
-      <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a>
-      
-      </div>
-          
+<div class="container event-details">
+  <div class='col-12 py-4'>
+    
+    <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
+    <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
+    <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+    
+    <div class='event-header-details'>
+    
+    <a class='event-title' id='{{event.id}}'>{{event.title}}</a><br />
+    <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
+    <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a>
+    
     </div>
+        
   </div>
-{% else %}
-  <div class="container event-details">
-    <div class='col-12 py-4'>
-      
-      
-      <div class='event-header-details form-inline'>
-        <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;'><br />
-        <button type="button" class="btn btn-dark btn-lg ml-2"><span>Edit</span></button>
-        <button type="button" class="btn btn-dark btn-lg ml-2"><span>Save</span></button>
-        <button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>
-      </div>
-          
-    </div>
-  </div>
-
-
-{% endif %}
-
-
-
+</div>

@@ -14,7 +14,7 @@ urlpatterns = [
     
     path('templates/create/', views.create_template, name='create_template'),
     path('templates/create/generate/', views.generate_template, name='generate_template'),
-    path('templates/create/save/', views.generate_template, name='generate_template'), 
+    path('templates/create/save/', views.save_template, name='save_template'), 
 ]
 
 

@@ -145,14 +145,14 @@ function sortTable(n,table_id) {
 var template = {'locations': {}};
 $(".generate-template" ).click(function() {
   var template_id = '';
-  var template_name = $('.template-name').val();
+  var title = $('.template-name').val();
   $('.location').each(function() {
     var location = $(this).html();
     var active = $(this).prev().prop('checked');
     template['locations'][location] = active;
   });
-  template['template_name'] = template_name;
-  context = { template: JSON.stringify(template), template_id: template_id, template_name: template_name };
+  template['title'] = title;
+  context = { template: JSON.stringify(template), template_id: template_id, title: title };
   
   var mydata = ''
   $.post( "/schedules/templates/create/generate/", context, function( data ) {
@@ -164,6 +164,7 @@ $(".generate-template" ).click(function() {
 var dict = {};
 $(".submit-schedule" ).click(function() {
   var event_id = $('.event-title').attr('id');
+  var title = $('.template-name').val()
   
   $('.location-body').each(function() {
     var location = $(this).attr('id');
@@ -171,6 +172,7 @@ $(".submit-schedule" ).click(function() {
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
     var active = !$(this).prev().children('label').hasClass('collapsed');
+    
     
     var posDict = {}
     posDict['positions'] = {};
@@ -189,17 +191,20 @@ $(".submit-schedule" ).click(function() {
     })
     dict[location] = posDict;
   });
+  var title = $('.template-name').val();
+  console.log(title);
   console.log(dict);
   $.ajax({
      type:"POST",
      url:"/schedules/templates/create/save/",
      dataType: 'json',
-     data: { schedule: JSON.stringify(dict), event_id: event_id },
+     data: { template: JSON.stringify(dict), event_id: event_id, title: title },
      success: function(){
          console.log(dict) 
     }
   });
 })
+
 
 // Control Panel Toggles
 $(document).ready(function(){
@@ -243,6 +248,16 @@ $(document).ready(function(){
     $('.B').val(arrival_time);
   });
 });
+
+
+
+$(".template-header > .save").click(function() {
+  $('.template-name').prop('readonly', true);
+});
+$(".template-header > .edit").click(function() {
+  $('.template-name').prop('readonly', false);
+});
+
 
 // Add/Remove Employees
 $(function() {

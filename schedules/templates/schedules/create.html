@@ -3,7 +3,23 @@
 {% block content %}  
 
 <div class='container px-0'>
-  {% include 'events/detail/header/event_header.html' %}
+  
+  
+  <div class="container event-details">
+    <div class='col-12 py-4'>
+      
+      
+      <div class='event-header-details form-inline template-header'>
+        <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%; color:black;'><br />
+        <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button>
+        <button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>
+        <button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>
+      </div>
+          
+    </div>
+  </div>
+  
+  
   
   <div class='container' style='background:white;'>
   

@@ -24,81 +24,6 @@ function myFunction() {
 }
 
 $(function() {
-  
-  $('.active-location').prop('indeterminate', true)
-  
-  $('.add-employee').click(function(){
-    var myparent = $(this).parent().prop('className');
-    var newRow = document.getElementById("new-employee");
-    $('#' + myparent).append(newRow)
-  });
-});
-
-$(function() {
-  $('.remove-employee').click(function(){
-    var target = $(this).attr('id')
-    var els = document.getElementsByClassName(target);
-    for(var i=0; i<els.length; ++i){
-      var s = els[i].style;
-      s.display = s.display==='none' ? 'inline-block' : 'none';
-    }
-  });
-});
-
-// $(".object-edit").on("hidden.bs.modal", function () {
-//     $('.modal-body-edit').empty()
-// });
-
-// $(".js-create-object").click(function () {
-//   var btn = $(this);  // <-- HERE
-//   $.ajax({
-//     url: btn.attr("data-url"),  // <-- AND HERE
-//     type: 'get',
-//     dataType: 'json',
-//     beforeSend: function () {
-//       $("#modal-object").modal("show");
-//     },
-//     success: function (data) {
-//       $("#modal-object .modal-content").html(data.html_form);
-//     }
-//   });
-// });
-
-
-// $("#modal-object").on("submit", ".js-object-create-form", function () {
-//     var form = $(this);
-//     $.ajax({
-//       url: form.attr("action"),
-//       data: form.serialize(),
-//       type: form.attr("method"),
-//       dataType: 'json',
-//       success: function (data) {
-//         if (data.form_is_valid) {
-//           console.log(data);
-//           $(".redbull").parent().html(data.html_event_list);  // <-- Replace the table body
-//           $("#modal-object").modal("hide");  // <-- Close the modal
-//           $('body').removeClass('modal-open');
-//           $('.modal-backdrop').remove();
-//           $('.modal').removeData('bs.modal');
-//           $('.modal').empty();
-//           $('.modal').removeAttr('style');
-          
-         
-//         }
-//         else {
-//           $("#modal-object .modal-content").html(data.html_form);
-//         }
-//       }
-//     });
-//     return false;
-//   });
-
-$(function() {
-  
-});
-
-$(function() {
-  
   var btn_id = '';
   var table = '';
   var loadForm = function () {
@@ -156,8 +81,6 @@ $(function() {
     return false;
   };
   
-  /* Binding */
-
   // Create
   $(".js-create-object").click(loadForm);
   $("#modal-object").on("submit", ".js-object-create-form", saveForm);
@@ -176,6 +99,7 @@ $(function() {
 
 });
 
+// Sort Columns
 function sortTable(n,table_id) {
   console.log(table_id);
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -217,104 +141,38 @@ function sortTable(n,table_id) {
   }
 }
 
-
-
-
-
-// collect value on change
-// $('select').on('change', function() {
-//   var employee = this.value;
-//   var position = $(this).closest('select').attr('value');
-//   var location = $(this).closest('.location-body').attr('id')
-//   dict[location] = [position, employee];
-// })
-
-
-$(document).ready(function() {
-       $("#test").submit(function(event){
-            $.ajax({
-                 type:"POST",
-                 url:"/edit_favorites/",
-                 data: {
-                        'video': $('#test').val() // from form
-                        },
-                 success: function(){
-                     $('#message').html("<h2>Contact Form Submitted!</h2>") 
-                 }
-            });
-            return false; //<---- move it here
-       });
-
-});
-
-// if request.method == 'POST':
-//         mydata = request.POST.get('schedule', None)
-//         title = request.POST.get('title', None)
-//         pk = request.POST.get('template_id', None)
-        
-//         if pk:
-//             template = get_object_or_404(Template, pk=pk)
-//             template.schedule = mydata
-//             template.title = title
-//             template.save()
-//         else:
-//             template = Template()
-//             template.title = title
-//             template.schedule = mydata
-//             template.save()
-        
-//     return HttpResponse("I'm working!")
+// Generate Template
 var template = {'locations': {}};
 $(".generate-template" ).click(function() {
   var template_id = '';
-  var template_name = $('.template-name').val();
+  var title = $('.title').val();
   $('.location').each(function() {
     var location = $(this).html();
     var active = $(this).prev().prop('checked');
     template['locations'][location] = active;
   });
-  template['template_name'] = template_name;
-  console.log(template_name);
-  
-  // $.ajax({
-  //   type:"POST",
-  //   url:"/events/templates/create/generate/",
-  //   dataType: 'json',
-  //   data: { template: JSON.stringify(template), template_id: template_id, template_name: template_name },
-  //   success: function(){
-  //       alert(data);
-  //   }
-  // });
-  
-  
-  context = { template: JSON.stringify(template), template_id: template_id, template_name: template_name };
+  template['title'] = title;
+  context = { template: JSON.stringify(template), template_id: template_id, title: title };
   
   var mydata = ''
-  $.post( "/events/templates/create/generate/", context, function( data ) {
-    mydata = JSON.stringify(data);
-    $('.control-panel-section').html(mydata);
+  $.post( "/schedules/templates/create/generate/", context, function( data ) {
+    $('.schedule-cards').html(data);
   });
-  
-  
-  
-    
-    
-  
 });
 
-
-
+// Submit/Update Schedule
 var dict = {};
 $(".submit-schedule" ).click(function() {
   var event_id = $('.event-title').attr('id');
+  var title = $('.template-name').val()
   
   $('.location-body').each(function() {
     var location = $(this).attr('id');
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
-    
     var active = !$(this).prev().children('label').hasClass('collapsed');
+    
     
     var posDict = {}
     posDict['positions'] = {};
@@ -332,60 +190,45 @@ $(".submit-schedule" ).click(function() {
       }
     })
     dict[location] = posDict;
-  
   });
+  var title = $('.title').val();
+  console.log(title);
   console.log(dict);
-  
   $.ajax({
      type:"POST",
-     url:"/events/update_schedule/",
+     url:"/schedules/templates/create/save/",
      dataType: 'json',
-     data: { schedule: JSON.stringify(dict), event_id: event_id },
+     data: { template: JSON.stringify(dict), event_id: event_id, title: title },
      success: function(){
          console.log(dict) 
     }
   });
 })
 
-
-
-
-  
+// Control Panel Toggles
 $(document).ready(function(){
 	$('.toggle-unscheduled').on("click", function(){
-      	$('.unscheduled').toggle();
-    });
-}); 
-
-$(document).ready(function(){
-	$('.toggle-scheduled').on("click", function(){
-      	$('.scheduled').toggle();
-    });
-}); 
-$(document).ready(function(){
-	$('.toggle-inactive-locations').on("click", function(){
-	      $('.location-title.collapsed').each(function(){
-	        $(this).parent().parent().toggle();
-	      });
-    });
-}); 
-
-$(document).ready(function(){
-	$('.toggle-bars').on("click", function(){
-	  $('.bar').each(function(){
-	    $(this).prop('indeterminate', false);
-	    var flag = $(this).is(':checked');
-	    $(this).prop('checked', !flag);
-	    
-	    $(this).parent().parent().parent().toggle();
-	      
-	    });
-	  
-	    
-	  });
-	      
+    $('.unscheduled').toggle();
   });
+  $('.toggle-scheduled').on("click", function(){
+    $('.scheduled').toggle();
+  });
+  $('.toggle-inactive-locations').on("click", function(){
+	  $('.location-title.collapsed').each(function(){
+	    $(this).parent().parent().toggle();
+	  });
+  });
+  $('.toggle-bars').on("click", function(){
+	  $('.bar').each(function(){
+	    var flag = $(this).is(':checked');
+	    $(this).prop('indeterminate', false);
+	    $(this).prop('checked', !flag);
+	    $(this).parent().parent().parent().toggle();
+    });
+  });
+}); 
 
+// Control Panel Arrival Times
 $(document).ready(function(){
 	$('#managers').on("click", function(){
     var arrival_time = $(this).parent().prev().children().val();
@@ -403,32 +246,26 @@ $(document).ready(function(){
     var arrival_time = $(this).parent().prev().children().val();
     $('.B').val(arrival_time);
   });
-  
 });
 
-
-
+// Add/Remove Employees
 $(function() {
-	$('.remove-employee').on("click", function(){
+  $('.schedule-cards').on('click', '.remove-employee', function(event) { 
 	  var shift = $(this).parent().next().find('.arrival-time');
 	  $(this).toggleClass('rotate');
 	  $(shift).each(function() {
-	    $(this).toggle();
 	    var delete_button = $(this).next();
-      $(delete_button).toggleClass('display-flex');
+	    $(delete_button).toggleClass('display-flex');
+	    $(this).toggle();
       $(this).prev().toggleClass('red-border');
       $(this).prev().prev().children().toggleClass('red-border-background');
 	  });
 	});
-	
-	$('.card-body').on('click', '.remove-button', function(event) { 
-    console.log($(this));
+	$('.schedule-cards').on('click', '.remove-button', function(event) { 
 	  $(this).parent().parent().parent().remove();
   });
-	
-	
-	
-	$('.add-employee').on("click", function(){
+  
+  $('.schedule-cards').on('click', '.add-employee', function(event) { 
 	  var card_body = $(this).parent().next();
 	  var new_position = $(card_body).children().last().find('span').html();
 	  var prefix = new_position.split('')[0];
@@ -442,26 +279,11 @@ $(function() {
 	    new_position = 'E' + i;
 	  }
 	  
-	  
 	  var new_employee = $(card_body).children().first().clone();
-	  
-	  
 	  new_employee.find('span').html(new_position);
 	  new_employee.find('option').first().html('Extra #' + i);
-	  
-	  
 	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
 	  new_employee.find('input').attr('value','');
-	  
-	  
-	  
 	  $(card_body).append(new_employee);
 	});
-
-});
-
-$('#user_button').toggle(function () {
-    $("#user_button").addClass("active");
-}, function () {
-    $("#user_button").removeClass("active");
 });
