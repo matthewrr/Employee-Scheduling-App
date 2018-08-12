@@ -61,14 +61,12 @@ def save_template(request):
         roster = schedule_template(template=json.loads(data))
         
         if template == 'true':
-            print('yes template')
             schedule = get_object_or_404(Schedule, pk=pk) if pk else Schedule()
             schedule.title = title
             schedule.template = True
             schedule.roster = {'locations': roster}
             schedule.save()
         else:
-            print('not template')
             roster = request.POST.get('roster')
             pk = request.POST.get('event_id', None)
             event = get_object_or_404(Event, pk=pk)

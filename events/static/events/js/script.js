@@ -161,13 +161,16 @@ $(".generate-template" ).click(function() {
 });
 
 // Submit/Update Schedule
-
 var dict = {};
-
 $(".submit-schedule" ).click(function(e) {
   e.preventDefault();
+  var template = false;
   var event_id = $('.event-title').attr('id');
   var title = $('.template-name').val()
+  if (title) {
+    template = true;
+  }
+  console.log('template is ' + template);
   
   $('.location-body').each(function() {
     var positions = $(this).find('select');
@@ -198,7 +201,7 @@ $(".submit-schedule" ).click(function(e) {
      type:"POST",
      url:"/schedules/templates/create/save/",
      dataType: 'json',
-     data: { template: JSON.stringify(dict), event_id: event_id, title: title },
+     data: { roster: JSON.stringify(dict), event_id: event_id, title: title, template: template, },
      success: function(){
          console.log(dict) 
     }

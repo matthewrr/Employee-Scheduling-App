@@ -21,8 +21,11 @@
           </div>
           
 
-          
+          {% if app %}
+          {% include 'event_templates'|add:'/'|add:obj|add:'_list.html' %}
+          {% else %}
           {% include objs|add:'/'|add:obj|add:'_list.html' %}
+          {% endif %}
 
         </div>
       </div>
