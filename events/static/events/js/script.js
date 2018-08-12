@@ -161,39 +161,39 @@ $(".generate-template" ).click(function() {
 });
 
 // Submit/Update Schedule
+
 var dict = {};
-$(".submit-schedule" ).click(function() {
+
+$(".submit-schedule" ).click(function(e) {
+  e.preventDefault();
   var event_id = $('.event-title').attr('id');
   var title = $('.template-name').val()
   
   $('.location-body').each(function() {
-    var location = $(this).attr('id');
     var positions = $(this).find('select');
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
     var active = !$(this).prev().children('label').hasClass('collapsed');
     
-    
-    var posDict = {}
-    posDict['positions'] = {};
-    posDict['active'] = active;
-    posDict['bar'] = bar;
-    posDict['location'] = $(this).attr('name');
+    var d = {
+      'positions': {},
+      'active': active,
+      'bar': bar,
+      'location':$(this).attr('name'),
+    }
     
     $(positions).each(function(i,v){
       var arrive = $(this).next().children().val();
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
-      posDict['positions'][position] = {
+      d['positions'][position] = {
         'arrival_time': arrive,
         'employee': $(person).val()
       }
     })
-    dict[location] = posDict;
+    dict[$(this).attr('id')] = d;
   });
-  var title = $('.template-name').val();
-  console.log(title);
-  console.log(dict);
+  
   $.ajax({
      type:"POST",
      url:"/schedules/templates/create/save/",
@@ -248,8 +248,6 @@ $(document).ready(function(){
     $('.B').val(arrival_time);
   });
 });
-
-
 
 $(".template-header > .save").click(function() {
   $('.template-name').prop('readonly', true);
