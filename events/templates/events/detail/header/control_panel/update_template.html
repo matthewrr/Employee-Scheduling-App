@@ -6,25 +6,45 @@
       All changes made to the schedule will be replaced with template values.
 
     <div class="input-group mt-3">
-      <select class="custom-select" id="inputGroupSelect04">
-        <option selected>Template Category...</option>
-        <option value="1">Reset to Blank</option>
-        <option value="2">Reset to Last Save</option>
-        <option value="3">Reset to Previous Event</option>
+      <select class="custom-select" id="template-category">
+        <option value="0" selected>Template Category...</option>
+        
+        <option value="1">Reset to Last Save</option>
+        <option value="2">Populate with Different Event</option>
+        <option value="3">Reset to Blank Template</option>
       </select>
     </div>
-    
-    <div class="input-group mt-3">
-      <select class="custom-select" id="inputGroupSelect04">
-        <option selected>Choose Subcategory</option>
-        <option value="1">Reset to Blank</option>
-        <option value="2">Reset to Last Save</option>
-        <option value="3">Reset to Previous Event</option>
-      </select>
-      <div class="input-group-append">
-        <button class="btn btn-dark" type="button">Update</button>
+  
+  <form>
+    <fieldset>
+      <div class="input-group mt-3">
+        <select class="custom-select" id="template-subcategory" disabled>
+          <option value="0" selected>Choose Category Above</option>
+          <option value="1">Click 'Submit'</option>
+          <option value="2">See Past Events...</option>
+          <option value="2">See Future Events...</option>
+          <option value="3"></option>
+          <option value="3">See More...</option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-dark update-template" type="button">Update</button>
+        </div>
       </div>
-    </div>
+    </fieldset>
+  </form>
+    
 
   </div>
+  
+  
 </div>
+
+
+<!--1. Reset to Last Save-->
+<!--      + Inactive Secondary-->
+<!--2. Populate w/Different Event-->
+<!--      + Future Event-->
+<!--      + Previous Event-->
+<!--3. Reset to Blank Template-->
+<!--      + 5 Most Recent-->
+<!--      + See More-->

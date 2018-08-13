@@ -299,3 +299,27 @@ $(function() {
 	  $(card_body).append(new_employee);
 	});
 });
+
+
+
+var template_category = $('#template-category');
+var template_subcategory = $( '#template-subcategory' );
+var options = template_subcategory.find( 'option' );
+    
+$(template_category).on('change', function() {
+  var val = this.value
+  if (val === '2' || val === '3') {
+    $(template_subcategory).removeAttr('disabled');
+  } else if (val === '0') {
+    $('.update-template').attr('disabled','disabled');
+    $(template_subcategory).attr('disabled','disabled');
+  } else {
+    $('.update-template').removeAttr('disabled');
+    $(template_subcategory).attr('disabled','disabled');
+  }
+  
+
+	$(template_subcategory).html(
+	  $(options).filter( '[value="' + val + '"]' ) 
+	);
+}).trigger('change');
