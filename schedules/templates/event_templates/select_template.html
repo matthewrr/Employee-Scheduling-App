@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-12">
+    <div class="list-group" id="list-tab" role="tablist">
+      {% for option in options %}
+          <a class="list-group-item list-group-item-action" id="{{option.pk}}" data-toggle="list" href="#list-home" role="tab" aria-controls="home">{{option.title}}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

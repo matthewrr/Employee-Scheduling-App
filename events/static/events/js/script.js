@@ -160,6 +160,47 @@ $(".generate-template" ).click(function() {
   });
 });
 
+
+
+$(".choose-template" ).click(function() {
+  var category = $('#template-subcategory').children('option:selected').attr('id');
+  $.post( "/schedules/templates/create/modal/", {category: category}, function( data ) {
+      $('.modal-body').html(data);
+  });
+});
+
+$(".update-template" ).click(function() {
+  var pk = $('.modal-body').find('.active').attr('id');
+  var category = $('#template-subcategory').children('option:selected').attr('id');
+  context = {category: category, pk: pk};
+  $.post( "/schedules/templates/create/select/", context, function( data ) {
+      // $('.modal-body').html(data);
+      $('.schedule-cards').html(data);
+  });
+});
+
+
+// var template = {'locations': {}};
+// $(".generate-template" ).click(function() {
+//   var template_id = '';
+//   var title = $('.template-name').val();
+//   $('.location').each(function() {
+//     var location = $(this).html();
+//     var active = $(this).prev().prop('checked');
+//     template['locations'][location] = active;
+//   });
+//   template['title'] = title;
+//   context = { template: JSON.stringify(template), template_id: template_id, title: title };
+  
+//   var mydata = ''
+//   $.post( "/schedules/templates/create/generate/", context, function( data ) {
+//     $('.schedule-cards').html(data);
+//   });
+// });
+
+
+
+
 // Submit/Update Schedule
 var dict = {};
 $(".submit-schedule" ).click(function(e) {
@@ -310,11 +351,12 @@ $(template_category).on('change', function() {
   var val = this.value
   if (val === '2' || val === '3') {
     $(template_subcategory).removeAttr('disabled');
+    $('.choose-template').removeAttr('disabled');
   } else if (val === '0') {
-    $('.update-template').attr('disabled','disabled');
+    $('.choose-template').attr('disabled','disabled');
     $(template_subcategory).attr('disabled','disabled');
   } else {
-    $('.update-template').removeAttr('disabled');
+    $('.choose-template').removeAttr('disabled');
     $(template_subcategory).attr('disabled','disabled');
   }
   

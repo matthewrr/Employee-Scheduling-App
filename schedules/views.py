@@ -8,6 +8,7 @@ from locations.models import Location
 from events.models import Event
 import json
 from pprint import pprint
+from datetime import date
 
 
 def template_list(request):
@@ -61,14 +62,12 @@ def save_template(request):
         roster = schedule_template(template=json.loads(data))
         
         if template == 'true':
-            print('yes template')
             schedule = get_object_or_404(Schedule, pk=pk) if pk else Schedule()
             schedule.title = title
             schedule.template = True
             schedule.roster = {'locations': roster}
             schedule.save()
         else:
-            print('not template')
             roster = request.POST.get('roster')
             pk = request.POST.get('event_id', None)
             event = get_object_or_404(Event, pk=pk)
@@ -87,3 +86,43 @@ def template_delete(request):
 
 def template_update(request):
     return HttpResponse('Meh')
+
+@csrf_exempt
+def modal_template(request):
+    
+    if request.method == 'POST':
+        category = request.POST.get('category')
+        if category == 'future-events':
+            options = Event.objects.filter(date__gte=date.today())
+        elif category == 'previous-events':
+            options = Event.objects.filter(date__lt=date.today())
+        elif category == 'all-templates':
+            options = Schedule.objects.all()
+        
+        template = render_to_string('event_templates/select_template.html', {'options': options})
+        return HttpResponse(template)
+    return HttpResponse('This is not good')
+
+@csrf_exempt
+def select_template(request):  
+
+    pk = request.POST.get('pk')
+    category = request.POST.get('category')
+    if category == 'future-events' or category == 'previous-events':
+        event = get_object_or_404(Event, pk=pk)
+        roster = json.loads(event.schedule)
+    elif category == 'all-templates':
+        schedule = get_object_or_404(Schedule, pk=pk)
+        roster = json.loads(schedule.schedule)
+    
+    # locations = schedule_template(template=json.loads(data))
+    context = {'locations': roster}
+    pprint(context)
+    
+    template = render_to_string('schedules/template.html', context)
+    return HttpResponse(template)
+
+# nest somewhere
+# send category with request
+# make sure old template is deleted
+# insert html similar to generate template
