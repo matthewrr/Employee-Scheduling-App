@@ -365,3 +365,31 @@ $(template_category).on('change', function() {
 	  $(options).filter( '[value="' + val + '"]' ) 
 	);
 }).trigger('change');
+
+
+$('.company-roles').on('click', '.add-role-button', function() { 
+    var new_role = $('.add-role').last().clone();
+    $(this).remove()
+    $(new_role).find('input').val('');
+    $('.company-roles').append(new_role);
+});
+
+$('#save-roles').click(function() {
+  var roles = {'roles': {}}
+  $('.add-role').each(function() {
+    var verbose_name = $(this).find('.role-name').val();
+    var short_name = $(this).find('.role-abbr').val();
+    roles['roles'][verbose_name] = short_name;
+  });
+  roles = JSON.stringify(roles)
+  
+  
+  $.post( "/company/roles/", {roles: roles}, function(data) {
+    console.log('hello');
+  });
+  
+});
+// { roster: JSON.stringify(dict), event_id: event_id, title: title, template: template, },
+// context = { template: JSON.stringify(template), template_id: template_id, title: title };
+
+// 'values' : JSON.stringify(values)

@@ -33,11 +33,13 @@
   <div class='row mx-auto schedule-cards'>
     <div class='col col-12'>
       <div class='card-columns mx-4'>
-        {% for location, attributes in schedule.items %}
+      {% for x, y in roster.items %}
+        {% for location, attributes in y.items %}
           {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
             {% include 'events/detail/location_card.html' %}
           {% endwith %}
         {% endfor %}
+      {% endfor %}
       </div>
       <hr />
     </div>

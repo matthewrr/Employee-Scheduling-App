@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
@@ -81,11 +81,33 @@ def save_template(request):
 def export_templates(request):
     return HttpResponse('Meh')
 
-def template_delete(request):
-    return HttpResponse('Meh')
+def template_delete(request, pk):
+    schedule = get_object_or_404(Schedule, pk=pk)
+    data = dict()
+    if request.method == 'POST':
+        schedule.delete()
+        data['form_is_valid'] = True
+        templates = Schedule.objects.all()
+        data['html_object_list'] = render_to_string('schedules/schedule_list_ajax.html', {
+            'templates': templates,
+        })
+    else:
+        context = {'object': schedule, 'obj': 'template',}
+        data['html_form'] = render_to_string('objects/delete.html',
+            context,
+            request=request,
+        )
+    return JsonResponse(data)
 
-def template_update(request):
+def template_update(request, pk):
     return HttpResponse('Meh')
+    # schedule = get_object_or_404(Schedule, pk=pk)
+    # if request.method == 'POST':
+    #     form = ScheduleForm(request.POST, instance=schedule)
+    # else:
+    #     form = ScheduleForm(instance=schedule)
+    # return save_schedule_form(request, form, 'objects/update.html')
+
 
 @csrf_exempt
 def modal_template(request):
@@ -115,14 +137,8 @@ def select_template(request):
         schedule = get_object_or_404(Schedule, pk=pk)
         roster = json.loads(schedule.schedule)
     
-    # locations = schedule_template(template=json.loads(data))
     context = {'locations': roster}
     pprint(context)
     
     template = render_to_string('schedules/template.html', context)
     return HttpResponse(template)
-
-# nest somewhere
-# send category with request
-# make sure old template is deleted
-# insert html similar to generate template
