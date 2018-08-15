@@ -366,12 +366,20 @@ $(template_category).on('change', function() {
 	);
 }).trigger('change');
 
-
 $('.company-roles').on('click', '.add-role-button', function() { 
     var new_role = $('.add-role').last().clone();
     $(this).remove()
     $(new_role).find('input').val('');
     $('.company-roles').append(new_role);
+});
+
+$('.company-roles').on('click', '.remove-role-button', function() { 
+  var myvar = $(this).parent().parent().parent();
+  var new_role = $('.add-role');
+  $(myvar).remove();
+  if (!new_role) {
+    $('.role-abbr').next(new_role);
+  }
 });
 
 $('#save-roles').click(function() {

@@ -44,7 +44,6 @@ def company_roles(request):
         for role in saved_roles:
             verbose_name = role.verbose_name
             if verbose_name not in l:
-                obj = get_object_or_404(CompanyProfileRole, verbose_name=verbose_name)
+                obj = CompanyProfileRole.objects.get(verbose_name__exact=verbose_name)
                 obj.delete()
-                obj.save()
     return HttpResponse('Hello, world!')

@@ -8,7 +8,10 @@
               <input type="text" class="form-control role-name" placeholder="Name of Role" value='{{role.verbose_name}}'>
           </div>
           <input type="text" class="form-control role-abbr" placeholder="Abbr." value='{{role.short_name}}' />
+          {% if forloop.last %}
           <img class='add-role-button' style='width:30px; height:30px;' src='{% static "events/img/plus.svg" %}' /> 
+          {% endif %}
+          <img class='remove-role-button' style='width:30px; height:30px;' src='{% static "events/img/minus.svg" %}' /> 
         </div>
       </div>
       <br />
