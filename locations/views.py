@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 
 from .forms import LocationForm
 from .models import *
+from company_profile.models import CompanyProfileRole
 
 def location_list(request):
     locations = Location.objects.all().order_by('location_id')
@@ -19,7 +20,7 @@ def location_create(request):
 
 def save_location_form(request, form, template_name):
     data = dict()
-    
+    roles = CompanyProfileRole.objects.all()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -30,7 +31,7 @@ def save_location_form(request, form, template_name):
             })
         else:
             data['form_is_valid'] = False
-    context = {'form': form, 'obj':'location'}
+    context = {'form': form, 'obj':'location', 'roles':roles}
     data['html_form'] = render_to_string(template_name, context, request=request)
     return JsonResponse(data)
 

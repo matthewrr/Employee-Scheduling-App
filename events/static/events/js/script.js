@@ -397,7 +397,59 @@ $('#save-roles').click(function() {
   });
   
 });
-// { roster: JSON.stringify(dict), event_id: event_id, title: title, template: template, },
-// context = { template: JSON.stringify(template), template_id: template_id, title: title };
 
-// 'values' : JSON.stringify(values)
+$('.modal').on('click', '.add-role-button', function() { 
+  var verbose_name = $(this).html();
+  var ss = $(this).attr('id');
+  var ll = $(this).html();
+  
+  var short_name = $(this).attr('id');
+  
+  var added_roles = $('.role-list').children();
+  var count = $('.' + short_name).length;
+  
+  var num = (count += 1)
+  
+  if (count === 1) {
+    short_name = short_name;
+  } else if (count === 2) {
+    short_name += num
+    verbose_name += (' #' + num)
+    var first_var = $('.' + ss).first();
+    $(first_var).html(ss + '1');
+    $(first_var).parent().next().html(ll + ' #1')
+  } else {
+    short_name += num
+    verbose_name += (' #' + num)
+  }
+  
+  var insertion = $('.d-none').children().clone();
+  $(insertion).find('.short-name').html(short_name);
+  $(insertion).find('.short-name').attr('class', ss)
+  $(insertion).find('.verbose-name').html(verbose_name);
+  
+  var container = ss + '-container'
+  
+  $('.' + container).append(insertion)
+   
+  
+  
+});
+
+$('.modal').on('click', '.remove-sub-role', function() {
+  var short_id = $(this).prev().prev().children().attr('class');
+  var target = $('.'+short_id);
+  var verbose_name = $(this).prev().html();
+  var v = verbose_name.split(" ").slice(0,-1).join(' ');
+  $(this).parent().parent().parent().remove();
+  
+  if (target.length === 1) {
+    target.html(short_id);
+    target.parent().next().html(v);
+  } else if (target.length > 1) {
+    target.each(function(i) {
+      $(this).parent().next().html(v+' #'+(i+1));
+      $(this).html(short_id+(i+1));
+    });
+  }
+});
