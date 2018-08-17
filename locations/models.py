@@ -5,6 +5,10 @@ class Location(models.Model):
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
     
+    @property
+    def positions_length(self):
+        return len(self.position_set.all())
+    
     class Meta:
         ordering = ['location_id']
 

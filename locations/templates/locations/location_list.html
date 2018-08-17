@@ -18,7 +18,7 @@
       <td>{{location.location_id}}</td>
       <td>{{location.title}}</td>
       <td>{% include 'base/boolean.html' with bool=location.bar %}</td>
-      <td>0</td>
+      <td>{{location.positions_length}}</td>
       <td>
         <button type="button" class="btn js-update-object" data-url="{% url 'location_update' location.id %}">
           <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>

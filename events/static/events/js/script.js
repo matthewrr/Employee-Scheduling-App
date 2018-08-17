@@ -51,7 +51,6 @@ $(function() {
 
   var saveForm = function () {
     var form = $(this);
-    console.log('first table is ' + table);
     $.ajax({
       url: form.attr("action"),
       data: form.serialize(),
@@ -61,11 +60,8 @@ $(function() {
         if (data.form_is_valid) {
           
           if (table != '#undefined') {
-            console.log('table is probably undefined: ' + table)
             $(table + " tbody").replaceWith(data.html_object_list);
           } else if (btn_id === 'events') {
-            console.log('table is ' + table)
-            console.log(data.html_object_list);
             $("#upcoming-events tbody").replaceWith(data.html_object_list);
           } else {
             $("#object-table tbody").replaceWith(data.html_object_list);
@@ -73,11 +69,13 @@ $(function() {
           $("#modal-object").modal("hide");
         }
         else {
-          console.log('form not valid');
           $("#modal-object .modal-content").html(data.html_form);
         }
       }
     });
+    var location = $('#id_location_id').val();
+    sendPositions(location);
+
     return false;
   };
   
@@ -98,6 +96,33 @@ $(function() {
   $("#modal-object").on("submit", ".js-object-delete-form", saveForm);
 
 });
+
+function sendPositions(location) {
+  var positions = {};
+  
+  $('.default-position').each(function() {
+    var short_name = $(this).find('.input-group-prepend').children().html();
+    var verbose_name = $(this).find('.verbose-name').html();
+    if (short_name) {
+      positions[short_name] = verbose_name;
+      
+    }
+    console.log(positions);
+    
+  });
+  positions = JSON.stringify(positions)
+  context = {positions: positions, location: location}
+  $.post( "/locations/create/positions/", context, function(data) {
+      console.log('success, good sir!');
+  });
+  
+}
+
+
+
+
+
+
 
 // Sort Columns
 function sortTable(n,table_id) {
@@ -432,8 +457,6 @@ $('.modal').on('click', '.add-role-button', function() {
   
   $('.' + container).append(insertion)
    
-  
-  
 });
 
 $('.modal').on('click', '.remove-sub-role', function() {

@@ -9,5 +9,5 @@ class LocationAdmin(admin.ModelAdmin):
     list_display = ('title', 'location_id','bar',)
     fields = (('title','location_id','bar'),)
     inlines = [PositionInline]
-
+    
 admin.site.register(Location, LocationAdmin)

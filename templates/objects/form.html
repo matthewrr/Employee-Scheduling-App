@@ -10,6 +10,11 @@
     {% endfor %}
   </div>
 {% endfor %}
+
+
+
+
+
 {% if obj == 'location' %}
   <div class='row'>
     <span>Maximum Positions:</span>
@@ -36,14 +41,14 @@
   
   
   <div class='d-none'>
-    <div class="form-row align-items-center">
+    <div class="form-row align-items-center default-position">
       <div class="col-auto">
         <label class="sr-only" for="inlineFormInputGroup">Username</label>
         <div class="input-group mb-2">
           <div class="input-group-prepend">
-            <div class="input-group-text short-name">MG</div>
+            <div class="input-group-text short-name"></div>
           </div>
-          <div class="input-group-text verbose-name">Manager</div>
+          <div class="input-group-text verbose-name"></div>
           <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "events/img/minus.svg" %}' /> </a>
         </div>
       </div>
