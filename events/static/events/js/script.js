@@ -23,28 +23,83 @@ function myFunction() {
   }
 }
 
+
+
+
+function loadPositions(l) {
+  // var l ='';
+  // var l = location;
+// $('body').on('click', '.js-update-object', function() { 
+  
+  // l = $(this).parent().parent().children().first().html();
+    
+    var context = {location: l};
+    console.log(context);
+    $.get( "/locations/create/positions/", context, function(data) {
+        p = JSON.parse(data);
+        var positions = {};
+        Object.keys(p).map(function(k,t) {
+          positions[k] = p[k]
+        });
+        console.log('positions:')
+        console.log(positions)
+        for (var short_name in positions) {
+          var p = short_name.replace(/[0-9]/g, '');
+          var verbose_name = positions[short_name];
+          var c = '.'+p+'-container';
+          
+          console.log('verbose is: ')
+          console.log(verbose_name);
+          var insertion = $('.d-none').children().clone();
+          
+          $(insertion).find('.short-name').html(short_name);
+          $(insertion).find('.short-name').attr('class', p)
+          $(insertion).find('.verbose-name').html(verbose_name);
+          
+          $(c).append(insertion);
+         
+          console.log('hello');
+          console.log(insertion)
+          console.log('bye')
+          
+          
+          
+        }
+          
+    // });
+});
+// return $(insertion);
+}
+
+
+
+
+
+
 $(function() {
   var btn_id = '';
   var table = '';
   var loadForm = function () {
     var btn = $(this);
-    console.log(btn_id);
-    console.log("working");
+    console.log(btn);
     table = '#' + $(this).closest('table').attr('id');
-    console.log(table);
+    
+    
+    var l = $(btn).parent().parent().children().first().html();
+    
     $.ajax({
       url: btn.attr("data-url"),
       type: 'get',
       dataType: 'json',
       
       beforeSend: function () {
-        console.log("working #1")
         $("#modal-object .modal-content").html("");
         $("#modal-object").modal("show");
       },
       success: function (data) {
-        console.log("working #2");
         $("#modal-object .modal-content").html(data.html_form);
+        // $("#modal-object .modal-content").html(insertion);
+        loadPositions(l);
       }
     });
   };
@@ -423,6 +478,30 @@ $('#save-roles').click(function() {
   
 });
 
+
+
+function sendPositions(location) {
+  var positions = {};
+  
+  $('.default-position').each(function() {
+    var short_name = $(this).find('.input-group-prepend').children().html();
+    var verbose_name = $(this).find('.verbose-name').html();
+    if (short_name) {
+      positions[short_name] = verbose_name;
+      
+    }
+    console.log(positions);
+    
+  });
+  positions = JSON.stringify(positions)
+  context = {positions: positions, location: location}
+  $.post( "/locations/create/positions/", context, function(data) {
+      console.log('success, good sir!');
+  });
+  
+}
+
+
 $('.modal').on('click', '.add-role-button', function() { 
   var verbose_name = $(this).html();
   var ss = $(this).attr('id');
@@ -465,7 +544,7 @@ $('.modal').on('click', '.remove-sub-role', function() {
   var verbose_name = $(this).prev().html();
   var v = verbose_name.split(" ").slice(0,-1).join(' ');
   $(this).parent().parent().parent().remove();
-  
+  var target = $('.'+short_id);
   if (target.length === 1) {
     target.html(short_id);
     target.parent().next().html(v);
