@@ -186,9 +186,11 @@ $(".generate-template" ).click(function() {
   var template_id = '';
   var title = $('.template-name').val();
   $('.location').each(function() {
-    var location = $(this).html();
+    var location = $(this).attr('id');
     var active = $(this).prev().prop('checked');
-    template['locations'][location] = active;
+    
+    template['locations'][location] = {};
+    template['locations'][location]['active'] = active;
   });
   template['title'] = title;
   context = { template: JSON.stringify(template), template_id: template_id, title: title };
@@ -231,12 +233,15 @@ $(".submit-schedule" ).click(function(e) {
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
     var active = !$(this).prev().children('label').hasClass('collapsed');
+    console.log(active)
+    var id = $(this).attr('id');
     
     var d = {
       'positions': {},
       'active': active,
       'bar': bar,
       'location':$(this).attr('name'),
+      'id': id,
     }
     
     $(positions).each(function(i,v){
@@ -305,9 +310,9 @@ $(document).ready(function(){
   });
 });
 
-$(".template-header > .save").click(function() {
-  $('.template-name').prop('readonly', true);
-});
+// $(".template-header > .save").click(function() {
+//   $('.template-name').prop('readonly', true);
+// });
 $(".template-header > .edit").click(function() {
   $('.template-name').prop('readonly', false);
 });

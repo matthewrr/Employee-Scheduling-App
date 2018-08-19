@@ -16,18 +16,36 @@ def template_list(request):
     return render(request, 'objects/list.html', {'templates': templates, 'obj':'template', 'objs':'templates', 'app':'event_templates'})
 
 def template_create(request):
-    schedule = schedule_template()
+    roster = schedule_template()
     context = {
-        'schedule': schedule,
+        'roster': roster,
         'roles': ['Managers','Cashiers','Preps','Bartenders'],
         'template': True,
+        'new': True,
     }
     return render(request, 'schedules/create.html', context)
     
 def schedule_template(schedule={},template={}):
     locations = Location.objects.all()
     for loc in locations:
-        active = template.get('locations', {}).get(loc.title, False) if template else True
+        # active = template.get('locations', {}).get(loc.location_id, False) if template else True
+        
+        if template:
+            try:
+                t = loc.title
+                l = template['locations'][str(loc.pk)]
+                active = l['active']
+                if active:
+                    active = True
+                else:
+                    active = False
+                
+            except:
+                active = False
+        else:
+            active = True
+        
+        
         schedule[loc.id] = {
             'active': active,
             'bar': loc.bar,
@@ -45,8 +63,11 @@ def schedule_template(schedule={},template={}):
 def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
-        locations = schedule_template(template=json.loads(data))
-        template = render_to_string('schedules/template.html', {'locations': locations})
+        item = json.loads(data)
+        pprint(item)
+        roster = schedule_template(template=json.loads(data))
+        pprint(roster)
+        template = render_to_string('schedules/template.html', {'roster': roster})
         return HttpResponse(template)
     return HttpResponse("Uh oh... this should only be accessed via POST requests.")
 
@@ -59,7 +80,15 @@ def save_template(request):
         title = request.POST.get('title')
         pk = request.POST.get('pk')
         event_id = request.POST.get('event_id')
-        roster = schedule_template(template=json.loads(data))
+        
+        data = json.loads(data)
+        data = {'locations': data}
+        
+        roster = schedule_template(template=data)
+        
+        # all_locations = schedule_template()
+        
+        
         
         if template == 'true':
             schedule = get_object_or_404(Schedule, pk=pk) if pk else Schedule()
@@ -67,6 +96,7 @@ def save_template(request):
             schedule.template = True
             schedule.roster = {'locations': roster}
             schedule.save()
+            #redirect or popup
         else:
             roster = request.POST.get('roster')
             pk = request.POST.get('event_id', None)
@@ -100,14 +130,17 @@ def template_delete(request, pk):
     return JsonResponse(data)
 
 def template_update(request, pk):
-    return HttpResponse('Meh')
-    # schedule = get_object_or_404(Schedule, pk=pk)
-    # if request.method == 'POST':
-    #     form = ScheduleForm(request.POST, instance=schedule)
-    # else:
-    #     form = ScheduleForm(instance=schedule)
+    schedule = get_object_or_404(Schedule, pk=pk)
+    roster = schedule.roster['locations']
+    pprint(roster)
+    title = schedule.title
+    context = {
+        'roster': roster,
+        'title': title,
+        'new': False,
+    }
+    return render(request, 'schedules/create.html', context)
     # return save_schedule_form(request, form, 'objects/update.html')
-
 
 @csrf_exempt
 def modal_template(request):
@@ -136,9 +169,6 @@ def select_template(request):
     elif category == 'all-templates':
         schedule = get_object_or_404(Schedule, pk=pk)
         roster = json.loads(schedule.schedule)
-    
     context = {'locations': roster}
-    pprint(context)
-    
     template = render_to_string('schedules/template.html', context)
     return HttpResponse(template)

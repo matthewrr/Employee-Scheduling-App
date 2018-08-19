@@ -5,11 +5,11 @@
 </div>
 
 <div class='row'>
-{% for location, attributes in schedule.items %}
+{% for location, attributes in roster.items %}
   <div class='col-3 py-2'>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked />
-      <label class="form-check-label location" for="defaultCheck1" id='{{location}}'>{{attributes.location}}</label>
+      <input class="form-check-input active-location" type="checkbox" value="" checked />
+      <label class="form-check-label location" id='{{location}}' for="defaultCheck1">{{attributes.location}}</label>
     </div>
   </div>
 {% endfor %}

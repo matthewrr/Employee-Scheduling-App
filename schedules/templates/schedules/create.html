@@ -1,69 +1,55 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 {% block content %}  
-
 <div class='container px-0'>
-  
   <form class='template-form'>
-  <div class="container event-details">
-    <div class='col-12 py-4'>
-      
-      
-      <div class='event-header-details form-inline template-header'>
-        <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;' required><br />
-        <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button>
-        <button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>
-        <button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>
-      </div>
+    <div class="container event-details">
+      <div class='col-12 py-4'>
+        <div class='event-header-details form-inline template-header'>
           
-    </div>
-  </div>
-  
-  
-  
-  <div class='container' style='background:white;'>
-  
-    <div class='col-12 py-3 control-panel-header'>
-      <span>TEMPLATE</span>
-      <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'><span>[Options]</span>
-        <img class='ml-1' src='{% static "events/img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />
-      </a>
-      <button class='btn btn-dark float-right submit-schedule' type='submit'>Save</button>
-    </div>
-  
-    <hr/>
-  
-    <div class='container px-0'>
-      <div class='card show' id='collapseCP'>
-        <div class='mx-3 mb-4'  style='background: #e8ebf1;'>
-          <div class='card-body' style='margin-left:30px;margin-right:30px;color:#5e6673;'>
-            
-              {% include 'events/detail/header/control_panel/template_cp.html' %}
-            
-          </div>
+          {% with yesno_arg=title|add:',' %}
+          <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
+          {% endwith %}
+          
+          {% if not new %}
+          <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button>
+          {% endif %}
+          <!--<button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>-->
+          <!--<button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>-->
         </div>
-        <hr/>
       </div>
     </div>
-    
-  <div class='schedule-cards'>
-    
-  </div>
-  
-  <!--<div class='row mx-auto' style='display:none;'>-->
-  <!--  <div class='col col-12'>-->
-  <!--    <div class='card-columns mx-4'>-->
-  <!--      {% for location, attributes in schedule.items %}-->
-  <!--        {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}-->
-  <!--          {% include 'events/detail/location_card.html' %}-->
-  <!--        {% endwith %}-->
-  <!--      {% endfor %}-->
-  <!--    </div>-->
-  <!--    <hr />-->
-  <!--  </div>-->
-  <!--</div>-->
-  </div>
-  
+    <div class='container' style='background:white;'>
+      <div class='col-12 py-3 control-panel-header'>
+        <span>TEMPLATE</span>
+        
+        <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'><span>[Options]</span>
+          <img class='ml-1' src='{% static "events/img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />
+        </a>
+        <button class='btn btn-dark float-right submit-schedule' type='submit'>Save</button>
+        
+      </div>
+      <hr/>
+      {% if new %}
+      <div class='container px-0'>
+        <div class='card show' id='collapseCP'>
+          <div class='mx-3 mb-4'  style='background: #e8ebf1;'>
+            <div class='card-body' style='margin-left:30px;margin-right:30px;color:#5e6673;'>
+              {% include 'schedules/template_cp.html' %}
+            </div>
+          </div>
+          <hr/>
+        </div>
+      </div>
+      {% endif %}
+      
+      <div class='schedule-cards'>
+        {% if not new %}
+          {% include 'schedules/template.html' %}
+        {% endif %}
+      </div>
+      
+    </div>
   </form>
 </div>
 
