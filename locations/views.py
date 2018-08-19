@@ -23,39 +23,45 @@ def location_create(request):
 
 @csrf_exempt
 def positions_create(request):
-    #make sure to delete
     if request.method == 'GET':
-        location_id = request.GET.get('location')
-        print('location_id is: ' + location_id)
-        location = get_object_or_404(Location, location_id=location_id)
-        p_set = location.position_set.all()
+        # prevent if new location
+        location_id = str(request.GET.get('location'))
+        try:
+            location = Location.objects.get(location_id=location_id)
+        except:
+            return HttpResponse('hi')
         
+        p_set = location.position_set.all()
         positions = {}
 
         for p in p_set:
             positions[p.code] = p.position
-        print(positions)
         return HttpResponse(json.dumps(positions))
         
-        
-        
     if request.method == 'POST':
-        
         
         positions = request.POST.get('positions')
         positions = json.loads(positions)
         location_id = request.POST.get('location')
-        location = get_object_or_404(Location, location_id=location_id)
-        # location = json.loads(location)
+        location = Location.objects.get(location_id=location_id)
+        print(location)
+        try:
+            location = Location.objects.get(location_id=location_id)
+        except:
+            location = Location()
+            for short_name, verbose_name in positions.items():
+                location.position_set.create(position=verbose_name, code=short_name)
+            
+            return HttpResponse('Hello')
         
-        p_set = location.position_set.values('code')
-        print('pset is:')
-        print(p_set)
-        keys = p_set
+        # location = get_object_or_404(Location, location_id=location_id) if pk else Location()
+        
+        
+        p_set = list(location.position_set.values('code'))
+        keys = []
         
         for k,v in enumerate(p_set):
-            print(str(v.values()))
-        
+            keys.append(p_set[k]['code'])
         short = []
         
         for short_name, verbose_name in positions.items():
@@ -67,12 +73,7 @@ def positions_create(request):
         
         for key in keys:
             if key not in short:
-                position = Position.objects.get(location=location)
-                print('deleting')
-                print(position)
-                position.delete()
-                # location.position_set.delete(code=key)
-            
+                Position.objects.filter(location=location, code=key).delete()
         
         return HttpResponse('Hello')
 
