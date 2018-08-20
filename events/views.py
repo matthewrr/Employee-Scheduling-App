@@ -9,11 +9,13 @@ from .forms import EventForm
 from schedules.views import schedule_template
 from .models import *
 from pprint import pprint
+from schedules.models import Schedule
 
 from django.views.decorators.csrf import csrf_exempt
 import json
 
 from django.template.loader import render_to_string
+
 
 @csrf_exempt
 def update_schedule(request):
@@ -28,8 +30,11 @@ def update_schedule(request):
 def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
+    roster = ''
+    print(event.pk)
     try:
-        roster = event.schedule.roster
+        schedule = Schedule.objects.get(event=event.pk)
+        roster = schedule.roster
     except:
         roster = schedule_template()
     context = {'event':event,

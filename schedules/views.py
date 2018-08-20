@@ -29,10 +29,10 @@ def schedule_template(schedule={},template={}):
     locations = Location.objects.all()
     for loc in locations:
         # active = template.get('locations', {}).get(loc.location_id, False) if template else True
-        
         if template:
             try:
                 t = loc.title
+                
                 l = template['locations'][str(loc.pk)]
                 active = l['active']
                 if active:
@@ -45,18 +45,40 @@ def schedule_template(schedule={},template={}):
         else:
             active = True
         
-        
-        schedule[loc.id] = {
+        thing = str(loc.pk)
+        schedule[thing] = {
             'active': active,
             'bar': loc.bar,
             'location': loc.title,
             'positions': {}
         }
         for position in loc.position_set.all():
-            schedule[loc.id]['positions'][position.code] = {
-                'employee': position.position,
-                'arrival_time': ''
-            }
+            try:
+                code = template['locations'][str(loc.pk)]['positions'][position.code]
+            except:
+                code = ''
+            try:
+                employee = template['locations'][str(loc.pk)]['positions'][position.code]['employee']
+            except:
+                employee = position.position
+            try:
+                arrival_time = template['locations'][str(loc.pk)]['positions'][position.code]['arrival_time']
+            except:
+                arrival_time = ''
+            
+            if code:
+                
+                schedule[thing]['positions'][position.code] = {
+                    'employee': employee,
+                    'arrival_time': arrival_time
+                }
+    for loc, value in template['locations'].items():
+        for p_code in value['positions']:
+            try:
+                exists = schedule[loc]['positions'][p_code]
+            except:
+                v = template['locations'][loc]['positions'][p_code]
+                schedule[loc]['positions'][p_code] = v
     return schedule
 
 @csrf_exempt
@@ -64,9 +86,7 @@ def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
         item = json.loads(data)
-        pprint(item)
         roster = schedule_template(template=json.loads(data))
-        pprint(roster)
         template = render_to_string('schedules/template.html', {'roster': roster})
         return HttpResponse(template)
     return HttpResponse("Uh oh... this should only be accessed via POST requests.")
@@ -85,25 +105,33 @@ def save_template(request):
         data = {'locations': data}
         
         roster = schedule_template(template=data)
-        
-        # all_locations = schedule_template()
-        
-        
-        
+        event = ''
+        schedule = ''
         if template == 'true':
             schedule = get_object_or_404(Schedule, pk=pk) if pk else Schedule()
             schedule.title = title
             schedule.template = True
             schedule.roster = {'locations': roster}
             schedule.save()
-            #redirect or popup
         else:
-            roster = request.POST.get('roster')
             pk = request.POST.get('event_id', None)
             event = get_object_or_404(Event, pk=pk)
-            event.schedule = roster
-            event.save()
-        
+            schedules = Schedule.objects.all()
+            try:
+                schedule = Schedule.objects.filter(event=event.pk)
+            except:
+                schedule = ''
+            if schedule:
+                schedule = Schedule.objects.get(event=event.pk)
+                schedule.roster = roster
+                schedule.save()
+            else:
+                schedule = Schedule()
+                schedule.roster = roster
+                schedule.title = event.title
+                schedule.event = event
+                schedule.template = False
+                schedule.save()
         return HttpResponse('Successfully saved template!')
 
     return HttpResponse("Uh oh... this should only be accessed via POST requests.")
@@ -132,7 +160,6 @@ def template_delete(request, pk):
 def template_update(request, pk):
     schedule = get_object_or_404(Schedule, pk=pk)
     roster = schedule.roster['locations']
-    pprint(roster)
     title = schedule.title
     context = {
         'roster': roster,
@@ -140,7 +167,6 @@ def template_update(request, pk):
         'new': False,
     }
     return render(request, 'schedules/create.html', context)
-    # return save_schedule_form(request, form, 'objects/update.html')
 
 @csrf_exempt
 def modal_template(request):
@@ -160,15 +186,17 @@ def modal_template(request):
 
 @csrf_exempt
 def select_template(request):  
-
+    roster = ''
+    schedule = ''
     pk = request.POST.get('pk')
     category = request.POST.get('category')
     if category == 'future-events' or category == 'previous-events':
         event = get_object_or_404(Event, pk=pk)
-        roster = json.loads(event.schedule)
+        schedule = Schedule.objects.filter(event=event.pk)
     elif category == 'all-templates':
         schedule = get_object_or_404(Schedule, pk=pk)
-        roster = json.loads(schedule.schedule)
-    context = {'locations': roster}
+        roster = schedule.roster
+    roster = roster['locations']
+    context = {'roster': roster}
     template = render_to_string('schedules/template.html', context)
     return HttpResponse(template)

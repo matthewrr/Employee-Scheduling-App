@@ -1,6 +1,5 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from schedules.models import Schedule
 from employees.models import Employee
 from locations.models import Location, Position
 import datetime
@@ -14,7 +13,6 @@ class Event(models.Model):
     doors_open = models.CharField(max_length=256, verbose_name="Doors Open")
     alcohol = models.BooleanField(default=True)
     slug = models.SlugField()
-    schedule = models.OneToOneField(Schedule, on_delete=models.CASCADE, null=True, blank=True)
     
     @property
     def event_category(self):

@@ -210,17 +210,20 @@ $(".choose-template" ).click(function() {
 
 $(".update-template" ).click(function() {
   var pk = $('.modal-body').find('.active').attr('id');
+  console.log(pk);
   var category = $('#template-subcategory').children('option:selected').attr('id');
   context = {category: category, pk: pk};
   $.post( "/schedules/templates/create/select/", context, function( data ) {
       // $('.modal-body').html(data);
+      console.log(data);
       $('.schedule-cards').html(data);
   });
 });
 
 // Submit/Update Schedule
 var dict = {};
-$(".submit-schedule" ).click(function(e) {
+$('.event-body').on('click', '.submit-schedule', function(e) { 
+// $(".submit-schedule" ).click(function(e) {
   e.preventDefault();
   var template = false;
   var event_id = $('.event-title').attr('id');
@@ -228,12 +231,18 @@ $(".submit-schedule" ).click(function(e) {
   if (title) {
     template = true;
   }
+  // var l = $('.location-body')
+  // var positions = $(l).find('select');
+  // console.log(positions.length)
   $('.location-body').each(function() {
     var positions = $(this).find('select');
+    // console.log(positions.length)
+    
+    
+    
     var scheduled = $(positions).children('option:selected');
     var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
     var active = !$(this).prev().children('label').hasClass('collapsed');
-    console.log(active)
     var id = $(this).attr('id');
     
     var d = {
@@ -245,6 +254,7 @@ $(".submit-schedule" ).click(function(e) {
     }
     
     $(positions).each(function(i,v){
+      // console.log($(this).find('selected').html())
       var arrive = $(this).next().children().val();
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
@@ -253,9 +263,9 @@ $(".submit-schedule" ).click(function(e) {
         'employee': $(person).val()
       }
     })
-    dict[$(this).attr('id')] = d;
+    id = $(this).attr('id')
+    dict[id] = d;
   });
-  
   $.ajax({
      type:"POST",
      url:"/schedules/templates/create/save/",
@@ -265,6 +275,7 @@ $(".submit-schedule" ).click(function(e) {
          console.log(dict) 
     }
   });
+  console.log(dict)
 })
 
 // Control Panel Toggles
@@ -349,10 +360,18 @@ $(function() {
 	  }
 	  
 	  var new_employee = $(card_body).children().first().clone();
+	  
 	  new_employee.find('span').html(new_position);
 	  new_employee.find('option').first().html('Extra #' + i);
+	  
+	  new_employee.find('option').first().attr('value','Extra #' + i);
+	  new_employee.find('option').first().attr('class',new_position);
+	  
 	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
+	 // new_employee.find('.template-placeholder').attr();
+	 // new_employee.find('.template-placeholder').attr();
 	  new_employee.find('input').attr('value','');
+	  
 	  $(card_body).append(new_employee);
 	});
 });

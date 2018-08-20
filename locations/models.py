@@ -15,6 +15,10 @@ class Location(models.Model):
     def __str__(self):
         return self.title
 
+# class LocationCategory(models.Model):
+#     location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
+#     location_category = models.CharField(max_length=256,null=True, blank=True)
+
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
    position = models.CharField(max_length=256)

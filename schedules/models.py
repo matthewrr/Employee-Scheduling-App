@@ -1,11 +1,12 @@
 from django.db import models
 from jsonfield import JSONField
+from events.models import Event
 
 class Schedule(models.Model):
     title = models.CharField(max_length=256)
     template = models.BooleanField(default=False)
     roster = JSONField(blank=True,null=True)
-    # event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
+    event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     
