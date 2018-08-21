@@ -12,6 +12,7 @@ from .models import *
 from events.models import Event
 from employees.models import Employee
 import json
+from locations.models import LocationCategory
 
 def company_profile(request):
     roles = CompanyProfileRole.objects.all()

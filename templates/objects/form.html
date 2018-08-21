@@ -20,7 +20,7 @@
     <span>Maximum Positions:</span>
   </div>
   <div class='row'>
-    <div class='col-6'>
+    <div class='col-4' style='border-right: 1px solid #DDD;'>
       <div class="btn-group-vertical">
       {% for role in roles %}
         <button type="button" class="btn btn-dark mb-2 add-role-button" id='{{role.short_name}}'>{{role.verbose_name}}</button>
@@ -29,7 +29,7 @@
     </div>
     <div class='col-6 role-list'>
       {% for role in roles %}
-        <div class='{{role.short_name}}-container'>
+        <div class='{{role.short_name}}-container mb-2'>
           
         </div>
       {% endfor %}
@@ -37,23 +37,24 @@
       
     </div>
   </div>
-  
-  
-  
+
   <div class='d-none'>
-    <div class="form-row align-items-center default-position">
-      <div class="col-auto">
-        <!--<label class="sr-only" for="inlineFormInputGroup">Username</label>-->
-        <div class="input-group mb-2">
+    <div class='row shift-row default-position'>
+      <div class="btn-group" style="width:100%;">
+        <div class="input-group">
           <div class="input-group-prepend">
-            <div class="input-group-text short-name"></div>
+            <span class="input-group-text short-name" id="basic-addon1"></span>
           </div>
-          <div class="input-group-text verbose-name"></div>
-          <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "events/img/minus.svg" %}' /> </a>
+          
+          <div class="form-control verbose-name" type="text" placeholder="{{scheduled.employee}}" readonly></div>
+          <div class="input-group-append">
+            <span class="input-group-text">
+              <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "events/img/minus.svg" %}' /> </a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </div>
   
 {% endif %}
-

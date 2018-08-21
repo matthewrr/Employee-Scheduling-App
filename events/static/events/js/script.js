@@ -42,9 +42,10 @@ function loadPositions(l) {
           var insertion = $('.d-none').children().clone();
           
           $(insertion).find('.short-name').html(short_name);
-          $(insertion).find('.short-name').attr('class', p)
+          $(insertion).find('.short-name').addClass(p);
           $(insertion).find('.verbose-name').html(verbose_name);
           $(c).append(insertion);
+          
         }
 });
 }
@@ -121,22 +122,22 @@ $(function() {
 
 });
 
-function sendPositions(location) {
-  var positions = {};
-  $('.default-position').each(function() {
-    var short_name = $(this).find('.input-group-prepend').children().html();
-    var verbose_name = $(this).find('.verbose-name').html();
-    if (short_name) {
-      positions[short_name] = verbose_name;
-    }
-  });
-  positions = JSON.stringify(positions)
-  context = {positions: positions, location: location}
-  $.post( "/locations/create/positions/", context, function(data) {
-      var hi = 'hello;'
-  });
+// function sendPositions(location) {
+//   var positions = {};
+//   $('.default-position').each(function() {
+//     var short_name = $(this).find('.input-group-prepend').children().html();
+//     var verbose_name = $(this).find('.verbose-name').html();
+//     if (short_name) {
+//       positions[short_name] = verbose_name;
+//     }
+//   });
+//   positions = JSON.stringify(positions)
+//   context = {positions: positions, location: location}
+//   $.post( "/locations/create/positions/", context, function(data) {
+//       var hi = 'hello;'
+//   });
   
-}
+// }
 
 // Sort Columns
 function sortTable(n,table_id) {
@@ -328,6 +329,8 @@ $(".template-header > .edit").click(function() {
   $('.template-name').prop('readonly', false);
 });
 
+
+
 // Add/Remove Employees
 $(function() {
   $('.schedule-cards').on('click', '.remove-employee', function(event) { 
@@ -451,6 +454,33 @@ function sendPositions(location) {
 }
 
 
+
+
+// function incrementEmployeeTitle(obj) {
+//   var verbose_name = $(this).html();
+//   var ss = $(this).attr('id');
+//   var ll = $(this).html();
+//   var short_name = $(this).attr('id');
+//   var added_roles = $('.role-list').children();
+//   var count = $('.' + short_name).length;
+//   var num = (count += 1)
+  
+//   if (count === 1) {
+//     short_name = short_name;
+//   } else if (count === 2) {
+//     short_name += num
+//     verbose_name += (' #' + num)
+//     var first_var = $('.' + ss).first();
+//     $(first_var).html(ss + '1');
+//     $(first_var).parent().next().html(ll + ' #1')
+//   } else {
+//     short_name += num
+//     verbose_name += (' #' + num)
+//   }
+  
+// }
+
+
 $('.modal').on('click', '.add-role-button', function() { 
   var verbose_name = $(this).html();
   var ss = $(this).attr('id');
@@ -475,8 +505,11 @@ $('.modal').on('click', '.add-role-button', function() {
   
   var insertion = $('.d-none').children().clone();
   $(insertion).find('.short-name').html(short_name);
-  $(insertion).find('.short-name').attr('class', ss)
+  $(insertion).find('.short-name').addClass(ss)
+  $(insertion).find('.short-name').attr('value', ss)
   $(insertion).find('.verbose-name').html(verbose_name);
+  $(insertion).find('.verbose-name').attr('placeholder', verbose_name);
+  
   
   var container = ss + '-container'
   
@@ -485,18 +518,34 @@ $('.modal').on('click', '.add-role-button', function() {
 });
 
 $('.modal').on('click', '.remove-sub-role', function() {
-  var short_id = $(this).prev().prev().children().attr('class');
+  var short_id = $(this).parent().parent().prev().prev().children().attr('value');
   var target = $('.'+short_id);
-  var verbose_name = $(this).prev().html();
+  var verbose_name = $(this).parent().parent().prev().attr('placeholder');
+  console.log(verbose_name)
   var v = verbose_name.split(" ").slice(0,-1).join(' ');
-  $(this).parent().parent().parent().remove();
+  console.log('v is: ' + v)
+  $(this).parent().parent().parent().parent().parent().remove();
   var target = $('.'+short_id);
   if (target.length === 1) {
     target.html(short_id);
-    target.parent().next().html(v);
+    console.log('v is: ' + v)
+    console.log('verbose_name is: ' + verbose_name)
+    if (v) {
+      target.parent().next().html(v);
+    } else {
+      target.parent().next().html(verbose_name);
+    }
+    
   } else if (target.length > 1) {
     target.each(function(i) {
+      
+      if (v) {
       $(this).parent().next().html(v+' #'+(i+1));
+      } else {
+        $(this).parent().next().html(verbose_name+' #'+(i+1));;
+      }
+      
+      
       $(this).html(short_id+(i+1));
     });
   }

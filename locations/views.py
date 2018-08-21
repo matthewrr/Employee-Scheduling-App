@@ -43,6 +43,7 @@ def positions_create(request):
         positions = request.POST.get('positions')
         positions = json.loads(positions)
         location_id = request.POST.get('location')
+        print(Location.objects.all())
         location = Location.objects.get(location_id=location_id)
         print(location)
         try:
