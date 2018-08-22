@@ -30,8 +30,9 @@ def template_create(request):
     }
     return render(request, 'schedules/create.html', context)
     
-def schedule_template(schedule={},template={}):
+def schedule_template(schedule={},template={},new_template=False):
     locations = Location.objects.all()
+    
     for location in locations:
         # active = template.get('locations', {}).get(loc.location_id, False) if template else True
         loc_id = str(location.pk)
@@ -53,17 +54,27 @@ def schedule_template(schedule={},template={}):
         }
         if template:
             for position in location.position_set.all():
-                if template['locations'].get(loc_id):
-                    p = template['locations'][loc_id]['positions'].get(position.code)
-                    if p:
-                        employee = p.get('employee')
-                        if employee: schedule[loc_id]['scheduled'] += 1
-                        arrival_time = p.get('arrival_time')
+                if new_template:
+                    flag = template['locations'].get(loc_id)
+                    if flag:
                         schedule[loc_id]['positions'][position.code] = {
-                            'employee': employee,
-                            'arrival_time': arrival_time,
+                            'employee': '',
+                            'arrival_time': '',
                             'verbose_name': position.position
                         }
+                else:
+                    if template['locations'].get(loc_id):
+                        p = template['locations'][loc_id]['positions'].get(position.code)
+                        if p:
+                            employee = p.get('employee')
+                            if employee: schedule[loc_id]['scheduled'] += 1
+                            arrival_time = p.get('arrival_time')
+                            schedule[loc_id]['positions'][position.code] = {
+                                'employee': employee,
+                                'arrival_time': arrival_time,
+                                'verbose_name': position.position
+                            }
+                
     if template:
         for loc, value in template['locations'].items():
             for p_code in value['positions']:
@@ -72,13 +83,15 @@ def schedule_template(schedule={},template={}):
                 except:
                     v = template['locations'][loc]['positions'][p_code]
                     schedule[loc]['positions'][p_code] = v
+                    # schedule[loc]['positions'][p_code]['verbose_name'] = 
+    print('schedule:')
     return schedule
 
 @csrf_exempt
 def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
-        roster = schedule_template(template=json.loads(data))
+        roster = schedule_template(template=json.loads(data),new_template=True)
         template = render_to_string('schedules/template.html', {'roster': roster})
         return HttpResponse(template)
 
@@ -95,6 +108,11 @@ def save_template(request):
         
         roster = schedule_template(template=data)
         
+        active_locations = 0
+        for location, attributes in roster.items():
+            if attributes['active'] == True:
+                active_locations += 1
+        
         event = ''
         schedule = ''
         if template == 'true':
@@ -102,9 +120,11 @@ def save_template(request):
             schedule.title = title
             schedule.template = True
             schedule.roster = {'locations': roster}
+            schedule.active_locations = active_locations
             schedule.save()
         else:
             total_scheduled = 0
+            
             for location, attributes in roster.items():
                 total_scheduled += attributes['scheduled'] 
             pk = request.POST.get('event_id', None)
@@ -117,6 +137,7 @@ def save_template(request):
                 schedule = Schedule.objects.get(event=event.pk)
                 schedule.roster = roster
                 schedule.scheduled = total_scheduled
+                schedule.active_locations = active_locations
                 schedule.save()
             else:
                 schedule = Schedule()
@@ -125,6 +146,7 @@ def save_template(request):
                 schedule.event = event
                 schedule.template = False
                 schedule.scheduled = total_scheduled
+                schedule.active_locations = active_locations
                 schedule.save()
     # pprint(schedule.roster)
     return HttpResponse('Successfully saved template!')
@@ -159,6 +181,7 @@ def template_update(request, pk):
         'roster': roster,
         'title': title,
         'new': False,
+        'schedule':schedule
     }
     return render(request, 'schedules/create.html', context)
 

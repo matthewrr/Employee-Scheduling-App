@@ -11,6 +11,7 @@ class Schedule(models.Model):
     scheduled    = models.IntegerField(null=True,blank=True)
     created      = models.DateTimeField(editable=False,null=True)
     modified     = models.DateTimeField(null=True)
+    active_locations = models.IntegerField(null=True,blank=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''

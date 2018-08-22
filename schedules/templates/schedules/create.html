@@ -8,18 +8,20 @@
         <div class='event-header-details form-inline template-header'>
           
           {% with yesno_arg=title|add:',' %}
-          <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
+            <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
           {% endwith %}
           
+          
           {% if not new %}
-          <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button>
+          <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button><br />
+          <p><a class='template-timestamps' style='font-size:1.2em;'>Created at: {{schedule.created}} | Last saved: {{template.modified}}</a></p><br />
           {% endif %}
           <!--<button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>-->
           <!--<button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>-->
         </div>
       </div>
     </div>
-    <div class='container' style='background:white;'>
+    <div class='container roster-body' style='background:white;'>
       <div class='col-12 py-3 control-panel-header'>
         <span>TEMPLATE</span>
         

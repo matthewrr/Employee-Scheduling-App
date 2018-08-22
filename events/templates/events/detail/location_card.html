@@ -22,7 +22,7 @@
           
           {% if not template %}
             <select class="col form-control" style='flex: 0 0 50%;max-width: 50%;'>
-              <option value='{{scheduled.employee|default:shift}}' class='{{shift}}' selected>{{scheduled.employee|default:shift}}</option>
+              <option value='{{scheduled.employee|default:shift}}' class='{{shift}}' selected>{{scheduled.employee|default:scheduled.verbose_name}}</option>
               {% for employee in all_employees %}
                 <option class="{{employee}}">{{employee.name}}</option>
               {% endfor %}

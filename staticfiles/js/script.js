@@ -117,7 +117,7 @@ function sortTable(n,table_id) {
     }
   }
 }
-
+// {'locations': {'10': {'active': False},
 // Generate Template
 $(".generate-template" ).click(function() {
   var template = {'locations': {}};
@@ -125,10 +125,17 @@ $(".generate-template" ).click(function() {
   $('.location').each(function() {
     var location = $(this).attr('id');
     var active = $(this).prev().prop('checked');
-    template['locations'][location] = {'active': active};
+    template['locations'][location] = {
+      'active': active,
+      'bar': '',
+      'id': '',
+      'location': '',
+      'positions': {},
+      'scheduled': 0
+    };
   });
   template['title'] = title;
-  var context = { template:JSON.stringify(template), title:title };
+  var context = { template:JSON.stringify(template), title:title, new_template: true };
   $.post( "/schedules/templates/create/generate/", context, function( data ) {
     $('.schedule-cards').html(data);
   });
@@ -152,7 +159,7 @@ $(".update-template" ).click(function() {
 
 // Submit/Update Schedule
 var dict = {};
-$('.event-body').on('click', '.submit-schedule', function(e) { 
+$('.roster-body').on('click', '.submit-schedule', function(e) { 
   e.preventDefault();
   var event_id = $('.event-title').attr('id');
   var title = $('.template-name').val();
