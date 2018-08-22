@@ -14,14 +14,14 @@
         <th onclick="sortTable(0,'upcoming-events')" scope="col" class='text-left'><a>Event</a></th>
         <th onclick="sortTable(1,'upcoming-events')" scope="col" class='text-left' id='date'><a>Date</a></th>
         <th onclick="sortTable(2,'upcoming-events')" scope="col" class='text-left'><a>Doors</a></th>
-        <th onclick="sortTable(3,'upcoming-events')" scope="col"><a>#</a></th>
+        <th onclick="sortTable(3,'upcoming-events')" scope="col"><a>Scheduled</a></th>
         <th onclick="sortTable(4,'upcoming-events')" scope="col"><a>Alcohol</a></th>
         <th scope="col">Edit</th>
         {% else %}
         <th onclick="sortTable(0, 'previous-events')" scope="col" class='text-left'><a>Event</a></th>
         <th onclick="sortTable(1, 'previous-events')" scope="col" class='text-left'><a>Date</a></th>
         <th onclick="sortTable(2, 'previous-events')" scope="col" class='text-left'><a>Doors</a></th>
-        <th onclick="sortTable(3, 'previous-events')" scope="col"><a>#</a></th>
+        <th onclick="sortTable(3, 'previous-events')" scope="col"><a>Scheduled</a></th>
         <th onclick="sortTable(4, 'previous-events')" scope="col"><a>Alcohol</a></th>
         <th scope="col">Edit</th>
         {% endif %}
@@ -35,14 +35,14 @@
         <td><a href='/events/{{event.date|date:"Y/m/d/"}}{{event.slug}}'>{{event}}</a><br /></td>
         <td>{{event.date}}</td>
         <td>{{event.doors_open}}</td>
-        <td class='text-center'>0</td>
+        <td class='text-center'>{% firstof event.schedule.scheduled '0' %}</td>
         <td class='text-center'>{% include 'base/boolean.html' with bool=event.alcohol %}</td>
         <td class="text-center">
           <button type="button" class="btn js-update-object" data-url="{% url 'event_update' event.id %}">
-            <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+            <img class='icon-edit 'src='{% static "img/edit.svg" %}' alt="Edit Icon"/>
           </button>
           <button type="button" class="btn js-delete-object" data-url="{% url 'event_delete' event.id %}">
-            <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
+            <img class='icon-delete 'src='{% static "img/delete.svg" %}' alt="Delete Icon"/>
           </button>
         </td>
 

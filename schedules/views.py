@@ -6,20 +6,25 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Schedule
 from locations.models import Location
 from events.models import Event
+from company_profile.models import CompanyProfileRole
 import json
 from pprint import pprint
 from datetime import date
 
-
 def template_list(request):
     templates = Schedule.objects.all()
-    return render(request, 'objects/list.html', {'templates': templates, 'obj':'template', 'objs':'templates', 'app':'event_templates'})
+    context = {
+        'templates': templates,
+        'obj':'template',
+        'objs':'templates',
+        'app':'event_templates'
+    }
+    return render(request, 'objects/list.html', context)
 
 def template_create(request):
     roster = schedule_template()
     context = {
         'roster': roster,
-        'roles': ['Managers','Cashiers','Preps','Bartenders'],
         'template': True,
         'new': True,
     }
@@ -27,84 +32,69 @@ def template_create(request):
     
 def schedule_template(schedule={},template={}):
     locations = Location.objects.all()
-    for loc in locations:
+    for location in locations:
         # active = template.get('locations', {}).get(loc.location_id, False) if template else True
+        loc_id = str(location.pk)
         if template:
-            try:
-                t = loc.title
-                
-                l = template['locations'][str(loc.pk)]
-                active = l['active']
-                if active:
-                    active = True
-                else:
-                    active = False
-                
-            except:
+            l = template['locations'].get(loc_id)
+            if l: 
+                active = l.get('active', False)
+            else:
                 active = False
         else:
             active = True
         
-        thing = str(loc.pk)
-        schedule[thing] = {
+        schedule[loc_id] = {
             'active': active,
-            'bar': loc.bar,
-            'location': loc.title,
+            'bar': location.bar,
+            'location': location.title,
+            'scheduled': 0,
             'positions': {}
         }
-        for position in loc.position_set.all():
-            try:
-                code = template['locations'][str(loc.pk)]['positions'][position.code]
-            except:
-                code = ''
-            try:
-                employee = template['locations'][str(loc.pk)]['positions'][position.code]['employee']
-            except:
-                employee = position.position
-            try:
-                arrival_time = template['locations'][str(loc.pk)]['positions'][position.code]['arrival_time']
-            except:
-                arrival_time = ''
-            
-            if code:
-                
-                schedule[thing]['positions'][position.code] = {
-                    'employee': employee,
-                    'arrival_time': arrival_time
-                }
-    for loc, value in template['locations'].items():
-        for p_code in value['positions']:
-            try:
-                exists = schedule[loc]['positions'][p_code]
-            except:
-                v = template['locations'][loc]['positions'][p_code]
-                schedule[loc]['positions'][p_code] = v
+        if template:
+            for position in location.position_set.all():
+                if template['locations'].get(loc_id):
+                    p = template['locations'][loc_id]['positions'].get(position.code)
+                    if p:
+                        employee = p.get('employee')
+                        if employee: schedule[loc_id]['scheduled'] += 1
+                        arrival_time = p.get('arrival_time')
+                        schedule[loc_id]['positions'][position.code] = {
+                            'employee': employee,
+                            'arrival_time': arrival_time,
+                            'verbose_name': position.position
+                        }
+    if template:
+        for loc, value in template['locations'].items():
+            for p_code in value['positions']:
+                try:
+                    exists = schedule[loc]['positions'][p_code]
+                except:
+                    v = template['locations'][loc]['positions'][p_code]
+                    schedule[loc]['positions'][p_code] = v
     return schedule
 
 @csrf_exempt
 def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
-        item = json.loads(data)
         roster = schedule_template(template=json.loads(data))
         template = render_to_string('schedules/template.html', {'roster': roster})
         return HttpResponse(template)
-    return HttpResponse("Uh oh... this should only be accessed via POST requests.")
 
 @csrf_exempt
 def save_template(request):
-    
     if request.method == 'POST':
         data = request.POST.get('roster')
         template = request.POST.get('template')
         title = request.POST.get('title')
         pk = request.POST.get('pk')
-        event_id = request.POST.get('event_id')
         
         data = json.loads(data)
         data = {'locations': data}
         
         roster = schedule_template(template=data)
+        
         event = ''
         schedule = ''
         if template == 'true':
@@ -114,9 +104,11 @@ def save_template(request):
             schedule.roster = {'locations': roster}
             schedule.save()
         else:
+            total_scheduled = 0
+            for location, attributes in roster.items():
+                total_scheduled += attributes['scheduled'] 
             pk = request.POST.get('event_id', None)
             event = get_object_or_404(Event, pk=pk)
-            schedules = Schedule.objects.all()
             try:
                 schedule = Schedule.objects.filter(event=event.pk)
             except:
@@ -124,6 +116,7 @@ def save_template(request):
             if schedule:
                 schedule = Schedule.objects.get(event=event.pk)
                 schedule.roster = roster
+                schedule.scheduled = total_scheduled
                 schedule.save()
             else:
                 schedule = Schedule()
@@ -131,10 +124,11 @@ def save_template(request):
                 schedule.title = event.title
                 schedule.event = event
                 schedule.template = False
+                schedule.scheduled = total_scheduled
                 schedule.save()
-        return HttpResponse('Successfully saved template!')
+    # pprint(schedule.roster)
+    return HttpResponse('Successfully saved template!')
 
-    return HttpResponse("Uh oh... this should only be accessed via POST requests.")
     
 def export_templates(request):
     return HttpResponse('Meh')
@@ -170,7 +164,6 @@ def template_update(request, pk):
 
 @csrf_exempt
 def modal_template(request):
-    
     if request.method == 'POST':
         category = request.POST.get('category')
         if category == 'future-events':
@@ -179,10 +172,8 @@ def modal_template(request):
             options = Event.objects.filter(date__lt=date.today())
         elif category == 'all-templates':
             options = Schedule.objects.all()
-        
         template = render_to_string('event_templates/select_template.html', {'options': options})
         return HttpResponse(template)
-    return HttpResponse('This is not good')
 
 @csrf_exempt
 def select_template(request):  
@@ -200,3 +191,5 @@ def select_template(request):
     context = {'roster': roster}
     template = render_to_string('schedules/template.html', context)
     return HttpResponse(template)
+    
+    # /210

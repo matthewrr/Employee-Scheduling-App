@@ -55,10 +55,10 @@
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.active %}</td>
       <td class="text-center">
         <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}">
-          <img class='icon-edit 'src='{% static "events/img/edit.svg" %}' alt="Edit Icon"/>
+          <img class='icon-edit 'src='{% static "img/edit.svg" %}' alt="Edit Icon"/>
         </button>
         <button type="button" class="btn js-delete-object" data-url="{% url 'employee_delete' employee.id %}">
-          <img class='icon-delete 'src='{% static "events/img/delete.svg" %}' alt="Delete Icon"/>
+          <img class='icon-delete 'src='{% static "img/delete.svg" %}' alt="Delete Icon"/>
         </button>
       </td>
 

@@ -16,7 +16,6 @@ import json
 
 from django.template.loader import render_to_string
 
-
 @csrf_exempt
 def update_schedule(request):
     if request.method == 'POST':
@@ -31,7 +30,6 @@ def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
     roster = ''
-    print(event.pk)
     try:
         schedule = Schedule.objects.get(event=event.pk)
         roster = schedule.roster
@@ -40,7 +38,6 @@ def event_detail_view(request,year,month,day,slug):
     context = {'event':event,
                'roster':roster,
                'all_employees':all_employees,
-               'roles': ['Managers','Cashiers','Preps','Bartenders'],
                'template':False,
                }
     return render(request, './events/detail/event_detail.html', context)

@@ -7,6 +7,7 @@ class Schedule(models.Model):
     template = models.BooleanField(default=False)
     roster = JSONField(blank=True,null=True)
     event = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
+    scheduled = models.IntegerField(null=True,blank=True)
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
     
