@@ -14,7 +14,10 @@
           
           {% if not new %}
           <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button><br />
-          <p><a class='template-timestamps' style='font-size:1.2em;'>Created at: {{schedule.created}} | Last saved: {{template.modified}}</a></p><br />
+          <p><a class='template-timestamps' style='font-size:1.2em;'>
+            Created at: {{schedule.created}}
+            {% if schedule.modified %}<br />Last modified: {{schedule.modified}} {% endif %}
+          </a></p><br />
           {% endif %}
           <!--<button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>-->
           <!--<button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>-->

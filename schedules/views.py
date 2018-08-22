@@ -12,7 +12,7 @@ from pprint import pprint
 from datetime import date
 
 def template_list(request):
-    templates = Schedule.objects.all()
+    templates = Schedule.objects.filter(template=True)
     context = {
         'templates': templates,
         'obj':'template',
@@ -85,6 +85,7 @@ def schedule_template(schedule={},template={},new_template=False):
                     schedule[loc]['positions'][p_code] = v
                     # schedule[loc]['positions'][p_code]['verbose_name'] = 
     print('schedule:')
+    pprint(schedule)
     return schedule
 
 @csrf_exempt
@@ -194,7 +195,7 @@ def modal_template(request):
         elif category == 'previous-events':
             options = Event.objects.filter(date__lt=date.today())
         elif category == 'all-templates':
-            options = Schedule.objects.all()
+            options = Schedule.objects.filter(template=True)
         template = render_to_string('event_templates/select_template.html', {'options': options})
         return HttpResponse(template)
 

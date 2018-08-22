@@ -146,6 +146,7 @@ $(".choose-template" ).click(function() {
   $.post( "/schedules/templates/create/modal/", {category: category}, function( data ) {
       $('.modal-body').html(data);
   });
+  $("#modal-object").modal("hide");
 });
 
 $(".update-template" ).click(function() {
@@ -155,6 +156,7 @@ $(".update-template" ).click(function() {
   $.post( "/schedules/templates/create/select/", context, function( data ) {
       $('.schedule-cards').html(data);
   });
+  $(".modal").modal("hide");
 });
 
 // Submit/Update Schedule
@@ -181,9 +183,19 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
       var arrive = $(this).next().children().val();
       var position = $(v).children().first().attr('class');
       var person = scheduled[i];
+      var employee = '';
+      // var employee = ($(person).val() === $(person).attr('.class'));
+      var attr = $(person).attr('default')
+      if (typeof attr !== typeof undefined && attr !== false) {
+        employee = '';
+      } else {
+        
+        employee = $(person).val();
+      }
+      console.log(employee);
       d['positions'][position] = {
         'arrival_time': arrive,
-        'employee': $(person).val()
+        'employee': employee
       };
     });
     id = $(this).attr('id');
