@@ -1,11 +1,11 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
+import datetime
+from jsonfield import JSONField
+
 from employees.models import Employee
 from locations.models import Location, Position
-import datetime
-    
-from django.db import models
-from jsonfield import JSONField
     
 class Event(models.Model):
     title = models.CharField(max_length=256)
@@ -13,6 +13,15 @@ class Event(models.Model):
     doors_open = models.CharField(max_length=256, verbose_name="Doors Open")
     alcohol = models.BooleanField(default=True)
     slug = models.SlugField()
+    created      = models.DateTimeField(editable=False,null=True)
+    modified     = models.DateTimeField(null=True)
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created = timezone.now()
+        self.modified = timezone.now()
+        return super(Event, self).save(*args, **kwargs)
     
     @property
     def event_category(self):

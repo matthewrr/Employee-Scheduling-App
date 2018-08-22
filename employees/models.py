@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 class Employee(models.Model):
     first_name = models.CharField(max_length=64, default='')
@@ -11,6 +12,15 @@ class Employee(models.Model):
     food_permit = models.BooleanField(default=False)
     alcohol_permit = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
+    created      = models.DateTimeField(editable=False,null=True)
+    modified     = models.DateTimeField(null=True)
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created = timezone.now()
+        self.modified = timezone.now()
+        return super(Employee, self).save(*args, **kwargs)
     
     class Meta:
         ordering = ['first_name']

@@ -1,9 +1,19 @@
 from django.db import models
+from django.utils import timezone
 
 class Location(models.Model):
     location_id = models.CharField(max_length=256,null=True, blank=True)
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
+    created      = models.DateTimeField(editable=False,null=True)
+    modified     = models.DateTimeField(null=True)
+
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id:
+            self.created = timezone.now()
+        self.modified = timezone.now()
+        return super(Location, self).save(*args, **kwargs)
     
     @property
     def positions_length(self):

@@ -1,7 +1,7 @@
 from django.db import models
+from django.utils import timezone
 from jsonfield import JSONField
 from events.models import Event
-from django.utils import timezone
 
 class Schedule(models.Model):
     title        = models.CharField(max_length=256)
@@ -9,8 +9,8 @@ class Schedule(models.Model):
     roster       = JSONField(blank=True,null=True)
     event        = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
     scheduled    = models.IntegerField(null=True,blank=True)
-    created      = models.DateTimeField(editable=False)
-    modified     = models.DateTimeField()
+    created      = models.DateTimeField(editable=False,null=True)
+    modified     = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
