@@ -17,6 +17,9 @@ class Event(models.Model):
     modified     = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Event, self).save(*args, **kwargs)
         ''' On save, update timestamps '''
         if not self.id:
             self.created = timezone.now()
@@ -26,11 +29,6 @@ class Event(models.Model):
     @property
     def event_category(self):
         return True if self.date < datetime.date.today() else False
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-        super(Event, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.title

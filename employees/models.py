@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils import timezone
+from jsonfield import JSONField
 
 class Employee(models.Model):
     first_name = models.CharField(max_length=64, default='')
@@ -14,6 +15,7 @@ class Employee(models.Model):
     admin = models.BooleanField(default=False)
     created      = models.DateTimeField(editable=False,null=True)
     modified     = models.DateTimeField(null=True)
+    # shifts       = JSONField(blank=True,null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -34,3 +36,7 @@ class Employee(models.Model):
         
     def __str__(self):
         return self.first_name + ' ' + self.last_name
+
+# class EmployeeSchedule(models.Model):
+#     employee = models.ForeignKey(Employee, on_delete=models.CASCADE,null=True, blank=True)
+#     event = models.ForeignKey(Employee, on_delete=models.CASCADE,null=True, blank=True)

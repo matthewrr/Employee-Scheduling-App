@@ -12,6 +12,7 @@ class Schedule(models.Model):
     created      = models.DateTimeField(editable=False,null=True)
     modified     = models.DateTimeField(null=True)
     active_locations = models.IntegerField(null=True,blank=True)
+    shifts =           JSONField(blank=True,null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -26,3 +27,10 @@ class Schedule(models.Model):
     
     def __str__(self):
         return self.title
+
+# event, date, etc.
+# employee --> location (short) -->
+#                                     +location long
+#                                     +pos short
+#                                     +pos long
+#                                     +arrive
