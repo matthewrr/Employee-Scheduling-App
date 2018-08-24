@@ -27,10 +27,3 @@ class Schedule(models.Model):
     
     def __str__(self):
         return self.title
-
-# event, date, etc.
-# employee --> location (short) -->
-#                                     +location long
-#                                     +pos short
-#                                     +pos long
-#                                     +arrive

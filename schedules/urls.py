@@ -11,6 +11,7 @@ from . import views
 urlpatterns = [
     # url(r'^$', views.template_list, name='schedules'),
     # path('schedules/create/', views.create_schedule, name='create_schedule'),
+    path('employee/<int:num>', views.employee_schedule, name='employee_schedule'),
     url('templates/$', views.template_list, name='templates'),
     path('templates/create/', views.template_create, name='template_create'),
     path('templates/create/generate/', views.generate_template, name='generate_template'),

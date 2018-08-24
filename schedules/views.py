@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Schedule
 from locations.models import Location
+from employees.models import Employee
 from events.models import Event
 from company_profile.models import CompanyProfileRole
 import json
@@ -123,37 +124,42 @@ def generate_template(request):
 @csrf_exempt
 def save_template(request):
     if request.method == 'POST':
-        shifts = {}
+        
         data = request.POST.get('roster')
         template = request.POST.get('template')
         title = request.POST.get('title')
-        pk = request.POST.get('pk')
+        pk = request.POST.get('event_id', None)
+        
+        shifts = {'event': pk, 'employees': {}}
         
         data = json.loads(data)
         data = {'locations': data}
         roster = schedule_template(template=data)
         
         active_locations = 0
-        pprint(roster)
-        for location, attributes in roster.items():
-            location = str(location)
-            if attributes['active'] == True:
-                active_locations += 1
-                if attributes['positions']:
-                    for position, p_attributes in attributes['positions'].items():
-                        employee = p_attributes['employee']
-                        if employee:
+        # pprint(roster)
+        if template == 'false':
+            for location, attributes in roster.items():
+                location = str(location)
+                if attributes['active'] == True:
+                    active_locations += 1
+                    print(active_locations)
+                    if attributes['positions']:
+                        for position, p_attributes in attributes['positions'].items():
                             employee = p_attributes['employee']
-                            shifts[employee] = {
-                                'location_id':location,
-                                'location': roster[location]['location'],
-                                'verbose_name': p_attributes['verbose_name'],
-                                'short_name':position,
-                                'arrive':p_attributes['arrival_time'],
-                            }
+                            print(employee)
+                            if employee:
+                                employee = p_attributes['employee']
+                                shifts['employees'][employee] = {
+                                    'location_id':location,
+                                    'location': roster[location]['location'],
+                                    'verbose_name': p_attributes['verbose_name'],
+                                    'short_name':position,
+                                    'arrive':p_attributes['arrival_time'],
+                                }
                         
                         
-        
+        pprint(shifts)
         event = ''
         schedule = ''
         if template == 'true':
@@ -259,3 +265,47 @@ def select_template(request):
     return HttpResponse(template)
     
     # /210
+
+def employee_schedule(request, num):
+    employee = get_object_or_404(Employee, employee_id=num)
+    context = {
+        'employee': {
+            'name': employee.name(),
+            'id': employee.employee_id,
+            'phone': employee.phone(),
+            'food_permit': employee.food_permit,
+            'alcohol_permit': employee.alcohol_permit,
+        }, 
+        'events': {},
+        'scheduled': 0
+    }
+    schedules = Schedule.objects.filter(template=False).values('shifts')
+    for schedule in schedules:
+        shifts = json.loads(schedule['shifts'])
+        if shifts.get('employees'):
+            shift = shifts['employees'].get(employee.name())
+            if shift:
+                pk = shifts['event']
+                event = get_object_or_404(Event, pk=pk)
+                
+                if employee:
+                    context['events'][event.title] = {}
+                    context['scheduled'] += 1
+                    context['events'][event.title]['shift'] = shift
+                    context['events'][event.title]['details'] = {
+                        'title': event.title,
+                        'date': event.date,
+                        'doors': event.doors_open,
+                    }
+            else:
+                pk = shifts['event']
+                event = get_object_or_404(Event, pk=pk)
+                context['events'][event.title] = {}
+                context['events'][event.title]['shift'] = shift
+                context['events'][event.title]['details'] = {
+                    'title': event.title,
+                    'date': event.date,
+                    'doors': event.doors_open,
+                }
+    pprint(context)
+    return render(request, 'employees/employee_schedule.html', context)

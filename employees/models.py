@@ -15,7 +15,6 @@ class Employee(models.Model):
     admin = models.BooleanField(default=False)
     created      = models.DateTimeField(editable=False,null=True)
     modified     = models.DateTimeField(null=True)
-    # shifts       = JSONField(blank=True,null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
