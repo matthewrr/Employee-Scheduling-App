@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+<div class="card" class='testing' style='width:100%;'>
+  <div class="card-header location-header py-2">
+    <label class='location-title' data-target='#{{location_id}}' data-toggle='collapse'>
+      <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked='checked' />
+      <a style="vertical-align:middle;">{{location_verbose}}</a>
+    </label>
+    <img class='float-right ml-1 add-employee' src='{% static "img/plus.svg" %}' alt="Plus Symbol"/>
+    <img class='float-right ml-1 remove-employee' src='{% static "img/minus.svg" %}' alt="Minus Symbol"/>
+  </div>
+  
+  <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true">
+  {% for shift, scheduled in position.items %}
+
+                <div class='row shift-row default-position'>
+                  <div class="btn-group" style="width:100%;">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text short-name" id="basic-addon1">{{shift}}</span>
+                      </div>
+                      
+                      <div class="form-control verbose-name {{shift}}" value='{{shift}}' default selected type="text" placeholder="{{ scheduled.verbose_name }}" readonly>{{ scheduled.verbose_name }}</div>
+                      
+                      
+                      <div class="col px-0 input-group-append input-group remove-button" style='flex: 0 0 30%;max-width: 30%; display:flex;'>
+                        <div class='btn btn-outline-dark' style='background:#f5f1f1; width:100%; margin-right:15px;'>Remove</div>
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                </div>
+          
+      {# {% include 'events/detail/add_row.html' with loc=location.location_id %} #}
+  {% endfor %}
+  </div>
+  
+</div>

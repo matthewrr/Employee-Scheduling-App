@@ -8,9 +8,8 @@
         <div class='event-header-details form-inline template-header'>
           
           {% with yesno_arg=title|add:',' %}
-            <input class="form-control template-name" type="text" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
+            <input class="form-control template-name" type="text" id="{{schedule.pk}}" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
           {% endwith %}
-          
           
           {% if not new %}
           <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button><br />
@@ -19,8 +18,6 @@
             {% if schedule.modified %}<br />Last modified: {{schedule.modified}} {% endif %}
           </a></p><br />
           {% endif %}
-          <!--<button type="button" class="btn btn-dark ml-2 save"><span>Save</span></button>-->
-          <!--<button type="button" class="btn btn-dark btn-lg ml-2 d-none"><span>Update</span></button>-->
         </div>
       </div>
     </div>
@@ -31,7 +28,7 @@
         <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'><span>[Options]</span>
           <img class='ml-1' src='{% static "img/down-chevron.svg" %}' style='height:18px;margin-top:-2px;' alt="Plus Symbol" />
         </a>
-        <button class='btn btn-dark float-right submit-schedule' type='submit'>Save</button>
+        <button class='btn btn-dark float-right submit-template' type='submit'>Save</button>
         
       </div>
       <hr/>

@@ -55,10 +55,14 @@
                   <strong>Doors: </strong>{{attributes.details.doors}}<br />
                 </td>
                 {% if scheduled %}
-                  <td>
-                    <strong>Location: </strong>{{attributes.shift.location}}<br />
-                    <strong>Role: </strong>{{attributes.shift.verbose_name}}
-                  </td>
+                  {% if attributes.shift.location %}
+                      <td>
+                        <strong>Location: </strong>{{attributes.shift.location}}<br />
+                        <strong>Role: </strong>{{attributes.shift.verbose_name}}
+                      </td>
+                  {% else %}
+                    <td>Not currently scheduled for this event.</td>
+                  {% endif %}
                 {% endif %}
               </tr>
             {% endfor %}

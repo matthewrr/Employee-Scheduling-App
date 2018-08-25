@@ -165,6 +165,7 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
   e.preventDefault();
   var event_id = $('.event-title').attr('id');
   var title = $('.template-name').val();
+  var pk = $('.template-name').attr('id');
   var template = title ? true : false;
   $('.location-body').each(function() {
     var positions = $(this).find('select');
@@ -181,27 +182,35 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
     };
     $(positions).each(function(i,v){
       var arrive = $(this).next().children().val();
-      var position = $(v).children().first().attr('class');
+      console.log(arrive);
+      var position = $(v).children().first().attr('value');
       var person = scheduled[i];
       var employee = '';
+      var verbose_name = '';
+      // var verbose_name = $(v).find('default').html();
+      // console.log(position)
+      // console.log(verbose_name)
       // var employee = ($(person).val() === $(person).attr('.class'));
+      verbose_name = $(this).find('.default-position').html();
       var attr = $(person).attr('default')
       if (typeof attr !== typeof undefined && attr !== false) {
         employee = '';
+        // verbose_name = $(v).children().first().html();
       } else {
         
         employee = $(person).val();
       }
-      console.log(employee);
       d['positions'][position] = {
         'arrival_time': arrive,
-        'employee': employee
+        'employee': employee,
+        'verbose_name': verbose_name
       };
+      // if (verbose_name) d['positions'][position]['verbose_name'] = verbose_name;
     });
     id = $(this).attr('id');
     dict[id] = d;
   });
-  var context = {roster:JSON.stringify(dict), event_id:event_id, title:title, template:template };
+  var context = {roster:JSON.stringify(dict), event_id:event_id, title:title, template:template, pk:pk };
   $.post("/schedules/templates/create/save/", context);
 });
 
@@ -260,20 +269,23 @@ $(function() {
 	  var new_position = $(card_body).children().last().find('span').html();
 	  var prefix = new_position.split('')[0];
 	  var i = Number(new_position.split('')[1]);
+	  
 	  if (prefix !== 'E') {
 	    new_position = 'E1';
 	    i = 1;
 	  } else {
 	    i += 1;
-	    new_position = 'E' + i;
+	    new_position = 'E'+i;
 	  }
+	  
 	  var new_employee = $(card_body).children().first().clone();
-	  new_employee.find('span').html(new_position);
+	  new_employee.find('input').attr('value','');
 	  new_employee.find('option').first().html('Extra #' + i);
 	  new_employee.find('option').first().attr('value','Extra #' + i);
 	  new_employee.find('option').first().attr('class',new_position);
+	  new_employee.find('span').html(new_position);
 	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
-	  new_employee.find('input').attr('value','');
+	  new_employee.find('.verbose-name').html('Extra #' + i);
 	  $(card_body).append(new_employee);
 	});
 });
@@ -329,37 +341,37 @@ function sendPositions(location) {
   });
   positions = JSON.stringify(positions);
   var context = {positions: positions, location: location};
+  console.log(context);
   $.post("/locations/create/positions/", context);
 }
 
 $('.modal').on('click', '.add-role-button', function() { 
-  var verbose_name = $(this).html();
-  var ss = $(this).attr('id');
-  var ll = $(this).html();
+  
+  var insertion = $('.d-none').children().clone();
+  var short = $(insertion).find('.short-name');
   var short_name = $(this).attr('id');
+  var verbose_name = $(this).html();
+  short.addClass(short_name);
+  short.attr('value', short_name);
+  
   var count = $('.' + short_name).length;
   var num = (count += 1);
-  var container = ss + '-container';
-  if (count === 1) {
-    short_name = short_name;
-  } else if (count === 2) {
+  var container = short_name + '-container';
+  if (count === 2) {
+    var first_var = $('.' + short_name).first();
+    $(first_var).html(short_name + '1');
     short_name += num;
+    $(first_var).parent().next().html(verbose_name + ' #1');
     verbose_name += (' #' + num);
-    var first_var = $('.' + ss).first();
-    $(first_var).html(ss + '1');
-    $(first_var).parent().next().html(ll + ' #1');
-  } else {
+  } else if (count > 2) {
     short_name += num;
     verbose_name += (' #' + num);
   }
-  var insertion = $('.d-none').children().clone();
-  var short = $(insertion).find('.short-name');
   short.html(short_name);
-  short.addClass(ss);
-  short.attr('value', ss);
   $(insertion).find('.verbose-name').html(verbose_name);
   $(insertion).find('.verbose-name').attr('placeholder', verbose_name);
   $('.' + container).append(insertion);
+  
 });
 
 $('.modal').on('click', '.remove-sub-role', function() {
@@ -379,4 +391,38 @@ $('.modal').on('click', '.remove-sub-role', function() {
       $(this).html(short_id+(i+1));
     });
   }
+});
+
+$('.roster-body').on('click', '.submit-template', function(e) { 
+  e.preventDefault();
+  var event_id = $('.event-title').attr('id');
+  var title = $('.template-name').val();
+  var pk = $('.template-name').attr('id');
+  var template = true;
+  $('.location-body').each(function() {
+    var positions = $(this).children();
+    var bar = ($(this).prev().children().children().first().attr('name') === 'bar');
+    var active = !$(this).prev().children('label').hasClass('collapsed');
+    var id = $(this).attr('id');
+    var d = {
+      'positions': {},
+      'active': active,
+      'bar': bar,
+      'location':$(this).attr('name'),
+      'id': id,
+    };
+    $(positions).each(function(){
+      var position = $(this).find('.short-name').html();
+      var verbose_name = $(this).find('.verbose-name').html();
+      d['positions'][position] = {
+        'arrival_time': '',
+        'employee': '',
+        'verbose_name': verbose_name
+      };
+    });
+    id = $(this).attr('id');
+    dict[id] = d;
+  });
+  var context = {roster:JSON.stringify(dict), event_id:event_id, title:title, template:template, pk:pk };
+  $.post("/schedules/templates/create/save/", context);
 });

@@ -3,10 +3,17 @@
     <div class='col col-12'>
       <div class='card-columns mx-4'>
         {% for location, attributes in roster.items %}
+        
             {% if attributes.active %}
               {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
+               {% if template %}
+                {% include 'event_templates/location_card.html' %}
+              {% else %}
                 {% include 'events/detail/location_card.html' %}
+              {% endif %}
               {% endwith %}
+                
+              
             {% endif %}
         {% endfor %}
         
