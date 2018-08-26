@@ -26,6 +26,7 @@
               <option value='{{shift}}' class='{{shift}} default-position' default selected>{{ scheduled.verbose_name }}</option>
               {% else %}
               <option value='{{scheduled.employee}}' class='{{shift}}' selected>{{ scheduled.employee }}</option>
+              <option value='{{shift}}' class='{{shift}} default-position' default>{{ scheduled.verbose_name }}</option>
               {% endif %}
               {% for employee in all_employees %}
                 <option class="{{employee}}">{{employee.name}}</option>

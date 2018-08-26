@@ -3,19 +3,41 @@
 <div class="container event-details">
   <div class='col-12 py-4'>
     
-    <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
-    <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
-    <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
     
-    <div class='event-header-details'>
     
-    <a class='event-title' id='{{event.id}}'>{{event.title}}</a><br />
-    <a class='event-timestamps' style='font-size:1.2em;'>
-      Created at: {{event.schedule.created}}
-      {% if event.schedule.modified is not None %} | Last modified: {{event.schedule.modified}} {% endif %}
-    </a><br />
-    <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
-    <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a><br />
+    <div class='row event-header-details'>
+      <div class='col-12'>
+        <a class='event-title' style='font-size:2em;' id='{{event.id}}'>{{event.title}}</a>
+        <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
+        <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
+        <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+      </div>
+      <div class='col-6'>
+        <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
+        <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a><br />
+      </div>
+      <div class='col-6'>
+        <a class='event-timestamps float-right' style='font-size:1.2em;text-align:right; line-height:1em;'>
+          {% if event.schedule.created %}
+          Created at: {{event.schedule.created}}
+          {% else %}
+          Never Saved
+          {% endif %}
+        </a>
+          <br />
+        <a class='event-timestamps float-right' style='font-size:1.2em;text-align:right;'>
+          {% if event.schedule.modified %}
+          Last modified: {{event.schedule.modified}}
+          {% else %}
+          Never Modified
+          {% endif %}
+        </a>
+      </div>
+      
+    
+    
+    
+    
     
     
     </div>

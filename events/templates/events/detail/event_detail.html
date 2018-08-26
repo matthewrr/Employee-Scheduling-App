@@ -16,7 +16,7 @@
   <hr/>
 
   <div class='container px-0'>
-    <div class='card collapse' id='collapseCP'>
+    <div class='card {{ first_save|yesno:"show,collapse" }}' id='collapseCP'>
       <div class=' mx-3 mb-4'  style='background: #e8ebf1;'>
         <div class='card-body'>
           <div class='row'>
@@ -31,18 +31,20 @@
   </div>
   
   <div class='row mx-auto schedule-cards'>
-    <div class='col col-12'>
-      <div class='card-columns mx-4'>
-        {% for location, attributes in roster.items %}
-          {% if attributes.active %}
-            {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
-              {% include 'events/detail/location_card.html' %}
-            {% endwith %}
-          {% endif %}
-        {% endfor %}
+    {% if not first_save %}
+      <div class='col col-12'>
+        <div class='card-columns mx-4'>
+          {% for location, attributes in roster.items %}
+            {% if attributes.active %}
+              {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
+                {% include 'events/detail/location_card.html' %}
+              {% endwith %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        <hr />
       </div>
-      <hr />
-    </div>
+    {% endif %}
   </div>
   </div>
 </div>

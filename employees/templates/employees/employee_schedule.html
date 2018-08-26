@@ -35,9 +35,7 @@
               <tr class='header'>
                 <th onclick="sortTable(0)" scope="col"><a>Date</a></th>
                 <th onclick="sortTable(1)" scope="col"><a>Event</a></th>
-                {% if scheduled %}
-                  <th onclick="sortTable(2)" scope="col"><a>Schedule</a></th>
-                {% endif %}
+                <th onclick="sortTable(2)" scope="col"><a>Schedule</a></th>
               </tr>
             </thead>
             
@@ -54,7 +52,6 @@
                   <strong>Name: </strong>{{attributes.details.title}}<br />
                   <strong>Doors: </strong>{{attributes.details.doors}}<br />
                 </td>
-                {% if scheduled %}
                   {% if attributes.shift.location %}
                       <td>
                         <strong>Location: </strong>{{attributes.shift.location}}<br />
@@ -63,7 +60,6 @@
                   {% else %}
                     <td>Not currently scheduled for this event.</td>
                   {% endif %}
-                {% endif %}
               </tr>
             {% endfor %}
             </tbody>

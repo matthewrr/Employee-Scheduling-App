@@ -182,16 +182,12 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
     };
     $(positions).each(function(i,v){
       var arrive = $(this).next().children().val();
-      console.log(arrive);
-      var position = $(v).children().first().attr('value');
+      var position = $(v).children('.default-position').attr('value');
       var person = scheduled[i];
       var employee = '';
       var verbose_name = '';
-      // var verbose_name = $(v).find('default').html();
-      // console.log(position)
-      // console.log(verbose_name)
-      // var employee = ($(person).val() === $(person).attr('.class'));
       verbose_name = $(this).find('.default-position').html();
+      console.log(position)
       var attr = $(person).attr('default')
       if (typeof attr !== typeof undefined && attr !== false) {
         employee = '';
@@ -209,7 +205,9 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
     });
     id = $(this).attr('id');
     dict[id] = d;
+    
   });
+  console.log(dict)
   var context = {roster:JSON.stringify(dict), event_id:event_id, title:title, template:template, pk:pk };
   $.post("/schedules/templates/create/save/", context);
 });

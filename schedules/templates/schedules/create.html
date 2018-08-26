@@ -6,18 +6,28 @@
     <div class="container event-details">
       <div class='col-12 py-4'>
         <div class='event-header-details form-inline template-header'>
+            <div class='col-12'>
+              {% with yesno_arg=title|add:',' %}
+                <input class="form-control template-name" type="text" id="{{schedule.pk}}" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}>
+              {% endwith %}
+              {% if not new %}
+                <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button><br />
+              {% endif %}
+          </div>
           
-          {% with yesno_arg=title|add:',' %}
-            <input class="form-control template-name" type="text" id="{{schedule.pk}}" placeholder="Template Name" style='width:50%;' value='{{ title|yesno:yesno_arg }}' required {{title|yesno:'readonly,' }}><br />
-          {% endwith %}
+            
+            {% if not new %}
+            <div class='col-12 pt-3'>
+            <a class='template-timestamps' style='font-size:1.2em;'>
+              Created at: {{schedule.created}}
+              {% if schedule.modified %}<br />Last modified: {{schedule.modified}} {% endif %}
+            </a>
+            </div>
+            {% endif %}
+            
           
-          {% if not new %}
-          <button type="button" class="btn btn-dark ml-2 edit"><span>Edit</span></button><br />
-          <p><a class='template-timestamps' style='font-size:1.2em;'>
-            Created at: {{schedule.created}}
-            {% if schedule.modified %}<br />Last modified: {{schedule.modified}} {% endif %}
-          </a></p><br />
-          {% endif %}
+          
+          
         </div>
       </div>
     </div>

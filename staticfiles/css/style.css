@@ -14,7 +14,7 @@ hr {background-color:white; margin: 0px; margin-bottom:24px!important;}
 th {color:#1b142d;}
 th > a {cursor:pointer;}
 td {vertical-align: baseline!important;}
-td > a { color:white; font-weight:600;}
+td > a {font-weight:600;}
 
 .shadow-custom { margin:auto; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
 
@@ -29,7 +29,7 @@ td > a { color:white; font-weight:600;}
 .schedule-btn {
 	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
 	border-radius: 40px;
-    box-sizing: border-box;
+  box-sizing: border-box;
 	color: #00a84f;
 	display: block;
 	letter-spacing: 1px;
@@ -62,9 +62,6 @@ td > a { color:white; font-weight:600;}
     font-weight: 300;
     text-transform:uppercase;
     font-size:1.6em;
-    background: -webkit-linear-gradient(#844162, #333);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .schedule-header {
@@ -115,7 +112,7 @@ button.add-object {
 .table-header {
     text-transform: uppercase;
     font-weight: 700;
-    color: white!important;
+    /*color: white!important;*/
     letter-spacing: 1px;
     font-size: 24px;
     display: inline-block;
@@ -181,8 +178,7 @@ button.add-object {
     border-radius: 20px;
 }
 .icon-edit, .icon-delete { height:16px; width:16px; margin-top:-1px; }
-.icon-export {float:right;}
-.icon-export img {height: 32px; width: 32px; margin-top: 14px; margin-right: 10px}
+.icon-export img {height: 48px; width: 48px;}
 .icon-search {vertical-align:text-top}
 
 .btn:focus, .input:focus, textarea:focus, text:focus, a:focus {

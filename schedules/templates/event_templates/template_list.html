@@ -7,6 +7,7 @@
       <th onclick="sortTable(0)" scope="col"><a>Title</a></th>
       <th onclick="sortTable(1)" scope="col"><a>Bar Active</a></th>
       <th onclick="sortTable(2)" scope="col"><a>Active Locations</a></th>
+      <!--<th onclick="sortTable(2)" scope="col"><a>Roles</a></th>-->
       <th scope="col">Edit</th>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
       <td>{{template.title}}</td>
       <td>{% include 'base/boolean.html' with bool=template.template %}</td>
       <td>{% firstof template.active_locations '0' %}</td>
+      <!--<td>Roles</td>-->
       <td>
         <a href='{% url "template_update" template.id %}'>
           <button type="button" class="btn">

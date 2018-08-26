@@ -20,6 +20,7 @@ def template_list(request):
         'objs':'templates',
         'app':'event_templates'
     }
+    pprint(templates[0].roster)
     return render(request, 'objects/list.html', context)
 
 def template_create(request):
@@ -228,6 +229,7 @@ def modal_template(request):
 def select_template(request):  
     pk = request.POST.get('pk')
     category = request.POST.get('category')
+    all_employees = Employee.objects.all()
     if category == 'future-events' or category == 'previous-events':
         event = get_object_or_404(Event, pk=pk)
         schedule = get_object_or_404(Schedule, event=event.pk)
@@ -236,7 +238,7 @@ def select_template(request):
         schedule = get_object_or_404(Schedule, pk=pk)
         roster = schedule.roster
     
-    context = {'roster': roster['locations'], 'template': False}
+    context = {'roster': roster['locations'], 'template': False, 'all_employees': all_employees}
     pprint(context)
     template = render_to_string('schedules/template.html', context)
     return HttpResponse(template)

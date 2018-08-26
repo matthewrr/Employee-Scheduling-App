@@ -29,16 +29,19 @@ def update_schedule(request):
 def event_detail_view(request,year,month,day,slug):
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
-    roster = ''
     try:
         schedule = Schedule.objects.get(event=event.pk)
         roster = schedule.roster
+        first_save = False
     except:
         roster = schedule_template()
+        first_save = True
+    
     context = {'event':event,
                'roster':roster,
                'all_employees':all_employees,
                'template':False,
+               'first_save': first_save,
                }
     return render(request, './events/detail/event_detail.html', context)
 
