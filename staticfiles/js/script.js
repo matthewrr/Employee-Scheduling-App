@@ -352,7 +352,14 @@ $('.modal').on('click', '.add-role-button', function() {
   short.addClass(short_name);
   short.attr('value', short_name);
   
-  var count = $('.' + short_name).length;
+  var count = $('.role-list').find('.' + short_name).length;
+  // var count = $('.' + short_name).length;
+  // count = 0;
+  // $('.' + short_name).each(function(){
+//     count += 1;
+// });
+//   console.log(short_name)
+//   console.log(count);
   var num = (count += 1);
   var container = short_name + '-container';
   if (count === 2) {
@@ -376,6 +383,7 @@ $('.modal').on('click', '.remove-sub-role', function() {
   var short_id = $(this).parent().parent().prev().prev().children().attr('value');
   var verbose_name = $(this).parent().parent().prev().attr('placeholder');
   var v = verbose_name.split(" ").slice(0,-1).join(' ');
+  if (v.length === 0) v = verbose_name
   $(this).parent().parent().parent().parent().parent().remove();
   var target = $('.'+short_id);
   if (target.length === 1) {

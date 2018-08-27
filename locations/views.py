@@ -24,7 +24,6 @@ def location_create(request):
 @csrf_exempt
 def positions_create(request):
     if request.method == 'GET':
-        # prevent if new location
         location_id = str(request.GET.get('location'))
         try:
             location = Location.objects.get(location_id=location_id)
@@ -35,7 +34,7 @@ def positions_create(request):
         positions = {}
 
         for p in p_set:
-            positions[p.code] = p.position
+            positions[p.short_name] = p.verbose_name
         return HttpResponse(json.dumps(positions))
         
     if request.method == 'POST':
@@ -43,26 +42,20 @@ def positions_create(request):
         positions = request.POST.get('positions')
         positions = json.loads(positions)
         location_id = request.POST.get('location')
-        print(Location.objects.all())
         location = Location.objects.get(location_id=location_id)
-        print(location)
         try:
             location = Location.objects.get(location_id=location_id)
         except:
             location = Location()
             for short_name, verbose_name in positions.items():
-                location.position_set.create(position=verbose_name, code=short_name)
+                location.position_set.create(verbose_name=verbose_name, short_name=short_name)
             
             return HttpResponse('Hello')
-        
-        # location = get_object_or_404(Location, location_id=location_id) if pk else Location()
-        
-        
-        p_set = list(location.position_set.values('code'))
+        p_set = list(location.position_set.values('short_name'))
         keys = []
         
         for k,v in enumerate(p_set):
-            keys.append(p_set[k]['code'])
+            keys.append(p_set[k]['short_name'])
         short = []
         
         for short_name, verbose_name in positions.items():
@@ -70,20 +63,17 @@ def positions_create(request):
             if short_name in keys:
                 pass
             else:
-                location.position_set.create(position=verbose_name, code=short_name)
+                location.position_set.create(verbose_name=verbose_name, short_name=short_name)
         
         for key in keys:
             if key not in short:
-                Position.objects.filter(location=location, code=key).delete()
+                Position.objects.filter(location=location, short_name=key).delete()
         
         return HttpResponse('Hello')
 
 def save_location_form(request, form, template_name):
     data = dict()
-    
-    # get location positionset
-    # position_set = 
-    roles = CompanyProfileRole.objects.all()
+    default_roles = CompanyProfileRole.objects.all()
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -94,10 +84,20 @@ def save_location_form(request, form, template_name):
             })
         else:
             data['form_is_valid'] = False
-        
-    context = {'form': form, 'obj':'location', 'roles':roles}
+    
+    location_id = form['location_id'].value()
+    location = Location.objects.get(location_id=location_id)
+    
+    
+    roles = {}
+    categories = CompanyProfileRole.objects.all()
+    location_roles = location.position_set.all()
+    for role in location_roles:
+        roles.setdefault(role.code, {})
+        roles[role.code][role.short_name] = role.verbose_name
+
+    context = {'form': form, 'obj':'location', 'roles':roles, 'default_roles': default_roles}
     data['html_form'] = render_to_string(template_name, context, request=request)
-    # data['position_set'] = position_set
     return JsonResponse(data)
 
 def location_update(request, pk):

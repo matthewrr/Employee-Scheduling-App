@@ -9,7 +9,6 @@ class Location(models.Model):
     modified     = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
         if not self.id:
             self.created = timezone.now()
         self.modified = timezone.now()
@@ -34,9 +33,10 @@ class LocationCategory(models.Model):
 
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
-   position = models.CharField(max_length=256)
+   verbose_name = models.CharField(max_length=256)
+   short_name = models.CharField(max_length=3)
    code = models.CharField(max_length=3)
    
    def __str__(self):
-       return self.position
+       return self.verbose_name
     

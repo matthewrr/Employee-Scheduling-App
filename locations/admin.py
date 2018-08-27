@@ -3,7 +3,7 @@ from .models import Location, Position
 
 class PositionInline(admin.StackedInline):
     model = Position
-    fields = (('position', 'code'),)
+    fields = ('code','verbose_name','short_name',)
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('title', 'location_id','bar','created','modified',)

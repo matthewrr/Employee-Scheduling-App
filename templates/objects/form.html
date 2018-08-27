@@ -22,21 +22,61 @@
   <div class='row'>
     <div class='col-4' style='border-right: 1px solid #DDD;'>
       <div class="btn-group-vertical">
-      {% for role in roles %}
+      {% for role in default_roles %}
         <button type="button" class="btn btn-dark mb-2 add-role-button" id='{{role.short_name}}'>{{role.verbose_name}}</button>
       {% endfor %}
       </div>
     </div>
+    
     <div class='col-6 role-list'>
-      {% for role in roles %}
-        <div class='{{role.short_name}}-container mb-2'>
-          
+      {% for code, role in roles.items %}
+        <div class='{{code}}-container mb-2'>
+          {% for short_name, verbose_name in role.items %}
+          <div class='row shift-row default-position'>
+            <div class="btn-group" style="width:100%;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text short-name {{code}}" value='{{code}}' id="basic-addon1">{{short_name}}</span>
+                </div>
+                
+                <div class="form-control verbose-name" type="text" placeholder="{{verbose_name}}" readonly>{{verbose_name}}</div>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "img/minus.svg" %}' /> </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         </div>
       {% endfor %}
       
       
     </div>
   </div>
+  
+  <!--{% for role in roles %}-->
+  <!--<div class='d-none'>-->
+  <!--  <div class='row shift-row default-position'>-->
+  <!--    <div class="btn-group" style="width:100%;">-->
+  <!--      <div class="input-group">-->
+  <!--        <div class="input-group-prepend">-->
+  <!--          <span class="input-group-text short-name" id="basic-addon1"></span>-->
+  <!--        </div>-->
+          
+  <!--        <div class="form-control verbose-name" type="text" placeholder="{{scheduled.employee}}" readonly></div>-->
+  <!--        <div class="input-group-append">-->
+  <!--          <span class="input-group-text">-->
+  <!--            <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "img/minus.svg" %}' /> </a>-->
+  <!--          </span>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--{% endfor %}-->
+  
 
   <div class='d-none'>
     <div class='row shift-row default-position'>
