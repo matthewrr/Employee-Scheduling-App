@@ -8,6 +8,8 @@ body {
     font-family:"Open Sans";
 }
 
+.company-logo {height:40px;}
+
 .page-link {background: rgba(256,256,256,.2); color: #000; border-radius:50px!important; margin-left: 2px; margin-right: 2px;}
 .btn-dark {background: rgba(0,0,0,.7); border-color:rgba(0,0,0,0);}
 hr {background-color:white; margin: 0px; margin-bottom:24px!important;}
@@ -735,3 +737,19 @@ button:focus {
 .display-flex {
   display:flex;
 }
+
+
+.colorPickSelector {
+  border-radius: 5px;
+  width: 32px;
+  height: 32px;
+  margin-top: 3px;
+  cursor: pointer;
+  -webkit-transition: all linear .2s;
+  -moz-transition: all linear .2s;
+  -ms-transition: all linear .2s;
+  -o-transition: all linear .2s;
+  transition: all linear .2s;
+}
+
+.colorPickSelector:hover { transform: scale(1.1); }

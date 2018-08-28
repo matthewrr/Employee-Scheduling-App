@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<div class='col-12 category-header'>
+  <span class='event-title'>Location Categories</span>
+  <a class='add-category-button'><img style='width:22px; height:22px; vertical-align:text-top; margin-left:4px;' src='{% static "img/plus.svg" %}' /></a>
+</div>
+
+<div class='col-12'>
+  <form class='company-categories' id='location'>
+    {% for category in categories %}
+    <div class="form-row add-category">
+        
+        <div class="input-group mb-2">
+          <div class="colorPickSelector" style='color:{{category.color}};background-color:{{cateogry.color}}'></div>
+          <div class="input-group-prepend col-8 pr-0 pl-2">
+              <input type="text" class="form-control category-name" style='border-top-right-radius:0px;border-bottom-right-radius:0px;' placeholder="Name of Category" value='{{category}}' required>
+          </div>
+          <div class="input-group-append">
+              <span class="input-group-text delete" style='cursor:pointer;'>Delete</span>
+            </div>
+        </div>
+      <br />
+    </div>
+    {% endfor %}
+    <div class="form-row add-category">
+        <div class="input-group mb-2">
+          <div class="colorPickSelector" style='color:rgb(256, 256, 256);background-color:rgb(256, 256, 256);'></div>
+          <div class="input-group-prepend col-8 pr-0 pl-2">
+              <input type="text" class="form-control category-name" style='border-top-right-radius:0px;border-bottom-right-radius:0px;' placeholder="Name of Category" value='{{category}}' required>
+          </div>
+          <div class="input-group-append">
+              <span class="input-group-text delete" style='cursor:pointer;'>Delete</span>
+            </div>
+        </div>
+      <br />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2 float-right save-categories">Save</button>
+  </form>
+  
+</div>
+
+

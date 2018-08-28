@@ -2,6 +2,11 @@
 // Navbar: set active link
 $(function() {$('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');});
 
+
+$(".colorPickSelector").colorPick();
+
+
+
 // Location App: load positions
 function loadPositions(l) {
   if ($('.modal-title').html() === 'Update location') {
@@ -306,29 +311,54 @@ $(template_category).on('change', function() {
 	$(template_subcategory).html($(options).filter( '[value="'+val+'"]') );
 }).trigger('change');
 
-$('.company-roles').on('click', '.add-role-button', function() { 
-    var new_role = $('.add-role').last().clone();
-    $(this).remove();
-    $(new_role).find('input').val('');
-    $('.company-roles').append(new_role);
+
+
+
+$('.category-header').on('click', '.add-category-button', function() {
+  console.log('hello');
+    var id = $(this).parent().next().children().first().attr('id');
+    var new_category = $('#'+id).find('.add-category').last().clone();
+    $('#'+id).children().last().before(new_category);
 });
-$('.company-roles').on('click', '.remove-role-button', function() { 
+$('.company-categories').on('click', '.delete', function() { 
   var myvar = $(this).parent().parent().parent();
-  var new_role = $('.add-role');
+  var new_category = $('.add-category');
   $(myvar).remove();
-  if (!new_role) $('.role-abbr').next(new_role);
+  if (!new_category) $('.category-abbr').next(new_category);
 });
 
-$('#save-roles').click(function() {
-  var roles = {'roles': {}};
-  $('.add-role').each(function() {
-    var verbose_name = $(this).find('.role-name').val();
-    var short_name = $(this).find('.role-abbr').val();
-    roles['roles'][verbose_name] = short_name;
+$('.save-categories').click(function(e) {
+  e.preventDefault();
+  var categories = {'categories': {}};
+  var category_id = $(this).parent().attr('id');
+  
+  $(this).parent().children('.add-category').each(function() {
+    var color = $(this).find('.colorPickSelector').css('color');
+    if (category_id === 'roles') {
+      var verbose_name = $(this).find('.category-name').val();
+      var short_name = $(this).find('.category-abbr').val();
+      categories['categories'][verbose_name] = {
+        'color': color,
+        'short_name': short_name,
+      };
+    } else if (category_id == 'location') {
+      var category = $(this).find('.category-name').val();
+      categories['categories'][category] = {
+        'color': color,
+      };
+    }
   });
-  roles = JSON.stringify(roles);
-  $.post( "/company/roles/", {roles: roles});
+  console.log(categories);
+  categories = JSON.stringify(categories);
+  var context = {
+    categories: categories,
+    category_id: category_id
+  };
+  $.post( "/company/roles/", context);
 });
+
+
+
 
 function sendPositions(location) {
   var positions = {};

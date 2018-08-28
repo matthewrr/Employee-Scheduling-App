@@ -4,15 +4,15 @@ from jsonfield import JSONField
 from events.models import Event
 
 class Schedule(models.Model):
-    title        = models.CharField(max_length=256)
-    template     = models.BooleanField(default=False)
-    roster       = JSONField(blank=True,null=True)
-    event        = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
-    scheduled    = models.IntegerField(null=True,blank=True)
-    created      = models.DateTimeField(editable=False,null=True)
-    modified     = models.DateTimeField(null=True)
+    title            = models.CharField(max_length=256)
+    template         = models.BooleanField(default=False)
+    roster           = JSONField(blank=True,null=True)
+    event            = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
+    scheduled        = models.IntegerField(null=True,blank=True)
+    created          = models.DateTimeField(editable=False,null=True)
+    modified         = models.DateTimeField(null=True)
     active_locations = models.IntegerField(null=True,blank=True)
-    shifts =           JSONField(blank=True,null=True)
+    shifts           = JSONField(blank=True,null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''

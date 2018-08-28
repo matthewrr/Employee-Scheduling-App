@@ -27,6 +27,7 @@ class Location(models.Model):
 class LocationCategory(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
     location_category = models.CharField(max_length=256,null=True, blank=True)
+    color = models.CharField(max_length=256,null=True, blank=True)
     
     def __str__(self):
        return self.location_category

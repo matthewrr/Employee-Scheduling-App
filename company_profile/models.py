@@ -23,3 +23,4 @@ class CompanyProfile(models.Model):
 class CompanyProfileRole(models.Model):
     verbose_name = models.CharField(max_length=256,null=True, blank=True)
     short_name = models.CharField(max_length=256,null=True, blank=True)
+    color = models.CharField(max_length=256,null=True, blank=True)

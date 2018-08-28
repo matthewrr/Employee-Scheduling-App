@@ -1,23 +1,45 @@
 {% load staticfiles %}
-<form class='company-roles'>
-  {% for role in roles %}
-    <div class="form-row add-role">
-      <div class="col-auto">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-              <input type="text" class="form-control role-name" placeholder="Name of Role" value='{{role.verbose_name}}'>
+
+<div class='col-12 category-header'>
+  <span class='event-title'>Employee Roles</span>
+   <img class='add-category-button' style='width:22px; height:22px; vertical-align:text-top; margin-left:4px;' src='{% static "img/plus.svg" %}' />
+  
+</div>
+
+<div class='col-12'>
+  <form class='company-categories' id='roles'>
+    {% for role in roles %}
+      <div class="form-row add-category">
+        
+          <div class="input-group mb-2">
+            <div class="colorPickSelector" style='color:{{role.color}};background-color:{{role.color}}'></div>
+            <div class="input-group-prepend col-5 pr-0 pl-2">
+              <input type="text" class="form-control category-name" style='border-top-right-radius:0px;border-bottom-right-radius:0px;' placeholder="Name of Role" value='{{role.verbose_name}}' required>
+            </div>
+            <input type="text" class="form-control category-abbr" placeholder="Abbr." value='{{role.short_name}}' />
+            <div class="input-group-append">
+              <span class="input-group-text delete" style='cursor:pointer;'>Delete</span>
+            </div>
           </div>
-          <input type="text" class="form-control role-abbr" placeholder="Abbr." value='{{role.short_name}}' />
-          {% if forloop.last %}
-          <img class='add-role-button' style='width:30px; height:30px;' src='{% static "img/plus.svg" %}' /> 
-          {% endif %}
-          <img class='remove-role-button' style='width:30px; height:30px;' src='{% static "img/minus.svg" %}' /> 
-        </div>
+        <br />
       </div>
-      <br />
-    </div>
-  {% endfor %}
-</form>
-<div class="col-auto">
-  <button type="submit" class="btn btn-primary mb-2" id='save-roles'>Save</button>
+    {% endfor %}
+      <div class="form-row add-category">
+          <div class="input-group mb-2">
+            <div class="colorPickSelector" style='color:rgb(256, 256, 256);background-color:rgb(256, 256, 256);'></div>
+            <div class="input-group-prepend col-5 pr-0 pl-2">
+                <input type="text" class="form-control category-name" style='border-top-right-radius:0px;border-bottom-right-radius:0px;' placeholder="Name of Role" required>
+            </div>
+            <input type="text" class="form-control category-abbr" placeholder="Abbr." value='{{role.short_name}}' />
+            <div class="input-group-append">
+              <span class="input-group-text delete" style='cursor:pointer;'>Delete</span>
+            </div>
+            
+           
+          </div>
+        <br />
+      </div>
+      <button type="submit" class="btn btn-primary mb-2 float-right save-categories">Save</button>
+  </form>
+  
 </div>

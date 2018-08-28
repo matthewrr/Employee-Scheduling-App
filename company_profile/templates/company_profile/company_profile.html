@@ -14,17 +14,25 @@
       </div>
       <hr />
       <div class='row'>
-        <div class='col col-12'>
+        <div class='col col-8'>
             Company Name<br/>
             Logo<br/>
             Admin Users<br/>
             How to User/Site Navigation<br/>
             Contact for Help/Feedback<br/>
         </div>
+        <div class='col-4'>
+          
+          <div class='row'>
+            {% include 'company_profile/employee_roles.html' %}
+          </div>
+          <div class='row'>
+            {% include 'company_profile/location_category.html' %}
+          </div>
+        </div>
+        
       </div>
-      <div class='row'>
-        {% include 'company_profile/employee_roles.html' %}
-      </div>
+      
       <hr />
     </div>
   </div>
