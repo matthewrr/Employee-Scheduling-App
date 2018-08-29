@@ -66,7 +66,13 @@ $(function() {
         }
       }
     });
+    
     if (location) sendPositions($('#id_location_id').val());
+    
+    var loc_id = $('#id_location_id');
+    if (loc_id && !location) sendPositions($('#id_location_id').val());
+    
+    
     return false;
   };
   // Create
@@ -212,7 +218,6 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
     dict[id] = d;
     
   });
-  console.log(dict)
   var context = {roster:JSON.stringify(dict), event_id:event_id, title:title, template:template, pk:pk };
   $.post("/schedules/templates/create/save/", context);
 });
@@ -360,7 +365,7 @@ $('.save-categories').click(function(e) {
 
 
 
-function sendPositions(location) {
+function sendPositions(location_id) {
   var positions = {};
   $('.default-position').each(function() {
     var short_name = $(this).find('.input-group-prepend').children().html();
@@ -368,8 +373,10 @@ function sendPositions(location) {
     if (short_name) positions[short_name] = verbose_name;
   });
   positions = JSON.stringify(positions);
-  var context = {positions: positions, location: location};
-  console.log(context);
+  console.log(positions);
+  var category = $('.category-select option:selected').text();
+  
+  var context = {positions: positions, location_id: location_id, category: category};
   $.post("/locations/create/positions/", context);
 }
 
@@ -388,8 +395,6 @@ $('.modal').on('click', '.add-role-button', function() {
   // $('.' + short_name).each(function(){
 //     count += 1;
 // });
-//   console.log(short_name)
-//   console.log(count);
   var num = (count += 1);
   var container = short_name + '-container';
   if (count === 2) {

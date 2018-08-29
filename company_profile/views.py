@@ -15,7 +15,7 @@ from locations.models import LocationCategory
 
 def company_profile(request):
     roles = CompanyProfileRole.objects.all()
-    categories = {}
+    categories = LocationCategory.objects.all()
     context = {'obj':'Profile', 'categories':categories, 'roles':roles}
     return render(request, 'company_profile/company_profile.html', context)
 
@@ -26,18 +26,12 @@ def company_roles(request):
         categories = json.loads(request.POST.get('categories'))
         # surely there's a way to get/assign all at once
         keys = []
-        print(categories)
         for key, values in categories['categories'].items():
             keys.append(key)
             color = values['color']
-            print(color)
-            print(category_id)
             if category_id == 'roles':
-                print('hello')
                 current_objs = CompanyProfileRole.objects.all()
                 short_name = values['short_name']
-                print(short_name)
-                print(color)
                 obj, created = CompanyProfileRole.objects.update_or_create(
                     verbose_name__exact=key,
                     defaults={

@@ -19,10 +19,11 @@ def location_create(request):
         form = LocationForm(request.POST)
     else:
         form = LocationForm()
-    return save_location_form(request, form, 'objects/create.html')
+    return save_location_form(request, form, 'objects/create.html', new_obj=True)
 
 @csrf_exempt
 def positions_create(request):
+    
     if request.method == 'GET':
         location_id = str(request.GET.get('location'))
         try:
@@ -39,18 +40,21 @@ def positions_create(request):
         
     if request.method == 'POST':
         
+        category = request.POST.get('category')
         positions = request.POST.get('positions')
+        
         positions = json.loads(positions)
-        location_id = request.POST.get('location')
+        location_id = request.POST.get('location_id')
+        print(location_id)
         location = Location.objects.get(location_id=location_id)
         try:
             location = Location.objects.get(location_id=location_id)
-        except:
-            location = Location()
             for short_name, verbose_name in positions.items():
                 location.position_set.create(verbose_name=verbose_name, short_name=short_name)
             
             return HttpResponse('Hello')
+        except:
+            pass
         p_set = list(location.position_set.values('short_name'))
         keys = []
         
@@ -60,20 +64,60 @@ def positions_create(request):
         
         for short_name, verbose_name in positions.items():
             short.append(short_name)
-            if short_name in keys:
-                pass
-            else:
+            if short_name not in keys:
                 location.position_set.create(verbose_name=verbose_name, short_name=short_name)
         
         for key in keys:
             if key not in short:
                 Position.objects.filter(location=location, short_name=key).delete()
         
+        LocationCategory.objects.filter(category=category).update(location=location.pk)
+        
         return HttpResponse('Hello')
 
-def save_location_form(request, form, template_name):
-    data = dict()
+def save_location_form(request, form, template_name, new_obj=False):
+    data = {}
+    roles = {}
+    categories = CompanyProfileRole.objects.all()
     default_roles = CompanyProfileRole.objects.all()
+    
+    try:
+        location_id = form['location_id'].value()
+        location = Location.objects.get(location_id=location_id)
+        location_roles = location.position_set.all()
+        for role in location_roles:
+            roles.setdefault(role.code, {})
+            roles[role.code][role.short_name] = role.verbose_name
+    except:
+        pass
+    
+    
+    
+    for role in default_roles:
+        short_name = role.short_name
+        roles.setdefault(short_name, {})
+            
+            
+    if new_obj == True:
+        categories = LocationCategory.objects.all()
+        
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            locations = Location.objects.all().order_by('location_id')
+            data['html_object_list'] = render_to_string('locations/location_list_ajax.html', {
+                'locations': locations,
+            })
+        else:
+            data['form_is_valid'] = False
+        context = {'form': form, 'obj':'location','roles':roles, 'default_roles': default_roles, 'categories':categories}
+        data['html_form'] = render_to_string(template_name, context, request=request)
+        return JsonResponse(data)
+        
+    
+    
+    
+    
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -85,18 +129,13 @@ def save_location_form(request, form, template_name):
         else:
             data['form_is_valid'] = False
     
-    location_id = form['location_id'].value()
-    location = Location.objects.get(location_id=location_id)
     
     
-    roles = {}
-    categories = CompanyProfileRole.objects.all()
-    location_roles = location.position_set.all()
-    for role in location_roles:
-        roles.setdefault(role.code, {})
-        roles[role.code][role.short_name] = role.verbose_name
+    
+    
 
-    context = {'form': form, 'obj':'location', 'roles':roles, 'default_roles': default_roles}
+    categories = LocationCategory.objects.all()
+    context = {'form': form, 'obj':'location', 'roles':roles, 'default_roles': default_roles, 'categories':categories}
     data['html_form'] = render_to_string(template_name, context, request=request)
     return JsonResponse(data)
 

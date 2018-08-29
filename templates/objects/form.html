@@ -16,6 +16,16 @@
 
 
 {% if obj == 'location' %}
+
+  <div class='row'>
+    <select class="category-select">
+      <option selected>Category...</option>
+      {% for category in categories %}
+        <!--add color-->
+        <option value="{{category.category}}">{{category.category}}</option>
+      {% endfor %}
+    </select>
+  </div>
   <div class='row'>
     <span>Maximum Positions:</span>
   </div>
@@ -51,32 +61,8 @@
           {% endfor %}
         </div>
       {% endfor %}
-      
-      
     </div>
   </div>
-  
-  <!--{% for role in roles %}-->
-  <!--<div class='d-none'>-->
-  <!--  <div class='row shift-row default-position'>-->
-  <!--    <div class="btn-group" style="width:100%;">-->
-  <!--      <div class="input-group">-->
-  <!--        <div class="input-group-prepend">-->
-  <!--          <span class="input-group-text short-name" id="basic-addon1"></span>-->
-  <!--        </div>-->
-          
-  <!--        <div class="form-control verbose-name" type="text" placeholder="{{scheduled.employee}}" readonly></div>-->
-  <!--        <div class="input-group-append">-->
-  <!--          <span class="input-group-text">-->
-  <!--            <a class='remove-sub-role'><img style='width:20px; height:20px;' src='{% static "img/minus.svg" %}' /> </a>-->
-  <!--          </span>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
-  <!--{% endfor %}-->
-  
 
   <div class='d-none'>
     <div class='row shift-row default-position'>

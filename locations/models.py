@@ -1,8 +1,19 @@
 from django.db import models
 from django.utils import timezone
 
+class LocationCategory(models.Model):
+    category = models.CharField(max_length=256,null=True, blank=True)
+    color = models.CharField(max_length=256,null=True, blank=True)
+    
+    def __str__(self):
+        return self.category
+    
+    class Meta:
+        verbose_name_plural = 'Location Categories'
+
 class Location(models.Model):
     location_id = models.CharField(max_length=256,null=True, blank=True)
+    category = models.ForeignKey(LocationCategory, on_delete=models.CASCADE,null=True, blank=True)
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
     created      = models.DateTimeField(editable=False,null=True)
@@ -24,13 +35,7 @@ class Location(models.Model):
     def __str__(self):
         return self.title
 
-class LocationCategory(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
-    location_category = models.CharField(max_length=256,null=True, blank=True)
-    color = models.CharField(max_length=256,null=True, blank=True)
-    
-    def __str__(self):
-       return self.location_category
+
 
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
