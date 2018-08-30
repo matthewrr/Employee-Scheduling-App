@@ -2,11 +2,11 @@ from django.db import models
 from django.utils import timezone
 
 class LocationCategory(models.Model):
-    category = models.CharField(max_length=256,null=True, blank=True)
+    category_name = models.CharField(max_length=256,null=True, blank=True)
     color = models.CharField(max_length=256,null=True, blank=True)
     
     def __str__(self):
-        return self.category
+        return self.category_name
     
     class Meta:
         verbose_name_plural = 'Location Categories'

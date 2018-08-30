@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Schedule
-from locations.models import Location
+from locations.models import Location, LocationCategory
 from employees.models import Employee
 from events.models import Event
 from company_profile.models import CompanyProfileRole
@@ -20,12 +20,28 @@ def template_list(request):
         'objs':'templates',
         'app':'event_templates'
     }
-    pprint(templates[0].roster)
     return render(request, 'objects/list.html', context)
 
 def template_create(request):
     roster = schedule_template()
+    pprint(roster)
+    d = {}
+    categories = LocationCategory.objects.all()
+    for category in categories:
+        color = category.color
+        secondary_color = 'rgba(' + color[4:-1] + ', .5)'
+        d[category.category_name] = {
+            'color': color,
+            'secondary_color': secondary_color, 
+            'locations': {}
+        }
+        
+    for location_id, attributes in roster.items():
+        category = attributes['category']
+        d[category]['locations'][location_id] = attributes
+    
     context = {
+        'd': d,
         'roster': roster,
         'template': True,
         'new': True,
@@ -46,13 +62,16 @@ def schedule_template(schedule={},template={},new_template=False):
                 active = False
         else:
             active = True
-        
+        color = location.category.color
         schedule[loc_id] = {
             'active': active,
             'bar': location.bar,
             'location': location.title,
             'scheduled': 0,
-            'positions': {}
+            'positions': {},
+            'category': location.category.category_name,
+            'color': color,
+            'secondary_color': 'rgba(' + color[4:-1] + ', .5)'
         }
         
         
@@ -60,12 +79,11 @@ def schedule_template(schedule={},template={},new_template=False):
             for position in location.position_set.all():
                 if new_template:
                     flag = template['locations'].get(loc_id)
-                    print(flag)
                     if flag:
                         schedule[loc_id]['positions'][position.code] = {
                             'employee': '',
                             'arrival_time': '',
-                            'verbose_name': position.position
+                            'verbose_name': position.verbose_name
                         }
                 else:
                     if template['locations'].get(loc_id):
@@ -96,13 +114,13 @@ def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
         roster = schedule_template(template=json.loads(data),new_template=True)
+        
         template = render_to_string('schedules/template.html', {'roster': roster, 'template': True})
         return HttpResponse(template)
 
 @csrf_exempt
 def save_template(request):
     if request.method == 'POST':
-        
         
         data = request.POST.get('roster')
         
@@ -116,7 +134,6 @@ def save_template(request):
         data = json.loads(data)
         data = {'locations': data}
         roster = schedule_template(template=data)
-        pprint(roster)
         
         active_locations = 0
         if template == 'false':
@@ -210,8 +227,8 @@ def template_update(request, pk):
         'roster': roster,
         'title': title,
         'new': False,
-        'schedule':schedule,
-        'template':True
+        'schedule': schedule,
+        'template': True
     }
     return render(request, 'schedules/create.html', context)
 

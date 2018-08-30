@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <div class="card" class='testing' style='width:100%;'>
-  <div class="card-header location-header py-2">
+  <div class="card-header location-header py-2" style='background-color:{{attributes.color}}'>
     <label class='location-title' data-target='#{{location_id}}' data-toggle='collapse'>
       <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked='checked' />
       <a style="vertical-align:middle;">{{location_verbose}}</a>
@@ -10,7 +10,7 @@
     <img class='float-right ml-1 remove-employee' src='{% static "img/minus.svg" %}' alt="Minus Symbol"/>
   </div>
   
-  <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true">
+  <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true" style='background-color:{{attributes.secondary_color}}'>
   {% for shift, scheduled in position.items %}
 
                 <div class='row shift-row default-position'>

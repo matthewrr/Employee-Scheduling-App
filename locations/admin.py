@@ -6,7 +6,7 @@ class PositionInline(admin.StackedInline):
     fields = ('code','verbose_name','short_name',)
 
 class LocationCategoryAdmin(admin.ModelAdmin):
-    list_display = ('category', 'color',)
+    list_display = ('category_name', 'color',)
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'location_id','bar','created','modified',)
