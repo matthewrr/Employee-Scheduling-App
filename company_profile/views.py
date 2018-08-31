@@ -47,15 +47,15 @@ def company_roles(request):
             if category_id == 'location':
                 current_objs = LocationCategory.objects.all()
                 obj, created = LocationCategory.objects.update_or_create(
-                    category__exact=key,
+                    category_name__exact=key,
                     defaults={
-                        'category': key,
+                        'category_name': key,
                         'color': color
                     }
                 )
                 for item in current_objs:
-                    if item.category not in keys:
-                        LocationCategory.objects.filter(category__exact=item.category).delete()
+                    if item.category_name not in keys:
+                        LocationCategory.objects.filter(category_name__exact=item.category_name).delete()
 
     return HttpResponse('Hello, world!')
     

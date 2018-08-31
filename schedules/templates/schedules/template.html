@@ -1,23 +1,25 @@
 {% load staticfiles %}
-<div class='row mx-auto'>
-    <div class='col col-12'>
-      <div class='card-columns mx-4'>
-        {% for location, attributes in roster.items %}
+{% for category, options in d.items %}
+  <div class='container' style='background-color:{{options.tertiary_color}}'>
+    {{category}}<br />
+    <div class='card-columns'>
+    {% for location, attributes in options.locations.items %}
+  
         
             {% if attributes.active %}
               {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
-               {% if template %}
-                {% include 'event_templates/location_card.html' %}
-              {% else %}
-                {% include 'events/detail/location_card.html' %}
-              {% endif %}
+                 {% if template %}
+                  {% include 'event_templates/location_card.html' %}
+                {% else %}
+                  {% include 'events/detail/location_card.html' %}
+                {% endif %}
               {% endwith %}
-                
-              
             {% endif %}
-        {% endfor %}
         
-      </div>
-      <hr />
+    {% endfor %}
     </div>
 </div>
+  {% endfor %}
+        
+      
+      <hr />

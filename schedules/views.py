@@ -24,7 +24,6 @@ def template_list(request):
 
 def template_create(request):
     roster = schedule_template()
-    pprint(roster)
     d = {}
     categories = LocationCategory.objects.all()
     for category in categories:
@@ -49,7 +48,8 @@ def template_create(request):
     return render(request, 'schedules/create.html', context)
     
 def schedule_template(schedule={},template={},new_template=False):
-    locations = Location.objects.all()
+    locations = Location.objects.order_by('category')
+    print(locations)
     shifts = {}
     for location in locations:
         # active = template.get('locations', {}).get(loc.location_id, False) if template else True
@@ -71,7 +71,8 @@ def schedule_template(schedule={},template={},new_template=False):
             'positions': {},
             'category': location.category.category_name,
             'color': color,
-            'secondary_color': 'rgba(' + color[4:-1] + ', .5)'
+            'secondary_color': 'rgba(' + color[4:-1] + ', .5)',
+            'tertiary_color': 'rgba(' + color[4:-1] + ', .1)'
         }
         
         
@@ -80,7 +81,7 @@ def schedule_template(schedule={},template={},new_template=False):
                 if new_template:
                     flag = template['locations'].get(loc_id)
                     if flag:
-                        schedule[loc_id]['positions'][position.code] = {
+                        schedule[loc_id]['positions'][position.short_name] = {
                             'employee': '',
                             'arrival_time': '',
                             'verbose_name': position.verbose_name
@@ -114,8 +115,28 @@ def generate_template(request):
     if request.method == 'POST':
         data = request.POST.get('template')
         roster = schedule_template(template=json.loads(data),new_template=True)
+        print('printing roster:')
+        pprint(roster)
         
-        template = render_to_string('schedules/template.html', {'roster': roster, 'template': True})
+        d = {}
+        categories = LocationCategory.objects.all()
+        for category in categories:
+            color = category.color
+            secondary_color = 'rgba(' + color[4:-1] + ', .5)'
+            tertiary_color = 'rgba(' + color[4:-1] + ', .1)'
+
+            d[category.category_name] = {
+                'color': color,
+                'secondary_color': secondary_color, 
+                'tertiary_color': tertiary_color,
+                'locations': {}
+            }
+        
+        for location_id, attributes in roster.items():
+            category = attributes['category']
+            d[category]['locations'][location_id] = attributes
+        
+        template = render_to_string('schedules/template.html', {'roster': roster, 'template': True, 'd':d})
         return HttpResponse(template)
 
 @csrf_exempt
