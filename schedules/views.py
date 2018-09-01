@@ -251,6 +251,7 @@ def template_update(request, pk):
         'schedule': schedule,
         'template': True
     }
+    pprint(schedule)
     return render(request, 'schedules/create.html', context)
 
 @csrf_exempt

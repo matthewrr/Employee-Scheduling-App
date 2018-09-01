@@ -108,7 +108,8 @@ button.add-object {
 
 }
 
-.js-update-object, .js-delete-object {text-align: center; border: 1px black solid; padding: 4px 9px;;background: rgba(256,256,256,.1);}
+/*.js-update-object, .js-delete-object {text-align: center; border: 1px black solid; padding: 4px 9px;;background: rgba(256,256,256,.1);}*/
+.js-update-object, .js-delete-object {background:none;}
 .js-object-create a {margin-left: -1px;}
 
 .table-header {
@@ -170,7 +171,7 @@ button.add-object {
 #searchInput:-ms-input-placeholder { color: black; } /* Internet Explorer 10-11 */
 #searchInput::-ms-input-placeholder { color: black; } /* Microsoft Edge */
 
-.icon-false, .icon-search, .icon-true { height:20px; width:20px; }
+.icon-false, .icon-search, .icon-true { height:30px; }
 .icon-true {
     background: rgba(194, 120, 117, 0.71);
     border-radius: 50px;
@@ -179,7 +180,7 @@ button.add-object {
     background: rgba(110, 49, 93, 0.47);
     border-radius: 20px;
 }
-.icon-edit, .icon-delete { height:16px; width:16px; margin-top:-1px; }
+.icon-edit, .icon-delete { height:30px; margin-top:-1px; background:none; }
 .icon-export img {height: 48px; width: 48px;}
 .icon-search {vertical-align:text-top}
 

@@ -12,7 +12,7 @@ class LocationCategory(models.Model):
         verbose_name_plural = 'Location Categories'
 
 class Location(models.Model):
-    location_id = models.CharField(max_length=256,null=True, blank=True)
+    location_id = models.CharField(max_length=256,null=True, blank=True,verbose_name='Location ID')
     category = models.ForeignKey(LocationCategory, on_delete=models.CASCADE,null=True, blank=True)
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
@@ -40,8 +40,8 @@ class Location(models.Model):
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
    verbose_name = models.CharField(max_length=256)
-   short_name = models.CharField(max_length=3)
-   code = models.CharField(max_length=3)
+   short_name = models.CharField(max_length=8)
+   code = models.CharField(max_length=8)
    
    def __str__(self):
        return self.verbose_name

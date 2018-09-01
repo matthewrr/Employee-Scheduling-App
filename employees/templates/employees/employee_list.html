@@ -52,14 +52,7 @@
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.alcohol_permit %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.admin %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.active %}</td>
-      <td class="text-center">
-        <button type="button" class="btn js-update-object" data-url="{% url 'employee_update' employee.id %}">
-          <img class='icon-edit 'src='{% static "img/edit.svg" %}' alt="Edit Icon"/>
-        </button>
-        <button type="button" class="btn js-delete-object" data-url="{% url 'employee_delete' employee.id %}">
-          <img class='icon-delete 'src='{% static "img/delete.svg" %}' alt="Delete Icon"/>
-        </button>
-      </td>
+      {% include 'objects/list_display/edit_delete.html' with obj=obj id=employee.id %}
 
     </tr>
   {% endfor %}

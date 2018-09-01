@@ -21,13 +21,12 @@
       <!--<td>Roles</td>-->
       <td>
         <a href='{% url "template_update" template.id %}'>
-          <button type="button" class="btn">
-            <img class='icon-edit 'src='{% static "img/edit.svg" %}' alt="Edit Icon"/>
+          <button type="button" class="btn" style='background:none;'>
+            <img class='icon-edit' src='{% static "img/edit.png" %}' alt="Edit Icon"/>
           </button>
         </a>
-        
         <button type="button" class="btn js-delete-object" data-url="{% url 'template_delete' template.id %}">
-          <img class='icon-delete 'src='{% static "img/delete.svg" %}' alt="Delete Icon"/>
+          <img class='icon-delete 'src='{% static "img/delete.png" %}' alt="Delete Icon"/>
         </button>
       </td>
     </tr>
