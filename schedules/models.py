@@ -9,7 +9,6 @@ class Schedule(models.Model):
     roster           = JSONField(blank=True,null=True)
     event            = models.OneToOneField(Event, on_delete=models.CASCADE,null=True,blank=True)
     scheduled        = models.IntegerField(null=True,blank=True)
-    created          = models.DateTimeField(editable=False,null=True)
     modified         = models.DateTimeField(null=True)
     active_locations = models.IntegerField(null=True,blank=True)
     shifts           = JSONField(blank=True,null=True)
@@ -20,10 +19,6 @@ class Schedule(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(Schedule, self).save(*args, **kwargs)
-    
-    # def name_schedule(self):
-    #     if not self.title:
-    #         self.title = event.title
     
     def __str__(self):
         return self.title

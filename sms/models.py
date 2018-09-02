@@ -2,14 +2,11 @@ from django.db import models
 from django.utils import timezone
 
 class SMS(models.Model):
-    command = models.CharField(max_length=256)
-    response = models.CharField(max_length=256)
+    command     = models.CharField(max_length=256)
+    response    = models.CharField(max_length=256)
     description = models.TextField(blank=True)
-    # if employee schedule, how many events?
-    # profiles/numbers with access
-    # who receives response: employees, mgmt, all
-    created      = models.DateTimeField(editable=False,null=True)
-    modified     = models.DateTimeField(null=True)
+    created     = models.DateTimeField(editable=False,null=True)
+    modified    = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''

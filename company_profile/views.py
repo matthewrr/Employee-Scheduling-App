@@ -21,46 +21,45 @@ def company_profile(request):
 
 @csrf_exempt
 def company_roles(request):
+    
     if request.method == 'POST':
-        category_id = request.POST.get('category_id')
         categories = json.loads(request.POST.get('categories'))
-        # surely there's a way to get/assign all at once
         keys = []
-        for key, values in categories['categories'].items():
-            keys.append(key)
-            color = values['color']
-            if category_id == 'roles':
-                current_objs = CompanyProfileRole.objects.all()
-                short_name = values['short_name']
-                obj, created = CompanyProfileRole.objects.update_or_create(
-                    verbose_name__exact=key,
-                    defaults={
-                        'color': color,
-                        'short_name': short_name,
-                        'verbose_name': key
-                    }
-                )
-                for item in current_objs:
-                    if item.verbose_name not in keys:
-                        CompanyProfileRole.objects.filter(verbose_name__exact=item.verbose_name).delete()
-                
-            if category_id == 'location':
-                current_objs = LocationCategory.objects.all()
-                obj, created = LocationCategory.objects.update_or_create(
-                    category_name__exact=key,
-                    defaults={
-                        'category_name': key,
-                        'color': color
-                    }
-                )
-                for item in current_objs:
-                    if item.category_name not in keys:
-                        LocationCategory.objects.filter(category_name__exact=item.category_name).delete()
-
+        for k, v in categories['categories'].items():
+            keys.append(k)
+            color = v['color']
+            current_objs = CompanyProfileRole.objects.all()
+            short_name = v['short_name']
+            obj, created = CompanyProfileRole.objects.update_or_create(
+                verbose_name__exact=k,
+                defaults={
+                    'color': color,
+                    'short_name': short_name,
+                    'verbose_name': k
+                }
+            )
+        for item in current_objs:
+            if item.verbose_name not in keys:
+                CompanyProfileRole.objects.filter(verbose_name__exact=item.verbose_name).delete()
     return HttpResponse('Hello, world!')
-    
-    
-    
-    
-    
-    
+
+@csrf_exempt
+def location_categories(request):
+    if request.method == 'POST':
+        categories = json.loads(request.POST.get('categories'))
+        keys = []
+        for k, v in categories['categories'].items():
+            keys.append(k)
+            color = v['color']
+            current_objs = LocationCategory.objects.all()
+            obj, created = LocationCategory.objects.update_or_create(
+                category_name__exact=k,
+                defaults={
+                    'category_name': k,
+                    'color': color
+                }
+            )
+        for item in current_objs:
+            if item.category_name not in keys:
+                LocationCategory.objects.filter(category_name__exact=item.category_name).delete()
+    return HttpResponse('Hello, world!')

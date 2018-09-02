@@ -4,11 +4,10 @@
   
   <thead>
     <tr class='header'>
-      <th onclick="sortTable(0)" scope="col"><a>ID</a></th>
-      <th onclick="sortTable(1)" scope="col"><a>Name</a></th>
-      <th onclick="sortTable(2)" scope="col"><a>Category</a></th>
-      <th onclick="sortTable(4)" scope="col"><a>Positions</a></th>
-      <th onclick="sortTable(5)" scope="col"><a>Bar</a></th>
+      <th onclick="sortTable(0)" scope="col"><a>Name</a></th>
+      <th onclick="sortTable(1)" scope="col"><a>Category</a></th>
+      <th onclick="sortTable(2)" scope="col"><a>Positions</a></th>
+      <th onclick="sortTable(3)" scope="col"><a>Bar</a></th>
       <th scope="col">Edit</th>
     </tr>
   </thead>
@@ -16,7 +15,6 @@
   <tbody>
   {% for location in locations %}
     <tr>
-      <td>{{location.location_id}}</td>
       <td>{{location.title}}</td>
       <td>{{location.category}}</td>
       <td>{{location.positions_length}}</td>

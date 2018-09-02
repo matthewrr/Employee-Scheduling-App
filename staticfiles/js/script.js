@@ -353,13 +353,17 @@ $('.save-categories').click(function(e) {
       };
     }
   });
-  console.log(categories);
   categories = JSON.stringify(categories);
   var context = {
     categories: categories,
     category_id: category_id
   };
-  $.post( "/company/roles/", context);
+  if (category_id === 'roles') {
+    $.post( "/company/roles/", context);
+  } else if (category_id === 'location') {
+    $.post( "/company/location/", context);
+  }
+  
 });
 
 
