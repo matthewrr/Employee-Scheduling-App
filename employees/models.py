@@ -4,20 +4,19 @@ from django.utils import timezone
 from jsonfield import JSONField
 
 class Employee(models.Model):
-    first_name = models.CharField(max_length=64, default='')
-    last_name = models.CharField(max_length=64, default='')
-    employee_id = models.CharField(max_length=8, default='')
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
-    active = models.BooleanField(default=True)
-    food_permit = models.BooleanField(default=False)
-    alcohol_permit = models.BooleanField(default=False)
-    admin = models.BooleanField(default=False)
-    created      = models.DateTimeField(editable=False,null=True)
-    modified     = models.DateTimeField(null=True)
+    first_name      = models.CharField(max_length=64, default='')
+    last_name       = models.CharField(max_length=64, default='')
+    employee_id     = models.CharField(max_length=8, default='')
+    phone_regex     = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number    = models.CharField(validators=[phone_regex], max_length=17, blank=True)
+    active          = models.BooleanField(default=True)
+    food_permit     = models.BooleanField(default=False)
+    alcohol_permit  = models.BooleanField(default=False)
+    admin           = models.BooleanField(default=False)
+    created         = models.DateTimeField(editable=False,null=True)
+    modified        = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
         if not self.id:
             self.created = timezone.now()
         self.modified = timezone.now()
@@ -35,7 +34,3 @@ class Employee(models.Model):
         
     def __str__(self):
         return self.first_name + ' ' + self.last_name
-
-# class EmployeeSchedule(models.Model):
-#     employee = models.ForeignKey(Employee, on_delete=models.CASCADE,null=True, blank=True)
-#     event = models.ForeignKey(Employee, on_delete=models.CASCADE,null=True, blank=True)

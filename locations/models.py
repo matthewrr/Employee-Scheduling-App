@@ -13,7 +13,7 @@ class LocationCategory(models.Model):
 
 class Location(models.Model):
     location_id = models.CharField(max_length=256,null=True, blank=True,verbose_name='Location ID')
-    category = models.ForeignKey(LocationCategory, on_delete=models.CASCADE,null=True, blank=True)
+    category = models.ForeignKey(LocationCategory, on_delete=models.SET_NULL,null=True, blank=True)
     title = models.CharField(max_length=256)
     bar = models.BooleanField(default=False)
     created      = models.DateTimeField(editable=False,null=True)
@@ -35,8 +35,6 @@ class Location(models.Model):
     def __str__(self):
         return self.title
 
-
-
 class Position(models.Model):
    location = models.ForeignKey(Location, on_delete=models.CASCADE,null=True, blank=True)
    verbose_name = models.CharField(max_length=256)
@@ -45,4 +43,3 @@ class Position(models.Model):
    
    def __str__(self):
        return self.verbose_name
-    
