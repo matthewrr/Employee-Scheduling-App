@@ -2,51 +2,66 @@
 {% load staticfiles %}
 {% block content %}  
 
-<div class='container px-0'>
+<div class='container-fluid' style='background:white;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
   {% include 'events/detail/header/event_header.html' with template=template %}
-  
-  <div class='container roster-body' style='background:white;'>
-    <div class='col-12 py-3 control-panel-header'>
-      <span>SCHEDULE</span>
-      <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'>
-        <span>[Control Panel]</span>
-      </a>
-      <div class='btn btn-dark float-right submit-schedule'>Save</div>
+  <div class='row px-4'>
+    <div class='col-2'>
+      <span>Employees:</span><br />
+      {% for employee in all_employees %}
+        {{employee.name}}<br />
+      {% endfor %}
     </div>
-  <hr/>
-
-  <div class='container px-0'>
-    <div class='card {{ first_save|yesno:"show,collapse" }}' id='collapseCP'>
-      <div class=' mx-3 mb-4'  style='background: #e8ebf1;'>
-        <div class='card-body'>
-          <div class='row'>
-              {% include './header/control_panel/update_template.html' %}
-              {% include './header/control_panel/update_roles.html' %}
-              {% include './header/control_panel/show_hide.html' %}
-          </div>
-        </div>
-      </div>
-      <hr/>
+    <div class='col-9'>
     </div>
-  </div>
-  
-  <div class='row mx-auto schedule-cards'>
-    {% if not first_save %}
-      <div class='col col-12'>
-        <div class='card-columns mx-4'>
-          {% for location, attributes in roster.items %}
-            {% if attributes.active %}
-              {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
-                {% include 'events/detail/location_card.html' %}
-              {% endwith %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        <hr />
-      </div>
-    {% endif %}
-  </div>
   </div>
 </div>
+  
+  
+  
+  
+
 
 {% endblock %}
+
+ <!--<div class='container-fluid roster-body' style='background:white;'>-->
+  <!--  <div class='col-12 py-3 control-panel-header'>-->
+  <!--    <span>SCHEDULE</span>-->
+  <!--    <a class='ml-2' data-toggle="collapse" href="#collapseCP" role="button" style='font-size:.6em; color:black;text-transform:uppercase;'>-->
+  <!--      <span>[Control Panel]</span>-->
+  <!--    </a>-->
+  <!--    <div class='btn btn-dark float-right submit-schedule'>Save</div>-->
+  <!--  </div>-->
+  <!--<hr/>-->
+
+  <!--<div class='container-fluid px-0'>-->
+  <!--  <div class='card {{ first_save|yesno:"show,collapse" }}' id='collapseCP'>-->
+  <!--    <div class=' mx-3 mb-4'  style='background: #e8ebf1;'>-->
+  <!--      <div class='card-body'>-->
+  <!--        <div class='row'>-->
+  <!--            {% include './header/control_panel/update_template.html' %}-->
+  <!--            {% include './header/control_panel/update_roles.html' %}-->
+  <!--            {% include './header/control_panel/show_hide.html' %}-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <hr/>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
+  <!--<div class='row mx-auto schedule-cards'>-->
+  <!--  {% if not first_save %}-->
+  <!--    <div class='col col-12'>-->
+  <!--      <div class='card-columns mx-4'>-->
+  <!--        {% for location, attributes in roster.items %}-->
+  <!--          {% if attributes.active %}-->
+  <!--            {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}-->
+  <!--              {% include 'events/detail/location_card.html' %}-->
+  <!--            {% endwith %}-->
+  <!--          {% endif %}-->
+  <!--        {% endfor %}-->
+  <!--      </div>-->
+  <!--      <hr />-->
+  <!--    </div>-->
+  <!--  {% endif %}-->
+  <!--</div>-->
+  <!--</div>-->

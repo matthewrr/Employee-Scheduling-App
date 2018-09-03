@@ -1,11 +1,12 @@
 body {
-    /*background: url("/static/events/img/background.jpg") no-repeat fixed;*/
-    /*background: url("/static/events/img/blue1.jpg") no-repeat fixed;*/
-    /*background: linear-gradient(to top right, rgba(57,44,93,1), rgba(57,44,93,1),rgba(129,71,110,1),rgba(231,174,143,1))!important; */
     background:#DDD;
-    background-position: bottom left;
     color:#1b142d;
     font-family:"Open Sans";
+}
+
+@media (min-width: 1200px)
+.container {
+    max-width: 100%;
 }
 
 .company-logo {height:40px;}
@@ -652,7 +653,7 @@ button:focus {
   font-weight: 500;
   font-family: 'Source Sans Pro';
   letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   letter-spacing: 1px;
 }
 
@@ -708,7 +709,7 @@ button:focus {
 }
 
 .event-details {
-  background-color: #e8ebf1;
+  /*background-color: #e8ebf1;*/
 }
 
 .remove-button {

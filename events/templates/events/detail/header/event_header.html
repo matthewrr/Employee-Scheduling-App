@@ -1,46 +1,23 @@
 {% load staticfiles %}
 
-<div class="container event-details">
+<div class="row px-4">
   <div class='col-12 py-4'>
-    
-    
-    
-    <div class='row event-header-details'>
+    <div class='row event-header-details' style='font-size:1.2em;font-family:"Source Sans Pro"'>
       <div class='col-12'>
-        <a class='event-title' style='font-size:2em;' id='{{event.id}}'>{{event.title}}</a>
-        <button type="button" class="btn btn-dark float-right print"><span>Print</span></button>
-        <button type="button" class="mx-2 btn-dark btn float-right"><span>Export</span></button>
-        <button type="button" class="btn btn-dark float-right"><span>Email</span></button>
+        <span class='event-title' style='font-size:1.5em;font-weight:100;' id='{{event.id}}'>{{event.title}}</span>
+        <form class='float-right'>
+          <select class="form-control" style='display:inline-block;width:200px;'>
+            <option>Save</option>
+            <option>Print</option>
+            <option>Export</option>
+            <option>Email</option>
+          </select>
+          <button type="button" class="btn btn-dark submit"><span>Submit</span></button>
+        </form><br />
+        <span style='font-weight:100;'>Event starts - </span><span>{{event.event_start}}</span><br />
+        <span style='font-weight:100;'>Doors open - </span><span class='event-date'>{{event.doors_open}}</span><br />
       </div>
-      <div class='col-6'>
-        <a class='event-date' style='font-size:1.2em;'>{{event.date}}</a><br />
-        <a class='event-doors' style='font-size:1.2em;'>Doors Open at {{event.doors_open}}</a><br />
-      </div>
-      <div class='col-6'>
-        <a class='event-timestamps float-right' style='font-size:1.2em;text-align:right; line-height:1em;'>
-          {% if event.schedule.created %}
-          Created at: {{event.schedule.created}}
-          {% else %}
-          Never Saved
-          {% endif %}
-        </a>
-          <br />
-        <a class='event-timestamps float-right' style='font-size:1.2em;text-align:right;'>
-          {% if event.schedule.modified %}
-          Last modified: {{event.schedule.modified}}
-          {% else %}
-          Never Modified
-          {% endif %}
-        </a>
-      </div>
-      
-    
-    
-    
-    
-    
-    
     </div>
-        
   </div>
 </div>
+<hr />

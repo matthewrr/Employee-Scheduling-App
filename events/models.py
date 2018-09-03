@@ -10,6 +10,7 @@ from locations.models import Location, Position
 class Event(models.Model):
     title        = models.CharField(max_length=256)
     date         = models.DateField(blank=False)
+    event_start  = models.CharField(max_length=256, verbose_name="Event Start")
     doors_open   = models.CharField(max_length=256, verbose_name="Doors Open")
     alcohol      = models.BooleanField(default=True)
     slug         = models.SlugField()
