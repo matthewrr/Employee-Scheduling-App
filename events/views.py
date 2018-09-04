@@ -37,11 +37,24 @@ def event_detail_view(request,year,month,day,slug):
         roster = schedule_template()
         first_save = True
     
+    whole = len(all_employees)
+    f = whole // 5
+    ff = whole - (whole % 5)
+    new_employees = {}
+    for i in range(4):
+        beg = i*f
+        end = beg + f
+        new_employees[i] = all_employees[beg:end]
+    
+    new_employees[5] = all_employees[ff:]
+    
+    
     context = {'event':event,
                'roster':roster,
                'all_employees':all_employees,
                'template':False,
                'first_save': first_save,
+               'new_employees':new_employees
                }
     return render(request, './events/detail/event_detail.html', context)
 
