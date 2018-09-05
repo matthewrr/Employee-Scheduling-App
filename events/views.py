@@ -38,15 +38,15 @@ def event_detail_view(request,year,month,day,slug):
         first_save = True
     
     whole = len(all_employees)
-    f = whole // 5
-    ff = whole - (whole % 5)
+    f = whole // 10
+    ff = whole - (whole % 10)
     new_employees = {}
-    for i in range(4):
+    for i in range(9):
         beg = i*f
         end = beg + f
         new_employees[i] = all_employees[beg:end]
     
-    new_employees[5] = all_employees[ff:]
+    new_employees[10] = all_employees[ff:]
     
     
     context = {'event':event,
@@ -56,6 +56,7 @@ def event_detail_view(request,year,month,day,slug):
                'first_save': first_save,
                'new_employees':new_employees
                }
+    pprint(roster)
     return render(request, './events/detail/event_detail.html', context)
 
 def event_list(request):

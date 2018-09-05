@@ -5,24 +5,64 @@
 <div class='container-fluid' style='background:white;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
   {% include 'events/detail/header/event_header.html' with template=template %}
   
-<div class='row mx-4'>  
-  {% for category, employees in new_employees.items %}
-  <div class="board col" style='background:#f0f0f0;margin:0px;'>
-      <div class="board-column todo">
+  
+  <div class='row row-height mx-4'>
+    
+    <div class="board col-2" style='margin:0px; flex: 0 0 12%;'>
+      <div class='left'>
+        <div class="board-column todo">
+          <!--<div class="board-column-header">Employees</div>-->
+          <div class="board-column-content">
+            {% for employee in all_employees %}
+              <div class="board-item"><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class='col-10' style='flex: 0 0 88%;'>
+      <div class='schedule-cards'>
+      {% if not first_save %}
+        <div class='col col-12' style='border-left: 1px #DDD solid;'>
+          <div class='card-columns mx-4'>
+            {% for location, attributes in roster.items %}
+              {% if attributes.active %}
+                {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
+                  {% include 'events/detail/new_location_card.html' %}
+                {% endwith %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          <hr />
+        </div>
+      {% endif %}
+      </div>
+    </div>  
+    
+  </div>
+  
+</div>
+  
+<!--<div class='row mx-4'>  -->
+<!--  {% for category, employees in new_employees.items %}-->
+<!--  <div class="board col" style='background:#f0f0f0;margin:0px;'>-->
+<!--      <div class="board-column todo">-->
         <!--<div class="board-column-header"></div>-->
         
           
-          <div class="board-column-content">
-            {% for employee in employees %}
-              <div class="board-item"><div class="board-item-content">{{employee.name}}</div></div>
-            {% endfor %}
-          </div>
+<!--          <div class="board-column-content">-->
+<!--            {% for employee in employees %}-->
+<!--              <div class="board-item"><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>-->
+<!--            {% endfor %}-->
+<!--          </div>-->
           
         
-      </div>
-    </div>
-  {% endfor %}
-</div>
+<!--      </div>-->
+<!--    </div>-->
+<!--  {% endfor %}-->
+<!--</div>-->
 
   
   <!--<div class="board">-->
@@ -36,7 +76,7 @@
   <!--  </div>-->
   <!--</div>-->
  
-</div>
+
 {% endblock %}
 
   

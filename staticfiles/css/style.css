@@ -778,7 +778,8 @@ button:focus {
   /*width: 30%;*/
   /*width:100%;*/
   margin: 0 1.5%;
-  background: #f0f0f0;
+  /*background: #f0f0f0;*/
+  background:none;
   border-radius: 3px;
   z-index: 1;
 }
@@ -816,7 +817,8 @@ button:focus {
 }
 .board-column-content {
   position: relative;
-  border: 10px solid transparent;
+  /*border: 10px solid transparent;*/
+  border: 3px solid transparent;
   min-height: 95px;
 }
 .board-item {
@@ -843,6 +845,7 @@ button:focus {
   cursor: pointer;
   -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+
 }
 @media (max-width: 600px) {
   .board-item-content {
@@ -853,11 +856,78 @@ button:focus {
   }
 }
 
-#cols {
-    -moz-column-count: 5;
-    -moz-column-gap: 20px;
-    -webkit-column-count: 5;
-    -webkit-column-gap: 20px;
-    column-count: 5;
-    column-gap: 20px;
+/*#cols {*/
+/*    -moz-column-count: 5;*/
+/*    -moz-column-gap: 20px;*/
+/*    -webkit-column-count: 5;*/
+/*    -webkit-column-gap: 20px;*/
+/*    column-count: 5;*/
+/*    column-gap: 20px;*/
+/*}*/
+
+.board-item-content {
+  font-family: "Source Sans Pro";
+  font-weight: 100;
+  padding: 4px 4px 4px 10px;
+  text-transform:capitalize;
+  
+}
+
+.card-columns {
+  column-count: 4;
+  /*@include media-breakpoint-only(sm) {*/
+  /*  column-count: 4;*/
+  /*}*/
+  /*@include media-breakpoint-only(xl) {*/
+  /*  column-count: 5;*/
+  /*}*/
+}
+
+
+
+
+
+
+
+
+/*Set the row height to the viewport*/
+.row-height{
+  height: 100vh;
+}
+
+/*Set up the columns with a 100% height, body color and overflow scroll*/
+
+.left{
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/*Remove the scrollbar from Chrome, Safari, Edge and IE*/
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+* {
+  -ms-overflow-style: none !important;
+}
+
+
+
+
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
 }
