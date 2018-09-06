@@ -1,52 +1,20 @@
 {% load staticfiles %}
 
-<div class="card" class='testing' style='width:100%;'>
-  <div class="card-header location-header py-2">
-    <label class='location-title' data-target='#{{location_id}}' data-toggle='collapse'>
-      <input name='{{bar|yesno:"bar,"}}' class='active-location mr-3 {{bar|yesno:"bar,"}}' type="checkbox" checked='checked' />
-      <a style="vertical-align:middle;">{{location_verbose}}</a>
-    </label>
-    <img class='float-right ml-1 add-employee' src='{% static "img/plus.svg" %}' alt="Plus Symbol"/>
-    <img class='float-right ml-1 remove-employee' src='{% static "img/minus.svg" %}' alt="Minus Symbol"/>
-  </div>
-  
-  <div class="card-body location-body collapse {{position|yesno:'show,hide'}}" id="{{location_id}}" name='{{location_verbose}}' aria-expanded="true">
-  {% for shift, scheduled in position.items %}
-    <div class='row shift-row {{scheduled.arrival_time|yesno:"scheduled,unscheduled"}}'>
-      <div class="btn-group" style="width:100%;height:35px;">
-        <!--<div class='col-3' style='flex: 0 0 18%;'>-->
-        <!--  <span>{{shift}}:</span>-->
-        <!--</div>-->
-        <input class="form-control" style='width:18%;font-family: "Source Sans Pro";box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-top-left-radius:4px;border-bottom-left-radius:4px;border-width:1px;border:none;font-size:17px;' type="text" placeholder="{{shift}}" readonly>
-            <!--<div class="input-group-text text-center" style='width:100%;font-family: "Source Sans Pro";padding: 4px 4px 4px 10px;box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-top-left-radius:4px;border-bottom-left-radius:4px;border-width:1px;border:none;font-size:17px;'>-->
-              <!--<span style='width:100%'>{{shift}}</span>-->
-        
-        <input type="text" class="{{employee}} ml-1" placeholder="{{scheduled.verbose_name}}" aria-label="Employee Name" style='width:80%;font-family: "Source Sans Pro";padding: 4px 4px 4px 10px;box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-radius:4px;border-width:1px;border:none;font-weight:100;font-size:17px;'>
-        <input type="text" class="arrival-time ml-1" placeholder="Arrival" aria-label="Arrival" style='width:30%;font-family: "Source Sans Pro";padding: 4px;box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-radius:4px;border-width:1px;border:none;font-weight:100;font-size:17px;'>
-        
-        <!--<div class="input-group">-->
+  <div class='col-3'>
+      <div class="board-column">
+        <div class='board-column-header'>{{location_verbose}}</div>
+        {% for shift, scheduled in position.items %}
+        <div class='row'>
+          <div class='col-3'>
+            <span>{{shift}}</span>
+          </div>
+          <div class='col-5'>
+            <div class="board-column-content" id='{{location}}-{{shift}}'>
+                <div class="board-item"><div class="board-item-content" style='width:200px;'>Hi</div></div>
+            </div>
+          </div>
           
-          <!--<div class="col pr-0 input-group-prepend" style='flex: 0 0 20%;max-width: 20%;'>-->
-          <!--  <div class="input-group-text text-center" style='width:100%;'>-->
-          <!--    <span style='width:100%'>{{shift}}</span>-->
-          <!--  </div>-->
-          <!--</div>-->
-          
-          <!--<input type="text" class="{{employee}}" placeholder="{{scheduled.verbose_name}}" aria-label="Employee Name" aria-describedby="basic-addon1">-->
-          
-          <!--<div class="col pl-0 input-group-append input-group arrival-time" style='flex: 0 0 30%;max-width: 30%; padding-right:15px;'>-->
-          <!--  <input type="text" class="form-control {{shift.0}}" placeholder="Arrive" aria-label="Arrive" value='{{ ""|add:scheduled.arrival_time }}' style="text-align:center;border-bottom-left-radius: 0px;border-top-left-radius: 0px;">-->
-          <!--</div>-->
-          
-          <!--<div class="col px-0 input-group-append input-group remove-button" style='flex: 0 0 30%;max-width: 30%;'>-->
-          <!--  <div class='btn btn-outline-danger' style='background:#f5f1f1; width:100%; margin-right:15px;'>Delete</div>-->
-          <!--</div>-->
-          
-        <!--</div>-->
+        </div><br />
+        {% endfor %}
       </div>
-      {# {% include 'events/detail/add_row.html' with loc=location.location_id %} #}
-    </div>
-  {% endfor %}
   </div>
-  
-</div>
