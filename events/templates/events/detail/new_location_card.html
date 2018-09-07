@@ -1,29 +1,52 @@
 {% load staticfiles %}
 
-  <div class='col-3' style='flex:0 0 20%;'>
-      <div class="board-column">
-        
+      
+      <div class='board-column' style='width:15%;'>
         <div class='board-column-header'>
-          <input type="checkbox" class="form-check-input float-left" id="exampleCheck1">
+          <input type="checkbox" class="form-check-input" id="">
           <span>{{location_verbose}}</span>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class='row' style='margin:0px;background-color:#f8f8f8;'>
+        <div class="board-column-content">
           
-          <div class='col-3' style='flex:0 0 1%;padding-right:0px;padding-left:12px;'>
-            <input class="form-control" style='margin:4px 0px;padding:4px;width:40px;font-family: "Source Sans Pro";box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-width:1px;border:none;font-size:17px;' type="text" placeholder="{{shift}}" readonly>
-          </div>
-          <div class='col' style='padding-left:5px;padding-right:0px;max-width:163px;'>
-            <div class="board-column-content" id='{{location}}-{{shift}}' style='border:none;'>
-              <!--fix width below-->
-                <div class="board-item"><div class="board-item-content" style='width:162px;max-height:35px;'>{{scheduled.verbose_name}}</div></div>
+          <input class="read-short" type="text" placeholder="{{shift}}" readonly></input>
+          <div class="board-item">
+            <div class="board-item-content" style='width:162px;max-height:35px;'>
+              <span>{{scheduled.verbose_name}}</span>
             </div>
           </div>
-          <input type="text" class="arrival-time" placeholder="Arrival" aria-label="Arrival" style='height: 33px;margin: 5px 0 5px 8px;width:70px;font-family: "Source Sans Pro";padding: 4px;box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-radius:4px;border-width:1px;border:none;font-weight:100;font-size:17px;'>
+          <input type="text" class="arrival-time float-right" placeholder="Arrival" aria-label="Arrival"></input>
+          
           
         </div>
         {% endfor %}
       </div>
-  </div>
-  
-  
+
+        <!--<div class='board-column'>-->
+        
+        <!--<div class='board-column-header'>-->
+        <!--  <input type="checkbox" class="form-check-input float-left" id="exampleCheck1">-->
+        <!--  <span>{{location_verbose}}</span>-->
+        <!--</div>-->
+        <!--{% for shift, scheduled in position.items %}-->
+        <!--<div class='row' style='margin:0px;background-color:#f8f8f8;'>-->
+          
+        <!--  <div class='col-3' style='flex:0 0 1%;padding-right:0px;padding-left:12px;'>-->
+        <!--    -->
+        <!--  </div>-->
+        <!--  <div class='col' style='padding-left:5px;padding-right:0px;max-width:163px;'>-->
+        <!--    <div class="board-column-content" id='{{location}}-{{shift}}' style='border:none;'>-->
+              <!--fix width below-->
+        <!--        <div class="board-item"><div class="board-item-content" style='width:162px;max-height:35px;'>{{scheduled.verbose_name}}</div></div>-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--  <input type="text" class="arrival-time" placeholder="Arrival" aria-label="Arrival" style='height: 33px;margin: 5px 0 5px 8px;width:70px;font-family: "Source Sans Pro";padding: 4px;box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);border-radius:4px;border-width:1px;border:none;font-weight:100;font-size:17px;'>-->
+          
+        <!--</div>-->
+        
+        <!--<div class="board-column-content" id='{{location}}-{{shift}}' style='border:none;'>-->
+        <!--        <div class="board-item"><div class="board-item-content" style='width:162px;max-height:35px;'>{{scheduled.verbose_name}}</div></div>-->
+        <!--    </div>-->
+        <!--{% endfor %}-->
+        <!--</div>-->
+      <!--</div>-->

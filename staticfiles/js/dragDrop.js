@@ -15,25 +15,65 @@ itemContainers.forEach(function (container) {
     dragSort: function () {
       return columnGrids;
     },
-    dragStartPredicate: function (item, e) {
-    // If this is final event in the drag process, let's prepare the predicate
-    // for the next round (do some resetting/teardown). The default predicate
-    // always needs to be called during the final event if there's a chance it
-    // has been triggered during the drag process because it does some necessary
-    // state resetting.
+    // dragStartPredicate: function (item, e) {
+    // // If this is final event in the drag process, let's prepare the predicate
+    // // for the next round (do some resetting/teardown). The default predicate
+    // // always needs to be called during the final event if there's a chance it
+    // // has been triggered during the drag process because it does some necessary
+    // // state resetting.
 
-    // Prevent first item from being dragged. 
-      if (grid.getItems().indexOf(item) === 0) {
-        return false;
-      }
-      return Muuri.ItemDrag.defaultStartPredicate(item, e);
+    // // Prevent first item from being dragged. 
+    // /////////////////////////
+    //   // if (grid.getItems().indexOf(item) === 0) {
+    //   //   return false;
+    //   // }
+    //   return Muuri.ItemDrag.defaultStartPredicate(item, e);
       
-    },
+    // },
     dragSortInterval: 0,
     dragContainer: document.body,
     dragReleaseDuration: 400,
     dragReleaseEasing: 'ease',
-    itemHiddenClass: 'hidden-item'
+    layout: function (items, gridWidth, gridHeight) {
+      var layout = {
+          // The layout item slots (left/top coordinates).
+          slots: [],
+          // The layout's total width.
+          width: 0,
+          // The layout's total height.
+          height: 0,
+          // Should Muuri set the grid's width after layout?
+          setWidth: false,
+          // Should Muuri set the grid's height after layout?
+          setHeight: true
+        };
+  
+      // Calculate the slots.
+      var item;
+      var m;
+      var x = 0;
+      var y = 0;
+      var w = 0;
+      var h = 0;
+      for (var i = 0; i < items.length; i++) {
+        item = items[i];
+        // x += w;
+        x = 50;
+        y += h;
+        m = item.getMargin();
+        // m = 0;
+        // w = item.getWidth() + m.left + m.right;
+        w = 10;
+        h = item.getHeight() + m.top + m.bottom;
+        layout.slots.push(x, y);
+      }
+  
+      // Calculate the layout's total width and height. 
+      // layout.width = x + w;
+      layout.height = y + h;
+  
+      return layout;
+    }
   })
   .on('dragStart', function (item) {
     // Let's set fixed widht/height to the dragged item
@@ -138,11 +178,6 @@ itemContainers.forEach(function (container) {
       grid.refreshItems();
     });
   })
-  .on('layoutStart', function () {
-    // Let's keep the board grid up to date with the
-    // dimensions changes of column grids.
-    boardGrid.refreshItems().layout();
-  });
 
   // Add the column grid reference to the column grids
   // array, so we can access it later on.
@@ -163,6 +198,88 @@ boardGrid = new Muuri('.board', {
   dragStartPredicate: {
     handle: '.board-column-header'
   },
+  // dragStartPredicate: {
+  //   handle: '.roww'
+  // },
   dragReleaseDuration: 400,
-  dragReleaseEasing: 'ease'
+  dragReleaseEasing: 'ease',
+  // layout: function (items, gridWidth, gridHeight) {
+  //     var layout = {
+  //         // The layout item slots (left/top coordinates).
+  //         slots: [],
+  //         // The layout's total width.
+  //         width: 0,
+  //         // The layout's total height.
+  //         height: 0,
+  //         // Should Muuri set the grid's width after layout?
+  //         setWidth: false,
+  //         // Should Muuri set the grid's height after layout?
+  //         setHeight: true
+  //       };
+  
+  //     // Calculate the slots.
+  //     var item;
+  //     var m;
+  //     var x = 0;
+  //     var y = 0;
+  //     var w = 0;
+  //     var h = 0;
+  //     for (var i = 0; i < items.length; i++) {
+  //       item = items[i];
+  //       // x += w;
+  //       x = 300;
+  //       y += h;
+  //       m = item.getMargin();
+  //       // m = 0;
+  //       w = item.getWidth() + m.left + m.right;
+  //       // w = 10;
+  //       h = item.getHeight() + m.top + m.bottom;
+  //       layout.slots.push(x, y);
+  //     }
+  
+  //     // Calculate the layout's total width and height. 
+  //     // layout.width = x + w;
+  //     layout.height = y + h;
+  
+  //     return layout;
+  //   }
+  
+});
+
+
+
+
+
+
+
+var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
+var employeeGrid = [];
+
+
+
+employeeContainers.forEach(function (container) {
+  var grid = new Muuri(container, {
+      
+      items: '.employee-item',
+      layoutDuration: 400,
+      layoutEasing: 'ease',
+      dragEnabled: true,
+      dragSort: function () {
+        return employeeGrid;
+      },
+      dragSortInterval: 0,
+      dragContainer: document.body,
+      dragReleaseDuration: 400,
+      dragReleaseEasing: 'ease',
+    })
+    .on('dragStart', function (item) {
+      item.getElement().style.width = item.getWidth() + 'px';
+      item.getElement().style.height = item.getHeight() + 'px';
+    })
+    .on('dragReleaseEnd', function (item) {
+      employeeGrid.forEach(function (grid) {
+        grid.refreshItems();
+      });
+    });
+  employeeGrid.push(grid);
 });

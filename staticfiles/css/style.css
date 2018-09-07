@@ -775,14 +775,15 @@ button:focus {
   position: absolute;
   left: 0;
   right: 0;
-  /*width: 30%;*/
-  /*width:100%;*/
+  /*width: 20%;*/
+  width:100%;
   margin: 0 1.5%;
   /*background: #f0f0f0;*/
   background:none;
   border-radius: 3px;
   z-index: 1;
-  display:contents;
+  /*display:contents;*/
+  display:inline-block;
 }
 .board-column.muuri-item-releasing {
   z-index: 2;
@@ -818,25 +819,25 @@ button:focus {
 .board-column.done .board-column-header {
   background: #2ac06d;
 }
-.board-column-content {
+.board-column-content, .employee-column-content {
   position: relative;
   /*border: 10px solid transparent;*/
   border: 3px solid transparent;
   /*min-height: 95px;*/
 }
-.board-item {
+.board-item, .employee-item {
   position: absolute;
   width: 100%;
   margin: 5px 0;
 }
-.board-item.muuri-item-releasing {
+.board-item.muuri-item-releasing, .employee-item.muuri-item-releasing {
   z-index: 9998;
 }
-.board-item.muuri-item-dragging {
+.board-item.muuri-item-dragging,.employee-item.muuri-item-dragging {
   z-index: 9999;
   cursor: move;
 }
-.board-item.muuri-item-hidden {
+.board-item.muuri-item-hidden, .employee-item.muuri-item-hidden {
   z-index: 0;
 }
 .board-item-content {
@@ -933,4 +934,30 @@ button:focus {
 
 :-ms-input-placeholder {  
    text-align: center; 
+}
+
+
+.read-short{
+  margin:4px 0px;
+  padding:4px;
+  width:40px;
+  font-family: "Source Sans Pro";
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+  border-width:1px;
+  border:none;
+  font-size:17px;
+}
+
+.arrival-time {
+  height: 33px;
+  margin: 5px 0 5px 8px;
+  width:70px;
+  font-family: "Source Sans Pro";
+  padding: 4px;
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+  border-radius:4px;
+  border-width:1px;
+  border:none;
+  font-weight:100;
+  font-size:17px;
 }
