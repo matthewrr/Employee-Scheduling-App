@@ -12,7 +12,7 @@
         <div class='row row-height '>
         
         
-        <div class="col-2 mx-4 left" style='margin:0px; flex: 0 0 12%;display:inline-block;'>
+        <div class="col-2 mx-4 left" style='margin:0px; flex: 0 0 9%;display:inline-block;'>
               <div class="board-column employee">
                 <!--<div class='board-column-header'>Employees:</div>-->
                 <div class="board-column-content employees">
@@ -27,12 +27,12 @@
     
     
     
-      <div class='col-7' style='display:inline-block;'>
-        <div class='schedule-cards'>
+      <div class='col-10' style='display:inline-block;'>
+        <div class='schedule-cards' style='height:100%;'>
         {% if not first_save %}
-          <div class='col col-12' style='border-left: 1px #DDD solid;'>
-            <div class='row'>
-              {% for location, attributes in roster.items %}
+          <div class='col col-12' style='border-left: 1px #DDD solid;height:100%;'>
+            <div class='row' style='height:100%;'>
+              {% for location, attributes in roster.locations.items %}
                 {% if attributes.active %}
                   {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
                     {% include 'events/detail/new_location_card.html' %}

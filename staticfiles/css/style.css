@@ -782,6 +782,7 @@ button:focus {
   background:none;
   border-radius: 3px;
   z-index: 1;
+  display:contents;
 }
 .board-column.muuri-item-releasing {
   z-index: 2;
@@ -792,8 +793,10 @@ button:focus {
 }
 .board-column-header {
   position: relative;
-  height: 50px;
-  line-height: 50px;
+  /*height: 50px;*/
+  /*line-height: 50px;*/
+  height: 30px;
+  line-height: 30px;
   overflow: hidden;
   padding: 0 20px;
   text-align: center;
@@ -819,7 +822,7 @@ button:focus {
   position: relative;
   /*border: 10px solid transparent;*/
   border: 3px solid transparent;
-  min-height: 95px;
+  /*min-height: 95px;*/
 }
 .board-item {
   position: absolute;
@@ -874,7 +877,7 @@ button:focus {
 }
 
 .card-columns {
-  column-count: 4;
+  column-count: 5;
   /*@include media-breakpoint-only(sm) {*/
   /*  column-count: 4;*/
   /*}*/
