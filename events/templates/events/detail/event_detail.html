@@ -4,18 +4,17 @@
 
 <div class='container-fluid' style='background:white;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
 {% include 'events/detail/header/event_header.html' with template=template %}
-    
-    
-  <!--  <div class='board'>-->
-<!--<div class='row'>-->
+  
+<div>
   <div class='board-column' style='width:10%;'>
     <!--<div class='board-column-header'>Header!</div>-->
     <div class="employee-column-content">
       {% for employee in all_employees %}
-        <div class="employee-item"><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
+        <div class="board-item"><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
       {% endfor %}
     </div>
   </div>
+</div>
 
   <!--    <div class='board-column' style='width:25%;'>-->
   <!--      <div class='board-column-header'>Header!</div>-->
@@ -40,88 +39,7 @@
         </div>
         {% endif %}
         </div>
-<!--</div>-->
   </div>
-  
-<!--  <div class='board'>-->
-      
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #4</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #5</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #4</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #5</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #4</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #5</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #4</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #5</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class='board-column' style='width:25%;'>-->
-<!--        <div class='board-column-header'>Header!</div>-->
-<!--        <div class="board-column-content employees">-->
-<!--          <div class="board-item"><div class="board-item-content">Item #1</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #2</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #3</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #4</div></div>-->
-<!--          <div class="board-item"><div class="board-item-content">Item #5</div></div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-  
-<!--  </div>-->
-      
-<!--</div>-->
+</div>
 
 {% endblock %}
-
-
-    <!--<div class='col-8'>-->
-    <!--    {% if not first_save %}-->
-    <!--          {% for location, attributes in roster.locations.items %}-->
-    <!--            {% if attributes.active %}-->
-    <!--              {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}-->
-    <!--                {% include 'events/detail/new_location_card.html' %}-->
-    <!--              {% endwith %}-->
-    <!--            {% endif %}-->
-    <!--          {% endfor %}-->
-    <!--        <hr />-->
-    <!--    {% endif %}-->
-    <!--</div>-->
-  
