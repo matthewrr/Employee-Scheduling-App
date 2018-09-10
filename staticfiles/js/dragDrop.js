@@ -1,10 +1,14 @@
 var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
 var columnGrids = [];
+var employeeIndex = [];
 var boardGrid;
 var employeeGrid;
-
+var employeeCount;
+var employees;
+var grid2Hash = {};
 // Define the column grids so we can drag those
 // items around.
+console.log(itemContainers);
 itemContainers.forEach(function (container) {
   // Instantiate column grid.
   var grid = new Muuri(container, {
@@ -16,11 +20,14 @@ itemContainers.forEach(function (container) {
     dragSort: function () {
       return columnGrids;
     },
-    // dragStartPredicate: function (item, event) {
+    dragStartPredicate: function (item, event) {
     // // Prevent first item from being dragged. 
-    //   if (grid.getItems().indexOf(item) === 0) {
-    //     return false;
-    //   }
+    if (grid.getItems().indexOf(item) === 0) {
+      return false;
+    }
+    return true;
+      
+    },
     //   // For other items use the default drag start predicate.
     //   return Muuri.ItemDrag.defaultStartPredicate(item, event);
     // },
@@ -37,7 +44,7 @@ itemContainers.forEach(function (container) {
           // The layout's total height.
           height: 0,
           // Should Muuri set the grid's width after layout?
-          setWidth: true,
+          setWidth: false,
           // Should Muuri set the grid's height after layout?
           setHeight: true
         };
@@ -66,8 +73,8 @@ itemContainers.forEach(function (container) {
       }
   
       // Calculate the layout's total width and height. 
-      // layout.width = x + w;
-      layout.width = 400;
+      layout.width = w + 0;
+      // layout.width = 
       layout.height = y + h;
   
       return layout;
@@ -78,8 +85,8 @@ itemContainers.forEach(function (container) {
     // so that it does not stretch unwillingly when
     // it's appended to the document body for the
     // duration of the drag.
-    // item.getElement().style.width = item.getWidth() + 'px';
-    // item.getElement().style.height = item.getHeight() + 'px';
+    item.getElement().style.width = item.getWidth() + 'px';
+    item.getElement().style.height = item.getHeight() + 'px';
     grid.show(0);
   })
   // hide placeholder if name returned to originator
@@ -96,12 +103,43 @@ itemContainers.forEach(function (container) {
   .on('beforeReceive', function (data) {
     var allItems = grid.getItems();
     allItems.forEach(function (item) {
-      el = item.getElement()
-      ch = $(el).children()
+      var el = item.getElement()
+      var ch = $(el).children()
       grid.hide(ch);
       // grid.hide()
     });
   })
+  .on('receive', function (data) {
+    var employeeGrid = columnGrids[103];
+    var toGrid = data.toGrid;
+    // if (data.fromGrid === employeeGrid && toGrid != employeeGrid) {
+    //   grid2Hash[data.item._id] = function (item) {
+    //     if (item === data.item) {
+    //       var clone = cloneElem(data.item);
+    //       data.fromGrid.add(clone, {index: data.fromIndex});
+    //       data.fromGrid.hide(clone);
+    //     }
+    //   };
+    // grid.once('dragReleaseStart', grid2Hash[data.item._id]);
+    // 
+    // }
+    })
+    
+    // console.log('same grid?')
+    // console.log(data.fromGrid !== data.toGrid)
+    // if (data.fromGrid !== data.toGrid) {
+    //   var toGrid = data.toGrid
+    //   var fromGrid = data.fromGrid
+    //   var idx = data.fromIndex;
+    //   var el = data.item.getElement();
+    //   console.log('compare');
+    //   // fromGrid.add(el, {index: 0})
+      
+      
+      // var clone = cloneElem(data.item.getElement());
+      // console.log('the index is: ' + data.fromIndex)
+      // data.fromGrid.add(clone, {index: Number(data.fromIndex)});
+  // })
   .on('send', function (data) {
     var item = data.item;
     if (data.toIndex === 0) {
@@ -109,6 +147,23 @@ itemContainers.forEach(function (container) {
       toGrid.move(0, 1, {action: 'swap'});
     }
     grid.show(0);
+    
+    // grid.on('dragReleaseEnd', function (item) {
+    //   console.log('drag release end')
+    //   var employeeGrid = columnGrids[103];
+    //   console.log(data.fromGrid === employeeGrid)
+    //   if (data.fromGrid === employeeGrid) {
+    //     var idx = data.fromIndex;
+    //     var el = item.getElement();
+    //     console.log('el to add:')
+    //     console.log(el)
+    //     data.fromGrid.add(el, {index: 0})
+    //   }
+    // });
+    // console.log(data.fromGrid)
+    // console.log(data.toGrid)
+    
+    
   })
   // .on('receive', function (data) {
     // var allItems = grid.getItems();
@@ -130,22 +185,11 @@ itemContainers.forEach(function (container) {
     // grid.hide(0);
   // })
   .on('dragReleaseEnd', function (item, e) {
-    // Let's remove the fixed width/height from the
-    // dragged item now that it is back in a grid
-    // column and can freely adjust to it's
-    // surroundings.
+
     // item.getElement().style.width = '';
     // item.getElement().style.height = '';
-    // Just in case, let's refresh the dimensions of all items
-    // in case dragging the item caused some other items to
-    // be different size.
-
-    // get list of invisible items
-    // var invisible = grid.getItems().filter(function (item) {
-    //   return !item.isVisible();
-    // });
-    
     // if return to same grid
+    
     if (item.getGrid() === grid) {
       if (grid.getItems().indexOf(item) === 0) {
         grid.move(0, 1, {action: 'swap'});
@@ -153,128 +197,29 @@ itemContainers.forEach(function (container) {
       grid.hide(0);
     }
     var toGrid = item.getGrid();
-    // if in new grid (use else statement after functioning)
     var allItems = grid.getItems();
-    // console.log(allItems.length)
-    // console.log(allItems(0))
-    // console.log(grid.getItems(0));
-    // console.log(grid.getItems(0).length)
     var pos = grid.getItems().indexOf(item);
     var l = allItems.length
-    console.log('sending grids')
-    console.log(typeof columnGrids)
-    console.log(columnGrids)
-    // var employeeGrid = columnGrids[-1];
-    console.log(columnGrids[103])
-    console.log('grid: ')
-    console.log(grid)
-    // !!!FIGURE OUT HOW TO NAME
-    var employeeGrid = columnGrids[103];
-    console.log('beg')
-    var employeeItems = employeeGrid.getItems();
-
-
-    for (var j in employeeItems) {
-      console.log('j is: ')
-      console.log(j)
-      console.log(employeeItems[j])
-    }
-    
-    console.log('end')
-    console.log(employeeItems)
-    if (l === 2) {
+    var toRemove;
+    var elementID
+    if (l === 2 && pos == 0) {
+      grid.move(0, 1, {action: 'swap'});
+    } else if (l >= 3) {
       if (pos === 0) {
         grid.move(0, 1, {action: 'swap'});
-      }
-    } else if (l === 3) {
-      
-      for (var employee in employeeItems) {
-        console.log('employee is')
-        console.log(employee)
-        
-      }
-      console.log('id is coming up')
-      // var x = grid.getItems()[i].getElement().id;
-      // // var id = x.getElement().id
-      // var y = x[1]
-      // var z = y.getElement()
-      // console.log(z.id)
-      
-      var i;
-      var x;
-      var appendTo;
-      
-      
-      
-      if (pos === 0) {
-        grid.move(0, 1, {action: 'swap'});
-        i = 2;
-        x = Number(grid.getItems()[i].getElement().id);
-        console.log(x)
-        console.log('sending pos 0')
-      
-        var k;
-        for (var j in employeeItems) {
-          var p = employeeItems[j]
-          console.log(p);
-          if (j < x) {
-            k = j + 0
-          } else {
-            grid.send(i, employeeGrid, Number(k))
-          }
-        }
-        
-        
+        toRemove = 2;
+      } else if (pos === 1) {
+        toRemove = 2;
       } else if (pos === 2) {
         grid.move(0, 2, {action: 'swap'});
-        i = 1;
-        x = grid.getItems()[i].getElement().id;
-        console.log(x)
-        console.log('sending pos 2')
-        
-        var k;
-        for (var j in employeeItems) {
-         
-          if (j < x) {
-            k = j + 0
-          } else {
-            grid.send(i, employeeGrid, Number(k))
-          }
-        }
-        
-        
-      } else {
-        i = 2;
-        x = grid.getItems()[i].getElement().id;
-        console.log(x)
-        console.log('sending else')
-        
-        var k;
-        for (var j in employeeItems) {
-
-          if (j < x) {
-            k = j + 0
-          } else {
-            grid.send(i, employeeGrid, Number(k))
-          }
-        }
-      }      
+        toRemove = 1;
+      }
+      grid.remove(toRemove, {removeElements: true});
     }
-    
-    // if (item.getGrid() !== grid) {
-    //   if (grid.getItems().indexOf(item) === 0) {
-    //     grid.move(0, 1, {action: 'swap'});
-    //   }
-    //   columnGrids.forEach(function (grid) {
-    //     grid.refreshItems();
-    //   });
-    // }
   });
-  // Add the column grid reference to the column grids
-  // array, so we can access it later on.
+  
   columnGrids.push(grid);
-
-  });
+});
 
 // Instantiate the board grid so we can drag those
 // columns around.
@@ -292,67 +237,35 @@ boardGrid = new Muuri('.board', {
 
 
 
-
-
-
-
-// var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
-
-// employeeContainers.forEach(function (container) {
-//   var employeeGrid = new Muuri(container, {
-      
-//       items: '.board-item',
-//       layoutDuration: 400,
-//       layoutEasing: 'ease',
-//       dragEnabled: true,
-//       dragSort: function () {
-//         return columnGrids;
-//       },
-//       dragSortInterval: 0,
-//       dragContainer: document.body,
-//       dragReleaseDuration: 400,
-//       dragReleaseEasing: 'ease',
-//     })
-//     .on('dragStart', function (item) {
-//       item.getElement().style.width = item.getWidth() + 'px';
-//       item.getElement().style.height = item.getHeight() + 'px';
-//     })
-//     .on('dragReleaseEnd', function (item) {
-//       columnGrids.forEach(function (employeeGrid) {
-//         employeeGrid.refreshItems();
-//       });
-//     });
-//   columnGrids.push(employeeGrid);
-// });
-
-
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
-
 employeeContainers.forEach(function (container) {
+  employees = $('.employee-column-content').children();
+  $.each( employees, function( key, value ) {
+    employeeIndex.push(key);
+  });
   var employeeGrid = new Muuri('.employee-column-content', {
-      
-      items: '.board-item',
-      layoutDuration: 400,
-      layoutEasing: 'ease',
-      dragEnabled: true,
-      dragSort: function () {
-        return columnGrids;
-      },
-      dragSortInterval: 0,
-      dragContainer: document.body,
-      dragReleaseDuration: 400,
-      dragReleaseEasing: 'ease',
-      containerClass: 'muuri-employees',
+    items: '.board-item',
+    layoutDuration: 400,
+    layoutEasing: 'ease',
+    dragEnabled: true,
+    dragSort: function () {
+      return columnGrids;
+    },
+    dragSortInterval: 0,
+    dragContainer: document.body,
+    dragReleaseDuration: 400,
+    dragReleaseEasing: 'ease',
+  })
+  .on('dragStart', function (item) {
+    // item.getElement().style.width = item.getWidth() + 'px';
+    // item.getElement().style.height = item.getHeight() + 'px';
+    item.getElement().style.width = 163 + 'px';
+  })
+  .on('dragReleaseEnd', function (item) {
+    columnGrids.forEach(function (employeeGrid) {
+      employeeGrid.refreshItems();
     })
-    .on('dragStart', function (item) {
-      item.getElement().style.width = item.getWidth() + 'px';
-      item.getElement().style.height = item.getHeight() + 'px';
-    })
-    .on('dragReleaseEnd', function (item) {
-      columnGrids.forEach(function (employeeGrid) {
-        employeeGrid.refreshItems();
-      });
-    });
-  columnGrids.push(employeeGrid);
-  console.log(columnGrids);
+  });
+  columnGrids.push(employeeGrid)
+
 });

@@ -6,7 +6,7 @@
 {% include 'events/detail/header/event_header.html' with template=template %}
   
 <div>
-  <div class='board-column' style='width:10%;'>
+  <div class='board-column' style='width:170px;'>
     <!--<div class='board-column-header'>Header!</div>-->
     <div class="employee-column-content">
       {% for employee in all_employees %}
@@ -16,19 +16,10 @@
   </div>
 </div>
 
-  <!--    <div class='board-column' style='width:25%;'>-->
-  <!--      <div class='board-column-header'>Header!</div>-->
-  <!--      <div class="board-column-content employees">-->
-  <!--        {% for employee in all_employees %}-->
-  <!--          <div class="board-item"><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>-->
-  <!--        {% endfor %}-->
-  <!--      </div>-->
-  <!--    </div>-->
-  
-  <!--</div>-->
-  <div>
+
+  <div style='height:100%'>
         {% if not first_save %}
-        <div class='board' style='margin-left:12%;'>
+        <div class='board' style='margin-left:212px;margin-bottom:100px;'>
               {% for location, attributes in roster.locations.items %}
                 {% if attributes.active %}
                   {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}

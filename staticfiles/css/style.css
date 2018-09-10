@@ -785,6 +785,11 @@ button:focus {
   /*display:contents;*/
   display:inline-block;
 }
+
+.board .board-column {
+  margin: 10px;
+}
+
 .board-column.muuri-item-releasing {
   z-index: 2;
 }
@@ -800,10 +805,11 @@ button:focus {
   line-height: 30px;
   overflow: hidden;
   padding: 0 20px;
-  text-align: center;
+  /*text-align: center;*/
   background: #333;
   color: #fff;
   border-radius: 3px 3px 0 0;
+  
 }
 @media (max-width: 600px) {
   .board-column-header {
@@ -825,12 +831,17 @@ button:focus {
   border: 3px solid transparent;
   /*min-height: 95px;*/
   min-height:43px;
+  background:white;
+  width: 100%!important;
 }
 .board-item, .employee-item {
   position: absolute;
-  width: 100%;
   margin: 5px 0;
 }
+.employee-column-content .board-item {
+  width:100%;
+}
+
 .board-item.muuri-item-releasing, .employee-item.muuri-item-releasing {
   z-index: 9998;
 }
@@ -947,6 +958,8 @@ button:focus {
   border-width:1px;
   border:none;
   font-size:17px;
+  border-radius:4px;
+  height:33px;
 }
 
 .arrival-time {
@@ -961,4 +974,11 @@ button:focus {
   border:none;
   font-weight:100;
   font-size:17px;
+}
+
+
+.form-check-input {
+  /*margin-left:20px;*/
+      margin: 0px;
+    position: relative;
 }
