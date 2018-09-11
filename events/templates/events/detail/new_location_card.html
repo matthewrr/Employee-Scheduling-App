@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-      <div class='board-column' style='width:18%;'>
+      <div class='board-column'>
         <div class='board-column-header'>
           <div style='display:inline-block;'>
           <input type="checkbox" class="form-check-input" id="">
@@ -8,16 +8,18 @@
           <div class='text-center' style='display:inline-block;padding-left:28px;'><div>{{location_verbose}}</div></div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content">
+        <div class="board-column-content" style='display:inline-block;'>
           
           <input class="read-short" type="text" placeholder="{{shift}}" readonly></input>
           <div class="board-item default-board-item">
+            
             <div class="board-item-content" style='width:163px;max-height:35px;'>
               <div>{{scheduled.verbose_name}}</div>
             </div>
+            
           </div>
+          <input type="text" class="arrival-time" placeholder="Arrival" aria-label="Arrival">
           
-          <input type="text" class="arrival-time" placeholder="Arrival" aria-label="Arrival" style='margin-left:180px;'>
           
           
         </div>

@@ -8,7 +8,6 @@ var employees;
 var grid2Hash = {};
 // Define the column grids so we can drag those
 // items around.
-console.log(itemContainers);
 itemContainers.forEach(function (container) {
   // Instantiate column grid.
   var grid = new Muuri(container, {
@@ -44,7 +43,7 @@ itemContainers.forEach(function (container) {
           // The layout's total height.
           height: 0,
           // Should Muuri set the grid's width after layout?
-          setWidth: false,
+          setWidth: true,
           // Should Muuri set the grid's height after layout?
           setHeight: true
         };
@@ -54,6 +53,7 @@ itemContainers.forEach(function (container) {
       var m;
       var x = 0;
       var y = 0;
+      z = 0;
       var w = 0;
       var h = 0;
       for (var i = 0; i < items.length; i++) {
@@ -66,30 +66,32 @@ itemContainers.forEach(function (container) {
         m = 0;
         // w = item.getWidth() + m.left + m.right;
         // w = 10;
-        w = item.getWidth();
-        h = item.getHeight() + m.top + m.bottom;
-        
+        w = item.getWidth() - 70;
+        // h = item.getHeight() + m.top + m.bottom;
+        if (x === 0) {
+          z = 20;
+          
+        } else {
+          z += 20;
+        }
+        x = 50
+          
         layout.slots.push(x, y);
       }
   
       // Calculate the layout's total width and height. 
-      layout.width = w + 0;
-      // layout.width = 
+      // layout.width = w + x;
+      layout.width = w * 4;
       layout.height = y + h;
   
       return layout;
     }
   })
   .on('dragStart', function (item) {
-    // Let's set fixed widht/height to the dragged item
-    // so that it does not stretch unwillingly when
-    // it's appended to the document body for the
-    // duration of the drag.
     item.getElement().style.width = item.getWidth() + 'px';
     item.getElement().style.height = item.getHeight() + 'px';
     grid.show(0);
   })
-  // hide placeholder if name returned to originator
   .on('dragEnd', function (item, event) {
     if (item.getGrid() === grid) {
       
@@ -99,7 +101,6 @@ itemContainers.forEach(function (container) {
       grid.hide(0);
     }
   })
-  // hide all items before receiving a new one
   .on('beforeReceive', function (data) {
     var allItems = grid.getItems();
     allItems.forEach(function (item) {
@@ -112,34 +113,7 @@ itemContainers.forEach(function (container) {
   .on('receive', function (data) {
     var employeeGrid = columnGrids[103];
     var toGrid = data.toGrid;
-    // if (data.fromGrid === employeeGrid && toGrid != employeeGrid) {
-    //   grid2Hash[data.item._id] = function (item) {
-    //     if (item === data.item) {
-    //       var clone = cloneElem(data.item);
-    //       data.fromGrid.add(clone, {index: data.fromIndex});
-    //       data.fromGrid.hide(clone);
-    //     }
-    //   };
-    // grid.once('dragReleaseStart', grid2Hash[data.item._id]);
-    // 
-    // }
-    })
-    
-    // console.log('same grid?')
-    // console.log(data.fromGrid !== data.toGrid)
-    // if (data.fromGrid !== data.toGrid) {
-    //   var toGrid = data.toGrid
-    //   var fromGrid = data.fromGrid
-    //   var idx = data.fromIndex;
-    //   var el = data.item.getElement();
-    //   console.log('compare');
-    //   // fromGrid.add(el, {index: 0})
-      
-      
-      // var clone = cloneElem(data.item.getElement());
-      // console.log('the index is: ' + data.fromIndex)
-      // data.fromGrid.add(clone, {index: Number(data.fromIndex)});
-  // })
+  })
   .on('send', function (data) {
     var item = data.item;
     if (data.toIndex === 0) {
@@ -147,49 +121,8 @@ itemContainers.forEach(function (container) {
       toGrid.move(0, 1, {action: 'swap'});
     }
     grid.show(0);
-    
-    // grid.on('dragReleaseEnd', function (item) {
-    //   console.log('drag release end')
-    //   var employeeGrid = columnGrids[103];
-    //   console.log(data.fromGrid === employeeGrid)
-    //   if (data.fromGrid === employeeGrid) {
-    //     var idx = data.fromIndex;
-    //     var el = item.getElement();
-    //     console.log('el to add:')
-    //     console.log(el)
-    //     data.fromGrid.add(el, {index: 0})
-    //   }
-    // });
-    // console.log(data.fromGrid)
-    // console.log(data.toGrid)
-    
-    
   })
-  // .on('receive', function (data) {
-    // var allItems = grid.getItems();
-    // var pos = data.toIndex;
-    // if (allItems.length === 2) {
-    //   if (pos === 0) {
-    //     grid.move(0, 1, {action: 'swap'});
-    //   }
-    // } else if (allItems.length === 3) {
-    //   if (pos === 0) {
-    //     grid.move(0, 1, {action: 'swap'});
-    //     grid.hide(2);
-    //   } else if (pos === 2) {
-    //     grid.move(0, 2, {action: 'swap'});
-    //     grid.hide(1);
-    //   }      
-      
-    // }
-    // grid.hide(0);
-  // })
   .on('dragReleaseEnd', function (item, e) {
-
-    // item.getElement().style.width = '';
-    // item.getElement().style.height = '';
-    // if return to same grid
-    
     if (item.getGrid() === grid) {
       if (grid.getItems().indexOf(item) === 0) {
         grid.move(0, 1, {action: 'swap'});
@@ -217,7 +150,6 @@ itemContainers.forEach(function (container) {
       grid.remove(toRemove, {removeElements: true});
     }
   });
-  
   columnGrids.push(grid);
 });
 
@@ -233,6 +165,69 @@ boardGrid = new Muuri('.board', {
   },
   dragReleaseDuration: 400,
   dragReleaseEasing: 'ease',
+  layout: function (items, gridWidth, gridHeight) {
+    // The layout data object. Muuri will read this data and position the items
+    // based on it.
+    
+    var layout = {
+      // The layout item slots (left/top coordinates).
+      slots: [],
+      // The layout's total width.
+      width: 0,
+      // The layout's total height.
+      height: 0,
+      // Should Muuri set the grid's width after layout?
+      setWidth: true,
+      // Should Muuri set the grid's height after layout?
+      setHeight: true
+    };
+
+    // Calculate the slots.
+    var item;
+    var m;
+    var x = 0;
+    var y = 0;
+    var z = 0;
+    var w = 0;
+    var h = 0;
+    var columns = 4;
+    for (var i = 0; i < items.length; i++) {
+      var column = i % 4;
+      if (column === 0) {
+        y += 50;
+      }
+      
+      item = items[i];
+      // y += h;
+      // y = 0
+      m = item.getMargin();
+      // w = item.getWidth() + m.left + m.right;
+      w = item.getWidth();
+      
+      // h = item.getHeight() + m.top + m.bottom;
+      
+      if (x === 0) {
+        z = 20;
+        
+      } else {
+        z += 20;
+      }
+      x = z + '%'
+      console.log(w)
+      // x = 500;
+      x = (w/5)*i
+      layout.slots.push(x, y);
+      // x += ;
+      
+    }
+    // Calculate the layout's total width and height. 
+    // layout.width = x + w;
+    // layout.width = (layout.slots[2] - layout.slots[1]) * 4;
+    layout.width = 16 + '%'
+    layout.height = y + h;
+
+    return layout;
+  }
 });
 
 

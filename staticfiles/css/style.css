@@ -786,8 +786,9 @@ button:focus {
   display:inline-block;
 }
 
-.board .board-column {
+.board-column {
   margin: 10px;
+  /*width:20%;*/
 }
 
 .board-column.muuri-item-releasing {
@@ -974,6 +975,7 @@ button:focus {
   border:none;
   font-weight:100;
   font-size:17px;
+  float:right;
 }
 
 
