@@ -59,7 +59,6 @@ itemContainers.forEach(function (container) {
       for (var i = 0; i < items.length; i++) {
       // for (var i = 0; i < items.length; i++) {
         item = items[i];
-        // x += w;
         x = 50;
         y = 0
         // m = item.getMargin();
@@ -181,7 +180,7 @@ boardGrid = new Muuri('.board', {
       // Should Muuri set the grid's height after layout?
       setHeight: true
     };
-
+ 
     // Calculate the slots.
     var item;
     var m;
@@ -190,35 +189,61 @@ boardGrid = new Muuri('.board', {
     var z = 0;
     var w = 0;
     var h = 0;
+    var rowHeights = [];
     var columns = 4;
+    var colObjs = 0;
+    var colHeight = 0;
+    var count = 0
     for (var i = 0; i < items.length; i++) {
-      var column = i % 4;
-      if (column === 0) {
-        y += 50;
-      }
       
-      item = items[i];
+      
+      
       // y += h;
       // y = 0
-      m = item.getMargin();
       // w = item.getWidth() + m.left + m.right;
-      w = item.getWidth();
-      
       // h = item.getHeight() + m.top + m.bottom;
       
-      if (x === 0) {
-        z = 20;
-        
-      } else {
-        z += 20;
-      }
-      x = z + '%'
-      console.log(w)
-      // x = 500;
-      x = (w/5)*i
-      layout.slots.push(x, y);
-      // x += ;
+      item = items[i];
+      m = item.getMargin();
+      w = item.getWidth();
+      h = item.getHeight() + m.top + m.bottom;
       
+      
+      var column = count % 4;
+      if (column === 0) {
+        
+        console.log('column is 0')
+        
+        var maxHeight = Math.max(...rowHeights.slice(-4));
+        var currentHeight = rowHeights
+        const arrSum = arr => arr.reduce((a,b) => a + b, 0)
+        var heightArr = rowHeights.slice(colObjs*-1);
+        for (var height in heightArr) {
+          colHeight += Number(height);
+          console.log(heightArr)
+          console.log(colHeight);
+          
+          if (h < maxHeight) {
+            colObjs += 1;
+            y = maxHeight;
+            x = x
+            
+          } else {
+            colObjs = 1
+            
+            y = maxHeight
+            x = (w/5)*i
+            
+          }
+          console.log('colobjs is: ' + colObjs)
+        }
+      }
+      rowHeights.push(h)
+  
+      // x = (w/5)*i
+      layout.slots.push(x, y);
+      colHeight = 0
+      // x += ;
     }
     // Calculate the layout's total width and height. 
     // layout.width = x + w;
@@ -264,3 +289,62 @@ employeeContainers.forEach(function (container) {
   columnGrids.push(employeeGrid)
 
 });
+
+
+
+
+var rowObjCounter = 0;
+
+for (obj in objs) {
+  var checkNewRow = rowObjCounter % 4 === 0;
+  if (checkNewRow) {
+    var objHeight = ;
+    var currentRowHeight = ;
+    var maxRowHeight = ;
+    if (currentRowHeight + objHeight < maxRowHeight) {
+      x += 0
+      y = currentRowHeight;
+
+    } else {
+      x = 0
+      y = maxRowHeight;
+    }
+  }
+}
+
+var desiredCols = 4;
+var maxRowObj = ;
+var numOfRowColumns = ;
+var rowColHeights = []
+
+var itemHeight = ;
+var maxRowHeight = ;
+
+
+if (numOfRowColumns === desiredCols) {
+  if (itemHeight + rowColHeights[-1] > maxRowHeight) {
+    // start new row
+  } else {
+    // append to 
+  }
+}
+
+
+New Row?column
+If current item + current row column height > max row height
+X = 0
+Y = max row height
+ Row columns at 0
+Row column height = item height
+Same Row
+If current item + current row column height <= max row height
+X = most recent x
+Y = most reent row column height
+Row column height += current item height
+Row columns unchanged
+
+Else (you’ll start a new column)...
+Row columns += 1
+X = most recent x in list + item width
+Y = most recent y
+rowcolumnheight  = item height
