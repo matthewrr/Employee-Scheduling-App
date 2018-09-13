@@ -2,16 +2,14 @@
 
       <div class='board-column'>
         <div class='board-column-header'>
-          <div style='display:inline-block;'>
           <input type="checkbox" class="form-check-input" id="">
-          </div>
           <div class='text-center' style='display:inline-block;padding-left:28px;'><div>{{location_verbose}}</div></div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content" style='display:inline-block;'>
+        <div class="board-column-content">
           
           <input class="read-short" type="text" placeholder="{{shift}}" readonly></input>
-          <div class="board-item default-board-item">
+          <div class="board-item default-board-item" style='left:50px;'>
             
             <div class="board-item-content" style='width:163px;max-height:35px;'>
               <div>{{scheduled.verbose_name}}</div>

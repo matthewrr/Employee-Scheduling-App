@@ -5,31 +5,36 @@
 <div class='container-fluid' style='background:white;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
 {% include 'events/detail/header/event_header.html' with template=template %}
   
-<div>
-  <div class='board-column' style='width:170px;'>
-    <!--<div class='board-column-header'>Header!</div>-->
+  <div class='board-column' style='width:170px;margin-left:40px;'>
     <div class="employee-column-content">
       {% for employee in all_employees %}
         <div class="board-item" id='{{forloop.counter}}'><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
       {% endfor %}
     </div>
   </div>
-</div>
 
 
-  <div style='height:100%'>
-        {% if not first_save %}
-        <div class='board' style='margin-left:212px;margin-bottom:100px;'>
-              {% for location, attributes in roster.locations.items %}
-                {% if attributes.active %}
-                  {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
-                    {% include 'events/detail/new_location_card.html' %}
-                  {% endwith %}
-                {% endif %}
-              {% endfor %}
-        </div>
+
+  <div style='height:100%; width:1500px;'>
+    {% if not first_save %}
+    <div class='board' style='margin-left:212px;margin-bottom:100px;'>
+      {% for location, attributes in roster.locations.items %}
+        {% if attributes.active %}
+          {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
+            {% include 'events/detail/new_location_card.html' %}
+          {% endwith %}
         {% endif %}
-        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+      
+  <div class='' style='width:100px;'>
+      {% include 'events/detail/panel.html' %}
+  </div>
+      
+      
+      
   </div>
 </div>
 
