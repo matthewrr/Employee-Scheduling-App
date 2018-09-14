@@ -6,10 +6,12 @@
 {% include 'events/detail/header/event_header.html' with template=template %}
   
   <div class='board-column' style='width:170px;margin-left:40px;'>
-    <div class="employee-column-content">
-      {% for employee in all_employees %}
-        <div class="board-item" id='{{forloop.counter}}'><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
-      {% endfor %}
+    <div class='scroll-content-wrapper'>
+      <div class="employee-column-content">
+        {% for employee in all_employees %}
+          <div class="board-item" id='{{forloop.counter}}'><div class="board-item-content">{{employee.name|truncatechars:20}}</div></div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 
@@ -29,7 +31,7 @@
     {% endif %}
   </div>
       
-  <div class='' style='width:100px;'>
+  <div class='' style='width: 100px;left: 80%;position: absolute;top: 250px;'>
       {% include 'events/detail/panel.html' %}
   </div>
       
