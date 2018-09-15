@@ -10,6 +10,7 @@ from schedules.views import schedule_template
 from .models import *
 from pprint import pprint
 from schedules.models import Schedule
+from locations.models import LocationCategory
 
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -48,13 +49,14 @@ def event_detail_view(request,year,month,day,slug):
     
     new_employees[10] = all_employees[ff:]
     
-    
+    categories = LocationCategory.objects.values_list('category_name')
     context = {'event':event,
                'roster':roster,
                'all_employees':all_employees,
                'template':False,
                'first_save': first_save,
-               'new_employees':new_employees
+               'new_employees':new_employees,
+               'categories':categories,
                }
     # pprint(roster)
     return render(request, './events/detail/event_detail.html', context)
