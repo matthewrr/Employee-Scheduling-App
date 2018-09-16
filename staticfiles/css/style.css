@@ -991,3 +991,7 @@ button:focus {
   max-height: 70vh;
   overflow-y: auto;
 }
+
+.list-group-item {
+  background:#F5F5F5;
+}

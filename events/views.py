@@ -49,6 +49,11 @@ def event_detail_view(request,year,month,day,slug):
     
     new_employees[10] = all_employees[ff:]
     
+    loc = LocationCategory.objects.all()
+    locations = {}
+    for l in loc:
+        locations[l] = l.location_set.all()
+    
     categories = LocationCategory.objects.values_list('category_name')
     context = {'event':event,
                'roster':roster,
@@ -57,6 +62,7 @@ def event_detail_view(request,year,month,day,slug):
                'first_save': first_save,
                'new_employees':new_employees,
                'categories':categories,
+               'locations':locations,
                }
     # pprint(roster)
     return render(request, './events/detail/event_detail.html', context)

@@ -5,7 +5,13 @@ $(function() {$('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addCl
 
 $(".colorPickSelector").colorPick();
 
-
+$(document).ready(function(){
+  var locationCategories = $('.location-category');
+  // $(counts).each(function() {
+  //   var item = 
+  // })
+  
+})
 
 // Location App: load positions
 function loadPositions(l) {

@@ -1,20 +1,6 @@
 {% load staticfiles %}
-<ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
+<ul class="list-group control-panel" style='text-transform:uppercase;letter-spacing:1px;'>
   
-  <li class="list-group-item">
-    <div class='row'>
-      <div class='col-5'><span style='vertical-align:-webkit-baseline-middle;'>Sort Panels:</span></div>
-      <div class='col-7 pl-0'>
-        <select class="custom-select" style='text-transform:capitalize;'>
-          <option selected>Choose One...</option>
-          <option value="1">By Category (Default)</option>
-          <option value="2">Name (Asc)</option>
-          <option value="3">Name (Desc)</option>
-          <option value="4"># of Positions</option>
-        </select>
-      </div>
-    </div>
-  </li>
   
   <li class="list-group-item">
     <div class='row'>
@@ -34,7 +20,24 @@
   
   <li class="list-group-item">
     <div class='row'>
-      <div class='col-5'><span style='vertical-align:-webkit-baseline-middle;'>Highlight:</span></div>
+      <div class='col-5'><span style='vertical-align:-webkit-baseline-middle;'>Sort Panels:</span></div>
+      <div class='col-7 pl-0'>
+        <select class="custom-select" style='text-transform:capitalize;'>
+          <option selected>Choose One...</option>
+          <option value="1">By Category (Default)</option>
+          <option value="2">Name (Asc)</option>
+          <option value="3">Name (Desc)</option>
+          <option value="4"># of Positions</option>
+        </select>
+      </div>
+    </div>
+  </li>
+  
+
+  
+  <li class="list-group-item">
+    <div class='row'>
+      <div class='col-5'><span style='vertical-align:-webkit-baseline-middle;'>Highlights:</span></div>
       <div class='col-7'>
         <div class='row'>  
           <div class="form-check" style='text-transform:capitalize;'>
@@ -55,15 +58,35 @@
   </li>
 </ul>
 
-<!--<div class='scroll-content-wrapper' style='width:100%;text-transform:uppercase;letter-spacing:1px;'>-->
-  
-
-
 <ul class="list-group pt-3" style='text-transform:uppercase;letter-spacing:1px;'>
   
-  <li class="list-group-item">Locations:</li>
-  {% for category in categories %}
-    <li class="list-group-item d-flex justify-content-between align-items-center">{{category.0}}<span class="badge badge-primary badge-pill">14</span></li>
+  <li class="list-group-item">Active Locations:</li>
+  {% for category, location in locations.items %}
+    <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
+      {{category}}
+      <span class="badge badge-primary badge-pill">
+        <span class='active-count'>0</span>
+        <span>/</span>
+        <span class='category-count'>{{location.count}}</span>
+      </span>
+    </li>
+    <div id="{{category|slugify}}" class="panel-collapse collapse">
+        <div class="form-check" style='text-transform:capitalize;'>
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            <strong>All</strong>
+          </label>
+        </div>
+        
+        {% for l in location %}
+        <div class="form-check" style='text-transform:capitalize;'>
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1">
+            {{l}}
+          </label>
+        </div>
+        {% endfor %}
+      </div>
   {% endfor %}
 </ul>
 
