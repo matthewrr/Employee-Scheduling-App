@@ -11,6 +11,7 @@ from .models import *
 from pprint import pprint
 from schedules.models import Schedule
 from locations.models import LocationCategory
+from company_profile.models import CompanyProfileRole
 
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -28,6 +29,8 @@ def update_schedule(request):
     return HttpResponse("I'm working!")
 
 def event_detail_view(request,year,month,day,slug):
+    
+    roles = CompanyProfileRole.objects.all()
     all_employees = Employee.objects.all()
     event = Event.objects.get(slug=slug)
     try:
@@ -63,6 +66,7 @@ def event_detail_view(request,year,month,day,slug):
                'new_employees':new_employees,
                'categories':categories,
                'locations':locations,
+               'roles':roles,
                }
     # pprint(roster)
     return render(request, './events/detail/event_detail.html', context)

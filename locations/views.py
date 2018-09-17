@@ -6,6 +6,8 @@ from django.template.loader import render_to_string
 from .forms import LocationForm
 from .models import *
 from company_profile.models import CompanyProfileRole
+
+
 import json
 
 from django.views.decorators.csrf import csrf_exempt
