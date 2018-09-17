@@ -5,13 +5,32 @@ $(function() {$('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addCl
 
 $(".colorPickSelector").colorPick();
 
-$(document).ready(function(){
-  var locationCategories = $('.location-category');
-  // $(counts).each(function() {
-  //   var item = 
-  // })
+$(document).ready(function () {
   
-})
+  $(".location-checkbox:input[type=checkbox]").each(function () {
+      console.log('Found an input.')
+      var location = $(this).parent().parent().prev();
+      $(this).change(function() {
+          console.log('were changing')
+         $(this).change(updateCount(location));
+      });
+  });
+
+  updateCount(l = false);
+
+  function updateCount (l = false) {
+    if (!l) {
+      var locationCategories = $('.location-category');
+      $(locationCategories).each(function() {
+        var count = $(this).next().find(".location-checkbox:input[type=checkbox]:checked").length;
+        $(this).find(".active-count").text(count);
+      });
+    } else {
+      var count = $(l).next().find(".location-checkbox:input[type=checkbox]:checked").length;
+      $(l).find(".active-count").text(count);
+    }
+  }
+});
 
 // Location App: load positions
 function loadPositions(l) {

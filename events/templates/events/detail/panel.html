@@ -70,9 +70,9 @@
         <span class='category-count'>{{location.count}}</span>
       </span>
     </li>
-    <div id="{{category|slugify}}" class="panel-collapse collapse">
+    <div id="{{category|slugify}}" class="panel-collapse collapse" style='border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
           <label class="form-check-label" for="defaultCheck1">
             <strong>All</strong>
           </label>
@@ -80,7 +80,7 @@
         
         {% for l in location %}
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+          <input class="form-check-input location-checkbox" type="checkbox" value="" id="defaultCheck1" checked>
           <label class="form-check-label" for="defaultCheck1">
             {{l}}
           </label>

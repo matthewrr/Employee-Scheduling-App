@@ -81,7 +81,6 @@ itemContainers.forEach(function (container) {
       // Calculate the layout's total width and height. 
       // layout.width = w + x;
       layout.width = 250;
-      console.log(layout.width)
       layout.height = y + h;
   
       return layout;
