@@ -1,86 +1,80 @@
 {% load staticfiles %}
-<ul class="list-group control-panel" style='text-transform:uppercase;letter-spacing:1px;'>
-  
-  
-  <li class="list-group-item">
-    <div class='row'>
-      <div class='col-4'>
-        <span style='vertical-align:-webkit-baseline-middle;'>Display:</span>
-      </div>
-      <div class='col'>
-        <div class="btn-group btn-group-toggle" style='text-transform:capitalize; width:100%;' data-toggle="buttons">
-          <label class="btn btn-primary active">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked> All
-          </label>
-          <label class="btn btn-primary">
-            <input type="radio" name="options" id="option3" autocomplete="off"> By Section
-          </label>
-        </div>
-      </div>
-    </div>    
-  </li>
-  
-  <li class="list-group-item">
-    <div class='row'>
-      <div class='col-12'>
-        <select class="custom-select" style='text-transform:capitalize;'>
-          <option selected>Sort By...</option>
-          <option value="1">Category (Default)</option>
-          <option value="2">Location Name (Asc)</option>
-          <option value="3">Location Name (Desc)</option>
-          <option value="4"># of Positions</option>
-        </select>
-      </div>
-    </div>
-  </li>
-  
 
+<ul class='list-group list-group-flush mt-0' style='border: 1px solid rgba(0,0,0,.125);'>
   
-  <li class="list-group-item">
-    <div class='row'>
-      <div class='col-5'><span>Highlight:</span></div>
-      <div class='col-7'>
-        <div class='row'>  
-          <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Scheduled
-            </label>
-          </div>
-          <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Unscheduled
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-</ul>
-
-<ul class='list-group list-group-flush mt-3' style='border: 1px solid rgba(0,0,0,.125);border-radius:4px;'>
+  <!--<li class="list-group-item text-center" style='border-top:none;padding:0px;text-transform:uppercase;letter-spacing:1px;'>Control Panel</li>-->
   
-  <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#display-options">
+  <li class="list-group-item" style='padding:0px;'>
     <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-          
-      <li class="list-group-item" style='border-top:none;'>Display</li>
-      <span class='collapse' id='display-options'>
-        <li class='list-group-item'>Option 1</li>
-        <li class='list-group-item'>Option 1</li>
-      </span>
+      <li class="list-group-item" style='border-top:none;' data-toggle="collapse" href="#display-options">
+        <img src='{% static "img/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:-5px;' alt="Menu Icon"/>
+        
+        Display
+      </li>
+      <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);'>
+          <li class="list-group-item" style='background:#FAFAFA;'>
+            <div class='row'>
+              <div class='col'>
+                <div class="btn-group btn-group-toggle" style='text-transform:capitalize; width:100%;' data-toggle="buttons">
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Show All
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Show By Section
+                  </label>
+                </div>
+              </div>
+            </div>    
+          </li>
+          <li class="list-group-item" style='background:#FAFAFA;'>
+            <div class='row'>
+              <div class='col-12'>
+                <select class="custom-select" style='text-transform:capitalize;'>
+                  <option selected>Sort By...</option>
+                  <option value="1">Category (Default)</option>
+                  <option value="2">Location Name (Asc)</option>
+                  <option value="3">Location Name (Desc)</option>
+                  <option value="4"># of Positions</option>
+                </select>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item" style='background:#FAFAFA;'>
+            <div class='row'>
+              <div class='col-5'><span>Highlight:</span></div>
+              <div class='col-7'>
+                <div class='row'>  
+                  <div class="form-check" style='text-transform:capitalize;'>
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Scheduled
+                    </label>
+                  </div>
+                  <div class="form-check" style='text-transform:capitalize;'>
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Unscheduled
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+      </ul>
     </ul>
   </li>
   
-  
-  <li class="list-group-item" style='border-bottom:none;border-top:none;padding:0px;' data-toggle="collapse" href="#location-categories">
+  <li class="list-group-item" style='border-bottom:none;padding:0px;'>
+    
     <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-  
-      <li class="list-group-item" style='border-top:none;'>Active Locations</li>
-      
-      <span class='collapse' id='location-categories'>
+      <li class="list-group-item" data-toggle="collapse" href="#location-categories">
+        <img src='{% static "img/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:-5px;' alt="Menu Icon"/>
+        Active Locations
+      </li>
+      <!--<span class='collapse' id='location-categories'>-->
+      <ul class="list-group collapse" id='location-categories' style='border-top:1px solid rgba(0,0,0,.125);'>
         {% for category, location in locations.items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
+        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;' data-toggle="collapse" href="#{{category|slugify}}">
           + {{category}}
           <span class="badge badge-primary badge-pill">
             <span class='active-count'>0</span>
@@ -90,7 +84,7 @@
         </li>
         <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
           <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+            <input class="form-check-input location-checkbox check-all" type="checkbox" value="" id="defaultCheck1" checked>
             <label class="form-check-label" for="defaultCheck1">
               <strong>All</strong>
             </label>
@@ -98,7 +92,7 @@
               
           {% for l in location %}
           <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input location-checkbox" type="checkbox" value="" id="defaultCheck1" checked>
+            <input class="form-check-input location-checkbox check-one" type="checkbox" value="" id="defaultCheck1" checked>
             <label class="form-check-label" for="defaultCheck1">
               {{l}}
             </label>
@@ -106,38 +100,40 @@
           {% endfor %}
         </div>
         {% endfor %}
-        
-      </span>
+      </ul>
+      <!--</span>-->
     </ul>
   </li>
   
-  
-  
-  
-  <li class="list-group-item" style='border-top:none;padding:0px;' data-toggle="collapse" href="#arrival-times">
+  <li class="list-group-item" style='padding:0px;'>
     <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-  
-      <li class="list-group-item">Arrival Times</li>
-      <span class='collapse' id='arrival-times'>
-        
-        
-        <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
+      <li class="list-group-item" data-toggle="collapse" href="#arrival-times">
+        <img src='{% static "img/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:-5px;' alt="Menu Icon"/>
+        Arrival Times
+      </li>
+      <ul class="list-group collapse" id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>
+      <!--<span class='collapse' id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>-->
+        <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;' data-toggle="collapse" href="#{{category|slugify}}">
           {% for role in roles %}
-            <div class="input-group mb-2 col-12 px-0">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">{{role.verbose_name}}</span>
+            <div class="input-group mb-2 px-0">
+              <div class="input-group-prepend col px-0">
+                <span class="input-group-text col-12" id="inputGroup-sizing-default">{{role.verbose_name}}:</span>
               </div>
-              <input type="text" class="form-control" aria-label="Default" placeholder='Arrival Time' aria-describedby="inputGroup-sizing-default">
+              <input type="text" class="form-control col-4" aria-label="Default" placeholder='Arrival' aria-describedby="inputGroup-sizing-default">
+              <div class="input-group-append col-2 px-0">
+                
+                <label class="input-group-text" for="inputGroupSelect02">
+                  <img src='{% static "img/reload.png" %}' style='width:18px;height:18px;' alt="Reload Icon"/>
+                </label>
+              </div>
             </div>
           {% endfor %}
-          
         </li>
-        
-      </span>
+      <!--</span>-->
+      </ul>
     </ul>
   </li>
-  
-  
+
 </ul>
 
 

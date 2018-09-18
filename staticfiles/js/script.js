@@ -7,11 +7,19 @@ $(".colorPickSelector").colorPick();
 
 $(document).ready(function () {
   
+  $(".check-all").click(function(){
+      $(this).parent().siblings().find('input:checkbox').not(this).prop('checked', this.checked);
+  });
+
+  // $(".check-all").click(function(){
+  //     $('input:checkbox').not(this).prop('checked', this.checked);
+  // });
+  
+  
+  
   $(".location-checkbox:input[type=checkbox]").each(function () {
-      console.log('Found an input.')
       var location = $(this).parent().parent().prev();
       $(this).change(function() {
-          console.log('were changing')
          $(this).change(updateCount(location));
       });
   });
@@ -22,11 +30,12 @@ $(document).ready(function () {
     if (!l) {
       var locationCategories = $('.location-category');
       $(locationCategories).each(function() {
-        var count = $(this).next().find(".location-checkbox:input[type=checkbox]:checked").length;
+        var count = $(this).next().find(".check-one:input[type=checkbox]:checked").length;
+        
         $(this).find(".active-count").text(count);
       });
     } else {
-      var count = $(l).next().find(".location-checkbox:input[type=checkbox]:checked").length;
+      var count = $(l).next().find(".check-one:input[type=checkbox]:checked").length;
       $(l).find(".active-count").text(count);
     }
   }

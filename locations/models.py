@@ -2,8 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 class LocationCategory(models.Model):
-    category_name = models.CharField(max_length=256,null=True, blank=True)
-    color = models.CharField(max_length=256,null=True, blank=True)
+    category_name   = models.CharField(max_length=256,null=True, blank=True)
+    color           = models.CharField(max_length=256,null=True, blank=True)
     
     def __str__(self):
         return self.category_name
@@ -13,11 +13,11 @@ class LocationCategory(models.Model):
 
 class Location(models.Model):
     location_id = models.CharField(max_length=256,null=True, blank=True,verbose_name='Location ID')
-    category = models.ForeignKey(LocationCategory, on_delete=models.SET_NULL,null=True, blank=True)
-    title = models.CharField(max_length=256)
-    bar = models.BooleanField(default=False)
-    created      = models.DateTimeField(editable=False,null=True)
-    modified     = models.DateTimeField(null=True)
+    category    = models.ForeignKey(LocationCategory, on_delete=models.SET_NULL,null=True, blank=True)
+    title       = models.CharField(max_length=256)
+    bar         = models.BooleanField(default=False)
+    created     = models.DateTimeField(editable=False,null=True)
+    modified    = models.DateTimeField(null=True)
 
     def save(self, *args, **kwargs):
         if not self.id:
