@@ -11,8 +11,8 @@
         
         Display
       </li>
-      <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);'>
-          <li class="list-group-item" style='background:#FAFAFA;'>
+      <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);background: #007bff;'>
+          <li class="list-group-item" style='background:#FAFAFA;margin-left:12px;'>
             <div class='row'>
               <div class='col'>
                 <div class="btn-group btn-group-toggle" style='text-transform:capitalize; width:100%;' data-toggle="buttons">
@@ -26,7 +26,7 @@
               </div>
             </div>    
           </li>
-          <li class="list-group-item" style='background:#FAFAFA;'>
+          <li class="list-group-item" style='background:#FAFAFA;margin-left:12px;'>
             <div class='row'>
               <div class='col-12'>
                 <select class="custom-select" style='text-transform:capitalize;'>
@@ -39,7 +39,7 @@
               </div>
             </div>
           </li>
-          <li class="list-group-item" style='background:#FAFAFA;'>
+          <li class="list-group-item" style='background:#FAFAFA;margin-left:12px;'>
             <div class='row'>
               <div class='col-5'><span>Highlight:</span></div>
               <div class='col-7'>
@@ -72,9 +72,9 @@
         Active Locations
       </li>
       <!--<span class='collapse' id='location-categories'>-->
-      <ul class="list-group collapse" id='location-categories' style='border-top:1px solid rgba(0,0,0,.125);'>
+      <ul class="list-group collapse" id='location-categories' style='border-top:1px solid rgba(0,0,0,.125);background: #007bff;'>
         {% for category, location in locations.items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;' data-toggle="collapse" href="#{{category|slugify}}">
+        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;margin-left:12px;' data-toggle="collapse" href="#{{category|slugify}}">
           + {{category}}
           <span class="badge badge-primary badge-pill">
             <span class='active-count'>0</span>
@@ -111,9 +111,9 @@
         <img src='{% static "img/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:-5px;' alt="Menu Icon"/>
         Arrival Times
       </li>
-      <ul class="list-group collapse" id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>
+      <ul class="list-group collapse" id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);background: #007bff;'>
       <!--<span class='collapse' id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>-->
-        <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;' data-toggle="collapse" href="#{{category|slugify}}">
+        <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;background:#FAFAFA;margin-left:12px;data-toggle="collapse" href="#{{category|slugify}}"'>
           {% for role in roles %}
             <div class="input-group mb-2 px-0">
               <div class="input-group-prepend col px-0">
