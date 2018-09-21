@@ -1,69 +1,5 @@
 /*global $*/
-// Navbar: set active link
 $(function() {$('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');});
-
-
-$(".colorPickSelector").colorPick();
-
-$(document).ready(function () {
-  
-  $(".check-all").click(function(){
-      $(this).parent().siblings().find('input:checkbox').not(this).prop('checked', this.checked);
-  });
-
-  // $(".check-all").click(function(){
-  //     $('input:checkbox').not(this).prop('checked', this.checked);
-  // });
-  
-  
-  
-  $(".location-checkbox:input[type=checkbox]").each(function () {
-      var location = $(this).parent().parent().prev();
-      $(this).change(function() {
-         $(this).change(updateCount(location));
-      });
-  });
-
-  updateCount(l = false);
-
-  function updateCount (l = false) {
-    if (!l) {
-      var locationCategories = $('.location-category');
-      $(locationCategories).each(function() {
-        var count = $(this).next().find(".check-one:input[type=checkbox]:checked").length;
-        
-        $(this).find(".active-count").text(count);
-      });
-    } else {
-      var count = $(l).next().find(".check-one:input[type=checkbox]:checked").length;
-      $(l).find(".active-count").text(count);
-    }
-  }
-});
-
-// Location App: load positions
-function loadPositions(l) {
-  if ($('.modal-title').html() === 'Update location') {
-    var context = {location: l};
-    $.get( "/locations/create/positions/", context, function(data) {
-      p = JSON.parse(data);
-      var positions = {};
-      Object.keys(p).map(function(k,t) {
-        positions[k] = p[k];
-      });
-      for (var short_name in positions) {
-        var p = short_name.replace(/[0-9]/g, '');
-        var verbose_name = positions[short_name];
-        var c = '.'+p+'-container';
-        var insertion = $('.d-none').children().clone();
-        $(insertion).find('.short-name').html(short_name);
-        $(insertion).find('.short-name').addClass(p);
-        $(insertion).find('.verbose-name').html(verbose_name);
-        $(c).append(insertion);
-      }
-    });
-  }
-}
 
 // CRUD Objects
 $(function() {
@@ -105,7 +41,6 @@ $(function() {
     
     var loc_id = $('#id_location_id');
     if (loc_id && !location) sendPositions($('#id_location_id').val());
-    
     
     return false;
   };
@@ -162,47 +97,8 @@ function sortTable(n,table_id) {
     }
   }
 }
-// {'locations': {'10': {'active': False},
-// Generate Template
-$(".generate-template" ).click(function() {
-  var template = {'locations': {}};
-  var title = $('.template-name').val();
-  $('.location').each(function() {
-    var location = $(this).attr('id');
-    var active = $(this).prev().prop('checked');
-    template['locations'][location] = {
-      'active': active,
-      'bar': '',
-      'id': '',
-      'location': '',
-      'positions': {},
-      'scheduled': 0
-    };
-  });
-  template['title'] = title;
-  var context = { template:JSON.stringify(template), title:title, new_template: true };
-  $.post( "/schedules/templates/create/generate/", context, function( data ) {
-    $('.schedule-cards').html(data);
-  });
-});
 
-$(".choose-template" ).click(function() {
-  var category = $('#template-subcategory').children('option:selected').attr('id');
-  $.post( "/schedules/templates/create/modal/", {category: category}, function( data ) {
-      $('.modal-body').html(data);
-  });
-  $("#modal-object").modal("hide");
-});
 
-$(".update-template" ).click(function() {
-  var pk = $('.modal-body').find('.active').attr('id');
-  var category = $('#template-subcategory').children('option:selected').attr('id');
-  var context = {category: category, pk: pk};
-  $.post( "/schedules/templates/create/select/", context, function( data ) {
-      $('.schedule-cards').html(data);
-  });
-  $(".modal").modal("hide");
-});
 
 // Submit/Update Schedule
 var dict = {};
@@ -246,7 +142,6 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
         'employee': employee,
         'verbose_name': verbose_name
       };
-      // if (verbose_name) d['positions'][position]['verbose_name'] = verbose_name;
     });
     id = $(this).attr('id');
     dict[id] = d;
@@ -256,86 +151,10 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
   $.post("/schedules/templates/create/save/", context);
 });
 
-// Control Panel Toggles
-$(document).ready(function(){
-	$('.toggle-unscheduled').on("click", function(){
-    $('.unscheduled').toggle();
-  });
-  $('.toggle-scheduled').on("click", function(){
-    $('.scheduled').toggle();
-  });
-  $('.toggle-inactive-locations').on("click", function(){
-	  $('.location-title.collapsed').each(function(){
-	    $(this).parent().parent().toggle();
-	  });
-  });
-  $('.toggle-bars').on("click", function(){
-	  $('.bar').each(function(){
-	    var flag = $(this).is(':checked');
-	    $(this).prop('indeterminate', false);
-	    $(this).prop('checked', !flag);
-	    $(this).parent().parent().parent().toggle();
-    });
-  });
-}); 
 
-// Control Panel Arrival Times
-$('.update-role').on("click", function(){
-  var target = $(this).attr('id')[0].toUpperCase();
-  var arrival_time = $(this).parent().prev().children().val();
-  $('.'+target).val(arrival_time);
-});
-
-$(".template-header > .edit").click(function() {
-  $('.template-name').prop('readonly', false);
-});
-
-// Add/Remove Employees
-$(function() {
-  $('.schedule-cards').on('click', '.remove-employee', function(event) { 
-	  var shift = $(this).parent().next().find('.arrival-time');
-	  $(this).toggleClass('rotate');
-	  $(shift).each(function() {
-	    var delete_button = $(this).next();
-	    $(delete_button).toggleClass('display-flex');
-	    $(this).toggle();
-      $(this).prev().toggleClass('red-border');
-      $(this).prev().prev().children().toggleClass('red-border-background');
-	  });
-	});
-	$('.schedule-cards').on('click', '.remove-button', function(event) { 
-	  $(this).parent().parent().parent().remove();
-  });
-  $('.schedule-cards').on('click', '.add-employee', function(event) { 
-	  var card_body = $(this).parent().next();
-	  var new_position = $(card_body).children().last().find('span').html();
-	  var prefix = new_position.split('')[0];
-	  var i = Number(new_position.split('')[1]);
-	  
-	  if (prefix !== 'E') {
-	    new_position = 'E1';
-	    i = 1;
-	  } else {
-	    i += 1;
-	    new_position = 'E'+i;
-	  }
-	  
-	  var new_employee = $(card_body).children().first().clone();
-	  new_employee.find('input').attr('value','');
-	  new_employee.find('option').first().html('Extra #' + i);
-	  new_employee.find('option').first().attr('value','Extra #' + i);
-	  new_employee.find('option').first().attr('class',new_position);
-	  new_employee.find('span').html(new_position);
-	  new_employee.find('.template-placeholder').attr('placeholder','Extra #' + i);
-	  new_employee.find('.verbose-name').html('Extra #' + i);
-	  $(card_body).append(new_employee);
-	});
-});
-
-var template_category = $('#template-category');
-var template_subcategory = $( '#template-subcategory' );
-var options = template_subcategory.find( 'option' );
-$(template_category).on('change', function() {
+$('#template-category').on('change', function() {
+  var template_subcategory = $( '#template-subcategory' );
+  var options = template_subcategory.find( 'option' );
   var val = this.value;
   if (val === '2' || val === '3') {
     $(template_subcategory).removeAttr('disabled');
@@ -349,59 +168,6 @@ $(template_category).on('change', function() {
   }
 	$(template_subcategory).html($(options).filter( '[value="'+val+'"]') );
 }).trigger('change');
-
-
-
-
-$('.category-header').on('click', '.add-category-button', function() {
-  console.log('hello');
-    var id = $(this).parent().next().children().first().attr('id');
-    var new_category = $('#'+id).find('.add-category').last().clone();
-    $('#'+id).children().last().before(new_category);
-});
-$('.company-categories').on('click', '.delete', function() { 
-  var myvar = $(this).parent().parent().parent();
-  var new_category = $('.add-category');
-  $(myvar).remove();
-  if (!new_category) $('.category-abbr').next(new_category);
-});
-
-$('.save-categories').click(function(e) {
-  e.preventDefault();
-  var categories = {'categories': {}};
-  var category_id = $(this).parent().attr('id');
-  
-  $(this).parent().children('.add-category').each(function() {
-    var color = $(this).find('.colorPickSelector').css('color');
-    if (category_id === 'roles') {
-      var verbose_name = $(this).find('.category-name').val();
-      var short_name = $(this).find('.category-abbr').val();
-      categories['categories'][verbose_name] = {
-        'color': color,
-        'short_name': short_name,
-      };
-    } else if (category_id == 'location') {
-      var category = $(this).find('.category-name').val();
-      categories['categories'][category] = {
-        'color': color,
-      };
-    }
-  });
-  categories = JSON.stringify(categories);
-  var context = {
-    categories: categories,
-    category_id: category_id
-  };
-  if (category_id === 'roles') {
-    $.post( "/company/roles/", context);
-  } else if (category_id === 'location') {
-    $.post( "/company/location/", context);
-  }
-  
-});
-
-
-
 
 function sendPositions(location_id) {
   var positions = {};
@@ -428,11 +194,6 @@ $('.modal').on('click', '.add-role-button', function() {
   short.attr('value', short_name);
   
   var count = $('.role-list').find('.' + short_name).length;
-  // var count = $('.' + short_name).length;
-  // count = 0;
-  // $('.' + short_name).each(function(){
-//     count += 1;
-// });
   var num = (count += 1);
   var container = short_name + '-container';
   if (count === 2) {

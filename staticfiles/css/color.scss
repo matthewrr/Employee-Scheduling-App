@@ -1,0 +1,10 @@
+@mixin colors($max-count, $color-frequency){
+  $color: 360/$max-count;
+  
+  @for $i from 1 through $max-count {
+    &:nth-child(#{$max-count}n + #{$i}) {
+      // Modify 's' and 'l' percentages to match color scheme you want
+      background: hsl(($i - 1)*($color / $color-frequency), 80%, 60%);
+    }
+  }
+}

@@ -1026,13 +1026,16 @@ button:focus {
 /*  height: 100%;*/
 /*}*/
 
-@mixin colors($max-count, $color-frequency){
-  $color: 360/$max-count;
+/*@mixin colors($max-count, $color-frequency){*/
+/*  $color: 360/$max-count;*/
   
-  @for $i from 1 through $max-count {
-    &:nth-child(#{$max-count}n + #{$i}) {
-      // Modify 's' and 'l' percentages to match color scheme you want
-      background: hsl(($i - 1)*($color / $color-frequency), 80%, 60%);
-    }
-  }
-}
+/*  @for $i from 1 through $max-count {*/
+/*    &:nth-child(#{$max-count}n + #{$i}) {*/
+/*      // Modify 's' and 'l' percentages to match color scheme you want*/
+/*      background: hsl(($i - 1)*($color / $color-frequency), 80%, 60%);*/
+/*    }*/
+/*  }*/
+/*}*/
+
+
+/*#40c8c2#4c98cf,#4873a6,#595386,#554269*/
