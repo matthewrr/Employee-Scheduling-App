@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% block content %}  
 
+<!--<link rel="stylesheet" href="{% static 'events/scss/gradientColor.scss' %}" />-->
+<link rel="stylesheet" href="{% static 'events/css/gradientColor.css' %}" />
+
 <div class='container-fluid' style='background:white;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
 {% include 'events/detail/header/event_header.html' with template=template %}
   
@@ -19,7 +22,7 @@
 
   <div style='height:100%; width:1500px;'>
     {% if not first_save %}
-    <div class='board location-board' style='margin-left:212px;margin-bottom:100px;'>
+    <div class='board location-board hList_breadcrumb' style='margin-left:212px;margin-bottom:100px;'>
       {% for location, attributes in roster.locations.items %}
         {% if attributes.active %}
           {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
@@ -48,4 +51,5 @@
 <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
 <script type="text/javascript" src="{% static 'events/js/events.js' %}"></script>
 <script type="text/javascript" src="{% static 'events/js/dragDrop.js' %}"></script>
+
 {% endblock %}

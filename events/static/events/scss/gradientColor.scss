@@ -1,0 +1,51 @@
+/************************
+nth-child mixin
+************************/
+
+// $max-count is the maximum amount of colors you'll want
+// $color-frequency is how intense you want the color change to be. Lower # = more intense changes
+@mixin colors($max-count, $color-frequency){
+  $color-frequency: 5;
+  $color: 213;
+  
+  @for $i from 1 through $max-count {
+    &:nth-child(#{$max-count}n + #{$i}) {
+      // Modify 's' and 'l' percentages to match color scheme you want
+      .board-column-header {
+          background: hsl($color - ($i*$color-frequency),80%,40%);
+      }
+      
+    }
+  }
+}
+
+/************************
+hList
+************************/
+
+.hList { overflow: hidden; }
+.hList > * { display: inline-block; }
+
+/************************
+hList Breadcrumbs
+************************/
+
+.hList_breadcrumb { 
+    overflow: hidden;
+	    list-style: none; 
+  	   
+}
+
+.hList_breadcrumb > * {
+    //nth child mixin
+    @include colors(200,1); //($number of color, $color-frequency)  
+}
+
+.hList_breadcrumb > * a {
+    display: block;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    color: #000000;
+}
