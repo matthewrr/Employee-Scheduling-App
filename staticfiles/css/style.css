@@ -809,7 +809,7 @@ button:focus {
   /*text-align: center;*/
   background: #333;
   color: #fff;
-  border-radius: 3px 3px 0 0;
+  /*border-radius: 3px 3px 0 0;*/
   
 }
 @media (max-width: 600px) {
@@ -833,7 +833,8 @@ button:focus {
   /*min-height: 95px;*/
   min-height:43px;
   background:white;
-  width: 100%!important;
+  width: 85%;
+  left:20px;
 }
 .board-item, .employee-item {
   position: absolute;
@@ -997,9 +998,15 @@ button:focus {
 }
 
 
+/*.board-column:nth-child(1) .board-column-header {*/
 
+.board-column-content:nth-child(2) {
+  margin-top:12px;
+}
 
-
+.board-column-content:nth-last-child(1) {
+  margin-bottom:12px;
+}
 
 
 

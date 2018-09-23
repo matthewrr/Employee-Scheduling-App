@@ -6,13 +6,13 @@ nth-child mixin
 // $color-frequency is how intense you want the color change to be. Lower # = more intense changes
 @mixin colors($max-count, $color-frequency){
   $color-frequency: 5;
-  $color: 213;
+  $color: 280;
   
   @for $i from 1 through $max-count {
     &:nth-child(#{$max-count}n + #{$i}) {
       // Modify 's' and 'l' percentages to match color scheme you want
       .board-column-header {
-          background: hsl($color - ($i*$color-frequency),80%,40%);
+          background: hsl($color - ($i*$color-frequency),80%,5%);
       }
       
     }

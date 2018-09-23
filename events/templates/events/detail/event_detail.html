@@ -22,7 +22,7 @@
 
   <div style='height:100%; width:1500px;'>
     {% if not first_save %}
-    <div class='board location-board hList_breadcrumb' style='margin-left:212px;margin-bottom:100px;'>
+    <div class='board location-board hList_breadcrumb' style='margin-left:270px;margin-bottom:100px;'>
       {% for location, attributes in roster.locations.items %}
         {% if attributes.active %}
           {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
