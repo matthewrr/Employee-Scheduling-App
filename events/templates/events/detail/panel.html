@@ -3,6 +3,11 @@
 <ul class='list-group list-group-flush mt-0' style='border: 1px solid rgba(0,0,0,.125);'>
   
   <!--<li class="list-group-item text-center" style='border-top:none;padding:0px;text-transform:uppercase;letter-spacing:1px;'>Control Panel</li>-->
+
+  
+  
+  
+  
   
   <li class="list-group-item" style='padding:0px;'>
     <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;background:#40c8c2;'>
@@ -13,20 +18,6 @@
         <img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>
       </li>
       <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);'>
-          <li class="list-group-item" style='background:#FAFAFA;'>
-            <div class='row'>
-              <div class='col'>
-                <div class="btn-group btn-group-toggle" style='text-transform:capitalize; width:100%;' data-toggle="buttons">
-                  <label class="btn btn-primary active">
-                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Show All
-                  </label>
-                  <label class="btn btn-primary">
-                    <input type="radio" name="options" id="option3" autocomplete="off"> Show By Section
-                  </label>
-                </div>
-              </div>
-            </div>    
-          </li>
           <li class="list-group-item" style='background:#FAFAFA;'>
             <div class='row'>
               <div class='col-12'>
@@ -132,6 +123,31 @@
           {% endfor %}
         </li>
       <!--</span>-->
+      </ul>
+    </ul>
+  </li>
+  
+    <li class="list-group-item" style='padding:0px;'>
+    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;background:#4c4a80;'>
+      <li class="list-group-item ml-2" style='border-top:none;' data-toggle="collapse" href="#employee-list">
+        Employees
+        <img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>
+      </li>
+      <ul class="list-group collapse" id='employee-list' style='border-top:1px solid rgba(0,0,0,.125);'>
+        <li class="list-group-item" style='background:#FAFAFA;height:69vh;'>
+        <div class='board-column'>
+          <div class='scroll-content-wrapper'>
+            <div class="employee-column-content">
+              {% for employee in all_employees %}
+                  <div class="board-item" id='{{forloop.counter}}'>
+                  <div class="board-item-content">{{employee.name|truncatechars:20}}</div>
+                </div>
+                
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        </li>
       </ul>
     </ul>
   </li>

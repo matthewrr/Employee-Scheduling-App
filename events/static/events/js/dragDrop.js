@@ -43,7 +43,7 @@ itemContainers.forEach(function (container) {
           // The layout's total height.
           height: 0,
           // Should Muuri set the grid's width after layout?
-          setWidth: false,
+          setWidth: true,
           // Should Muuri set the grid's height after layout?
           setHeight: true
         };
@@ -59,28 +59,27 @@ itemContainers.forEach(function (container) {
       for (var i = 0; i < items.length; i++) {
       // for (var i = 0; i < items.length; i++) {
         item = items[i];
-        x = 50;
         y = 0
         // m = item.getMargin();
         m = 0;
         // w = item.getWidth() + m.left + m.right;
         // w = 10;
-        w = item.getWidth() - 70;
+        w = item.getWidth() - 90;
         // h = item.getHeight() + m.top + m.bottom;
-        if (x === 0) {
-          z = 20;
+        // if (x === 0) {
+        //   z = 20;
           
-        } else {
-          z += 20;
-        }
-        x = 50
+        // } else {
+        //   z += 20;
+        // }
+        x = 40
           
         layout.slots.push(x, y);
       }
   
       // Calculate the layout's total width and height. 
       // layout.width = w + x;
-      layout.width = 250;
+      layout.width = 280;
       layout.height = y + h;
   
       return layout;
@@ -229,7 +228,7 @@ employeeContainers.forEach(function (container) {
   .on('dragStart', function (item) {
     // item.getElement().style.width = item.getWidth() + 'px';
     // item.getElement().style.height = item.getHeight() + 'px';
-    item.getElement().style.width = 163 + 'px';
+    item.getElement().style.width = 150 + 'px';
   })
   .on('dragReleaseEnd', function (item) {
     columnGrids.forEach(function (employeeGrid) {

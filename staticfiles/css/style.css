@@ -773,8 +773,8 @@ button:focus {
 }
 .board-column {
   position: absolute;
-  left: 0;
-  right: 0;
+  /*left: 0;*/
+  /*right: 0;*/
   width: 23%;
   /*width:100%;*/
   margin: 0 1.5%;
@@ -788,7 +788,9 @@ button:focus {
 
 .board-column {
   margin: 10px;
-  /*width:20%;*/
+  margin-top:0px;
+  width:100%;
+  margin-left:0px;
 }
 
 .board-column.muuri-item-releasing {
@@ -826,15 +828,25 @@ button:focus {
 .board-column.done .board-column-header {
   background: #2ac06d;
 }
-.board-column-content, .employee-column-content {
+.board-column-content {
   position: relative;
   /*border: 10px solid transparent;*/
   border: 3px solid transparent;
   /*min-height: 95px;*/
   min-height:43px;
   background:white;
-  width: 85%;
-  left:20px;
+  /*width: 85%;*/
+  left:15px;
+}
+
+.employee-column-content {
+  position: relative;
+  /*border: 10px solid transparent;*/
+  border: 3px solid transparent;
+  /*min-height: 95px;*/
+  min-height:43px;
+  /*background:white;*/
+  
 }
 .board-item, .employee-item {
   position: absolute;
@@ -863,6 +875,7 @@ button:focus {
   cursor: pointer;
   -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+  width:204px;
 
 }
 @media (max-width: 600px) {
@@ -966,7 +979,7 @@ button:focus {
 
 .arrival-time {
   height: 33px;
-  margin: 5px 0 5px 8px;
+  margin: 5px 0 5px 0px;
   width:70px;
   font-family: "Source Sans Pro";
   padding: 4px;
@@ -1046,3 +1059,58 @@ button:focus {
 
 
 /*#40c8c2#4c98cf,#4873a6,#595386,#554269*/
+
+
+.cd-horizontal-timeline .events-content {
+  position: relative;
+}
+.cd-horizontal-timeline .events-content li {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+  opacity: 0;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+.cd-horizontal-timeline .events-content li.selected {
+  /* visible event content */
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  transform: translateX(0);
+}
+.cd-horizontal-timeline .events-content li.enter-right, 
+.cd-horizontal-timeline .events-content li.leave-right {
+  animation-name: cd-enter-right;
+}
+.cd-horizontal-timeline .events-content li.enter-left, 
+.cd-horizontal-timeline .events-content li.leave-left {
+  animation-name: cd-enter-left;
+}
+.cd-horizontal-timeline .events-content li.leave-right, 
+.cd-horizontal-timeline .events-content li.leave-left {
+  animation-direction: reverse;
+}
+@keyframes cd-enter-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+@keyframes cd-enter-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}

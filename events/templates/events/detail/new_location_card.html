@@ -1,16 +1,15 @@
 {% load staticfiles %}
 
-      <div class='board-column' style='box-shadow: #cacaca 0px 0px 12px;border-radius:0px'>
+      <div class='board-column' style='box-shadow: #cacaca 0px 0px 12px;border-radius:0px;width:16vw;'>
         <div class='board-column-header hList hList_5up' style='height:38px;background:#336f99'>
-          <!--<input type="checkbox" class="form-check-input" id="" style='vertical-align: middle;margin-top: 3px;'>-->
-          <div class='text-center location-title' style='line-height:2em;text-transform:capitalize;letter-spacing:.5px; font-size:1.1em;font-weight:600;vertical-align: middle; margin-top: 2px;'>
+          <div class='text-center location-title' style='line-height:2em;text-transform:uppercase;letter-spacing:1px; font-size:1em;font-weight:400;vertical-align: middle; margin-top: 2px;'>
             <span>{{location_verbose}}</span>
           </div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content">
+        <div class="board-column-content" style='text-transform:uppercase;'>
           
-          <input class="read-short" type="text" placeholder="{{shift}}" readonly></input>
+          <span style='line-height:2.5em;'>{{shift|upper}}:</span>
           <div class="board-item default-board-item" style='left:50px;'>
             
             <div class="board-item-content" style='width:163px;max-height:35px;'>
