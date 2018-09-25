@@ -153,7 +153,10 @@ itemContainers.forEach(function (container) {
 
 // Instantiate the board grid so we can drag those
 // columns around.
-boardGrid = new Muuri('.board', {
+var boardContainers = [].slice.call(document.querySelectorAll('.board'));
+
+boardContainers.forEach(function (board) {
+boardGrid = new Muuri(board, {
   layoutDuration: 400,
   layoutEasing: 'ease',
   dragEnabled: true,
@@ -204,6 +207,7 @@ boardGrid = new Muuri('.board', {
   //   console.log(gridWidth)
   //   return layout;
   // }
+});
 });
 
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));

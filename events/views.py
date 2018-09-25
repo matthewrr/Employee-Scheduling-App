@@ -56,6 +56,14 @@ def event_detail_view(request,year,month,day,slug):
     locations = {}
     for l in loc:
         locations[l] = l.location_set.all()
+        
+    event_categories = {}
+    for location, values in roster['locations'].items():
+        category = values['category']
+        event_categories.setdefault(category,{})
+        event_categories[category][location] = values 
+    pprint(event_categories)
+    
     
     categories = LocationCategory.objects.values_list('category_name')
     context = {'event':event,
@@ -67,6 +75,7 @@ def event_detail_view(request,year,month,day,slug):
                'categories':categories,
                'locations':locations,
                'roles':roles,
+               'event_categories': event_categories
                }
     # pprint(roster)
     return render(request, './events/detail/event_detail.html', context)
