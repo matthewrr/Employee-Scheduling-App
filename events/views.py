@@ -62,9 +62,7 @@ def event_detail_view(request,year,month,day,slug):
         category = values['category']
         event_categories.setdefault(category,{})
         event_categories[category][location] = values 
-    pprint(event_categories)
-    
-    
+
     categories = LocationCategory.objects.values_list('category_name')
     context = {'event':event,
                'roster':roster,

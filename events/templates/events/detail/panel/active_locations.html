@@ -1,0 +1,43 @@
+{% load staticfiles %} 
+  <li class="list-group-item" style='border-bottom:none;padding:0px;'>
+    
+    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
+        <!--background:#4c98cf;-->
+      <li class="list-group-item ml-2" data-toggle="collapse" style='color:white;' href="#location-categories">
+        <img class='panel-icon' src='{% static "events/img/locations.png" %}' alt="False"/>
+         <span class='panel-label'>Active Locations</span>
+        <!--<img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>-->
+      </li>
+      <!--<span class='collapse' id='location-categories'>-->
+      <ul class="list-group collapse" id='location-categories' style='border-top:1px solid rgba(0,0,0,.125);'>
+        {% for category, location in locations.items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
+          + {{category}}
+          <span class="badge badge-primary badge-pill">
+            <span class='active-count'>0</span>
+            <span>/</span>
+            <span class='category-count'>{{location.count}}</span>
+          </span>
+        </li>
+        <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
+          <div class="form-check" style='text-transform:capitalize;'>
+            <input class="form-check-input location-checkbox check-all" type="checkbox" value="" id="defaultCheck1" checked>
+            <label class="form-check-label" for="defaultCheck1">
+              <strong>All</strong>
+            </label>
+          </div>
+              
+          {% for l in location %}
+          <div class="form-check" style='text-transform:capitalize;'>
+            <input class="form-check-input location-checkbox check-one" type="checkbox" value="" id="defaultCheck1" checked>
+            <label class="form-check-label" for="defaultCheck1">
+              {{l}}
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </ul>
+      <!--</span>-->
+    </ul>
+  </li>

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<li class="list-group-item" style='padding:0px;'>
+    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
+        <!--background:#4874a8;-->
+      <li class="list-group-item ml-2" data-toggle="collapse" style='color:white;' href="#arrival-times">
+        <img class='panel-icon' src='{% static "events/img/arrival_times.png" %}' alt="False"/>
+         <span class='panel-label'>Arrival Times</span>
+        <!--<img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>-->
+      </li>
+      <ul class="list-group collapse" id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>
+      <!--<span class='collapse' id='arrival-times' style='border-top:1px solid rgba(0,0,0,.125);'>-->
+        <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;data-toggle="collapse" href="#{{category|slugify}}"'>
+          {% for role in roles %}
+            <div class="input-group mb-2 px-0">
+              <div class="input-group-prepend col px-0">
+                <span class="input-group-text col-12" id="inputGroup-sizing-default">{{role.verbose_name}}:</span>
+              </div>
+              <input type="text" class="form-control col-4" aria-label="Default" placeholder='Arrival' aria-describedby="inputGroup-sizing-default">
+              <div class="input-group-append col-2 px-0">
+                
+                <label class="input-group-text" for="inputGroupSelect02">
+                  <img src='{% static "img/icons/refresh.png" %}' style='width:18px;height:18px;' alt="Refresh Icon"/>
+                </label>
+              </div>
+            </div>
+          {% endfor %}
+        </li>
+      <!--</span>-->
+      </ul>
+    </ul>
+  </li>

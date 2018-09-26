@@ -1,18 +1,19 @@
 {% load staticfiles %}
 
-      <div class='board-column' style='box-shadow: #cacaca 0px 0px 12px;border-radius:0px;width:16vw;'>
+      <div class='board-column' style='box-shadow: #cacaca 0px 0px 12px;border-radius:0px;width:18vw;margin-left:20px;background:white;'>
         <div class='board-column-header hList hList_5up' style='height:38px;background:#336f99'>
           <div class='text-center location-title' style='line-height:2em;text-transform:uppercase;letter-spacing:1px; font-size:1em;font-weight:400;vertical-align: middle; margin-top: 2px;'>
             <span>{{location_verbose}}</span>
           </div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content" style='text-transform:uppercase;'>
+        <div class="board-column-content" style='text-transform:uppercase;width:16.5vw'>
           
-          <span style='line-height:2.5em;'>{{shift|upper}}:</span>
-          <div class="board-item default-board-item" style='left:50px;'>
+          <!--<span style='line-height:2.5em;'>{{shift|upper}}:</span>-->
+          <input class="read-short" type="text" placeholder="{{shift}}" readonly>
+          <div class="board-item default-board-item" style='margin-left:10px;height:150px;'>
             
-            <div class="board-item-content" style='width:163px;max-height:35px;'>
+            <div class="board-item-content" style='width:9.4vw;max-height:35px;'>
               <div>{{scheduled.verbose_name}}</div>
             </div>
             

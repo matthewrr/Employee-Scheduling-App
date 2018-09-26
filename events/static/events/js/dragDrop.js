@@ -43,7 +43,7 @@ itemContainers.forEach(function (container) {
           // The layout's total height.
           height: 0,
           // Should Muuri set the grid's width after layout?
-          setWidth: true,
+          setWidth: false,
           // Should Muuri set the grid's height after layout?
           setHeight: true
         };
@@ -61,10 +61,11 @@ itemContainers.forEach(function (container) {
         item = items[i];
         y = 0
         // m = item.getMargin();
-        m = 0;
+        m = 20;
         // w = item.getWidth() + m.left + m.right;
         // w = 10;
-        w = item.getWidth() - 90;
+        // w = item.getWidth() - 90;
+        w = item.getWidth() + 90;
         // h = item.getHeight() + m.top + m.bottom;
         // if (x === 0) {
         //   z = 20;

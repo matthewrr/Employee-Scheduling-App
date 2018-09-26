@@ -1,0 +1,28 @@
+{% load staticfiles %}
+
+<li class="list-group-item" style='padding:0px;'>
+    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
+        <!--background:#4c4a80;-->
+      <li class="list-group-item ml-2" style='border-top:none;color:white;' data-toggle="collapse" href="#employee-list">
+        <img class='panel-icon' src='{% static "events/img/employees.png" %}' alt="False"/>
+        <span class='panel-label'>Employees</span>
+        <!--<img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>-->
+      </li>
+      <ul class="list-group collapse show" id='employee-list' style='border-top:1px solid rgba(0,0,0,.125);'>
+        <li class="list-group-item" style='height:69vh;'>
+        <div class='board-column'>
+          <div class='scroll-content-wrapper'>
+            <div class="employee-column-content" style='color:black;'>
+              {% for employee in all_employees %}
+                  <div class="board-item" id='{{forloop.counter}}'>
+                  <div class="board-item-content">{{employee.name|truncatechars:20}}</div>
+                </div>
+                
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        </li>
+      </ul>
+    </ul>
+  </li>

@@ -1,0 +1,48 @@
+{% load staticfiles %} 
+ 
+  <li class="list-group-item" style='padding:0px;'>
+    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
+        <!--background:#40c8c2;-->
+      <li class="list-group-item ml-2" style='border-top:none;color:white;' data-toggle="collapse" href="#display-options">
+        <img class='panel-icon' src='{% static "events/img/employees.png" %}' alt="False"/>
+         <span class='panel-label'>Display</span>
+        <!--<img src='{% static "img/icons/menu.png" %}' style='width:18px;height:18px;margin-right:7px;margin-top:4px;float:right;' alt="Menu Icon"/>-->
+      </li>
+      <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);'>
+          <li class="list-group-item">
+            <div class='row'>
+              <div class='col-12'>
+                <select class="custom-select" style='text-transform:capitalize;'>
+                  <option selected>Sort By...</option>
+                  <option value="1">Category (Default)</option>
+                  <option value="2">Location Name (Asc)</option>
+                  <option value="3">Location Name (Desc)</option>
+                  <option value="4"># of Positions</option>
+                </select>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class='row'>
+              <div class='col-5'><span>Highlight:</span></div>
+              <div class='col-7'>
+                <div class='row'>  
+                  <div class="form-check" style='text-transform:capitalize;'>
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Scheduled
+                    </label>
+                  </div>
+                  <div class="form-check" style='text-transform:capitalize;'>
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Unscheduled
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+      </ul>
+    </ul>
+  </li>

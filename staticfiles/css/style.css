@@ -1,5 +1,5 @@
 body {
-    background:#DDD;
+    background:#FFF;
     color:#1b142d;
     font-family:"Open Sans";
 }
@@ -72,7 +72,8 @@ td > a {font-weight:600;}
     padding-right: 30px;
 }
 
-.navbar {background-color: rgba(0,0,0,.7);}
+/*.navbar {background-color: rgba(0,0,0,.7);}*/
+.navbar {background-color: rgba(0,0,0,1);}
 
 /*.location-title {*/
 /*    font-size: 1.1em;*/
@@ -875,7 +876,7 @@ button:focus {
   cursor: pointer;
   -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
-  width:204px;
+  width:180px;
 
 }
 @media (max-width: 600px) {
@@ -1007,7 +1008,8 @@ button:focus {
 }
 
 .list-group-item {
-  background:#F5F5F5;
+  /*background:#F5F5F5;*/
+  background:none;
 }
 
 
@@ -1211,6 +1213,24 @@ button:focus {
   border-bottom: 1px solid black;
 }
 
+
+
+.panel-icon {
+  height:26px;
+  width:26px;
+}
+
+.panel-label {
+  background: -webkit-linear-gradient(#84d5ff, #e783fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left:10px;
+  vertical-align:middle;
+}
+
+
+
+
 @-webkit-keyframes 
 fill {  0% {
  width: 0%;
@@ -1266,3 +1286,4 @@ fillColour {  0% {
  color: #333;
 }
 }<br type="_moz">
+
