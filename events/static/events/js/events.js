@@ -74,3 +74,14 @@ $(document).ready(function () {
 //     $($('.location-categories a')[0]).addClass('active');
 //     $('body').bind('mousewheel', mouseEvent);
 // });
+
+
+$("document").ready(function(){
+    $(".list-group-item.control-panel").hover(function(){
+      var image = $(this).find('.panel-icon');
+      var text = $(this).find('.panel-label');
+      // var text = $(this).find('img').siblings('.gradient');
+      $(image).toggleClass('d-none');
+      $(text).toggleClass('d-none');
+    });
+});

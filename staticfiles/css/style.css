@@ -1216,20 +1216,36 @@ button:focus {
 
 
 .panel-icon {
-  height:26px;
-  width:26px;
+  height:22px;
+  width:22px;
 }
 
 .panel-label {
-  background: -webkit-linear-gradient(#84d5ff, #e783fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /*background: -webkit-linear-gradient(#84d5ff, #e783fd);*/
+  /*-webkit-background-clip: text;*/
+  /*-webkit-text-fill-color: transparent;*/
+  color:white;
   margin-left:10px;
   vertical-align:middle;
 }
 
+.panel-label.gradient {
+  background: -webkit-linear-gradient(#84d5ff, #e783fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+  
+}
+/*.list-group-item.control-panel:hover { */
+/*  background-image: url(/); */
+
+/*}*/
 
 
+.badge-primary {
+  background: linear-gradient(#84d5ff, #e783fd);
+    color: black;
+}
 
 @-webkit-keyframes 
 fill {  0% {
