@@ -1,33 +1,30 @@
 {% load staticfiles %}
 
-<li class="list-group-item control-panel" style='padding:0px;'>
-    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-        <!--background:#4c4a80;-->
-      <li class="list-group-item py-2" style='border-top:none;color:white;margin-left:18px;background:rgb(58, 58, 58);' data-toggle="collapse" href="#employee-list">
-        
-          <img class='panel-icon d-none' src='{% static "events/img/gradient/employees.png" %}' alt="Employee List Icon"/> 
-          <img class='panel-icon' src='{% static "events/img/solid/employees.png" %}' alt="Employee List Icon"/>
-         
-          <span class='panel-label d-none gradient'>Employees</span>
-          <span class='panel-label'>Employees</span>
-        
-        
-      </li>
-      <ul class="list-group collapse collapse" id='employee-list' style='border-top:1px solid rgba(0,0,0,.125);margin-left:18px;'>
-        <li class="list-group-item" style='height:69vh;'>
+<li class="list-group-item control-panel-item" style='background:linear-gradient(#ce98fd, #e980fc)'>
+  <ul class="list-group">
+    
+    <li class="list-group-item py-2 toggle">
+      <img class='panel-icon d-none' src='{% static "events/img/gradient/employees.png" %}' alt="Employee List Icon"/> 
+      <img class='panel-icon' src='{% static "events/img/solid/employees.png" %}' alt="Employee List Icon"/>
+      <span class='panel-label d-none gradient'>Employees</span>
+      <span class='panel-label'>Employees</span>
+    </li>
+    
+    <ul class="list-group inner">
+      <li class="list-group-item" style='height:69vh;'>
         <div class='board-column'>
           <div class='scroll-content-wrapper'>
-            <div class="employee-column-content" style='color:black;'>
+            <div class="employee-column-content">
               {% for employee in all_employees %}
-                  <div class="board-item" id='{{forloop.counter}}'>
+                <div class="board-item" id='{{forloop.counter}}'>
                   <div class="board-item-content">{{employee.name|truncatechars:20}}</div>
                 </div>
-                
               {% endfor %}
             </div>
           </div>
         </div>
-        </li>
-      </ul>
+      </li>
     </ul>
-  </li>
+    
+  </ul>
+</li>

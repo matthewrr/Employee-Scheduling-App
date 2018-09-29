@@ -77,11 +77,27 @@ $(document).ready(function () {
 
 
 $("document").ready(function(){
-    $(".list-group-item.control-panel").hover(function(){
+    $(".list-group-item.control-panel-item").hover(function(){
       var image = $(this).find('.panel-icon');
       var text = $(this).find('.panel-label');
       // var text = $(this).find('img').siblings('.gradient');
       $(image).toggleClass('d-none');
       $(text).toggleClass('d-none');
     });
+});
+
+$('.toggle').click(function(e) {
+  	e.preventDefault();
+  
+    var $this = $(this);
+  
+    if ($this.next().hasClass('show')) {
+        $this.next().removeClass('show');
+        $this.next().slideUp(350);
+    } else {
+        $this.parent().parent().parent().find('li .inner').removeClass('show');
+        $this.parent().parent().parent().find('li .inner').slideUp(350);
+        $this.next().toggleClass('show');
+        $this.next().slideToggle(350);
+    }
 });

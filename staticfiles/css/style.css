@@ -1291,15 +1291,35 @@ fillColour {  0% {
 }
 }
 
-@keyframes 
-fillColour {  0% {
- color: #fff;
-}
- 50% {
- color: #fff;
-}
- 100% {
- color: #333;
-}
-}<br type="_moz">
 
+
+/*----------------------------------*/
+
+.control-panel {
+  margin-top:40px;
+}
+
+.control-panel-item {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+.control-panel-item .list-group {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.control-panel-item .list-group:first-child {
+  border-top: none;
+  color: white;
+  margin-left:9px;
+  background:rgb(58, 58, 58);
+}
+
+.control-panel-item .list-group.inner {
+  border-top: 1px solid rgba(0,0,0,.125);
+  display:none;
+}
+
+.employee-column-content {
+  color: black;
+}

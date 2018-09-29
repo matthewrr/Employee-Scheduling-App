@@ -1,48 +1,42 @@
 {% load staticfiles %} 
-  <li class="list-group-item control-panel" style='border-bottom:none;padding:0px;'>
+<li class="list-group-item control-panel-item" style='background:linear-gradient(#9cc0fe, #b4adfe)'>
+  <ul class="list-group">
     
-    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-        <!--background:#4c98cf;-->
-      <li class="list-group-item py-2" data-toggle="collapse" style='color:white;margin-left:18px;background:rgb(58, 58, 58);' href="#location-categories">
-        
-          <img class='panel-icon d-none' src='{% static "events/img/gradient/locations.png" %}' alt="Active Locations Icon"/> 
-          <img class='panel-icon' src='{% static "events/img/solid/locations.png" %}' alt="Active Locations Icon"/>
-         
-          <span class='panel-label d-none gradient'>Active Locations</span>
-          <span class='panel-label'>Active Locations</span>
-        
-        
+    <li class="list-group-item py-2 toggle">
+        <img class='panel-icon d-none' src='{% static "events/img/gradient/locations.png" %}' alt="Active Locations Icon"/> 
+        <img class='panel-icon' src='{% static "events/img/solid/locations.png" %}' alt="Active Locations Icon"/>
+        <span class='panel-label d-none gradient'>Active Locations</span>
+        <span class='panel-label'>Active Locations</span>
+    </li>
+    
+    <ul class="list-group inner">
+      {% for category, location in locations.items %}
+      <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
+        + {{category}}
+        <span class="badge badge-primary badge-pill">
+          <span class='active-count'>0</span>
+          <span>/</span>
+          <span class='category-count'>{{location.count}}</span>
+        </span>
       </li>
-      <!--<span class='collapse' id='location-categories'>-->
-      <ul class="list-group collapse" id='location-categories' style='border-top:1px solid rgba(0,0,0,.125);margin-left:18px;'>
-        {% for category, location in locations.items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;' data-toggle="collapse" href="#{{category|slugify}}">
-          + {{category}}
-          <span class="badge badge-primary badge-pill">
-            <span class='active-count'>0</span>
-            <span>/</span>
-            <span class='category-count'>{{location.count}}</span>
-          </span>
-        </li>
-        <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
-          <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input location-checkbox check-all" type="checkbox" value="" id="defaultCheck1" checked>
-            <label class="form-check-label" for="defaultCheck1">
-              <strong>All</strong>
-            </label>
-          </div>
-              
-          {% for l in location %}
-          <div class="form-check" style='text-transform:capitalize;'>
-            <input class="form-check-input location-checkbox check-one" type="checkbox" value="" id="defaultCheck1" checked>
-            <label class="form-check-label" for="defaultCheck1">
-              {{l}}
-            </label>
-          </div>
-          {% endfor %}
+      <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
+        <div class="form-check" style='text-transform:capitalize;'>
+          <input class="form-check-input location-checkbox check-all" type="checkbox" value="" id="defaultCheck1" checked>
+          <label class="form-check-label" for="defaultCheck1">
+            <strong>All</strong>
+          </label>
+        </div>
+        {% for l in location %}
+        <div class="form-check" style='text-transform:capitalize;'>
+          <input class="form-check-input location-checkbox check-one" type="checkbox" value="" id="defaultCheck1" checked>
+          <label class="form-check-label" for="defaultCheck1">
+            {{l}}
+          </label>
         </div>
         {% endfor %}
-      </ul>
-      <!--</span>-->
+      </div>
+      {% endfor %}
     </ul>
-  </li>
+    
+  </ul>
+</li>

@@ -1,19 +1,14 @@
 {% load staticfiles %} 
  
-  <li class="list-group-item control-panel" style='padding:0px;'>
-    <ul class="list-group" style='text-transform:uppercase;letter-spacing:1px;'>
-        <!--background:#40c8c2;-->
-      <li class="list-group-item py-2" style='border-top:none;color:white;margin-left:18px;background:rgb(58, 58, 58);' data-toggle="collapse" href="#display-options">
+  <li class="list-group-item control-panel-item" style='background:linear-gradient(#83d6ff, #9cc0fe)'>
+    <ul class="list-group">
+      <li class="list-group-item py-2 toggle">
           <img class='panel-icon d-none' src='{% static "events/img/gradient/display.png" %}' alt="Display Options Icon"/> 
           <img class='panel-icon' src='{% static "events/img/solid/display.png" %}' alt="Display Options Icon"/>
-         
           <span class='panel-label d-none gradient'>Display</span>
           <span class='panel-label'>Display</span>
-          
-        
-        
       </li>
-      <ul class="list-group collapse" id='display-options' style='border-top:1px solid rgba(0,0,0,.125);margin-left:18px;'>
+      <ul class="list-group inner" id='display-options'>
           <li class="list-group-item">
             <div class='row'>
               <div class='col-12'>
