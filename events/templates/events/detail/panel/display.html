@@ -1,14 +1,12 @@
 {% load staticfiles %} 
- 
+
   <li class="list-group-item control-panel-item" style='background:linear-gradient(#83d6ff, #9cc0fe)'>
     <ul class="list-group">
       <li class="list-group-item py-2 toggle">
-          <img class='panel-icon d-none' src='{% static "events/img/gradient/display.png" %}' alt="Display Options Icon"/> 
-          <img class='panel-icon' src='{% static "events/img/solid/display.png" %}' alt="Display Options Icon"/>
-          <span class='panel-label d-none gradient'>Display</span>
-          <span class='panel-label'>Display</span>
+        <div class='panel-icon display-icon'></div>
+        <div class='panel-label'>Display</div>
       </li>
-      <ul class="list-group inner" id='display-options'>
+      <ul class="list-group inner">
           <li class="list-group-item">
             <div class='row'>
               <div class='col-12'>

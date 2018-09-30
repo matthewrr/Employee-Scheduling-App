@@ -77,14 +77,22 @@ $(document).ready(function () {
 
 
 $("document").ready(function(){
-    $(".list-group-item.control-panel-item").hover(function(){
-      var image = $(this).find('.panel-icon');
-      var text = $(this).find('.panel-label');
-      // var text = $(this).find('img').siblings('.gradient');
-      $(image).toggleClass('d-none');
-      $(text).toggleClass('d-none');
+    $(".control-panel-item").hover(function(){
+      // var myparent = $(this);
+      var showing = $(this).find('.list-group.inner').hasClass('show');
+      if (!showing) {
+        $(this).find('.toggle').children().toggleClass('gradient');
+        // $(this).find('.panel-icon').toggleClass('gradient');
+        // $(myparent).find('.toggle').children().toggleClass('gradient');
+        
+      }
+      
+      
     });
 });
+
+
+
 
 $('.toggle').click(function(e) {
   	e.preventDefault();
@@ -94,10 +102,19 @@ $('.toggle').click(function(e) {
     if ($this.next().hasClass('show')) {
         $this.next().removeClass('show');
         $this.next().slideUp(350);
+        $this.children('.gradient').removeClass('gradient');
     } else {
         $this.parent().parent().parent().find('li .inner').removeClass('show');
+        $this.parent().parent().parent().find('.gradient').removeClass('gradient');
         $this.parent().parent().parent().find('li .inner').slideUp(350);
+        
         $this.next().toggleClass('show');
+        $this.children().addClass('gradient');
         $this.next().slideToggle(350);
     }
+    
+    
+    
+    
+    
 });

@@ -1215,31 +1215,9 @@ button:focus {
 
 
 
-.panel-icon {
-  height:22px;
-  width:22px;
-}
 
-.panel-label {
-  /*background: -webkit-linear-gradient(#84d5ff, #e783fd);*/
-  /*-webkit-background-clip: text;*/
-  /*-webkit-text-fill-color: transparent;*/
-  color:white;
-  margin-left:10px;
-  vertical-align:middle;
-}
 
-.panel-label.gradient {
-  background: -webkit-linear-gradient(#84d5ff, #e783fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-  
-}
-/*.list-group-item.control-panel:hover { */
-/*  background-image: url(/); */
 
-/*}*/
 
 
 .badge-primary {
@@ -1298,7 +1276,6 @@ fillColour {  0% {
 .control-panel {
   margin-top:40px;
 }
-
 .control-panel-item {
   padding: 0px;
   margin: 0px;
@@ -1314,10 +1291,52 @@ fillColour {  0% {
   margin-left:9px;
   background:rgb(58, 58, 58);
 }
-
 .control-panel-item .list-group.inner {
   border-top: 1px solid rgba(0,0,0,.125);
   display:none;
+}
+
+.panel-icon {
+  height:22px;
+  width:22px;
+  display:inline-block;
+  vertical-align:middle;
+}
+.display-icon {
+  content:url(/static/events/img/solid/display.png);
+}
+.display-icon.gradient {
+  content:url(/static/events/img/gradient/display.png);
+}
+.locations-icon {
+  content:url(/static/events/img/solid/locations.png);
+}
+.locations-icon.gradient {
+  content:url(/static/events/img/gradient/locations.png);
+}
+.arrival-icon {
+  content:url(/static/events/img/solid/arrival.png);
+}
+.arrival-icon.gradient {
+  content:url(/static/events/img/gradient/arrival.png);
+}
+.employees-icon {
+  content:url(/static/events/img/solid/employees.png);
+}
+.employees-icon.gradient {
+  content:url(/static/events/img/gradient/employees.png);
+}
+
+.panel-label {
+  color:white;
+  margin-left:10px;
+  vertical-align:middle;
+  display:inline-block;
+}
+.panel-label.gradient {
+  background: -webkit-linear-gradient(#84d5ff, #e783fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .employee-column-content {
