@@ -112,9 +112,4 @@ $('.toggle').click(function(e) {
         $this.children().addClass('gradient');
         $this.next().slideToggle(350);
     }
-    
-    
-    
-    
-    
 });

@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Stand Name</th>
+      <th scope="col">Scheduled</th>
+      <th scope="col">Unscheduled</th>
+      <th scope="col">Shift #1</th>
+      <th scope="col">Shift #2</th>
+      <th scope="col">Shift #3</th>
+      <th scope="col">Shift #4</th>
+      <th scope="col">Shift #5</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for category, location_num in event_categories.items %}
+    <tr>
+      
+        
+        
+        
+      <td>{{category}}</td>
+      <td>
+        {% for parent, attributes in location_num.items %}
+          {% with position=attributes.positions active=attributes.active location_verbose=attributes.location location_id=location %}
+              {{location_verbose}}<br/>
+          {% endwith %}
+        {% endfor %}
+      </td>
+      <td>7</td>
+      <td>0</td>
+
+      
+      
+      
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

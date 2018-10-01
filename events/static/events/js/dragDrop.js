@@ -233,7 +233,7 @@ employeeContainers.forEach(function (container) {
   .on('dragStart', function (item) {
     // item.getElement().style.width = item.getWidth() + 'px';
     // item.getElement().style.height = item.getHeight() + 'px';
-    item.getElement().style.width = 150 + 'px';
+    item.getElement().style.width = 140 + 'px';
   })
   .on('dragReleaseEnd', function (item) {
     columnGrids.forEach(function (employeeGrid) {
