@@ -7,13 +7,39 @@
 <div class='container-fluid' style='height:100vh;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
 
 
+
+
+  <!--<nav class="navbar navbar-light bg-faded">-->
+    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>-->
+    <!--<a class="navbar-brand" href="#">.navbar</a>-->
+  <!--  <div class="collapse width navbar-collapse bg-faded" id="navbarNavDropdown3">-->
+  <!--    <ul class="navbar-nav ml-auto">-->
+
+
+
+
+
+
 <div class='row'>
   
-  
-  <div class='col px-0' style='background:rgba(0,0,0,.83); height:100vh; color:white;flex: 0 0 15%;max-width: 15%;'>
-      <div style='height:100%; width: 100%;padding:0px;'>
-          {% include 'events/detail/panel.html' %}
+  <div class='px-0' style='color:white;width:240px'>
+    <div class='col' style='background:rgba(0,0,0,.83);'>
+      <!--<div class='row'>-->
+        <!--<div class='panel-icon menu-icon' data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"></div>-->
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Hi</span></button>-->
+      <!--</div>  -->
+      <div class='row' style='collapse width navbar-collapse bg-faded' id='navbarNavDropdown3'>
+            <div class='col px-0' style='width:240px;height:100vh;'>
+      {% include 'events/detail/panel.html' %}
+    </div>
+        
       </div>
+    </div>
+    
+    
+    
+    
+
   </div>
   
   <div class='col'>
@@ -33,11 +59,11 @@
                 <!--</li>-->
                 {% for category in locations %}
                 <li class="nav-item">
-                  <div>
-                    <a class="nav-link nav-link-category {{forloop.first|yesno:'active, inactive'}} px-0 mx-4" style='position:relative;' data-toggle="pill" href="#pills-{{category|slugify}}" role="tab" aria-controls="pills-home" aria-selected="false">
+                  <!--<div>-->
+                    <a class="nav-link nav-link-category {{forloop.first|yesno:'active,'}} px-0 mx-4" style='position:relative;' data-toggle="pill" href="#pills-{{category|slugify}}" role="tab" aria-controls="pills-home" aria-selected="false">
                       <span>{{category}}</span>
                     </a>
-                  </div>
+                  <!--</div>-->
                 </li>
                 {% endfor %}
               </ul>

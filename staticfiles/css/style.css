@@ -1175,6 +1175,9 @@ fillColour {  0% {
 .employees-icon.gradient {
   content:url(/static/events/img/gradient/employees.png);
 }
+.menu-icon {
+  content:url(/static/events/img/solid/menu.png);
+}
 
 .panel-label {
   color:white;
@@ -1240,3 +1243,54 @@ fillColour {  0% {
 }
 
 .nav-link:first-child {margin-left:14px!important;}
+
+
+/*.collapse {*/
+/*  visibility: hidden;*/
+/*}*/
+/*.collapse.show {*/
+/*  visibility: visible;*/
+/*  display: block;*/
+/*}*/
+/*.collapsing {*/
+/*  position: relative;*/
+  /*height: 0;*/
+/*  overflow: hidden;*/
+/*  -webkit-transition-property: height, visibility;*/
+/*  transition-property: height, visibility;*/
+/*  -webkit-transition-duration: 0.35s;*/
+/*  transition-duration: 0.35s;*/
+/*  -webkit-transition-timing-function: ease;*/
+/*  transition-timing-function: ease;*/
+/*}*/
+
+/*.collapsing.width {*/
+/*  -webkit-transition-property: width, visibility;*/
+/*  transition-property: width, visibility;*/
+/*  width: 0px;*/
+/*  height: auto;*/
+/*}*/
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition-timing-function: ease;
+  transition-duration: .35s;
+  transition-property: height;
+}
+.collapsing.width {
+  width: 0;
+  height: auto;
+  transition-property: width;
+}
+
+.navbar-collapse.width {
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+}
+.navbar-collapse.width > .list-group-item {
+  /*width: 200px;*/
+}
