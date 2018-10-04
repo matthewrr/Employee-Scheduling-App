@@ -60,19 +60,8 @@ itemContainers.forEach(function (container) {
       // for (var i = 0; i < items.length; i++) {
         item = items[i];
         y = 0
-        // m = item.getMargin();
         m = 20;
-        // w = item.getWidth() + m.left + m.right;
-        // w = 10;
-        // w = item.getWidth() - 90;
         w = item.getWidth() + 90;
-        // h = item.getHeight() + m.top + m.bottom;
-        // if (x === 0) {
-        //   z = 20;
-          
-        // } else {
-        //   z += 20;
-        // }
         x = 40
           
         layout.slots.push(x, y);
@@ -82,7 +71,6 @@ itemContainers.forEach(function (container) {
       // layout.width = w + x;
       layout.width = 280;
       layout.height = y + h;
-  
       return layout;
     }
   })
@@ -150,6 +138,7 @@ itemContainers.forEach(function (container) {
     }
   });
   columnGrids.push(grid);
+  
 });
 
 // Instantiate the board grid so we can drag those
@@ -157,58 +146,17 @@ itemContainers.forEach(function (container) {
 var boardContainers = [].slice.call(document.querySelectorAll('.board'));
 
 boardContainers.forEach(function (board) {
-boardGrid = new Muuri(board, {
-  layoutDuration: 400,
-  layoutEasing: 'ease',
-  dragEnabled: true,
-  dragSortInterval: 0,
-  dragStartPredicate: {
-    handle: '.board-column-header'
-  },
-  dragReleaseDuration: 400,
-  dragReleaseEasing: 'ease',
-  // layout: function (items, gridWidth, gridHeight) {
-  //   // The layout data object. Muuri will read this data and position the items
-  //   // based on it.
-  //   console.log(gridWidth)
-  //   var layout = {
-  //     // The layout item slots (left/top coordinates).
-  //     slots: [],
-  //     // The layout's total width.
-  //     width: 0,
-  //     // The layout's total height.
-  //     height: 0,
-  //     // Should Muuri set the grid's width after layout?
-  //     setWidth: true,
-  //     // Should Muuri set the grid's height after layout?
-  //     setHeight: true
-  //   };
- 
-  //   // Calculate the slots.
-  // var item;
-  //   var m;
-  //   var x = 0;
-  //   var y = 0;
-  //   var w = 0;
-  //   var h = 0;
-  //   for (var i = 0; i < items.length; i++) {
-  //     item = items[i];
-  //     x += w;
-  //     y += h;
-  //     m = item.getMargin();
-  //     w = item.getWidth() + m.left + m.right;
-  //     h = item.getHeight() + m.top + m.bottom;
-  //     layout.slots.push(x, y);
-  //   }
-
-  //   // Calculate the layout's total width and height. 
-  //   // layout.width = x + w;
-  //   layout.width = 400;
-  //   layout.height = y + h;
-  //   console.log(gridWidth)
-  //   return layout;
-  // }
-});
+    boardGrid = new Muuri(board, {
+      layoutDuration: 400,
+      layoutEasing: 'ease',
+      dragEnabled: true,
+      dragSortInterval: 0,
+      dragStartPredicate: {
+        handle: '.board-column-header'
+      },
+      dragReleaseDuration: 400,
+      dragReleaseEasing: 'ease',
+    });
 });
 
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
@@ -243,3 +191,17 @@ employeeContainers.forEach(function (container) {
   columnGrids.push(employeeGrid)
 
 });
+
+
+// $('.location-checkbox').change(function(){
+//     console.log('changed!');
+//     var item = '#' + $(this).attr('target');
+//     var b_grid = $(item).find('.board-column-content');
+//     var grid = Muuri(b_grid);
+//     grid.destroy();
+//     // console.log(new_item);
+//     // var grid = item.getGrid();
+//     // console.log(item);
+//     // console.log(grid);
+// })
+// grid.refreshItems();

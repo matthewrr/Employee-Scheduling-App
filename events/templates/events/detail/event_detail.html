@@ -6,28 +6,10 @@
 
 <div class='container-fluid' style='height:100vh;font-family:"Source Sans Pro";text-transform:lowercase;color:#333;'>
 
-
-
-
-  <!--<nav class="navbar navbar-light bg-faded">-->
-    <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>-->
-    <!--<a class="navbar-brand" href="#">.navbar</a>-->
-  <!--  <div class="collapse width navbar-collapse bg-faded" id="navbarNavDropdown3">-->
-  <!--    <ul class="navbar-nav ml-auto">-->
-
-
-
-
-
-
 <div class='row'>
   
   <div class='px-0' style='color:white;width:240px'>
     <div class='col' style='background:rgba(0,0,0,.83);'>
-      <!--<div class='row'>-->
-        <!--<div class='panel-icon menu-icon' data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"></div>-->
-        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown3" aria-controls="navbarNavDropdown3" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon">Hi</span></button>-->
-      <!--</div>  -->
       <div class='row' style='collapse width navbar-collapse bg-faded' id='navbarNavDropdown3'>
             <div class='col px-0' style='width:240px;height:100vh;'>
       {% include 'events/detail/panel.html' %}
@@ -35,11 +17,6 @@
         
       </div>
     </div>
-    
-    
-    
-    
-
   </div>
   
   <div class='col'>
@@ -74,7 +51,7 @@
               <!--  {% include 'events/detail/summary.html' %}-->
               <!--</div>-->
             {% for category, location_num in event_categories.items %}
-                <div class='board location-board tab-pane {{forloop.first|yesno:"show,"}} fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+                <div class='board location-board tab-pane {{forloop.first|yesno:"show active,"}} fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
                   {% for parent, attributes in location_num.items %}
                     {% if attributes.active %}
                       {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}

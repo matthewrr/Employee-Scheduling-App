@@ -19,14 +19,14 @@
       </li>
       <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;padding-left:8px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input location-checkbox check-all" type="checkbox" value="" id="defaultCheck1" checked>
+          <input class="form-check-input location-checkbox check-all" type="checkbox" value="" target='pills-{{category|slugify}}' id="defaultCheck1" checked>
           <label class="form-check-label" for="defaultCheck1">
             <strong>All</strong>
           </label>
         </div>
         {% for l in location %}
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input location-checkbox check-one" type="checkbox" value="" id="defaultCheck1" checked>
+          <input class="form-check-input location-checkbox check-one" target="{{l|slugify}}" type="checkbox" value="" id="defaultCheck1" checked>
           <label class="form-check-label" for="defaultCheck1">
             {{l}}
           </label>
