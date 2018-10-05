@@ -82,10 +82,15 @@ $('.location-checkbox').change(function(){
         $(this).prop( "checked", false );
         var target = '#' + $(this).attr('target');
         $(target).hide();
-        
-    })
-      
+      })
     }
   }
+});
 
+$('.highlight-shifts').change(function(){
+  var category = $(this).attr('id');
+  var shifts = (category === 'scheduled-shifts') ? $('.highlight-employee') : $('.highlight-default');
+  $(shifts).each(function () {
+    $(this).toggleClass('highlight');
+  });
 });

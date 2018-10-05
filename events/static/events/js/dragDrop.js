@@ -117,6 +117,13 @@ itemContainers.forEach(function (container) {
       grid.hide(0);
     }
     var toGrid = item.getGrid();
+    // console.log(toGrid);
+    var elem = item.getElement();
+    console.log(elem);
+    
+    
+    
+    
     var allItems = grid.getItems();
     var pos = grid.getItems().indexOf(item);
     var l = allItems.length
