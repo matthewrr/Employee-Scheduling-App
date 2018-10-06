@@ -94,7 +94,6 @@ itemContainers.forEach(function (container) {
       var el = item.getElement()
       var ch = $(el).children()
       grid.hide(ch);
-      // grid.hide()
     });
   })
   .on('receive', function (data) {
@@ -108,6 +107,16 @@ itemContainers.forEach(function (container) {
       toGrid.move(0, 1, {action: 'swap'});
     }
     grid.show(0);
+    
+    
+    // var fromGrid = data.fromGrid;
+    // var fromIndex = data.fromIndex;
+    // var item = fromGrid.getItems(0)[0];
+    // console.log(fromGrid);
+    // console.log(fromGrid.getElement());
+    // console.log(item.getElement())
+    
+    
   })
   .on('dragReleaseEnd', function (item, e) {
     if (item.getGrid() === grid) {
@@ -116,10 +125,11 @@ itemContainers.forEach(function (container) {
       }
       grid.hide(0);
     }
-    var toGrid = item.getGrid();
-    // console.log(toGrid);
+    
+    
+    // var fromGrid = item.getGrid();
     var elem = item.getElement();
-    console.log(elem);
+    $(elem).siblings().removeClass('highlight-default').addClass('highlight-employee');
     
     
     
@@ -143,7 +153,11 @@ itemContainers.forEach(function (container) {
       }
       grid.remove(toRemove, {removeElements: true});
     }
+  })
+  .on('layoutEnd', function (items) {
+    // console.log(items);
   });
+  
   columnGrids.push(grid);
   
 });
@@ -180,14 +194,51 @@ employeeContainers.forEach(function (container) {
     dragSort: function () {
       return columnGrids;
     },
+    layout: function (items, gridWidth, gridHeight) {
+    // The layout data object. Muuri will read this data and position the items
+    // based on it.
+    var layout = {
+      // The layout's item slots (left/top coordinates).
+      slots: [],
+      // The layout's total width.
+      width: 0,
+      // The layout's total height.
+      height: 0,
+      // Should Muuri set the grid's width after layout?
+      setWidth: true,
+      // Should Muuri set the grid's height after layout?
+      setHeight: true
+    };
+
+    // Calculate the slots.
+    var item;
+    var m;
+    var x = 0;
+    var y = 0;
+    var w = 0;
+    var h = 0;
+    for (var i = 0; i < items.length; i++) {
+      item = items[i];
+      x += w;
+      y += h;
+      m = item.getMargin();
+      w = item.getWidth() + m.left + m.right;
+      h = 33 + m.top + m.bottom;
+      layout.slots.push(0, y);
+    }
+
+    // Calculate the layout's total width and height. 
+    layout.width = x + w;
+    layout.height = y + h;
+
+    return layout;
+    },
     dragSortInterval: 0,
     dragContainer: document.body,
     dragReleaseDuration: 400,
     dragReleaseEasing: 'ease',
   })
   .on('dragStart', function (item) {
-    // item.getElement().style.width = item.getWidth() + 'px';
-    // item.getElement().style.height = item.getHeight() + 'px';
     item.getElement().style.width = 140 + 'px';
   })
   .on('dragReleaseEnd', function (item) {
@@ -195,20 +246,7 @@ employeeContainers.forEach(function (container) {
       employeeGrid.refreshItems();
     })
   });
+  employeeGrid.refreshItems();
   columnGrids.push(employeeGrid)
 
 });
-
-
-// $('.location-checkbox').change(function(){
-//     console.log('changed!');
-//     var item = '#' + $(this).attr('target');
-//     var b_grid = $(item).find('.board-column-content');
-//     var grid = Muuri(b_grid);
-//     grid.destroy();
-//     // console.log(new_item);
-//     // var grid = item.getGrid();
-//     // console.log(item);
-//     // console.log(grid);
-// })
-// grid.refreshItems();

@@ -8,13 +8,13 @@
         <div class='panel-label'>Employees</div>
     </li>
     
-    <ul class="list-group inner">
+    <ul class="list-group inner show">
       <li class="list-group-item" style='height:69vh;'>
         <div class='board-column'>
           <div class='scroll-content-wrapper'>
             <div class="employee-column-content">
               {% for employee in all_employees %}
-                <div class="board-item" id='{{forloop.counter}}'>
+                <div class="board-item" id='{{forloop.counter}}' style='margin-left:5px;'>
                   <div class="board-item-content highlight-employee">{{employee.name|truncatechars:20}}</div>
                 </div>
               {% endfor %}

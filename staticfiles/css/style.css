@@ -1121,7 +1121,12 @@ fillColour {  0% {
 .control-panel .form-control {
   background-color: #3e3e3e;
   color:white;
-  border:1px solid #3a3a3a;
+  border:1px solid #CECECE;
+  
+}
+
+.control-panel .form-control::placeholder {
+  color:#CECECE;
 }
 
 .control-panel-item .display-select {

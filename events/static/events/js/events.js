@@ -38,7 +38,7 @@ $("document").ready(function(){
 });
 
 $('.toggle').click(function(e) {
-  	e.preventDefault();
+  // 	e.preventDefault();
   
     var $this = $(this);
   
@@ -93,4 +93,13 @@ $('.highlight-shifts').change(function(){
   $(shifts).each(function () {
     $(this).toggleClass('highlight');
   });
+});
+
+$(".btn-arrival").click(function(){
+  var el = $(".display-select option:selected");
+  var category = $(el[1]).attr('id');
+  var targets = $('.'+category);
+  var time = $('.input-arrival').val();
+  targets.val(time);
+  $('.input-arrival').val('');
 });

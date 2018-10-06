@@ -9,21 +9,26 @@
     </li>
     
     <ul class="list-group inner">
-      <li class="list-group-item justify-content-between align-items-center location-category" style='text-transform:capitalize;data-toggle="collapse" href="#{{category|slugify}}"'>
-        {% for role in roles %}
-          <div class="input-group mb-2 px-0">
-            <div class="input-group-prepend col px-0">
-              <span class="input-group-text col-12" id="inputGroup-sizing-default">{{role.verbose_name}}:</span>
+          <li class="list-group-item">
+            <div class='row'>
+              <div class='col-12'>
+                <select class="custom-select display-select" style='text-transform:capitalize;'>
+                  <option>Choose Position...</option>
+                  {% for role in roles %}
+                    <option class='arrival-category' id='{{role.verbose_name.0}}' value="{{role.verbose_name.0}}">{{role.verbose_name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
             </div>
-            <input type="text" class="form-control col-4" aria-label="Default" placeholder='Arrival' aria-describedby="inputGroup-sizing-default">
-            <div class="input-group-append col-2 px-0">
-              <label class="input-group-text" for="inputGroupSelect02">
-                <img src='{% static "img/icons/refresh.png" %}' style='width:18px;height:18px;' alt="Refresh Icon"/>
-              </label>
+            <div class='row'>
+              <div class='col-6 pr-0'>
+                <input type="text" class="form-control input-arrival" placeholder='Arrival'>
+              </div>
+              <div class='col-6'>
+                <button type="button" class="btn btn-dark btn-arrival">Update</button>
+              </div>
             </div>
-          </div>
-        {% endfor %}
-      </li>
+          </li>
     </ul>
     
   </ul>
