@@ -1116,12 +1116,12 @@ fillColour {  0% {
 .control-panel .input-group-text {
   background: #484848;
   color: #bdbdbd;
-  border: 1px solid #3a3a3a;
+  border: 1px solid black;
 }
 .control-panel .form-control {
   background-color: #3e3e3e;
   color:white;
-  border:1px solid #CECECE;
+  border:1px solid black;
   
 }
 
@@ -1200,7 +1200,9 @@ fillColour {  0% {
   color: black;
 }
 
-
+.location-category {
+  height: 36px;
+}
 .location-categories {
     margin-bottom: 14px;
     font-size: 1.2em;

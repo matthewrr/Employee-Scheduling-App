@@ -127,7 +127,6 @@ itemContainers.forEach(function (container) {
     }
     
     
-    // var fromGrid = item.getGrid();
     var elem = item.getElement();
     $(elem).siblings().removeClass('highlight-default').addClass('highlight-employee');
     
@@ -157,16 +156,22 @@ itemContainers.forEach(function (container) {
   .on('layoutEnd', function (items) {
     // console.log(items);
   });
-  
+
   columnGrids.push(grid);
+  grid.on('click', function (items) {
+      console.log('clicked the grid!')
+  });
   
 });
 
 // Instantiate the board grid so we can drag those
 // columns around.
 var boardContainers = [].slice.call(document.querySelectorAll('.board'));
+var myBoards = {};
 
 boardContainers.forEach(function (board) {
+    var name = $(board).attr('id');
+    console.log(name);
     boardGrid = new Muuri(board, {
       layoutDuration: 400,
       layoutEasing: 'ease',
@@ -178,7 +183,11 @@ boardContainers.forEach(function (board) {
       dragReleaseDuration: 400,
       dragReleaseEasing: 'ease',
     });
+    myBoards[name] = boardGrid;
+    // myBoards.push(name);
 });
+
+
 
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
 employeeContainers.forEach(function (container) {
@@ -249,4 +258,23 @@ employeeContainers.forEach(function (container) {
   employeeGrid.refreshItems();
   columnGrids.push(employeeGrid)
 
+});
+
+
+// $(".add-shift").click(function(){
+//   console.log('clicked')
+//   var newShift = $('.shift-template').clone().removeClass('shift-template', 'd-none');
+//   console.log(newShift)
+//   $(this).parent().parent().parent().append(newShift.html());
+// });
+
+// console.log(columnGrids)
+// console.log(myBoards);
+
+$(".add-shift").click(function(){
+    var boardName = $(this).parents('.board').attr('id');
+    var board = myBoards[boardName];
+    var newShift = $('.shift-template').clone().removeClass('shift-template', 'd-none').html();
+    // console.log(newShift);
+    // console.log(boardName);
 });

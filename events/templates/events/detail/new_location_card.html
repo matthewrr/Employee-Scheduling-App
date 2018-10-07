@@ -4,11 +4,11 @@
         <div class='board-column-header hList hList_5up' style='padding-left: 2px;height: 42px;background: none;color: #757575;opacity: 1;transform: scale(1);margin-bottom: 12px;padding-bottom: 12px;margin-top: 12px;'>
           <div class='location-title' style='line-height: 2em;text-transform: uppercase;letter-spacing: 1px;font-size: 1.1em;font-weight: 400;vertical-align: bottom;'>
             <span>{{location_verbose}}</span>
-            <span style='float:right;font-weight: 700;font-size: 1.2em;margin-top: -1px;'>+</span>
+            <a class='add-shift' style='float:right;font-weight: 700;font-size: 1.2em;margin-top: -1px;'>+</a>
           </div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content" style='text-transform:uppercase;width:15.3vw'>
+        <div class="board-column-content {{location_verbose|slugify}}-{{forloop.counter}}" style='text-transform:uppercase;width:15.3vw'>
           
           <input class="read-short highlight-default" type="text" placeholder="{{shift}}" readonly>
           <div class="board-item" style='margin-left:5px;height:150px;'>
@@ -19,9 +19,9 @@
             
           </div>
           <input type="text" class="arrival-time highlight-default {{shift.0}}" placeholder="Time" aria-label="Arrival">
-          
-          
-          
         </div>
         {% endfor %}
+
+        
+        
       </div>

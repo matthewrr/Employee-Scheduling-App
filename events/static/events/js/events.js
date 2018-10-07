@@ -96,8 +96,7 @@ $('.highlight-shifts').change(function(){
 });
 
 $(".btn-arrival").click(function(){
-  var el = $(".display-select option:selected");
-  var category = $(el[1]).attr('id');
+  var category = $(".display-select option:selected").attr('id');
   var targets = $('.'+category);
   var time = $('.input-arrival').val();
   targets.val(time);
