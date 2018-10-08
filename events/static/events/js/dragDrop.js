@@ -8,7 +8,13 @@ var employees;
 var grid2Hash = {};
 // Define the column grids so we can drag those
 // items around.
-itemContainers.forEach(function (container) {
+
+// var boards = itemContainers;
+
+
+
+var createBoards = function (boards = itemContainers.slice(0)) {
+boards.forEach(function (container) {
   // Instantiate column grid.
   var grid = new Muuri(container, {
     
@@ -163,7 +169,8 @@ itemContainers.forEach(function (container) {
   });
   
 });
-
+};
+createBoards();
 // Instantiate the board grid so we can drag those
 // columns around.
 var boardContainers = [].slice.call(document.querySelectorAll('.board'));
@@ -183,11 +190,12 @@ boardContainers.forEach(function (board) {
       dragReleaseDuration: 400,
       dragReleaseEasing: 'ease',
     });
+    // console.log('name is ' + name)name === pills-fdnaojfae
     myBoards[name] = boardGrid;
     // myBoards.push(name);
 });
 
-
+var employeeContainer = [];
 
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
 employeeContainers.forEach(function (container) {
@@ -257,6 +265,7 @@ employeeContainers.forEach(function (container) {
   });
   employeeGrid.refreshItems();
   columnGrids.push(employeeGrid)
+  employeeContainer.push(employeeGrid);
 
 });
 
@@ -271,10 +280,17 @@ employeeContainers.forEach(function (container) {
 // console.log(columnGrids)
 // console.log(myBoards);
 
+var temp = [];
 $(".add-shift").click(function(){
     var boardName = $(this).parents('.board').attr('id');
+    console.log('boardname is ' + boardName)
     var board = myBoards[boardName];
-    var newShift = $('.shift-template').clone().removeClass('shift-template', 'd-none').html();
-    // console.log(newShift);
-    // console.log(boardName);
+    board.synchronize();
+    var shiftTemplate = $('.shift-template').first().clone();
+    $(this).parent().parent().parent().append(shiftTemplate.removeClass('d-none shift-template'));
+    var formattedShift = [].slice.call(document.querySelectorAll('.shift-template'));
+    createBoards(formattedShift);
+    employeeContainer[0].synchronize();
+    console.log(columnGrids.length)
 });
+

@@ -8,7 +8,7 @@
           </div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content {{location_verbose|slugify}}-{{forloop.counter}}" style='text-transform:uppercase;width:15.3vw'>
+        <div class="board-column-content" style='text-transform:uppercase;width:15.3vw'>
           
           <input class="read-short highlight-default" type="text" placeholder="{{shift}}" readonly>
           <div class="board-item" style='margin-left:5px;height:150px;'>
