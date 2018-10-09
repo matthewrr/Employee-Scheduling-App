@@ -11,9 +11,10 @@ var grid2Hash = {};
 
 // var boards = itemContainers;
 
-
+var newestBoard = [];
 
 var createBoards = function (boards = itemContainers.slice(0)) {
+// console.log(boards);
 boards.forEach(function (container) {
   // Instantiate column grid.
   var grid = new Muuri(container, {
@@ -102,10 +103,6 @@ boards.forEach(function (container) {
       grid.hide(ch);
     });
   })
-  .on('receive', function (data) {
-    var employeeGrid = columnGrids[103];
-    var toGrid = data.toGrid;
-  })
   .on('send', function (data) {
     var item = data.item;
     if (data.toIndex === 0) {
@@ -113,16 +110,6 @@ boards.forEach(function (container) {
       toGrid.move(0, 1, {action: 'swap'});
     }
     grid.show(0);
-    
-    
-    // var fromGrid = data.fromGrid;
-    // var fromIndex = data.fromIndex;
-    // var item = fromGrid.getItems(0)[0];
-    // console.log(fromGrid);
-    // console.log(fromGrid.getElement());
-    // console.log(item.getElement())
-    
-    
   })
   .on('dragReleaseEnd', function (item, e) {
     if (item.getGrid() === grid) {
@@ -159,14 +146,9 @@ boards.forEach(function (container) {
       grid.remove(toRemove, {removeElements: true});
     }
   })
-  .on('layoutEnd', function (items) {
-    // console.log(items);
-  });
-
   columnGrids.push(grid);
-  grid.on('click', function (items) {
-      console.log('clicked the grid!')
-  });
+  newestBoard.push(grid);
+
   
 });
 };
@@ -198,6 +180,8 @@ boardContainers.forEach(function (board) {
 var employeeContainer = [];
 
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
+
+// var createEmployee = function (boards = employeeContainers.slice(0)) {
 employeeContainers.forEach(function (container) {
   employees = $('.employee-column-content').children();
   $.each( employees, function( key, value ) {
@@ -263,34 +247,30 @@ employeeContainers.forEach(function (container) {
       employeeGrid.refreshItems();
     })
   });
-  employeeGrid.refreshItems();
+//   employeeGrid.refreshItems();
   columnGrids.push(employeeGrid)
-  employeeContainer.push(employeeGrid);
+//   employeeContainer.push(employeeGrid);
 
 });
+// };
+
+// createEmployee();
 
 
-// $(".add-shift").click(function(){
-//   console.log('clicked')
-//   var newShift = $('.shift-template').clone().removeClass('shift-template', 'd-none');
-//   console.log(newShift)
-//   $(this).parent().parent().parent().append(newShift.html());
-// });
-
-// console.log(columnGrids)
-// console.log(myBoards);
-
-var temp = [];
 $(".add-shift").click(function(){
-    var boardName = $(this).parents('.board').attr('id');
-    console.log('boardname is ' + boardName)
-    var board = myBoards[boardName];
-    board.synchronize();
-    var shiftTemplate = $('.shift-template').first().clone();
-    $(this).parent().parent().parent().append(shiftTemplate.removeClass('d-none shift-template'));
-    var formattedShift = [].slice.call(document.querySelectorAll('.shift-template'));
-    createBoards(formattedShift);
-    employeeContainer[0].synchronize();
-    console.log(columnGrids.length)
-});
+    
+    var board = $(this).parents('.board').attr('id');
+    var shiftTemplate = $('.shift-template').clone().removeClass('d-none shift-template').addClass('board-column-content');
+    var sequenceNum = Number($(this).attr('value')) + 1;
+    
+    $(this).attr('value', sequenceNum);
+    
+    $(this).parents('.board-column').append(shiftTemplate);
 
+    shiftTemplate.find('.board-item-content').html('Extra #'+sequenceNum);
+    shiftTemplate.children().first().attr('placeholder', '#'+sequenceNum);
+    shiftTemplate.attr('value', sequenceNum);
+    
+    createBoards(shiftTemplate.toArray());
+    myBoards[board].refreshItems().layout();
+});

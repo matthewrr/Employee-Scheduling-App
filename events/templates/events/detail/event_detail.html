@@ -3,15 +3,12 @@
 {% block content %}  
 
 
-        <div class="board-column-content shift-template d-none" style='text-transform:uppercase;width:15.3vw'>
-          
-          <input class="read-short highlight-default" type="text" placeholder="#1">
+        <div class="shift-template d-none" style='text-transform:uppercase;width:15.3vw'>
+          <input class="read-short added-role highlight-default" type="text" placeholder="#1">
           <div class="board-item" style='margin-left:5px;height:150px;'>
-            
-            <div class="board-item-content highlight-default" style='width:8.7vw;max-height:35px;'>
-              <div>Extra #1</div>
+            <div class="board-item-content added-role highlight-default" style='width:8.7vw;max-height:35px;'>
+              Extra #1
             </div>
-            
           </div>
           <input type="text" class="arrival-time highlight-default" placeholder="Time" aria-label="Arrival">
         </div>
@@ -46,16 +43,14 @@
             {% if not first_save %}
             <div class='location-categories py-2' style='font-size: 1.2em;font-weight: 100;'>
               <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                <!--<li class="nav-item">-->
-                <!--  <a class="nav-link active" data-toggle="pill" href="#pills-summary" role="tab" aria-controls="pills-home" aria-selected="true">Summary</a>-->
-                <!--</li>-->
+                
+
+                
                 {% for category in locations %}
                 <li class="nav-item">
-                  <!--<div>-->
-                    <a class="nav-link nav-link-category {{forloop.first|yesno:'active,'}} px-0 mx-4" style='position:relative;' data-toggle="pill" href="#pills-{{category|slugify}}" role="tab" aria-controls="pills-home" aria-selected="false">
-                      <span>{{category}}</span>
-                    </a>
-                  <!--</div>-->
+                  <a class="nav-link nav-link-category {{forloop.first|yesno:'active,'}} px-0 mx-4" style='position:relative;' data-toggle="pill" href="#pills-{{category|slugify}}" role="tab" aria-controls="pills-home" aria-selected="false">
+                    <span>{{category}}</span>
+                  </a>
                 </li>
                 {% endfor %}
               </ul>
@@ -65,9 +60,17 @@
               <!--<div class='board location-board tab-pane fade' id='pills-summary' style='margin-bottom:100px;position:absolute;width:80vw;'>-->
               <!--  {% include 'events/detail/summary.html' %}-->
               <!--</div>-->
+            
+            
             {% for category, location_num in event_categories.items %}
-                <div class='board location-board tab-pane {{forloop.first|yesno:"show active,"}} fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
-                  {% for parent, attributes in location_num.items %}
+            
+            {% ifequal category "Main Stands" %}
+                <div class='board location-board tab-pane show active fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+            {% else %}
+                <div class='board location-board tab-pane fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+            {% endifequal %}
+            
+                {% for parent, attributes in location_num.items %}
                     {% if attributes.active %}
                       {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
                         {% include 'events/detail/new_location_card.html' %}
