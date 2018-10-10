@@ -10,15 +10,15 @@
         {% for shift, scheduled in position.items %}
         <div class="board-column-content" style='text-transform:uppercase;width:15.3vw'>
           
-          <input class="read-short highlight-default" type="text" placeholder="{{shift}}" readonly>
-          <div class="board-item" style='margin-left:5px;height:150px;'>
+          <input class="read-short highlight-default highlight-update" type="text" placeholder="{{shift}}" readonly>
+          <div class="board-item" style='margin-left:5px;'>
             
             <div class="board-item-content highlight-default" style='width:8.7vw;max-height:35px;'>
               <div>{{scheduled.verbose_name}}</div>
             </div>
             
           </div>
-          <input type="text" class="arrival-time highlight-default {{shift.0}}" placeholder="Time" aria-label="Arrival">
+          <input type="text" class="arrival-time highlight-default highlight-update {{shift.0}}" placeholder="Time" aria-label="Arrival">
         </div>
         {% endfor %}
 

@@ -15,7 +15,9 @@
             <div class="employee-column-content" style='letter-spacing:0px;'>
               {% for employee in all_employees %}
                 <div class="board-item" id='{{forloop.counter}}' style='margin-left:5px;'>
-                  <div class="board-item-content highlight-employee">{{employee.name|truncatechars:20}}</div>
+                  <div class="board-item-content highlight-employee">
+                    <div>{{employee.name|truncatechars:20}}</div>
+                  </div>
                 </div>
               {% endfor %}
             </div>
