@@ -102,3 +102,13 @@ $(".btn-arrival").click(function(){
   targets.val(time);
   $('.input-arrival').val('');
 });
+
+var dataList = document.getElementById('json-datalist');
+var input = document.getElementById('ajax');
+$.post( "/employees/list/", function( employeeList ) {
+  for (var employee in employeeList) {
+    var option = document.createElement('option');
+    option.value = employeeList[employee];
+    dataList.appendChild(option);
+  }
+});

@@ -64,12 +64,12 @@
             
             {% for category, location_num in event_categories.items %}
             
-            <!--{% ifequal category "Main Stands" %}-->
-            <!--    <div class='board location-board tab-pane show active fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>-->
-            <!--{% else %}-->
-            <!--    <div class='board location-board tab-pane fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>-->
-            <!--{% endifequal %}-->
-            <div class='board location-board tab-pane fade {{forloop.first|yesno:"active,"}}' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+            {% ifequal category "Main Stands" %}
+                <div class='board location-board tab-pane show active fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+            {% else %}
+                <div class='board location-board tab-pane fade' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>
+            {% endifequal %}
+            <!--<div class='board location-board tab-pane fade {{forloop.first|yesno:"active,"}}' id='pills-{{category|slugify}}' style='margin-bottom:100px;position:absolute;width:80vw;'>-->
 
             
                 {% for parent, attributes in location_num.items %}

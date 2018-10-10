@@ -1,11 +1,18 @@
 import csv
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.template.loader import render_to_string
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import EmployeeForm
 from .models import *
+
+@csrf_exempt
+def fetch_employees(request):
+    return render_to_response('employees/employee_list.json',content_type='application/json')
+    return JsonResponse({'first':'Matthew Rivera','second':'Pam McCain','third':'Alisha Rivera'})
+
 
 def employee_list(request):
     employees_list = Employee.objects.all().order_by('first_name')
