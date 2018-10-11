@@ -190,7 +190,7 @@ button.add-object {
     box-shadow: none!important;
     outline: none!important;
 }
-input:focus,
+/*input:focus,*/
 select:focus,
 textarea:focus,
 button:focus {
@@ -1311,4 +1311,40 @@ fillColour {  0% {
   /*left: 0;*/
   /*position: absolute;*/
   /*right: 0;*/
+}
+
+.input-container, .trial {
+  /*position: absolute;*/
+  border: none;
+  width: 8.7vw;
+  min-width: 8.7vw;
+  height: 33px;
+  display:inline-flex;
+}
+.input-container {
+  margin: 5px 0 5px 3px;
+  padding: 0px;
+}
+
+
+.trial {
+  margin: 0px;
+  padding: 4px 4px 4px 10px;
+  /*box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);*/
+  border: none;
+  font-weight: 100;
+  font-size: 17px;
+}
+.trial::placeholder {
+  text-align:left;
+}
+
+.box-shadow {
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2)!important;
+  transition:none;
+  
+}
+.box-shadow:focus {
+  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2)!important;
+  color: rgb(51,51,51);
 }

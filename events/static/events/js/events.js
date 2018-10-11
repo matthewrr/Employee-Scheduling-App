@@ -103,12 +103,32 @@ $(".btn-arrival").click(function(){
   $('.input-arrival').val('');
 });
 
-var dataList = document.getElementById('json-datalist');
-var input = document.getElementById('ajax');
+// var dataList = document.getElementsByClassName('json-datalist');
+var dataList = $('#json-datalist');
+// var input = document.getElementById('ajax');
 $.post( "/employees/list/", function( employeeList ) {
   for (var employee in employeeList) {
     var option = document.createElement('option');
     option.value = employeeList[employee];
-    dataList.appendChild(option);
+    console.log(employeeList[employee])
+    dataList.append(option);
   }
 });
+
+$('.board-item-content').on('click', function() {
+  
+  var textbox = $(this).parent().prev().children().first();
+  
+  textbox.addClass('box-shadow');
+  textbox.focus();
+  $(this).hide();
+  
+  
+})
+
+$('.trial').on('blur', function() {
+  if( !$(this).val() ) {
+    $(this).removeClass('box-shadow');
+    $(this).parent().next().children().show();
+  }
+})
