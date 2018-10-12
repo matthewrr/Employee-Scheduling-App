@@ -14,9 +14,11 @@
           <div class='scroll-content-wrapper'>
             <div class="employee-column-content" style='letter-spacing:0px;'>
               {% for employee in all_employees %}
-                <div class="board-item" id='{{forloop.counter}}' style='margin-left:5px;'>
+                <div class="board-item" id='{{employee.2}}' style='margin-left:5px;'>
                   <div class="board-item-content highlight-employee">
-                    <div>{{employee.name|truncatechars:20}}</div>
+                    {% with employeex=employee.0|add:' '|add:employee.1 %}
+                    <div>{{employeex|truncatechars:20}}</div>
+                    {% endwith %}
                   </div>
                 </div>
               {% endfor %}

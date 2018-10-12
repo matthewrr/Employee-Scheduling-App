@@ -31,7 +31,8 @@ def update_schedule(request):
 def event_detail_view(request,year,month,day,slug):
     
     roles = CompanyProfileRole.objects.all()
-    all_employees = Employee.objects.all()
+    all_employees = Employee.objects.all().values_list('first_name','last_name', 'employee_id')
+    print(all_employees)
     event = Event.objects.get(slug=slug)
     try:
         schedule = Schedule.objects.get(event=event.pk)

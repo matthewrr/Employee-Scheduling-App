@@ -14,8 +14,10 @@ var grid2Hash = {};
 var newestBoard = [];
 var childBoards = {};
 var createBoards = function (boards = itemContainers.slice(0)) {
-    boards.forEach(function (container) {
+var name;
+boards.forEach(function (container) {
   // Instantiate column grid.
+  name = $(container).parent().attr('id')
   var grid = new Muuri(container, {
     
     items: '.board-item',
@@ -165,9 +167,9 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       grid.remove(toRemove, {removeElements: true});
     }
   })
-  
+//   var name = $(this);;
   columnGrids.push(grid);
-//   childBoards.push(grid);
+  childBoards[name] = grid;
   
 });
 };
@@ -421,6 +423,8 @@ var employeeContainers = [].slice.call(document.querySelectorAll('.employee-colu
 
 // });
 
+
+var employeesBoard = [];
 var employeeContainers = [].slice.call(document.querySelectorAll('.employee-column-content'));
 employeeContainers.forEach(function (container) {
   employees = $('.employee-column-content').children();
@@ -491,12 +495,11 @@ employeeContainers.forEach(function (container) {
   });
   columnGrids.push(employeeGrid)
   employeeGrid.refreshItems().layout();
-
+  employeesBoard[0] = employeeGrid;
 });
 
 
 $(".add-shift").click(function(){
-    
     var board = $(this).parents('.board').attr('id');
     var shiftTemplate = $('.shift-template').clone().removeClass('d-none shift-template').addClass('board-column-content');
     var sequenceNum = Number($(this).attr('value')) + 1;
@@ -511,9 +514,6 @@ $(".add-shift").click(function(){
     
     createBoards(shiftTemplate.toArray());
     parentBoards[board].refreshItems().layout();
-    // employeeContainer[0].refreshItems().layout();
-    console.log(employeeContainer[0])
-    console.log(columnGrids.length)
 });
 
 $(".nav-pills .nav-link").click(function(){
@@ -522,7 +522,6 @@ $(".nav-pills .nav-link").click(function(){
     for (var board in parentBoards) {
         parentBoards[board].hide()
     }
-    
     activeBoard.show();
 })
 
@@ -530,5 +529,35 @@ for (var i in parentBoards) {
     if (i != "pills-main-stands") {
         parentBoards[i].hide();
     }
-    
 }
+
+
+
+$('.trial').on('blur', function() {
+  
+  var val = $(this).val();
+  if (!val) {
+    $(this).removeClass('box-shadow');
+    $(this).parent().next().children().show();
+  }
+  
+  var dataList = $('#json-datalist')
+  var options = dataList.find('option');
+  var filtered = options.filter(function () {
+    return this.value.toUpperCase() === val.toUpperCase();
+  })
+  if (filtered.length > 0) {
+    var employee_id = $(filtered).attr('class');
+    var item = $('#'+employee_id);
+    
+    var fromGrid = item.getGrid();
+    var toGridName = $(this).parents('.board-column').attr('id');
+    console.log(toGridName)
+    var toGrid = 'hi';
+    
+    
+    // fromGrid.move(elemA, elemB);
+  }
+  
+  
+})

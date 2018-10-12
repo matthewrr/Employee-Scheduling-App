@@ -103,32 +103,19 @@ $(".btn-arrival").click(function(){
   $('.input-arrival').val('');
 });
 
-// var dataList = document.getElementsByClassName('json-datalist');
 var dataList = $('#json-datalist');
-// var input = document.getElementById('ajax');
 $.post( "/employees/list/", function( employeeList ) {
   for (var employee in employeeList) {
     var option = document.createElement('option');
-    option.value = employeeList[employee];
-    console.log(employeeList[employee])
+    option.value = employeeList[employee]['name'];
+    option.classList.add(employeeList[employee]['id']);
     dataList.append(option);
   }
 });
 
 $('.board-item-content').on('click', function() {
-  
   var textbox = $(this).parent().prev().children().first();
-  
   textbox.addClass('box-shadow');
   textbox.focus();
   $(this).hide();
-  
-  
-})
-
-$('.trial').on('blur', function() {
-  if( !$(this).val() ) {
-    $(this).removeClass('box-shadow');
-    $(this).parent().next().children().show();
-  }
 })

@@ -11,7 +11,7 @@ from .models import *
 @csrf_exempt
 def fetch_employees(request):
     return render_to_response('employees/employee_list.json',content_type='application/json')
-    return JsonResponse({'first':'Matthew Rivera','second':'Pam McCain','third':'Alisha Rivera'})
+    # return JsonResponse({'first':'Matthew Rivera','second':'Pam McCain','third':'Alisha Rivera'})
 
 
 def employee_list(request):
