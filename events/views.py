@@ -32,7 +32,6 @@ def event_detail_view(request,year,month,day,slug):
     
     roles = CompanyProfileRole.objects.all()
     all_employees = Employee.objects.all().values_list('first_name','last_name', 'employee_id')
-    print(all_employees)
     event = Event.objects.get(slug=slug)
     try:
         schedule = Schedule.objects.get(event=event.pk)
@@ -138,7 +137,6 @@ def event_delete(request, pk):
         })
     else:
         context = {'object': event, 'obj': 'event', 'expired': expired,}
-        print(event)
         data['html_form'] = render_to_string('objects/delete.html',
             context,
             request=request,

@@ -8,11 +8,11 @@
           </div>
         </div>
         {% for shift, scheduled in position.items %}
-        <div class="board-column-content" style='text-transform:uppercase;width:15.3vw'>
+        <div class="board-column-content board-name" id='{{location_verbose|slugify}}-{{forloop.counter}}' style='text-transform:uppercase;width:15.3vw'>
           
           <input class="read-short highlight-default highlight-update" type="text" placeholder="{{shift}}" readonly>
           <div class='input-container'>
-            <input class="form-control col-3 trial" type="text" list="json-datalist">
+            <input class="form-control col-3 name-input" type="text" list="json-datalist">
             
           </div>
           
