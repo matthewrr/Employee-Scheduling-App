@@ -125,6 +125,15 @@ boards.forEach(function (container) {
       toGrid.move(0, 1, {action: 'swap'});
     }
     grid.show(0);
+    
+    var fromGrid = data.fromGrid.getElement();
+    // $(fromGrid).find('.input-container').hide();
+    $(fromGrid).find('.board-item-content').show();
+    // var newitem = data.fromGrid.getItems(0)[0];
+    // data.fromGrid.show(0);
+    $(fromGrid).find('.name-input').val('');
+    
+
   })
   .on('dragReleaseEnd', function (item, e) {
     if (item.getGrid() === grid) {
@@ -160,12 +169,9 @@ boards.forEach(function (container) {
             grid.move(0, 2, {action: 'swap'});
             toRemove = 1;
           }
-      grid.remove(toRemove, {removeElements: true});
+      grid.send(toRemove, employeesBoard[0], 0);
     }
-    // $(elem).parents('.board-column-content').find('.name-input').val('');
-    // console.log('elem is:',elem)
-    // console.log(elem.parents('.board-column-content'))
-    // $(grid.getElement()).find('.name-input').val('');
+
   })
   columnGrids.push(grid);
   innerBoards[name] = grid;
@@ -344,3 +350,10 @@ $('.name-input').on('blur', function() {
   }
   
 })
+
+$(document).ready(function() {    
+     $(".name-input").bind('blur keyup',function(e) {  
+          if (e.type === 'blur' || e.keyCode === 13)  
+          e.currentTarget.blur();
+     });  
+  });
