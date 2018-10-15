@@ -56,7 +56,7 @@ boards.forEach(function (container) {
     //   // For other items use the default drag start predicate.
     //   return Muuri.ItemDrag.defaultStartPredicate(item, event);
     // },
-    dragSortInterval: 0,
+    // dragSortInterval: 0,
     dragContainer: document.body,
     dragReleaseDuration: 400,
     dragReleaseEasing: 'ease',
@@ -105,19 +105,19 @@ boards.forEach(function (container) {
     item.getElement().style.height = item.getHeight() + 'px';
     grid.show(0);
   })
+  .on('layoutEnd', function (items) {
+    $(items[0].getElement()).parent().find('.input-container').hide();
+    
+    })
   .on('beforeReceive', function (data) {
     var allItems = grid.getItems();
     allItems.forEach(function (item) {
       var el = item.getElement()
+      
       var ch = $(el).children()
       grid.hide(ch);
     });
-    // console.log(grid.getElement())
-    // $(grid.getElement()).find('.name-input').val('');
   })
-//   .on('layoutEnd', function (items) {
-//   console.log(items);
-//     })
   .on('send', function (data) {
     var item = data.item;
     if (data.toIndex === 0) {
@@ -142,8 +142,6 @@ boards.forEach(function (container) {
       }
       grid.hide(0);
     }
-    
-    
     var elem = item.getElement();
     $(elem).siblings('.highlight-update').removeClass('highlight-default').addClass('highlight-employee');
     
