@@ -114,8 +114,9 @@ $.post( "/employees/list/", function( employeeList ) {
 });
 
 $('.board-item-content').on('click', function() {
-  var textbox = $(this).parent().prev().children().first();
+  var textbox = $(this).parents('.board-column-content').find('.input-container');
   textbox.addClass('box-shadow');
+  textbox.show();
   textbox.focus();
   $(this).hide();
 })
