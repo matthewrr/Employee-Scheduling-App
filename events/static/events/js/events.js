@@ -27,7 +27,6 @@ $(document).ready(function () {
   }
 });
 
-
 $("document").ready(function(){
     $(".control-panel-item").hover(function(){
       var showing = $(this).find('.list-group.inner').hasClass('show');
@@ -87,14 +86,14 @@ $('.location-checkbox').change(function(){
   }
 });
 
+// Highlight scheduled/unscheduled shifts
 $('.highlight-shifts').change(function(){
   var category = $(this).attr('id');
   var shifts = (category === 'scheduled-shifts') ? $('.highlight-employee') : $('.highlight-default');
-  $(shifts).each(function () {
-    $(this).toggleClass('highlight');
-  });
+  $(shifts).each(function () {$(this).toggleClass('highlight');});
 });
 
+// Update arrival time by job title
 $(".btn-arrival").click(function(){
   var category = $(".display-select option:selected").attr('id');
   var targets = $('.'+category);
@@ -103,6 +102,7 @@ $(".btn-arrival").click(function(){
   $('.input-arrival').val('');
 });
 
+// Get list of employees for autocomplete
 var dataList = $('#json-datalist');
 $.post( "/employees/list/", function( employeeList ) {
   for (var employee in employeeList) {
@@ -112,11 +112,3 @@ $.post( "/employees/list/", function( employeeList ) {
     dataList.append(option);
   }
 });
-
-$('.board-item-content').on('click', function() {
-  var textbox = $(this).parents('.board-column-content').find('.input-container');
-  textbox.addClass('box-shadow');
-  textbox.show();
-  textbox.focus();
-  $(this).hide();
-})

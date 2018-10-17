@@ -148,8 +148,20 @@ employeeContainers.forEach(function (container) {
   innerBoards['employeeGrid'] = employeeGrid;
 });
 
-// ACTIONS //
+// BOARD ACTIONS //
+// Hide Boards on Load
+for (var i in outerBoards) {
+  if (i != "pills-main-stands") outerBoards[i].hide();
+}
 
+// Hide Background Board Items on Category Selection
+$(".nav-pills .nav-link").click(function(){
+    var boardName = $(this).attr('href').slice(1);
+    for (var board in outerBoards) {if (board != boardName) outerBoards[board].hide()}
+    outerBoards[boardName].show();
+});
+
+// TEXTBOX ACTIONS //
 // Add Shift
 $(".add-shift").click(function(){
   var $this = $(this);
@@ -166,20 +178,31 @@ $(".add-shift").click(function(){
   outerBoards[board].refreshItems().layout();
 });
 
-// Inactivate Background Board Items
-$(".nav-pills .nav-link").click(function(){
-    var boardName = $(this).attr('href').slice(1);
-    for (var board in outerBoards) {if (board != boardName) outerBoards[board].hide()}
-    outerBoards[boardName].show();
+// Textbox Behavior
+$('.board-column').on('click', '.board-item', function(){
+    var target = $(this).parents('.board-column-content').find('.name-input');
+    target.find(".name-input").bind('blur keyup',function(e) {  
+      if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
+    }); 
+    target.blur();
+    var textbox = $(this).parents('.board-column-content').find('.input-container');
+    textbox.addClass('box-shadow');
+    textbox.show();
+    textbox.children().focus();
+    
+   
+    $(this).hide();
 });
 
-// Hide Boards on Load
-for (var i in outerBoards) {
-  if (i != "pills-main-stands") outerBoards[i].hide();
-}
+// Blur employee name input on 'Enter'
+// $(document).ready(function() {    
+//   $(".name-input").bind('blur keyup',function(e) {  
+//     if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
+//   });  
+// });
 
-// Move Item on Name Input Update
-$('.name-input').on('blur', function() {
+// Move Item on Textbox Update
+$('.board-column').on('blur', '.name-input', function(){
   var $this = $(this);    
   if (!$this.val()) {
     $this.removeClass('box-shadow');
@@ -194,11 +217,4 @@ $('.name-input').on('blur', function() {
     var fromGrid = innerBoard(employeeItem);
     fromGrid.send(employeeItem, toGrid, 1);
   }
-});
-
-// Blur employee name input on 'Enter'
-$(document).ready(function() {    
-  $(".name-input").bind('blur keyup',function(e) {  
-    if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
-  });  
 });

@@ -1250,9 +1250,6 @@ fillColour {  0% {
     transition: color 0.1s,transform 0.2s ease-out;
     z-index: -9999;
 }
-.nav-link::before {
-    background-color: #000;
-}
 .nav-link:hover::before, .nav-link:focus::before, .nav-link.active::before {
     transform-origin: left top;
     transform: scale(1, 1);
