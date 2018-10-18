@@ -19,15 +19,15 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       layoutEasing: 'ease',
       dragEnabled: true,
       dragSort: function () {return columnGrids;},
-      dragSortPredicate: function (item, e) {
-        return Muuri.ItemDrag.defaultSortPredicate(item, {
-          threshold: 50,
-          action: 'move',
-          index: 1
-        });
-      },
       dragStartPredicate: function (item, event) {
         return grid.getItems().indexOf(item) === 0 ? false : true;
+      },
+      dragSortPredicate: function (item, e) {
+      return Muuri.ItemDrag.defaultSortPredicate(item, {
+        threshold: 50,
+        action: 'move',
+        index: 1
+        });
       },
       dragContainer: document.body,
       dragReleaseDuration: 400,
@@ -54,26 +54,36 @@ var createBoards = function (boards = itemContainers.slice(0)) {
         return layout;
       }
     })
+    .on('dragMove', function (data) {
+      grid.show([0]);
+    })
     .on('send', function (data) {
-      grid.show(0);
-      var fromGrid = $(data.fromGrid.getElement());
-      fromGrid.find('.board-item-content').show();
-      fromGrid.find('.name-input').val('');
+      // $(data.fromGrid.getElement()).find('.name-input').val('');
+      data.fromGrid.show();
     })
     .on('beforeReceive', function (data) {
-      grid.getItems().forEach(function (item) {
-        grid.hide($(item.getElement()).children());
-      });
+      grid.hide([0]);
+      // set ease style similar to Muuri items. jquery only allows 'slide' and 'linear'.
+      $(grid.getElement()).find('.input-container').hide(600);
     })
+    // .on('receive', function (data) {
+    //   $(data.fromGrid.getElement()).find('.name-input').val('');
+    // })
     .on('dragReleaseEnd', function (item, e) {
       $(item.getElement()).siblings('.highlight-update').removeClass('highlight-default').addClass('highlight-employee');
-      var pos = grid.getItems().indexOf(item);
       var l = grid.getItems().length;
+      var pos = grid.getItems().indexOf(item);
       if (pos === 0) grid.move(0, 1, {action: 'swap'});
+      if (pos === 2) grid.move(2, 1, {action: 'swap'})
+      console.log(l)
+      
       if (l > 2) item.getGrid().send(item.getGrid().getItems(2)[0], innerBoards['employeeGrid'], 0);
+      grid.hide(0);
     })
     .on('layoutEnd', function (items) {
-      $(items[0].getElement()).parent().find('.input-container').hide();
+      $(grid.getElement()).find('.name-input').val('');
+      // $(data.fromGrid.getElement()).find('.name-input').val('');
+      // $(grid.getElement()).find('.input-container').hide();
     });
     columnGrids.push(grid);
     innerBoards[$(container).attr('id')] = grid;
@@ -142,7 +152,7 @@ employeeContainers.forEach(function (container) {
   .on('dragReleaseEnd', function (item) {
     columnGrids.forEach(function (employeeGrid) {
       employeeGrid.refreshItems();
-    })
+    });
   });
   columnGrids.push(employeeGrid);
   innerBoards['employeeGrid'] = employeeGrid;
@@ -180,11 +190,8 @@ $(".add-shift").click(function(){
 
 // Textbox Behavior
 $('.board-column').on('click', '.board-item', function(){
-    var target = $(this).parents('.board-column-content').find('.name-input');
-    target.find(".name-input").bind('blur keyup',function(e) {  
-      if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
-    }); 
-    target.blur();
+    // var target = $(this).parents('.board-column-content').find('.name-input');
+    // target.blur();
     var textbox = $(this).parents('.board-column-content').find('.input-container');
     textbox.addClass('box-shadow');
     textbox.show();
@@ -195,11 +202,11 @@ $('.board-column').on('click', '.board-item', function(){
 });
 
 // Blur employee name input on 'Enter'
-// $(document).ready(function() {    
-//   $(".name-input").bind('blur keyup',function(e) {  
-//     if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
-//   });  
-// });
+$(document).ready(function() {    
+  $(".name-input").bind('blur keyup',function(e) {  
+    if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
+  });  
+});
 
 // Move Item on Textbox Update
 $('.board-column').on('blur', '.name-input', function(){

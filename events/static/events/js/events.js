@@ -56,7 +56,6 @@ $('.toggle').click(function(e) {
     }
 });
 
-
 //update to redo muuri layout
 $('.location-checkbox').change(function(){
   var target = '#' + $(this).attr('target');

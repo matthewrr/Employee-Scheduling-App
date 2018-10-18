@@ -857,6 +857,7 @@ button:focus {
 .board-item, .employee-item {
   position: absolute;
   margin: 5px 0;
+  z-index:9999;
 }
 .employee-column-content .board-item {
   width:100%;
