@@ -19,17 +19,10 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       layoutEasing: 'ease',
       dragEnabled: true,
       dragSort: function () {return columnGrids;},
-      dragSortInterval: 20,
+      dragSortInterval: 0,
       dragStartPredicate: function (item, event) {
         return grid.getItems().indexOf(item) === 0 ? false : true;
       },
-      // dragSortPredicate: function (item, e) {
-      // return Muuri.ItemDrag.defaultSortPredicate(item, {
-      //   threshold: 50,
-      //   action: 'move',
-      //   index: 1
-      //   });
-      // },
       dragContainer: document.body,
       dragReleaseDuration: 400,
       dragReleaseEasing: 'ease',
@@ -55,8 +48,6 @@ var createBoards = function (boards = itemContainers.slice(0)) {
         return layout;
       }
     })
-
-
     .on('dragStart', function (item, event) {
       var g = item.getGrid();
       var l = g.getItems().length;
@@ -66,64 +57,20 @@ var createBoards = function (boards = itemContainers.slice(0)) {
         g.show(1)
       }
     })
-    // .on('beforeSend', function (data) {
-    //   var l = grid.getItems().length;
-    //   if (l <= 2) {
-    //     grid.show(0)
-    //   } else {
-    //     grid.show(1)
-    //   }
-    // })
-    // .on('send', function (data) {
-    //   var l = grid.getItems().length;
-    //   if (l <= 2) {
-    //     grid.show(0)
-    //   } else {
-    //     grid.show(1)
-    //   }
-    // })
-    // .on('layoutStart', function (items) {
-    //   console.log('before receive')
-    //   // var g = data.toGrid;
-    //   // grid.hide(-1);
-    //   // g.hide(-1);
-    //   // set ease style similar to Muuri items. jquery only allows 'slide' and 'linear'.
-    //   // $(grid.getElement()).find('.input-container').hide(600);
-    // })
     .on('beforeReceive', function (data) {
       grid.hide();
     })
-    .on('beforeSend', function (data) {
-      
-      var gridLength = data.fromGrid.getItems().length;
-      if (gridLength === 2) {
-        grid.show(0);
-      } else if (gridLength === 3) {
-        grid.show(1);
-      } else {
-        console.log('Unexpected Grid Length')
-      }
-      
-      
-      var myItem = data.item;
-      var fromGrid = data.fromGrid;
-      // fromGrid.show();
-      
-      
-      // var idx = grid.getItems().length - 2;
-      // // console.log('item', i[-2])
-      // console.log('item', grid.getItems([idx]))
-      // var i = grid.getItems([idx])
-      // i.show()
-      // console.log('i is', i)
-      // // grid.getItems([idx]).show();
-      // grid.show([idx]);
-      // grid.show()[]
+    .on('receive', function (data) {
+      $(grid.getElement).find('.name-input').val('');
     })
-    
-    // .on('receive', function (data) {
-    //   $(data.fromGrid.getElement()).find('.name-input').val('');
-    // })\
+    .on('send', function (data) {
+      var gridLength = data.fromGrid.getItems().length;
+      var idx = data.fromIndex;
+      data.fromGrid.show();
+      if (gridLength > 2) {
+        data.fromGrid.hide(0);
+      }
+    })
     .on('dragReleaseEnd', function (item, e) {
       console.log('drag release end')
       $(item.getElement()).siblings('.highlight-update').removeClass('highlight-default').addClass('highlight-employee');
@@ -131,21 +78,19 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       var pos = grid.getItems().indexOf(item);
       if (pos === 0) grid.move(0, 1, {action: 'swap'});
       if (pos === 2) grid.move(2, 1, {action: 'swap'})
-      
-      if (l > 2) item.getGrid().send(item.getGrid().getItems(2)[0], innerBoards['employeeGrid'], 0);
+      if (l > 2) {
+        var toSend = item.getGrid().getItems(2)[0]
+        grid.show(toSend);
+        // item.getGrid().getItems(2)[0].show();
+        item.getGrid().send(toSend, innerBoards['employeeGrid'], 0);
+      }
       grid.hide(0);
     })
-    // .on('layoutEnd', function (items) {
-    //   $(grid.getElement()).find('.name-input').val('');
-      // $(data.fromGrid.getElement()).find('.name-input').val('');
-      // $(grid.getElement()).find('.input-container').hide();
-    // });
     columnGrids.push(grid);
     innerBoards[$(container).attr('id')] = grid;
   });
 };
 createBoards();
-console.log('hi')
 
 // Create Outer Boards
 boardContainers.forEach(function (board) {
@@ -252,32 +197,32 @@ $('.board-column').on('click', '.board-item', function(){
     textbox.addClass('box-shadow');
     textbox.show();
     textbox.children().focus();
-    
-   
     $(this).hide();
 });
 
 // Blur employee name input on 'Enter'
-// $(document).ready(function() {    
-//   $(".name-input").bind('blur keyup',function(e) {  
-//     if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
-//   });  
-// });
+$(document).ready(function() {    
+  $(".name-input").bind('blur keyup',function(e) {  
+    if (e.type === 'blur' || e.keyCode === 13) e.currentTarget.blur();
+  });  
+});
 
 // Move Item on Textbox Update
-// $('.board-column').on('blur', '.name-input', function(){
-//   var $this = $(this);    
-//   if (!$this.val()) {
-//     $this.removeClass('box-shadow');
-//     $this.parent().next().children().show();
-//   }
-//   var matchFound = $('#json-datalist').find('option').filter(function () {
-//     return this.value.toUpperCase() === $this.val().toUpperCase();
-//   });
-//   if (matchFound.length) {
-//     var employeeItem = document.getElementById(matchFound.attr('class'));
-//     var toGrid = innerBoard($this);
-//     var fromGrid = innerBoard(employeeItem);
-//     fromGrid.send(employeeItem, toGrid, 1);
-//   }
-// });
+$('.board-column').on('blur', '.name-input', function(){
+  var $this = $(this);    
+  if (!$this.val()) {
+    $this.removeClass('box-shadow');
+    $this.parent().next().children().show();
+  }
+  var matchFound = $('#json-datalist').find('option').filter(function () {
+    return this.value.toUpperCase() === $this.val().toUpperCase();
+  });
+  if (matchFound.length) {
+    var employeeItem = document.getElementById(matchFound.attr('class'));
+    var toGrid = innerBoard($this);
+    var fromGrid = innerBoard(employeeItem);
+    
+    fromGrid.send(employeeItem, toGrid, 1);
+    // $(toGrid.getElement()).find('.name-input').val('')
+  }
+});
