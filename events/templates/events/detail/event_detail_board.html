@@ -1,0 +1,23 @@
+<div class='location-categories py-2'>
+  <ul class="nav nav-pills" id="pills-tab" role="tablist">
+    {% for category in locations %}
+    <li class="nav-item">
+      <a class="nav-link nav-link-category {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#pills-{{category|slugify}}" role="tab" aria-controls="pills-home" aria-selected="false">
+        <span>{{category}}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="tab-contents" id="pills-tabContent">
+  {% for category, location_num in event_categories.items %}
+    {% ifequal category "Main Stands" %}
+      <div class='board location-board tab-pane show active fade' id='pills-{{category|slugify}}'>
+    {% else %}
+      <div class='board location-board tab-pane fade' id='pills-{{category|slugify}}'>
+    {% endifequal %}
+    {% include 'events/detail/new_location_card.html' %}
+      </div>
+  {% endfor %}
+      </div>
+</div>

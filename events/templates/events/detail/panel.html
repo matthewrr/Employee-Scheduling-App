@@ -1,7 +1,15 @@
 {% load staticfiles %}
-<div class='control-panel accordian'>
-    {% include 'events/detail/panel/display.html'%}
-    {% include 'events/detail/panel/active_locations.html'%}
-    {% include 'events/detail/panel/arrival_times.html'%}
-    {% include 'events/detail/panel/employees.html'%}
+<div class='px-0' style='width:240px'>
+  <div class='col' style='background:rgba(0,0,0,.83);color:white;'>
+    <div class='row' id='navbarNavDropdown3'>
+      <div class='col px-0' style='width:240px;height:100vh;'>
+        <div class='control-panel accordian'>
+          {% include 'events/detail/panel/display.html'%}
+          {% include 'events/detail/panel/active_locations.html'%}
+          {% include 'events/detail/panel/arrival_times.html'%}
+          {% include 'events/detail/panel/employees.html'%}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

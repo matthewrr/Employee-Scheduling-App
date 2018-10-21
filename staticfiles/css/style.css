@@ -1346,3 +1346,41 @@ fillColour {  0% {
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2)!important;
   color: rgb(51,51,51);
 }
+
+
+
+
+
+/*///////*/
+
+.shift-template, .board-name {
+  text-transform:uppercase;
+  width:15.3vw;
+}
+
+.highlight-default {
+  width:8.7vw;
+  max-height:35px;
+}
+
+.event-details {
+  height:100vh;
+  font-family:"Source Sans Pro";
+  text-transform:lowercase;
+  color:#333;
+}
+
+.location-categories {
+  font-size: 1.2em;
+  font-weight: 100;
+}
+
+.nav-link-category {
+  position:relative;
+}
+
+.location-board {
+  margin-bottom:100px;
+  position:absolute;
+  width:80vw;
+}
