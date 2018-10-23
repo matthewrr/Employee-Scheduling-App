@@ -1379,7 +1379,7 @@ fillColour {  0% {
   position:relative;
 }
 
-.location-board {
+.tab-contents .location-board {
   margin-bottom:100px;
   position:absolute;
   width:80vw;

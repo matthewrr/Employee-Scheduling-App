@@ -8,12 +8,12 @@
     {% include 'events/detail/panel.html' %}
     
     <div class='col'>
-      {% include 'events/detail/header/event_header.html' with template=template %}
+      {% include 'events/detail/event_header.html' with template=template %}
       
       <div class='row'>
         <div class='col-12'>
           {% if not first_save %}
-            {% include 'events/detail/event_detail-board.html' %}
+            {% include 'events/detail/event_detail_board.html' %}
           {% endif %}
       </div>
     </div>
