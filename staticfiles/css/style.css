@@ -1348,9 +1348,6 @@ fillColour {  0% {
 }
 
 
-
-
-
 /*///////*/
 
 .shift-template, .board-name {
@@ -1382,4 +1379,43 @@ fillColour {  0% {
   margin-bottom:100px;
   position:absolute;
   width:80vw;
+}
+
+
+
+
+/*locationcard*/
+
+.location-cards .add-shift {
+  float:right;
+  font-weight: 700;
+  font-size: 1.2em;
+  margin-top: -1px;
+}
+.location-cards .board-column {
+  box-shadow: #cacaca 0px 0px 12px;
+  border-radius:0px;
+  width:18vw;
+  margin-left:20px;
+  background:white;
+}
+.location-cards .board-column-header {
+  padding-left: 2px;
+  height: 42px;
+  background: none;
+  color: #757575;
+  opacity: 1;
+  transform: scale(1);
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  margin-top: 12px;
+}
+.location-cards .board-item {margin-left:5px;}
+.location-cards .location-title {
+  line-height: 2em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+  font-weight: 400;
+  vertical-align: bottom;
 }

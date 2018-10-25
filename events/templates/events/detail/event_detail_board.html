@@ -9,7 +9,7 @@
     {% endfor %}
   </ul>
 </div>
-<div class="tab-contents" id="pills-tabContent">
+<div class="tab-contents location-cards" id="pills-tabContent">
   {% for category, location_num in event_categories.items %}
     {% ifequal category "Main Stands" %}
       <div class='board tab-pane show active fade' id='pills-{{category|slugify}}'>
