@@ -1,9 +1,9 @@
 {% load staticfiles %}
-<div class='px-0' style='width:240px'>
-  <div class='col' style='background:rgba(0,0,0,.83);color:white;'>
-    <div class='row' id='navbarNavDropdown3'>
-      <div class='col px-0' style='width:240px;height:100vh;'>
-        <div class='control-panel accordian'>
+<div class='px-0' id='control-panel'>
+  <div class='col'  style='background:rgba(0,0,0,.83)'>
+    <div class='row'>
+      <div class='col px-0' style='width:240px;height:100vh;background:rgba(0,0,0,.83);'>
+        <div class='accordian' style='background:rgba(0,0,0,.83)'>
           {% include 'events/detail/panel/display.html'%}
           {% include 'events/detail/panel/active_locations.html'%}
           {% include 'events/detail/panel/arrival_times.html'%}

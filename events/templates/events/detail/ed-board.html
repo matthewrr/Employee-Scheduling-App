@@ -1,0 +1,23 @@
+<div class='row' id='ed-board'>
+  <div class='col-12'>
+    <div class='py-2' id='loc-categories'>
+      <ul class="nav nav-pills">
+        {% for cat in locations %}
+        <li class="nav-item">
+          <a class="nav-link {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#{{cat|slugify}}" role="tab">
+            <span>{{cat}}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="loc-cards" id="pills-tabContent">
+      {% for cat, locNum in event_categories.items %}
+        <div class='board tab-pane fade' id='{{cat|slugify}}'>
+          {% include 'events/detail/loc-card.html' %}
+        </div>
+      {% endfor %}
+          </div>
+    </div>
+`</div>
+</div>

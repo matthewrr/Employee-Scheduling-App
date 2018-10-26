@@ -1,5 +1,7 @@
 /*global $*/
 
+$('#main-stands').addClass('show active');
+
 $(document).ready(function () {
   $(".check-all").click(function(){
       $(this).parent().siblings().find('input:checkbox').not(this).prop('checked', this.checked);
@@ -88,7 +90,7 @@ $('.location-checkbox').change(function(){
 // Highlight scheduled/unscheduled shifts
 $('.highlight-shifts').change(function(){
   var category = $(this).attr('id');
-  var shifts = (category === 'scheduled-shifts') ? $('.highlight-employee') : $('.highlight-default');
+  var shifts = (category === 'scheduled-shifts') ? $('.employee') : $('.default');
   $(shifts).each(function () {$(this).toggleClass('highlight');});
 });
 

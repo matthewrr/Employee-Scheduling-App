@@ -72,8 +72,10 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       }
     })
     .on('dragReleaseEnd', function (item, e) {
-      console.log('drag release end')
-      $(item.getElement()).siblings('.highlight-update').removeClass('highlight-default').addClass('highlight-employee');
+      // $(item.getElement()).siblings('.highlight').removeClass('default').addClass('employee');
+      var toSend;
+      $(item.getElement()).siblings().removeClass('default').addClass('employee');
+      $(item.getElement()).children().removeClass('default').addClass('employee');
       var l = grid.getItems().length;
       var pos = grid.getItems().indexOf(item);
       if (pos === 0) grid.move(0, 1, {action: 'swap'});
@@ -83,6 +85,12 @@ var createBoards = function (boards = itemContainers.slice(0)) {
         grid.show(toSend);
         // item.getGrid().getItems(2)[0].show();
         item.getGrid().send(toSend, innerBoards['employeeGrid'], 0);
+      }
+      var fromGrid = item.getGrid();
+      console.log(fromGrid.getItems().length)
+      if (item.getGrid().length === 1) {
+        var el = item.getGrid().getElement();
+        $(el).find('.employee').addClass('default').removeClass('employee');
       }
       grid.hide(0);
     })
@@ -162,7 +170,7 @@ employeeContainers.forEach(function (container) {
 // BOARD ACTIONS //
 // Hide Boards on Load
 for (var i in outerBoards) {
-  if (i != "pills-main-stands") outerBoards[i].hide();
+  if (i != "main-stands") outerBoards[i].hide();
 }
 
 // Hide Background Board Items on Category Selection

@@ -4,10 +4,11 @@ body {
     font-family:"Open Sans";
 }
 
-@media (min-width: 1200px)
-.container {
-    max-width: 100%;
-}
+
+/*@media (min-width: 1200px)*/
+/*.container {*/
+/*    max-width: 100%;*/
+/*}*/
 
 .company-logo {height:40px;}
 
@@ -676,16 +677,17 @@ button:focus {
 /*    text-align: center;*/
 /*}*/
 
+
 .bulk-arrival {
   background-color: rgba(256,256,256,.4);
   line-height:1.2em;
-    margin-left: 5px;
-    background-color: rgba(256,256,256,.4);
-    line-height: 1.2em;
-    border: none;
-    border-bottom: 1px solid #BBB;
-    border-radius: 0px;
-    padding-bottom:3px;
+  margin-left: 5px;
+  background-color: rgba(256,256,256,.4);
+  line-height: 1.2em;
+  border: none;
+  border-bottom: 1px solid #BBB;
+  border-radius: 0px;
+  padding-bottom:3px;
 }
 
 .input-group.mb-1 {
@@ -697,12 +699,23 @@ button:focus {
     height: 38px;
 }
 
-.control-panel {
-  background:#e8ebf1;
+#control-panel .accordian {
+  width:240px;
+  color:white;
+  background:rgba(0,0,0,.83);
 }
 
+
+
+/*#control-panel .accordian {*/
+/*  background:#e8ebf1;*/
+/*}*/
+
 .control-panel-section {
-  color:#5a626f;font-family:"Open Sans";font-size: 1.2em;font-weight: 600;
+  color:#5a626f;
+  font-family:"Open Sans";
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .control-panel-description {
@@ -1114,7 +1127,7 @@ fillColour {  0% {
 
 /*----------------------------------*/
 
-.control-panel {
+#control-panel .accordian  {
   margin-top:40px;
 }
 .control-panel-item {
@@ -1122,19 +1135,19 @@ fillColour {  0% {
   margin: 0px;
   border: none;
 }
-.control-panel .input-group-text {
+#control-panel .input-group-text {
   background: #484848;
   color: #bdbdbd;
   border: 1px solid black;
 }
-.control-panel .form-control {
+#control-panel .form-control {
   background-color: #3e3e3e;
   color:white;
   border:1px solid black;
   
 }
 
-.control-panel .form-control::placeholder {
+#control-panel .form-control::placeholder {
   color:#CECECE;
 }
 
@@ -1212,18 +1225,17 @@ fillColour {  0% {
 .location-category {
   height: 36px;
 }
-.location-categories {
-    margin-bottom: 14px;
+#loc-categories {
+  margin: 0 91px 14px 20px;
+    /*margin-bottom: 14px;*/
     font-size: 1.2em;
     font-weight: 100;
-    margin-right: 20px;
-    /*box-shadow: rgb(202, 202, 202) 0px 0px 12px;*/
-    /*padding-left: 20px;*/
-    margin-left: 20px;
-    margin-right: 91px;
+    /*margin-right: 20px;*/
+    /*margin-left: 20px;*/
+    /*margin-right: 91px;*/
 }
 
-.location-categories .nav-link {
+#loc-categories .nav-link {
     line-height: 1em;
     text-transform: uppercase;
     letter-spacing: 1.5px;
@@ -1266,7 +1278,9 @@ fillColour {  0% {
 /*}*/
 
 .nav-link:first-child {margin-left:4px!important;}
-
+#ed .list-group-item:last-child, #ed .list-group-item:first-child {
+  border-radius: 0px;
+}
 
 .collapsing {
   position: relative;
@@ -1292,9 +1306,8 @@ fillColour {  0% {
   /*width: 200px;*/
 }
 
-/*.highlight{border:1px solid green;}*/
-.highlight-default.highlight {border:1px solid red;}
-.highlight-employee.highlight {border:1px solid green;}
+.default.highlight {border:1px solid red;}
+.employee.highlight {border:1px solid green;}
 
 
 
@@ -1355,27 +1368,22 @@ fillColour {  0% {
   width:15.3vw;
 }
 
-.highlight-default {
+.default {
   max-height:35px;
 }
 
-.event-details {
+#ed {
   height:100vh;
   font-family:"Source Sans Pro";
   text-transform:lowercase;
   color:#333;
 }
 
-.location-categories {
-  font-size: 1.2em;
-  font-weight: 100;
-}
-
-.nav-link-category {
+#ed-board .nav-link {
   position:relative;
 }
 
-.tab-contents .location-board {
+.loc-cards .location-board {
   margin-bottom:100px;
   position:absolute;
   width:80vw;
@@ -1384,22 +1392,20 @@ fillColour {  0% {
 
 
 
-/*locationcard*/
-
-.location-cards .add-shift {
+.loc-cards .add-shift {
   float:right;
   font-weight: 700;
   font-size: 1.2em;
   margin-top: -1px;
 }
-.location-cards .board-column {
+.loc-cards .board-column {
   box-shadow: #cacaca 0px 0px 12px;
   border-radius:0px;
   width:18vw;
   margin-left:20px;
   background:white;
 }
-.location-cards .board-column-header {
+.loc-cards .board-column-header {
   padding-left: 2px;
   height: 42px;
   background: none;
@@ -1410,8 +1416,8 @@ fillColour {  0% {
   padding-bottom: 12px;
   margin-top: 12px;
 }
-.location-cards .board-item {margin-left:5px;}
-.location-cards .location-title {
+.loc-cards .board-item {margin-left:5px;}
+.loc-cards .location-title {
   line-height: 2em;
   text-transform: uppercase;
   letter-spacing: 1px;

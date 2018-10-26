@@ -9,7 +9,7 @@
     
     <ul class="list-group inner">
       {% for category, location in locations.items %}
-      <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;padding-left:26px;' data-toggle="collapse" href="#{{category|slugify}}">
+      <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;padding-left:26px;' data-toggle="collapse" href="#active-{{category|slugify}}">
         + {{category}}
         <span class="badge badge-primary badge-pill" style='background:black; color:white;'>
           <span class='active-count'>0</span>
@@ -17,16 +17,16 @@
           <span class='category-count'>{{location.count}}</span>
         </span>
       </li>
-      <div id="{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;padding-left:8px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
+      <div id="active-{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;padding-left:8px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input location-checkbox check-all" type="checkbox" value="" target='pills-{{category|slugify}}' id="defaultCheck1" checked>
+          <input class="form-check-input location-checkbox check-all" type="checkbox" value="" target='{{category|slugify}}' checked>
           <label class="form-check-label" for="defaultCheck1">
             <strong>All</strong>
           </label>
         </div>
         {% for l in location %}
         <div class="form-check" style='text-transform:capitalize;'>
-          <input class="form-check-input location-checkbox check-one" target="{{l|slugify}}" type="checkbox" value="" id="defaultCheck1" checked>
+          <input class="form-check-input location-checkbox check-one" target="{{l|slugify}}" type="checkbox" value="" checked>
           <label class="form-check-label" for="defaultCheck1">
             {{l}}
           </label>
