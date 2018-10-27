@@ -70,9 +70,15 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       if (gridLength > 2) {
         data.fromGrid.hide(0);
       }
+      
+      
+      var fromGrid = data.fromGrid;
+      var el = fromGrid.getElement();
+      $(el).find('.employee').addClass('default').removeClass('employee');
+      
+      
     })
     .on('dragReleaseEnd', function (item, e) {
-      // $(item.getElement()).siblings('.highlight').removeClass('default').addClass('employee');
       var toSend;
       $(item.getElement()).siblings().removeClass('default').addClass('employee');
       $(item.getElement()).children().removeClass('default').addClass('employee');
@@ -86,8 +92,9 @@ var createBoards = function (boards = itemContainers.slice(0)) {
         // item.getGrid().getItems(2)[0].show();
         item.getGrid().send(toSend, innerBoards['employeeGrid'], 0);
       }
-      var fromGrid = item.getGrid();
-      console.log(fromGrid.getItems().length)
+      // var fromGrid = item.getGrid();
+      // console.log(item.fromGrid())
+      // console.log(fromGrid.getItems().length)
       if (item.getGrid().length === 1) {
         var el = item.getGrid().getElement();
         $(el).find('.employee').addClass('default').removeClass('employee');
