@@ -13,9 +13,7 @@
     </div>
     <div class="loc-cards" id="pills-tabContent">
       {% for cat, locNum in event_categories.items %}
-        <div class='board tab-pane fade' id='{{cat|slugify}}'>
           {% include 'events/detail/loc-card.html' %}
-        </div>
       {% endfor %}
           </div>
     </div>

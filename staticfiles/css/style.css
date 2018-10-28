@@ -907,6 +907,8 @@ button:focus {
   }
 }
 
+
+
 /*#cols {*/
 /*    -moz-column-count: 5;*/
 /*    -moz-column-gap: 20px;*/
@@ -1268,6 +1270,7 @@ fillColour {  0% {
     transform: scale(1, 1);
 }
 
+
 /*.nav-link.active {*/
 /*    transform-origin: left top;*/
 /*    transform: scale(1, 1);*/
@@ -1383,6 +1386,10 @@ fillColour {  0% {
   position:relative;
 }
 
+
+.loc-cards {
+  display:inline-block;
+}
 .loc-cards .location-board {
   margin-bottom:100px;
   position:absolute;
@@ -1424,4 +1431,8 @@ fillColour {  0% {
   font-size: 1.1em;
   font-weight: 400;
   vertical-align: bottom;
+}
+
+.tab-pane {
+  margin-bottom:100px;position:absolute;width:80vw;
 }

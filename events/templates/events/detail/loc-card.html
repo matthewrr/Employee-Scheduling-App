@@ -1,9 +1,9 @@
 {% load staticfiles %}
 
+<div class='board tab-pane fade' id='{{cat|slugify}}'>
 {% for parent, attr in locNum.items %}
   {% if attr.active %}
   
-    <div class='board tab-pane fade show active'>
       <div class='board-column' value='0' id='{{attr.location|slugify}}'>
         <div class='board-column-header'>
           <div class='location-title'>
@@ -27,7 +27,7 @@
         </div>
         {% endfor %}
       </div>
-    </div>
       
   {% endif %}
 {% endfor %}
+</div>
