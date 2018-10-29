@@ -75,6 +75,8 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       var fromGrid = data.fromGrid;
       var el = fromGrid.getElement();
       $(el).find('.employee').addClass('default').removeClass('employee');
+      $('.board-item').removeClass('highlight');
+      
       
       
     })
@@ -82,6 +84,7 @@ var createBoards = function (boards = itemContainers.slice(0)) {
       var toSend;
       $(item.getElement()).siblings().removeClass('default').addClass('employee');
       $(item.getElement()).children().removeClass('default').addClass('employee');
+      $('.board-item').removeClass('highlight');
       var l = grid.getItems().length;
       var pos = grid.getItems().indexOf(item);
       if (pos === 0) grid.move(0, 1, {action: 'swap'});

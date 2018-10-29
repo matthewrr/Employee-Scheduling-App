@@ -92,6 +92,7 @@ $('.highlight-shifts').change(function(){
   var category = $(this).attr('id');
   var shifts = (category === 'scheduled-shifts') ? $('.employee') : $('.default');
   $(shifts).each(function () {$(this).toggleClass('highlight');});
+  $('.board-item').removeClass('highlight');
 });
 
 // Update arrival time by job title
