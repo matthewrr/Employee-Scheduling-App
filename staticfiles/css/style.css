@@ -1436,3 +1436,10 @@ fillColour {  0% {
 .tab-pane {
   margin-bottom:100px;position:absolute;width:80vw;
 }
+
+/*control panel*/
+
+#control-panel .control-panel-item:first-child {background:linear-gradient(#83d6ff, #9cc0fe);}
+#control-panel .control-panel-item:nth-child(2) {background:linear-gradient(#9cc0fe, #b4adfe);}
+#control-panel .control-panel-item:nth-child(3) {background:linear-gradient(#b4adfe, #ce98fd);}
+#control-panel .control-panel-item:last-child {background:linear-gradient(#ce98fd, #e980fc);}
