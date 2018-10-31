@@ -17,7 +17,7 @@ $(document).ready(function () {
 
   function updateCount (l = false) {
     if (!l) {
-      var locationCategories = $('.location-category');
+      var locationCategories = $('.loc-category');
       $(locationCategories).each(function() {
         var count = $(this).next().find(".check-one:input[type=checkbox]:checked").length;
         $(this).find(".active-count").text(count);
@@ -39,26 +39,23 @@ $("document").ready(function(){
 });
 
 $('.toggle').click(function(e) {
-  // 	e.preventDefault();
-  
-    var $this = $(this);
-  
-    if ($this.next().hasClass('show')) {
-        $this.next().removeClass('show');
-        $this.next().slideUp(350);
-        $this.children('.gradient').removeClass('gradient');
+    var $header = $(this);
+    var $content = $header.next();
+    if ($content.hasClass('show')) {
+        $content.removeClass('show');
+        $content.slideUp(350);
+        $header.children('.gradient').removeClass('gradient');
     } else {
-        $this.parent().parent().parent().find('li .inner').removeClass('show');
-        $this.parent().parent().parent().find('.gradient').removeClass('gradient');
-        $this.parent().parent().parent().find('li .inner').slideUp(350);
+        var $cp = $('#cp');
+        $cp.find('li .inner').removeClass('show').slideUp(350);
+        $cp.find('.gradient').removeClass('gradient');
         
-        $this.next().toggleClass('show');
-        $this.children().addClass('gradient');
-        $this.next().slideToggle(350);
+        $content.toggleClass('show');
+        $header.children().addClass('gradient');
+        $content.slideToggle(350);
     }
 });
 
-//update to redo muuri layout
 $('.location-checkbox').change(function(){
   var target = '#' + $(this).attr('target');
   var check_all = $(this).hasClass('check-all');

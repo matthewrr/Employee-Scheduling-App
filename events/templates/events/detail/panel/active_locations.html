@@ -1,33 +1,32 @@
 {% load staticfiles %} 
-<li class="list-group-item control-panel-item">
-  <ul class="list-group">
-    
+
+<li class="list-group-item cp-item" id='active-locs'>
+  <ul class="list-group ml-2">
     <li class="list-group-item py-2 toggle">
-        <div class='panel-icon locations-icon'></div>
-        <div class='panel-label'>Active Locations</div>
+        <div class='panel-icon locs-icon align-middle d-inline-block'></div>
+        <div class='panel-label align-middle d-inline-block ml-2'>Active Locations</div>
     </li>
-    
     <ul class="list-group inner">
       {% for category, location in locations.items %}
-      <li class="list-group-item d-flex justify-content-between align-items-center location-category" style='text-transform:capitalize;padding-left:26px;' data-toggle="collapse" href="#active-{{category|slugify}}">
+      <li class="list-group-item d-flex justify-content-between align-items-center loc-category" data-toggle="collapse" href="#active-{{category|slugify}}">
         + {{category}}
-        <span class="badge badge-primary badge-pill" style='background:black; color:white;'>
+        <span class="badge badge-primary badge-pill">
           <span class='active-count'>0</span>
           <span>/</span>
           <span class='category-count'>{{location.count}}</span>
         </span>
       </li>
-      <div id="active-{{category|slugify}}" class="panel-collapse collapse py-3" style='margin-left:13px;padding-left:8px;border-left: 1px solid rgba(0,0,0,.125);border-right: 1px solid rgba(0,0,0,.125);'>
-        <div class="form-check" style='text-transform:capitalize;'>
+      <div id="active-{{category|slugify}}" class="panel-collapse collapse py-3">
+        <div class="form-check">
           <input class="form-check-input location-checkbox check-all" type="checkbox" value="" target='{{category|slugify}}' checked>
-          <label class="form-check-label" for="defaultCheck1">
+          <label class="form-check-label">
             <strong>All</strong>
           </label>
         </div>
         {% for l in location %}
-        <div class="form-check" style='text-transform:capitalize;'>
+        <div class="form-check">
           <input class="form-check-input location-checkbox check-one" target="{{l|slugify}}" type="checkbox" value="" checked>
-          <label class="form-check-label" for="defaultCheck1">
+          <label class="form-check-label">
             {{l}}
           </label>
         </div>
@@ -35,6 +34,5 @@
       </div>
       {% endfor %}
     </ul>
-    
   </ul>
 </li>

@@ -1,20 +1,18 @@
 {% load staticfiles %}
 
-<li class="list-group-item control-panel-item">
-  <ul class="list-group">
-    
+<li class="list-group-item cp-item" id='employee-list'>
+  <ul class="list-group ml-2">
     <li class="list-group-item py-2 toggle">
-        <div class='panel-icon employees-icon'></div>
-        <div class='panel-label'>Employees</div>
+        <div class='panel-icon employees-icon align-middle d-inline-block'></div>
+        <div class='panel-label align-middle d-inline-block ml-2'>Employees</div>
     </li>
-    
     <ul class="list-group inner show">
       <li class="list-group-item" style='height:69vh;'>
         <div class='board-column pl-0'>
           <div class='scroll-content-wrapper'>
-            <div class="employee-column-content board-name" id='employeeGrid' style='letter-spacing:0px;'>
+            <div class="employee-column-content board-name" id='employeeGrid'>
               {% for employee in all_employees %}
-                <div class="board-item" id='{{employee.2}}' style='margin-left:5px;'>
+                <div class="board-item" id='{{employee.2}}'>
                   <div class="board-item-content highlight-employee">
                     {% with employeex=employee.0|add:' '|add:employee.1 %}
                     <div>{{employeex|truncatechars:20}}</div>
@@ -27,6 +25,5 @@
         </div>
       </li>
     </ul>
-    
   </ul>
 </li>

@@ -1,15 +1,11 @@
 {% load staticfiles %}
-<div class='px-0' id='control-panel'>
-  <div class='col'  style='background:rgba(0,0,0,.83)'>
+  <div class='col' id='cp'>
     <div class='row'>
-      <div class='col px-0' style='width:240px;height:100vh;background:rgba(0,0,0,.83);'>
-        <div class='accordian' style='background:rgba(0,0,0,.83)'>
+      <div class='col px-0 accordian'>
           {% include 'events/detail/panel/display.html'%}
           {% include 'events/detail/panel/active_locations.html'%}
           {% include 'events/detail/panel/arrival_times.html'%}
           {% include 'events/detail/panel/employees.html'%}
-        </div>
       </div>
     </div>
   </div>
-</div>

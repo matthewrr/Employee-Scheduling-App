@@ -1,16 +1,16 @@
 {% load staticfiles %}
 
-<li class="list-group-item control-panel-item">
-  <ul class="list-group">
+<li class="list-group-item cp-item" id='arrival-times'>
+  <ul class="list-group ml-2">
     <li class="list-group-item py-2 toggle">
-        <div class='panel-icon arrival-icon'></div>
-        <div class='panel-label'>Arrival Times</div>
+        <div class='panel-icon arrival-icon align-middle d-inline-block'></div>
+        <div class='panel-label align-middle d-inline-block ml-2'>Arrival Times</div>
     </li>
     <ul class="list-group inner">
       <li class="list-group-item">
         <div class='row'>
           <div class='col-12'>
-            <select class="custom-select display-select" style='text-transform:capitalize;'>
+            <select class="custom-select display-select">
               <option>Choose Position...</option>
               {% for role in roles %}
                 <option class='arrival-category' id='{{role.verbose_name.0}}' value="{{role.verbose_name.0}}">{{role.verbose_name}}</option>
