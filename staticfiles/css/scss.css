@@ -1,0 +1,143 @@
+#ed {
+  font-family: "Source Sans Pro";
+}
+
+#cp {
+  background: rgba(0, 0, 0, 0.83);
+  max-width: 240px;
+  height: 100vh;
+  padding-top: 40px;
+  color: #FFF;
+}
+#cp #arrival-times .form-control {
+  background-color: #3E3E3E;
+  border: 1px solid black;
+}
+#cp #employee-list .employee-column-content {
+  color: black;
+}
+
+.cp-item {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+  letter-spacing: 1px;
+}
+.cp-item:first-child {
+  background: linear-gradient(#83d6ff, #9cc0fe);
+}
+.cp-item:nth-child(2) {
+  background: linear-gradient(#9cc0fe, #b4adfe);
+}
+.cp-item:nth-child(3) {
+  background: linear-gradient(#b4adfe, #ce98fd);
+}
+.cp-item:last-child {
+  background: linear-gradient(#ce98fd, #e980fc);
+}
+.cp-item .list-group:first-child {
+  background: #3a3a3a;
+}
+.cp-item .list-group.inner {
+  display: none;
+}
+.cp-item .toggle .panel-icon {
+  height: 22px;
+  width: 22px;
+}
+.cp-item .toggle .panel-label.gradient {
+  background: -webkit-linear-gradient(#84d5ff, #e783fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.panel-icon.display-icon {
+  content: url("/static/events/img/solid/display.png");
+}
+.panel-icon.display-icon.gradient {
+  content: url("/static/events/img/gradient/display.png");
+}
+.panel-icon.locs-icon {
+  content: url("/static/events/img/solid/locations.png");
+}
+.panel-icon.locs-icon.gradient {
+  content: url("/static/events/img/solid/locations.png");
+}
+.panel-icon.arrival-icon {
+  content: url("/static/events/img/solid/arrival.png");
+}
+.panel-icon.arrival-icon.gradient {
+  content: url("/static/events/img/gradient/arrival.png");
+}
+.panel-icon.employees-icon {
+  content: url("/static/events/img/solid/employees.png");
+}
+.panel-icon.employees-icon.gradient {
+  content: url("/static/events/img/gradient/employees.png");
+}
+
+#active-locs .badge-pill {
+  background: black;
+  color: white;
+}
+#active-locs .loc-category {
+  padding-left: 26px;
+  height: 36px;
+}
+#active-locs .panel-collapse {
+  margin-left: 13px;
+  padding-left: 8px;
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#loc-categories {
+  margin: 0 91px 14px 20px;
+  font-size: 1.2em;
+  font-weight: 100;
+}
+#loc-categories .nav-link {
+  line-height: 1em;
+  letter-spacing: 1.5px;
+  font-size: 1em;
+  font-weight: 600;
+  color: #555;
+  position: relative;
+}
+
+#loc-cards .board {
+  margin-bottom: 100px;
+  position: absolute;
+  width: 80vw;
+}
+#loc-cards .board-column {
+  box-shadow: #CACACA 0px 0px 12px;
+  border-radius: 0px;
+  width: 18vw;
+  margin-left: 20px;
+  background: #FFF;
+}
+#loc-cards .board-column .board-column-header {
+  height: 42px;
+  background: none;
+  color: #757575;
+  margin: 12px 0px;
+  padding: 0px 0px 12px 2px;
+}
+#loc-cards .board-column .board-column-header .location-title {
+  line-height: 2em;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+  font-weight: 400;
+  vertical-align: bottom;
+}
+#loc-cards .board-column .board-column-header .add-shift {
+  font-weight: 700;
+  font-size: 1.2em;
+  margin-top: -1px;
+}
+#loc-cards .board-column .board-item {
+  margin-left: 5px;
+}
+
+/*# sourceMappingURL=scss.css.map */

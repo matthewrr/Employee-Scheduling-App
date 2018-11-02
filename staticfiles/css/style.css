@@ -1,7 +1,7 @@
 body {
-  font-family:"Open Sans";
-  background:#F7F7F7;
-  color:#1B142D;
+  font-family: 'Open Sans';
+  background: #F7F7F7;
+  color: #1B142D;
 }
 .company-logo {height:40px;}
 
@@ -310,7 +310,7 @@ select:focus, textarea:focus, button:focus {outline: none!important; box-shadow:
   margin:5px 0px;
   padding:4px;
   width:40px;
-  font-family: "Source Sans Pro";
+  font-family: 'Source Sans Pro';
   box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
   border-width:1px;
   border:none;
@@ -468,106 +468,3 @@ fillColour {
 }
 
 .default {max-height:35px;}
-
-/* Control Panel */
-
-#cp {
-  background: rgba(0,0,0,.83);
-  max-width: 240px;
-  height: 100vh;
-  padding-top: 40px;
-  color: #FFF;
-}
-#cp .cp-item {
-  padding: 0px;
-  margin: 0px;
-  border: none;
-  letter-spacing: 1px;
-}
-#cp .cp-item:first-child {background:linear-gradient(#83d6ff, #9cc0fe);}
-#cp .cp-item:nth-child(2) {background:linear-gradient(#9cc0fe, #b4adfe);}
-#cp .cp-item:nth-child(3) {background:linear-gradient(#b4adfe, #ce98fd);}
-#cp .cp-item:last-child {background:linear-gradient(#ce98fd, #e980fc);}
-#cp .cp-item .list-group:first-child {background:rgb(58, 58, 58);}
-#cp .cp-item .toggle .panel-icon {height:22px; width:22px;}
-#cp .cp-item .toggle .panel-label.gradient {
-  background: -webkit-linear-gradient(#84d5ff, #e783fd);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-#cp .cp-item .list-group.inner {display:none;}
-#cp #active-locs .badge-pill {background:black; color:white;}
-#cp #active-locs .loc-category {padding-left:26px; height:36px;}
-#cp #active-locs .panel-collapse {
-  margin-left:13px;
-  padding-left:8px;
-  border-left: 1px solid rgba(0,0,0,.125);
-  border-right: 1px solid rgba(0,0,0,.125);
-}
-#cp #arrival-times .form-control {
-  background-color: #3E3E3E;
-  border: 1px solid black;
-}
-#cp #employee-list .employee-column-content {color: black;}
-
-#cp .cp-item .toggle .panel-icon.display-icon {content:url(/static/events/img/solid/display.png);}
-#cp .cp-item .toggle .panel-icon.display-icon.gradient {content:url(/static/events/img/gradient/display.png);}
-#cp .cp-item .toggle .panel-icon.locs-icon {content:url(/static/events/img/solid/locations.png);}
-#cp .cp-item .toggle .panel-icon.locs-icon.gradient {content:url(/static/events/img/gradient/locations.png);}
-#cp .cp-item .toggle .panel-icon.arrival-icon {content:url(/static/events/img/solid/arrival.png);}
-#cp .cp-item .toggle .panel-icon.arrival-icon.gradient {content:url(/static/events/img/gradient/arrival.png);}
-#cp .cp-item .toggle .panel-icon.employees-icon {content:url(/static/events/img/solid/employees.png);}
-#cp .cp-item .toggle .panel-icon.employees-icon.gradient {content:url(/static/events/img/gradient/employees.png);}
-#cp .cp-item .toggle .panel-icon.menu-icon {content:url(/static/events/img/solid/menu.png);}
-
-/* Event Detail Board */
-
-#ed {font-family: "Source Sans Pro";}
-#ed-board #loc-categories {
-  margin: 0 91px 14px 20px;
-  font-size: 1.2em;
-  font-weight: 100;
-}
-#ed-board #loc-categories .nav-link {
-  line-height: 1em;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 1em;
-  font-weight: 600;
-  color: #555;
-  position: relative;
-}
-#ed-board .loc-cards .board {
-  margin-bottom: 100px;
-  position: absolute;
-  width: 80vw;
-}
-#ed-board .loc-cards .board-column {
-  box-shadow: #CACACA 0px 0px 12px;
-  border-radius:0px;
-  width:18vw;
-  margin-left:20px;
-  background:white;
-}
-#ed-board .loc-cards .board-column .board-column-header {
-  height: 42px;
-  background: none;
-  color: #757575;
-  margin: 12px 0px;
-  padding: 0px 0px 12px 2px;
-}
-#ed-board .loc-cards .board-column .add-shift {
-  float: right;
-  font-weight: 700;
-  font-size: 1.2em;
-  margin-top: -1px;
-}
-#ed-board .loc-cards .board-item {margin-left:5px;}
-#ed-board .loc-cards .location-title {
-  line-height: 2em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 1.1em;
-  font-weight: 400;
-  vertical-align: bottom;
-}

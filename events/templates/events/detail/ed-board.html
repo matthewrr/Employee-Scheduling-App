@@ -4,7 +4,7 @@
       <ul class="nav nav-pills">
         {% for cat in locations %}
         <li class="nav-item">
-          <a class="nav-link {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#{{cat|slugify}}" role="tab">
+          <a class="nav-link text-uppercase {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#{{cat|slugify}}" role="tab">
             <span>{{cat}}</span>
           </a>
         </li>

@@ -6,9 +6,9 @@
   
       <div class='board-column' value='0' id='{{attr.location|slugify}}'>
         <div class='board-column-header'>
-          <div class='location-title'>
+          <div class='location-title text-uppercase'>
             <span>{{attr.location}}</span>
-            <a class='add-shift' value='0'>+</a>
+            <a class='add-shift float-right' value='0'>+</a>
           </div>
         </div>
         {% for shift, scheduled in attr.positions.items %}
