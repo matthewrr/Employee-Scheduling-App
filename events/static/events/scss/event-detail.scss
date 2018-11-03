@@ -1,4 +1,4 @@
-// Event Detail Page //
+// EVENT DETAIL //
 #ed {font-family: 'Source Sans Pro';}
 
 // Control Panel //
@@ -63,7 +63,63 @@
   }
 } 
 
-// Event Detail Board //
+// Header //
+.event-header-details {
+  color: #5A626F;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  font-size: 1.2em;
+  .event-title {
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+}
+
+// Board Nav //
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background:none;
+  color:black;
+}
+.nav-link::before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(to right, #83d6ff, #e881fc);
+  transform-origin: right top;
+  transform: scale(0, 1);
+  transition: color 0.1s,transform 0.2s ease-out;
+  z-index: -9999;
+}
+.nav-link:hover::before, .nav-link:focus::before, .nav-link.active::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+.nav-link:first-child {margin-left: 4px;}
+
+// Global Muuri Items //
+.board {
+  position: relative;
+  margin-left: 1%;
+}
+.board-column {
+  position: absolute;
+  margin:0px 10px 10px 0px;
+  border-radius: 3px;
+  display:inline-block;
+  padding: 0px 12px 10px 12px;
+}
+.employee-column-content {
+  position: relative;
+  border: 3px solid transparent;
+  min-height:43px;
+}
+
+// Event Board //
 #loc-categories {
   margin: 0 91px 14px 20px;
   font-size: 1.2em;
@@ -77,7 +133,7 @@
     position: relative;
   }
 }
-#loc-cards {
+.loc-cards {
   .board {
     margin-bottom: 100px;
     position: absolute;
@@ -90,24 +146,57 @@
     margin-left: 20px;
     background: #FFF;
     .board-column-header {
-       height: 42px;
-       background: none;
-       color: #757575;
-       margin: 12px 0px;
-       padding: 0px 0px 12px 2px;
-       .location-title {
-         line-height: 2em;
-         letter-spacing: 1px;
-         font-size: 1.1em;
-         font-weight: 400;
-         vertical-align: bottom;
-       }
-       .add-shift {
-         font-weight: 700;
-         font-size: 1.2em;
-         margin-top: -1px;
-       }
-     }
-    .board-item {margin-left: 5px;}
+      height: 42px;
+      background: none;
+      color: #757575;
+      margin: 12px 0px;
+      padding: 0px 0px 12px 2px;
+      position: relative;
+      line-height: 30px;
+      overflow: hidden;
+      border-bottom: 1px solid #d2d2d2;
+      .location-title {
+        line-height: 2em;
+        letter-spacing: 1px;
+        font-size: 1.1em;
+        font-weight: 400;
+        vertical-align: bottom;
+      }
+      .add-shift {
+        font-weight: 700;
+        font-size: 1.2em;
+        margin-top: -1px;
+      }
+    }
+    .board-column-content {
+      width: 15.3vw;
+      position: relative;
+      border: 3px solid transparent;
+      min-height: 43px;
+      background: white;
+      left: 15px;
+    }
+    .read-short{
+      margin: 5px 0px;
+      padding: 4px;
+      width: 40px;
+      box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+      border: none;
+      font-size: 17px;
+      border-radius: 4px;
+      height: 34px;
+      text-align: center;
+    }
+    .board-item {
+      margin-left: 5px;
+        .board-item-content {
+          font-weight: 100;
+          padding: 4px 4px 4px 10px;
+        }
+    }
+    .highlight {
+        &.default {border: 1px solid red;}
+        &.employeer {border: 1px solid green;}
+    }
   }
 }
