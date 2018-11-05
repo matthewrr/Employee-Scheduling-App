@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% if bool %}
-  <img class='icon-true' src='{% static "img/icons/plus.png" %}' alt="True"/>
+  <div class='icon icon-true' alt="True"/></div>
 {% else %}
-  <img class='icon-false' src='{% static "img/icons/minus.png" %}' alt="False"/>
+  <div class='icon icon-false' alt="False"/></div>
 {% endif %}

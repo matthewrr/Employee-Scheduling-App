@@ -12,14 +12,15 @@
             <span class='title'>{{objs}}</span>
             
             {% if obj == 'template' %}
-              <a href='{% url "template_create" %}'><div class='icon-export btn' style='vertical-align:top;'><img src='{% static "img/icons/objects/add.png" %}' alt="Add Object Icon" /></div></a>
+              <a href='{% url "template_create" %}'><div class='icon icon-create btn' style='vertical-align:top;'></div></a>
             {% else %}
-                <div class='icon-export btn add-object js-create-object' style='vertical-align:top;' data-url="{% url obj|add:'_create' %}">
-                  <img src='{% static "img/icons/objects/add.png" %}' alt="Add Object Icon" />
+                <div class='btn icon icon-create add-object js-create-object' style='vertical-align:top;' data-url="{% url obj|add:'_create' %}">
                 </div>
             {% endif %}
             
-            <a href="{% url 'export_'|add:objs %}"><div class='icon-export btn' style='vertical-align:top; float:right;' ><img src='{% static "img/icons/objects/download.png" %}' alt="Export Icon" /></div></a>
+            <a href="{% url 'export_'|add:objs %}">
+              <div class='icon icon-download btn' style='vertical-align:top; float:right;' ></div>
+            </a>
           </h2>
           
           <div class="modal fade hide" id="modal-object" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

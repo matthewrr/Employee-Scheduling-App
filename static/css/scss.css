@@ -2,31 +2,6 @@
   font-family: "Source Sans Pro";
 }
 
-* {
-  -ms-overflow-style: none !important;
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-::-webkit-input-placeholder {
-  text-align: center;
-}
-
-:-moz-placeholder {
-  text-align: center;
-}
-
-::-moz-placeholder {
-  text-align: center;
-}
-
-:-ms-input-placeholder {
-  text-align: center;
-}
-
 #cp {
   background: rgba(0, 0, 0, 0.83);
   max-width: 240px;
@@ -74,6 +49,31 @@
   background: -webkit-linear-gradient(#84d5ff, #e783fd);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.panel-icon.display-icon {
+  content: url("/static/events/img/solid/display.png");
+}
+.panel-icon.display-icon.gradient {
+  content: url("/static/events/img/gradient/display.png");
+}
+.panel-icon.locs-icon {
+  content: url("/static/events/img/solid/locations.png");
+}
+.panel-icon.locs-icon.gradient {
+  content: url("/static/events/img/solid/locations.png");
+}
+.panel-icon.arrival-icon {
+  content: url("/static/events/img/solid/arrival.png");
+}
+.panel-icon.arrival-icon.gradient {
+  content: url("/static/events/img/gradient/arrival.png");
+}
+.panel-icon.employees-icon {
+  content: url("/static/events/img/solid/employees.png");
+}
+.panel-icon.employees-icon.gradient {
+  content: url("/static/events/img/gradient/employees.png");
 }
 
 #active-locs .badge-pill {
@@ -143,33 +143,6 @@
   border-radius: 3px;
   display: inline-block;
   padding: 0px 12px 10px 12px;
-}
-
-.board-item {
-  position: absolute;
-  margin: 5px 0;
-}
-.board-item.muuri-item-releasing {
-  z-index: 9998;
-}
-.board-item.muuri-item-dragging {
-  z-index: 9999;
-  cursor: move;
-}
-.board-item.muuri-item-hidden {
-  z-index: 0;
-}
-
-.board-item-content {
-  position: relative;
-  padding: 20px;
-  background: #fff;
-  border-radius: 4px;
-  font-size: 17px;
-  cursor: pointer;
-  -webkit-box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
-  width: 167px;
 }
 
 .employee-column-content {
@@ -253,19 +226,6 @@
   font-weight: 100;
   padding: 4px 4px 4px 10px;
 }
-.loc-cards .board-column .board-item .arrival-time {
-  height: 33px;
-  margin: 5px 0;
-  width: 70px;
-  padding: 4px;
-  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  border-width: 1px;
-  border: none;
-  font-weight: 100;
-  font-size: 17px;
-  float: right;
-}
 .loc-cards .board-column .highlight.default {
   border: 1px solid red;
 }
@@ -273,102 +233,50 @@
   border: 1px solid green;
 }
 
-body {
-  font-family: "Open Sans";
-  background: #F7F7F7;
-  color: #1B142D;
-}
-
-.box-shadow {
-  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2) !important;
-  transition: none;
-}
-.box-shadow:focus {
-  color: #333333;
-}
-
-#navbar {
-  background-color: #000;
-}
-
 .icon {
-  background-image: url("../img/spritesheet.png");
+  background-image: url("~/staticfiles/img/spritesheet.png");
   width: 32px;
   height: 32px;
 }
 
 .icon-true {
-  background-position: -3px -111px;
+  background-position: -242px -10px;
 }
 .icon-false {
-  background-position: -117px -111px;
-}
-.icon-create {
-  background-position: -3px -3px;
-  width: 64px;
-  height: 64px;
+  background-position: -94px -158px;
 }
 .icon-edit {
-  background-position: -181px -41px;
+  background-position: -158px -10px;
 }
 .icon-delete {
-  background-position: -181px -79px;
+  background-position: -10px -158px;
 }
 .icon-download {
-  background-position: -73px -3px;
+  background-position: -10px -10px;
 }
 .icon-display {
-  background-position: -143px -41px;
+  background-position: -242px -166px;
 }
 .icon-display.gradient {
-  background-position: -181px -3px;
+  background-position: -146px -158px;
 }
 .icon-locations {
-  background-position: -41px -111px;
+  background-position: -62px -242px;
 }
 .icon-locations.gradient {
-  background-position: -143px -3px;
+  background-position: -242px -114px;
 }
 .icon-arrival {
-  background-position: -79px -111px;
+  background-position: -114px -242px;
 }
 .icon-arrival.gradient {
-  background-position: -41px -73px;
+  background-position: -158px -94px;
 }
 .icon-employees {
-  background-position: -3px -73px;
+  background-position: -10px -242px;
 }
 .icon-employees.gradient {
-  background-position: -79px -73px;
-}
-
-#searchInput {
-  color: black;
-  font-weight: 700;
-  background: rgba(0, 0, 0, 0);
-}
-
-#searchInput::placeholder {
-  color: black;
-  opacity: 1;
-}
-
-#searchInput:-ms-input-placeholder {
-  color: black;
-}
-
-#searchInput::-ms-input-placeholder {
-  color: black;
-}
-
-a:focus {
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-select:focus, textarea:focus, button:focus {
-  outline: none !important;
-  box-shadow: none !important;
+  background-position: -242px -62px;
 }
 
 /*# sourceMappingURL=scss.css.map */

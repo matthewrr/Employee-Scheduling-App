@@ -200,3 +200,51 @@
     }
   }
 }
+
+
+// .icon {
+//   width: 32px;
+//   height: 32px;
+//   &.true {background: url('staticfiles/img/spritesheet.png') -242px -10px;}
+//   &.false {background: url('staticfiles/img/spritesheet.png') -94px -158px;}
+//   &.edit {background: url('staticfiles/img/spritesheet.png') -158px -10px;}
+//   &.delete {background: url('staticfiles/img/spritesheet.png') -10px -158px;}
+//   &.download {background: url('staticfiles/img/spritesheet.png') -10px -10px;}
+//   &.display {background: url('staticfiles/img/spritesheet.png') -242px -166px;}
+//   &.display.gradient {background: url('staticfiles/img/spritesheet.png') -146px -158px;}
+//   &.locations {background: url('staticfiles/img/spritesheet.png') -62px -242px;}
+//   &.locations.gradient {background: url('staticfiles/img/spritesheet.png') -242px -114px;}
+//   &.arrival {background: url('staticfiles/img/spritesheet.png') -114px -242px;}
+//   &.arrival.gradient {background: url('staticfiles/img/spritesheet.png') -158px -94px;}
+//   &.employees {background: url('staticfiles/img/spritesheet.png') -10px -242px;}
+//   &.employees.gradient {background: url('staticfiles/img/spritesheet.png') -242px -62px;}
+// }
+
+.icon {
+  background-image: url('~/staticfiles/img/spritesheet.png');
+  width: 32px;
+  height: 32px;
+}
+.icon- {
+  &true {background-position: -242px -10px;}
+  &false {background-position: -94px -158px;}
+  &edit {background-position: -158px -10px;}
+  &delete {background-position: -10px -158px;}
+  &download {background-position: -10px -10px;}
+  &display {background-position: -242px -166px;}
+  &display.gradient {background-position: -146px -158px;}
+  &locations {background-position: -62px -242px;}
+  &locations.gradient {background-position: -242px -114px;}
+  &arrival {background-position: -114px -242px;}
+  &arrival.gradient {background-position: -158px -94px;}
+  &employees {background-position: -10px -242px;}
+  &employees.gradient {background-position: -242px -62px;}
+}
+
+
+// .icon-false, .icon-search, .icon-true { height:30px; }
+// .icon-true {background: rgba(194, 120, 117, 0.71); border-radius: 50px;}
+// .icon-false {background: rgba(110, 49, 93, 0.47); border-radius: 20px;}
+// .icon-edit, .icon-delete {height:30px; margin-top:-1px; background:none;}
+// .icon-export img {height: 48px; width: 48px;}
+// .icon-search {vertical-align:text-top}

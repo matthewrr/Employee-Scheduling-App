@@ -1,82 +1,21 @@
-body {
-  font-family: 'Open Sans';
-  background: #F7F7F7;
-  color: #1B142D;
+/*Employee Scroll Pages*/
+.page-link {
+  background: rgba(256,256,256,.2);
+  color: #000;
+  border-radius:50px!important;
+  margin: 0px 2px;
 }
-.navbar {background-color: rgba(0,0,0,1);}
-.company-logo {height:40px;}
 
-.page-link {background: rgba(256,256,256,.2); color: #000; border-radius:50px!important; margin-left: 2px; margin-right: 2px;}
-.btn-dark {background: rgba(0,0,0,.7); border-color:rgba(0,0,0,0);}
-hr {background-color:white; margin: 0px; margin-bottom:24px!important;}
-th {color:#1b142d;}
-th > a {cursor:pointer;}
-td {vertical-align: baseline!important;}
-td > a {font-weight:600;}
-
-.shadow-custom { margin:auto; box-shadow:0rem 0rem 6rem rgba(0,0,0,.4); }
-
-.schedule {
-  font-family: 'Roboto Condensed';
-  font-size: 1.3em;
-  text-transform: uppercase;
-  color: white;
-  font-weight: 500;
-}
-.schedule-btn {
-	background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
-	border-radius: 40px;
-  box-sizing: border-box;
-	color: #00a84f;
-	display: block;
-	letter-spacing: 1px;
-	margin: 0 auto;
-	padding: 2px;
-	position: relative;
-  text-decoration: none;
-	z-index: 2;
-}
-.schedule-btn:hover {color: #fff;}
-.schedule-btn span {
-	align-items: center;
-	background: #e7e8e9;
-	border-radius: 40px;
-	display: flex;
-	justify-content: center;
-	height: 100%;
-	transition: background .5s ease;
-	width: 100%;
-	padding: 0px 8px;
-}
-.schedule-btn:hover span {background: transparent;}
-.schedule-header {padding: 0px 30px;}
+/*Section Title (i.e. employees, locations, etc.)*/
 .title {
   font-weight: 300;
-  text-transform:uppercase;
-  font-size:1.6em;
+  text-transform: uppercase;
+  font-size: 1.6em;
 }
 
-.card-header.location-header {
-  line-height: 12px;
-  background:#99a0ab;
-}
 
-.card {background-color:rgba(255, 255, 255, .15); border:none;}
 .row {margin-bottom:.5rem;}
 .row:last-child {margin-bottom:0px;}
-
-button.add-object {
-  border-radius: 500px;
-  width: 42px;
-  height: 42px;
-  color: white;
-  background: -webkit-linear-gradient(#844162, #68305f);;
-  border: none;
-  font-size: .9em;
-  line-height: 4px;
-  margin-left: 2px;
-  margin-top: -18px;
-}
 
 .js-update-object, .js-delete-object {background:none;}
 .js-object-create a {margin-left: -1px;}
@@ -90,32 +29,18 @@ button.add-object {
   text-align: center;
   width: 100%;
 }
-
 .event-row {
-    background-color: rgba(256,256,256,.1);
-    border-radius: 8px;
+  background-color: rgba(256,256,256,.1);
+  border-radius: 8px;
 }
 
-#searchInput {color: black; font-weight: 700; background: rgba(0,0,0,0);}
-#searchInput::placeholder {color: black; opacity: 1;}
-#searchInput:-ms-input-placeholder { color: black; }
-#searchInput::-ms-input-placeholder { color: black; }
-
-.icon-false, .icon-search, .icon-true { height:30px; }
-.icon-true {background: rgba(194, 120, 117, 0.71); border-radius: 50px;}
-.icon-false {background: rgba(110, 49, 93, 0.47); border-radius: 20px;}
-.icon-edit, .icon-delete {height:30px; margin-top:-1px; background:none;}
-.icon-export img {height: 48px; width: 48px;}
-.icon-search {vertical-align:text-top}
 
 .btn:focus, .input:focus, textarea:focus, text:focus, a:focus {box-shadow: none!important;outline: none!important;}
 select:focus, textarea:focus, button:focus {outline: none!important; box-shadow: none!important;}
 
 #eventTable {margin-top: 12px;}
 
-.location-header input {height:17px; width:17px;}
-.location-header img {height:20px; width:20px;}
-.remove-location {height:20px; width:20px; display:none; margin-left: -31px;margin-top: 10px;margin-right: 11px;}
+
 .employee-dropdown {background:rgba(256,256,256,.3);}
 
 .dropdown-toggle::after {float:right; margin-top:10px;}
@@ -125,21 +50,7 @@ select:focus, textarea:focus, button:focus {outline: none!important; box-shadow:
 
 .location-header input {vertical-align:text-bottom; height:15px;}
 
-.card-header {
-  font-family: 'Lato';
-  letter-spacing: 1px;
-  color: #FFF;
-}
-.bulk-arrival {
-  line-height:1.2em;
-  margin-left: 5px;
-  background-color: rgba(256,256,256,.4);
-  line-height: 1.2em;
-  border: none;
-  border-bottom: 1px solid #BBB;
-  border-radius: 0px;
-  padding-bottom:3px;
-}
+
 .input-group.mb-1 {
   background: white;
   border-radius: 5px;
@@ -149,79 +60,16 @@ select:focus, textarea:focus, button:focus {outline: none!important; box-shadow:
   height: 38px;
 }
 
-.display-flex {display: flex;}
-.colorPickSelector {
-  border-radius: 5px;
-  width: 32px;
-  height: 32px;
-  margin-top: 3px;
-  cursor: pointer;
-  -webkit-transition: all linear .2s;
-  -moz-transition: all linear .2s;
-  -ms-transition: all linear .2s;
-  -o-transition: all linear .2s;
-  transition: all linear .2s;
-}
-.colorPickSelector:hover {transform: scale(1.1);}
-
-
-
-.board-item, .employee-item {position: absolute; margin: 5px 0;}
-.board-item.muuri-item-releasing {z-index: 9998;}
-.board-item.muuri-item-dragging {z-index: 9999; cursor: move;}
-.board-item.muuri-item-hidden {z-index: 0;}
-.board-item-content {
-  position: relative;
-  padding: 20px;
-  background: #fff;
-  border-radius: 4px;
-  font-size: 17px;
-  cursor: pointer;
-  -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
-  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
-  width:167px;
-
-}
-
-* {-ms-overflow-style: none !important;}
-::-webkit-scrollbar {width: 0px; background: transparent;}
-::-webkit-input-placeholder {text-align: center;}
-:-moz-placeholder {text-align: center;}
-::-moz-placeholder {text-align: center;}
-:-ms-input-placeholder {text-align: center;}
-
-
-.arrival-time {
-  height: 33px;
-  margin: 5px 0 5px 0px;
-  width:70px;
-  font-family: "Source Sans Pro";
-  padding: 4px;
-  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
-  border-radius:4px;
-  border-width:1px;
-  border:none;
-  font-weight:100;
-  font-size:17px;
-  float:right;
-  text-align:center;
-}
 .form-check-input {
   margin: 0px;
   position: relative;
 }
-
 .scroll-content-wrapper {
   position: relative;
   max-height: 70vh;
   overflow-y: auto;
 }
-
 .list-group-item {background: none;}
-
-.board-column-content:nth-child(2) {margin-top:12px;}
-.board-column-content:nth-last-child(1) {margin-bottom:12px;}
-
 .slides {
   -webkit-transition: -webkit-transform 0.8s ease;
   transition: transform 0.8s ease;
@@ -289,12 +137,3 @@ fillColour {
   font-size: 17px;
 }
 .name-input::placeholder {text-align:left;}
-
-.box-shadow {
-  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2)!important;
-  transition: none;
-}
-.box-shadow:focus {
-  box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2)!important;
-  color: rgb(51,51,51);
-}

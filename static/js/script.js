@@ -152,8 +152,7 @@ $('.roster-body').on('click', '.submit-schedule', function(e) {
 });
 
 
-$(template_category).on('change', function() {
-  var template_category = $('#template-category');
+$('#template-category').on('change', function() {
   var template_subcategory = $( '#template-subcategory' );
   var options = template_subcategory.find( 'option' );
   var val = this.value;
