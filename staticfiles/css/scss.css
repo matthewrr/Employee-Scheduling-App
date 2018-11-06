@@ -235,6 +235,19 @@
   background: white;
   left: 15px;
 }
+.loc-cards .board-column .board-column-content .arrival-time {
+  height: 33px;
+  margin: 5px 0;
+  width: 70px;
+  padding: 4px;
+  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  border-width: 1px;
+  border: none;
+  font-weight: 100;
+  font-size: 17px;
+  float: right;
+}
 .loc-cards .board-column .read-short {
   margin: 5px 0px;
   padding: 4px;
@@ -253,19 +266,6 @@
   font-weight: 100;
   padding: 4px 4px 4px 10px;
 }
-.loc-cards .board-column .board-item .arrival-time {
-  height: 33px;
-  margin: 5px 0;
-  width: 70px;
-  padding: 4px;
-  box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  border-width: 1px;
-  border: none;
-  font-weight: 100;
-  font-size: 17px;
-  float: right;
-}
 .loc-cards .board-column .highlight.default {
   border: 1px solid red;
 }
@@ -279,16 +279,21 @@ body {
   color: #1B142D;
 }
 
+a:focus, input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.bg-black {
+  background: #000;
+}
+
 .box-shadow {
   box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2) !important;
   transition: none;
 }
 .box-shadow:focus {
   color: #333333;
-}
-
-#navbar {
-  background-color: #000;
 }
 
 .icon {
@@ -342,33 +347,33 @@ body {
   background-position: -79px -73px;
 }
 
-#searchInput {
-  color: black;
+#search-input {
+  color: #000;
   font-weight: 700;
-  background: rgba(0, 0, 0, 0);
+  background: #000;
 }
-
-#searchInput::placeholder {
-  color: black;
+#search-input::placeholder {
+  color: #000;
   opacity: 1;
 }
-
-#searchInput:-ms-input-placeholder {
-  color: black;
+#search-input:-ms-input-placeholder {
+  color: #000;
+}
+#search-input::-ms-input-placeholder {
+  color: #000;
 }
 
-#searchInput::-ms-input-placeholder {
-  color: black;
+.list-view .single-header {
+  font-weight: 300;
+  font-size: 1.6em;
 }
-
-a:focus {
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-select:focus, textarea:focus, button:focus {
-  outline: none !important;
-  box-shadow: none !important;
+.list-view .multi-header {
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 24px;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 /*# sourceMappingURL=scss.css.map */

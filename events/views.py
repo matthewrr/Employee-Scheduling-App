@@ -76,7 +76,7 @@ def event_detail_view(request,year,month,day,slug):
                'event_categories': event_categories
                }
     # pprint(roster)
-    return render(request, './events/detail/event_detail.html', context)
+    return render(request, './events/detail/event-detail.html', context)
 
 def event_list(request):
     events_list = Event.objects.all().order_by('-date')
@@ -115,7 +115,7 @@ def save_event_form(request, form, template_name):
             form.save()
             data['form_is_valid'] = True
             events = Event.objects.all().order_by('-date')
-            data['html_object_list'] = render_to_string('events/event_list_ajax.html', {
+            data['html_object_list'] = render_to_string('events/event-list-ajax.html', {
                 'events': events,'expired': expired
             })
         else:
@@ -132,7 +132,7 @@ def event_delete(request, pk):
         event.delete()
         data['form_is_valid'] = True
         events = Event.objects.all().order_by('-date')
-        data['html_object_list'] = render_to_string('events/event_list_ajax.html', {
+        data['html_object_list'] = render_to_string('events/event-list-ajax.html', {
             'events': events, 'expired': expired,
         })
     else:

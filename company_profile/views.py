@@ -17,7 +17,7 @@ def company_profile(request):
     roles = CompanyProfileRole.objects.all()
     categories = LocationCategory.objects.all()
     context = {'obj':'Profile', 'categories':categories, 'roles':roles}
-    return render(request, 'company_profile/company_profile.html', context)
+    return render(request, 'company-profile/company-profile.html', context)
 
 @csrf_exempt
 def company_roles(request):

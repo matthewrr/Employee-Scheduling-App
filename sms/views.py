@@ -20,4 +20,4 @@ def sms_text(request):
         'admins': admins,
         'texts': texts,
     }
-    return render(request, 'sms/sms_text.html', context)
+    return render(request, 'sms/sms-text.html', context)

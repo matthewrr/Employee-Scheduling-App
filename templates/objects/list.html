@@ -2,23 +2,23 @@
 {% load staticfiles %}
 {% block content %}
 
-<div class="container-fluid background-container">  
-  <div class='card shadow-custom'>
+<div class="container-fluid background-container list-view" id='{{objs}}'>  
+  <div class='card'>
     <div class='card-body mx-4 align-center'>
       <div class='row'>
         <div class='col col-12'>
           
           <h2 class='mb-3'>
-            <span class='title'>{{objs}}</span>
+            <span class='text-uppercase single-header'>{{objs}}</span>
             
             {% if obj == 'template' %}
-              <a href='{% url "template_create" %}'><div class='icon icon-create btn' style='vertical-align:top;'></div></a>
+              <a href='{% url "template-create" %}'><div class='icon icon-create btn' style='vertical-align:top;'></div></a>
             {% else %}
-                <div class='btn icon icon-create add-object js-create-object' style='vertical-align:top;' data-url="{% url obj|add:'_create' %}">
+                <div class='btn icon icon-create add-object js-create-object' style='vertical-align:top;' data-url="{% url obj|add:'-create' %}">
                 </div>
             {% endif %}
             
-            <a href="{% url 'export_'|add:objs %}">
+            <a href="{% url 'export-'|add:objs %}">
               <div class='icon icon-download btn' style='vertical-align:top; float:right;' ></div>
             </a>
           </h2>
@@ -29,11 +29,10 @@
             </div>
           </div>
           
-
           {% if app %}
-          {% include 'event_templates'|add:'/'|add:obj|add:'_list.html' %}
+          {% include 'event-templates'|add:'/'|add:obj|add:'-list.html' %}
           {% else %}
-          {% include objs|add:'/'|add:obj|add:'_list.html' %}
+          {% include objs|add:'/'|add:obj|add:'-list.html' %}
           {% endif %}
 
         </div>

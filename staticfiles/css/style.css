@@ -6,51 +6,10 @@
   margin: 0px 2px;
 }
 
-/*Section Title (i.e. employees, locations, etc.)*/
-.title {
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 1.6em;
-}
-
-
-.row {margin-bottom:.5rem;}
-.row:last-child {margin-bottom:0px;}
-
 .js-update-object, .js-delete-object {background:none;}
 .js-object-create a {margin-left: -1px;}
 
-.table-header {
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1px;
-  font-size: 24px;
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-}
-.event-row {
-  background-color: rgba(256,256,256,.1);
-  border-radius: 8px;
-}
-
-
-.btn:focus, .input:focus, textarea:focus, text:focus, a:focus {box-shadow: none!important;outline: none!important;}
-select:focus, textarea:focus, button:focus {outline: none!important; box-shadow: none!important;}
-
-#eventTable {margin-top: 12px;}
-
-
-.employee-dropdown {background:rgba(256,256,256,.3);}
-
-.dropdown-toggle::after {float:right; margin-top:10px;}
-.dropdown-toggle {text-align:left;}
-
 .input-group-text {padding: 0rem .75rem; font-weight:600;}
-
-.location-header input {vertical-align:text-bottom; height:15px;}
-
-
 .input-group.mb-1 {
   background: white;
   border-radius: 5px;
@@ -59,7 +18,6 @@ select:focus, textarea:focus, button:focus {outline: none!important; box-shadow:
   border:1px solid #ced4da;
   height: 38px;
 }
-
 .form-check-input {
   margin: 0px;
   position: relative;
@@ -70,37 +28,7 @@ select:focus, textarea:focus, button:focus {outline: none!important; box-shadow:
   overflow-y: auto;
 }
 .list-group-item {background: none;}
-.slides {
-  -webkit-transition: -webkit-transform 0.8s ease;
-  transition: transform 0.8s ease;
-}
-.slides .slide {
-  float: left;
-  text-align: center;
-}
-.slides .slide .content p {
-  padding: 10px 0;
-  border-bottom: 1px solid black;
-}
 
-@-webkit-keyframes 
-fill {  
-  0% {width: 0%; height: 1px;}
-  50% {width: 100%; height: 1px;}
-  100% {width: 100%; height: 100%; background: #fff;}
-}
-@keyframes 
-fill {  
-  0% {width: 0%; height: 1px;}
- 50% {width: 100%; height: 1px;}
- 100% {width: 100%; height: 100%; background: #fff;}
-}
-@-webkit-keyframes 
-fillColour {  
-  0% {color: #fff;}
-  50% {color: #fff;}
-  100% {color: #333;}
-}
 
 #ed .list-group-item:last-child, #ed .list-group-item:first-child {
   border-radius: 0px;
@@ -123,17 +51,5 @@ fillColour {
   width: 8.7vw;
   min-width: 8.7vw;
   height: 33px;
-  display:inline-flex;
+  display: inline-flex;
 }
-.input-container {
-  margin: 5px 0 5px 3px;
-  padding: 0px;
-}
-.name-input {
-  margin: 0px;
-  padding: 4px 4px 4px 10px;
-  border: none;
-  font-weight: 100;
-  font-size: 17px;
-}
-.name-input::placeholder {text-align:left;}

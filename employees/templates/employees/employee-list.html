@@ -52,7 +52,7 @@
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.alcohol_permit %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.admin %}</td>
       <td class="text-center">{% include 'base/boolean.html' with bool=employee.active %}</td>
-      {% include 'objects/list_display/edit_delete.html' with obj=obj id=employee.id %}
+      {% include 'objects/list-display/edit-delete.html' with id=employee.id %}
 
     </tr>
   {% endfor %}

@@ -1,7 +1,6 @@
 {% load staticfiles %}
 
 <table class="table table-striped table-hover" id='object-table'>
-  
   <thead>
     <tr class='header'>
       <th onclick="sortTable(0)" scope="col"><a>Title</a></th>
@@ -11,26 +10,14 @@
       <th scope="col">Edit</th>
     </tr>
   </thead>
-  
   <tbody>
   {% for template in templates %}
     <tr>
       <td>{{template.title}}</td>
       <td>{% include 'base/boolean.html' with bool=template.template %}</td>
       <td>{% firstof template.active_locations '0' %}</td>
-      <!--<td>Roles</td>-->
-      <td>
-        <a href='{% url "template_update" template.id %}'>
-          <button type="button" class="btn" style='background:none;'>
-            <img class='icon-edit' src='{% static "img/edit.png" %}' alt="Edit Icon"/>
-          </button>
-        </a>
-        <button type="button" class="btn js-delete-object" data-url="{% url 'template_delete' template.id %}">
-          <img class='icon-delete 'src='{% static "img/delete.png" %}' alt="Delete Icon"/>
-        </button>
-      </td>
+      {% include 'objects/list-display/edit-delete.html' with id=template.id %}
     </tr>
   {% endfor %}
   </tbody>
-
 </table>

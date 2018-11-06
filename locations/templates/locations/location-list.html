@@ -19,7 +19,7 @@
       <td>{{location.category}}</td>
       <td>{{location.positions_length}}</td>
       <td>{% include 'base/boolean.html' with bool=location.bar %}</td>
-      {% include 'objects/list_display/edit_delete.html' with obj=obj id=location.id %}
+      {% include 'objects/list-display/edit-delete.html' with id=location.id %}
     </tr>
   {% endfor %}
   </tbody>
