@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-<form method="post" action="{% url obj|add:'_update' form.instance.pk %}" class="js-object-update-form">
+<form method="post" action="{% url obj|add:'-update' form.instance.pk %}" class="js-object-update-form">
   {% csrf_token %}
   <div class="modal-header">
     <h4 class="modal-title">Update {{obj|title}}</h4>

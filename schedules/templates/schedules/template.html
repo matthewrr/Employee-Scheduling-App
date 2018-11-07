@@ -9,7 +9,7 @@
             {% if attributes.active %}
               {% with position=attributes.positions bar=attributes.bar active=attributes.active location_verbose=attributes.location location_id=location %}
                  {% if template %}
-                  {% include 'event_templates/location-card.html' %}
+                  {% include 'event-templates/location-card.html' %}
                 {% else %}
                   {% include 'events/detail/location-card.html' %}
                 {% endif %}
