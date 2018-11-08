@@ -1,21 +1,16 @@
 <div class='row' id='ed-board'>
-  <div class='col-12'>
-    <div class='py-2' id='loc-categories'>
-      <ul class="nav nav-pills">
-        {% for cat in locations %}
-        <li class="nav-item">
-          <a class="nav-link text-uppercase {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#{{cat|slugify}}" role="tab">
-            <span>{{cat}}</span>
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+  <div class='col-12 py-2' id='loc-categories'>
+    <ul class="nav nav-pills">
+      {% for cat in locations %}
+      <li class="nav-item">
+        <a class="nav-link text-uppercase {{forloop.first|yesno:'active,'}} px-0 mx-4" data-toggle="pill" href="#{{cat|slugify}}" role="tab">{{cat}}</a>
+      </li>
+      {% endfor %}
+    </ul>
     <div class="loc-cards d-inline-block" id="pills-tabContent">
       {% for cat, locNum in event_categories.items %}
-          {% include 'events/detail/loc-card.html' %}
+        {% include 'events/detail/ed-board/loc-card.html' %}
       {% endfor %}
-          </div>
     </div>
-`</div>
+  </div>
 </div>

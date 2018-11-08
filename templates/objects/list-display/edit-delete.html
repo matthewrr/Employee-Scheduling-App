@@ -1,9 +1,9 @@
 {% load staticfiles %}
 <td>
-  <button type="button" class="btn js-update-object" data-url="{% url obj|add:'_update' id %}">
+  <button type="button" class="btn js-update-object" data-url="{% url obj|add:'-update' id %}">
     <div class='icon icon-edit' alt='Edit Icon'></div>
   </button>
-  <button type="button" class="btn js-delete-object" data-url="{% url obj|add:'_delete' id %}">
+  <button type="button" class="btn js-delete-object" data-url="{% url obj|add:'-delete' id %}">
     <div class='icon icon-delete' alt='Delete Icon'></div>
   </button>
 </td>

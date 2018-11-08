@@ -3,7 +3,18 @@
 {% block content %}
 
 <div class="container-fluid background-container list-view" id='{{objs}}'>  
-  <div class='card'>
+
+<div class='row'>
+  <div class='col' id='list-panel'>
+    <div class='row'>
+      <div class='col px-0 accordian'>
+        <span>Summary:</span>
+        {% include objs|add:'/list-panel.html' %}
+      </div>
+    </div>
+  </div>
+
+  <div class='col'>
     <div class='card-body mx-4 align-center'>
       <div class='row'>
         <div class='col col-12'>
@@ -38,6 +49,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </div>
 

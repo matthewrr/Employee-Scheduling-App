@@ -9,7 +9,6 @@
         <div class='col-6'>
           <a class='event-title' id='{{event.id}}'>{{employee.name}} | #{{employee.id}}</a><br />
           <a class='event-timestamps' style='font-size:1.2em;'>Phone: {{employee.phone}}</a><br />
-
         </div>
         <div class='col-6'>
           <a class='event-date float-right' style='font-size:1em;'>Alcohol Permit: {{employee.alcohol_permit}}</a><br />
@@ -24,13 +23,8 @@
             a mistake, please reach out to your manager.
         {% endif %}
         </div>
-        
         <div class='col-12 mt-3' style='border-bottom:1px black solid;'></div>
-        
-        
-        
           <table class="table table-striped table-hover" id='object-table'>
-    
             <thead>
               <tr class='header'>
                 <th onclick="sortTable(0)" scope="col"><a>Date</a></th>
@@ -38,7 +32,6 @@
                 <th onclick="sortTable(2)" scope="col"><a>Schedule</a></th>
               </tr>
             </thead>
-            
             <tbody>
             {% for event, attributes in events.items %}
               <tr>
