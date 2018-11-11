@@ -30,10 +30,35 @@
       </div>
     <hr style='margin-bottom:0px!important;margin-left: 24px;margin-right: 90px;' />  
     
-    
+    <div class='row'>
+      <div class='col-4'>
+        
+        <div class="card">
+          <div class="card-header">
+            Summary:
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+        
+                <div class="card">
+          <div class="card-header">
+            Event Details:
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go to Event</a>
+          </div>
+        </div>
+        
+        
+      </div>
+      <div class='col-8'>
+      
     <div class='card-body mx-4 align-center' style='background:white;'>
-      <div class='row'>
-        <div class='col-8'>
 
           <div class="modal fade hide" id="modal-object" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -47,9 +72,11 @@
           {% include objs|add:'/'|add:obj|add:'-list.html' %}
           {% endif %}
 
-        </div>
-      </div>
     </div>
+    </div>
+    </div>
+    
+    
   </div>
   </div>
 </div>
