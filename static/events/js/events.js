@@ -12,7 +12,7 @@ $(document).ready(function () {
          $(this).change(updateCount(location));
       });
   });
-
+ 
   updateCount(l = false);
 
   function updateCount (l = false) {
