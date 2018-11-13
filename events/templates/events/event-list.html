@@ -2,8 +2,20 @@
 {% regroup events by event_category as active_list %}
 {% for event_category in active_list %}
 
-<div class='event-row py-3 px-3 mb-4'>
-  <a class='multi-header text-uppercase mb-3'>{% cycle 'Upcoming Events' 'Previous Events' %}</a>
+
+{% if forloop.first %}
+<div class="card mb-4">
+  <div class="card-header">Upcoming Events</div>
+    <div class="card-body">
+{% else %}
+<div class="card mb-4">
+  <div class="card-header">Previous Events</div>
+    <div class="card-body">
+{% endif %}
+              
+              
+              
+    <!--<a class='multi-header text-uppercase mb-3'>{% cycle 'Upcoming Events' 'Previous Events' %}</a>-->
   <table class="table table-sm table-striped table-hover" id="{% cycle 'upcoming-events' 'previous-events' %}">
     <thead>
       <tr class='header text-center'>
@@ -41,5 +53,13 @@
     {% endfor %}
     </tbody>
   </table>
-</div>
+              
+
+            </div>
+          </div>
+
+
+
+
+
 {% endfor %}
