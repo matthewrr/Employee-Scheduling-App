@@ -5,12 +5,30 @@
 
 {% if forloop.first %}
 <div class="card mb-4">
-  <div class="card-header">Upcoming Events</div>
-    <div class="card-body">
+  <div class="card-header">
+    <span>Upcoming Events</span>
+    <form class='float-right'>
+      <select class="form-control" style='display:inline-block;width:200px;'>
+        <option>Print</option>
+        <option>Export</option>
+        <option>Email</option>
+      </select>
+    </form>
+  </div>
+  <div class="card-body">
 {% else %}
 <div class="card mb-4">
-  <div class="card-header">Previous Events</div>
-    <div class="card-body">
+  <div class="card-header">
+    <span>Previous Events</span>
+    <form class='float-right'>
+      <select class="form-control" style='display:inline-block;width:200px;'>
+        <option>Print</option>
+        <option>Export</option>
+        <option>Email</option>
+      </select>
+    </form>
+  </div>
+  <div class="card-body">
 {% endif %}
               
               
