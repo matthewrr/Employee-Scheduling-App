@@ -7,7 +7,7 @@
   
   
   
-      <div class='board-column card p-0 mt-0' value='0' id='{{attr.location|slugify}}'>
+      <div class='board-column card pt-0 px-0 pb-3 mt-0' value='0' id='{{attr.location|slugify}}'>
         <div class='board-column-header card-header mt-0 pb-0' style='background:rgba(0, 0, 0, 0.83);'>
           <div class='list-header text-uppercase d-inline-block px-4' style='width:100%;color:white;font-weight:400;'>
             <span style='line-height:2.1;vertical-align:middle;'>{{attr.location}}</span>
@@ -15,7 +15,7 @@
           </div>
         </div>
         {% for shift, scheduled in attr.positions.items %}
-        <div class="board-column-content board-name card-body" id='{{attr.location|slugify}}-{{forloop.counter}}'>
+        <div class="board-column-content board-name" id='{{attr.location|slugify}}-{{forloop.counter}}'>
           
           <input class="read-short default" type="text" placeholder="{{shift}}" readonly>
           <div class='input-container'>
